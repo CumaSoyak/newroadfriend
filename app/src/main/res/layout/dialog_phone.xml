@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_background_simple"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/margin_normal"
+    android:paddingBottom="@dimen/margin_normal">
+
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ibm_plex_sans_semi_bold"
+        android:gravity="center"
+        android:text="Geçerli Telefon Numarası giriniz"
+        android:textColor="@color/red_ribbon"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_huge"
+        android:layout_marginEnd="@dimen/margin_huge"
+        android:fontFamily="@font/ibm_plex_sans_semi_bold"
+        android:gravity="center"
+        android:text="Size ulaşabilmeleri için telefon numarası göndermek ister misiniz ?" />
+
+    <roadfriend.app.customviews.MaskEditText
+        android:id="@+id/etPhone"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/card_background"
+        android:drawablePadding="10dp"
+        android:hint="Telefon numarası"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        android:paddingEnd="12dp"
+        android:textAlignment="center"
+        android:textColor="@color/border"
+        android:textColorHint="@color/color_edittext"
+        android:textCursorDrawable="@null"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/cvPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv"
+        app:mask_format="0 (###) ### ## ##"
+        app:topTitle="@string/add_detail_tarih" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_huge"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/margin_huge"
+        android:background="@drawable/custom_green_button"
+        android:fontFamily="@font/ibm_plex_sans_semi_bold"
+        android:text="Gönder"
+        android:textColor="@color/white" />
+
+</LinearLayout>

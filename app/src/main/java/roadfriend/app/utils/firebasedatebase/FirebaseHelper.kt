@@ -1,0 +1,296 @@
+package roadfriend.app.utils.firebasedatebase
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
+import roadfriend.app.CoreApp
+import roadfriend.app.CoreApp.Companion.db
+import roadfriend.app.data.remote.model.city.City
+import roadfriend.app.data.remote.model.trips.GetTripRequest
+import roadfriend.app.data.remote.model.trips.Trips
+import roadfriend.app.data.remote.model.user.User
+import roadfriend.app.utils.OtherUtils
+import roadfriend.app.utils.PrefUtils
+import roadfriend.app.utils.extensions.getCurrentDate
+import roadfriend.app.utils.extensions.showSucces
+import java.util.*
+
+class FirebaseHelper {
+    private var userIsAvailable: Boolean = true
+    val test = CoreApp.testDatabase
+    fun chatCreateUser(user: User) {
+        val userMe = PrefUtils.getUser()
+        //benim chat listeme ekle
+
+        val dataYou = hashMapOf(
+            "id" to user.id,
+            "fullName" to user.fullName,
+            "image" to user.image,
+            "firebaseToken" to user.firebaseToken
+        )
+
+        db.collection(test + "chat")
+            .document(userMe!!.id)
+            .collection("info")
+            .document(user.id)
+            .set(dataYou, SetOptions.merge())
+
+
+        // onun chat listesine ekle benim datamı ekle
+
+        val dataMe = hashMapOf(
+            "id" to userMe.id,
+            "fullName" to userMe.fullName,
+            "image" to userMe.image,
+            "firebaseToken" to userMe.firebaseToken
+        )
+        db.collection(test + "chat")
+            .document(user.id)
+            .collection("info")
+            .document(userMe.id)
+            .set(dataMe, SetOptions.merge())
+    }
+
+
+    fun getMessageList(requestCallback: (data: ArrayList<User>) -> Unit) {
+        val messageData: ArrayList<User> = arrayListOf()
+        val docRef =
+            db.collection(test + "chat").document(PrefUtils.getUserId().toString())
+                .collection("info")
+        docRef.addSnapshotListener { snapshot, e ->
+            snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
+                val data: User = queryDocumentSnapshot.toObject(User::class.java)
+                messageData.add(data)
+            }
+            requestCallback(messageData)
+        }
+    }
+
+    fun isAppUpdate(update: (isUpdate: Boolean) -> Unit) {
+        var isFirst = true
+        val docRef = db.collection(CoreApp.testDatabase + "update")
+        docRef.addSnapshotListener { snapshot, e ->
+            if (snapshot != null) {
+                if (!snapshot.documents.isNullOrEmpty()) {
+                    val updateVersion = snapshot.documents.get(0)["lastVersion"].toString()
+                    if (updateVersion > OtherUtils.versionNumber()!!) {
+                        if (isFirst) {
+                            isFirst = false
+                            update(true)
+                        }
+                    } else {
+                        if (isFirst) {
+                            isFirst = false
+                            update(false)
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun createTrip(trips: Trips, result: (trips: Trips, tripId: String) -> Unit) {
+        val uuid = UUID.randomUUID().toString()
+        trips.documentKey = uuid
+        db.collection(test + "trip")
+            .document(uuid)
+            .set(tripsConvert(trips, uuid), SetOptions.merge()).addOnSuccessListener {
+                result(trips, uuid)
+            }
+    }
+
+    fun getDefaultTrip(
+        status: String,
+        requestCallback: (data: ArrayList<Trips>) -> Unit
+    ) {
+        val trips: ArrayList<Trips> = arrayListOf()
+        val docRef = db.collection(test + "trip")
+            .whereEqualTo("codeCountry", OtherUtils.getCountryCode())
+            .whereEqualTo("status", status)
+            .orderBy("firebaseTime", Query.Direction.DESCENDING).limit(400)
+        docRef.addSnapshotListener { snapshot, e ->
+            snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
+                val data: Trips = queryDocumentSnapshot.toObject(Trips::class.java)
+                if (queryDocumentSnapshot["firebaseTime"] != null) {
+                    val seconds = (queryDocumentSnapshot["firebaseTime"] as Timestamp)
+                    data.firebaseTimeSecond = seconds.seconds
+                } else {
+                    data.firebaseTimeSecond = 1000
+                }
+
+                trips.add(data)
+            }
+            requestCallback(trips)
+        }
+    }
+
+    fun getFilterTrip(
+        getTripRequest: GetTripRequest? = null,
+        requestCallback: (data: ArrayList<Trips>) -> Unit
+    ) {
+        val trips: ArrayList<Trips> = arrayListOf()
+        val docRef = db.collection(test + "trip")
+            .whereEqualTo("startCityName", getTripRequest?.startCity)
+            .whereEqualTo("endCityName", getTripRequest?.endCity)
+            .whereEqualTo("status", getTripRequest?.status)
+            .whereEqualTo("codeCountry", OtherUtils.getCountryCode())
+            .orderBy("firebaseTime", Query.Direction.DESCENDING)
+        docRef.addSnapshotListener { snapshot, e ->
+            snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
+                val data: Trips = queryDocumentSnapshot.toObject(Trips::class.java)
+                if (queryDocumentSnapshot["firebaseTime"] != null) {
+                    val seconds = (queryDocumentSnapshot["firebaseTime"] as Timestamp)
+                    data.firebaseTimeSecond = seconds.seconds
+                } else {
+                    data.firebaseTimeSecond = 1000
+                }
+                trips.add(data)
+            }
+            requestCallback(tripsPremimumCalculate(trips))
+        }
+    }
+
+
+    @SuppressLint("RestrictedApi")
+    fun getMyTrip(requestCallback: (data: ArrayList<Trips>) -> Unit) {
+        val trips: ArrayList<Trips> = arrayListOf()
+        val docRef = db.collection(test + "trip").whereEqualTo("user.id", PrefUtils.getUser()?.id)
+            .orderBy("firebaseTime", Query.Direction.DESCENDING)
+        docRef.addSnapshotListener { snapshot, e ->
+            snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
+                val data: Trips = queryDocumentSnapshot.toObject(Trips::class.java)
+                trips.add(data)
+            }
+            requestCallback(trips)
+        }
+    }
+
+    fun savedTrip(context: Activity, trips: Trips) {
+        val uuid = UUID.randomUUID().toString()
+        trips.documentKey = uuid
+        db.collection(test + "savedTrip")
+            .document(userMe().id)
+            .collection("info")
+            .document(uuid)
+            .set(tripsConvert(trips, uuid), SetOptions.merge()).addOnSuccessListener {
+                context.showSucces("Yolculuk kaydedilmiştir")
+            }
+    }
+
+
+    fun getSavedTrip(requestCallback: (data: ArrayList<Trips>) -> Unit) {
+        val trips: ArrayList<Trips> = arrayListOf()
+        val docRef =
+            db.collection(test + "savedTrip").document(userMe().id).collection("info")
+                .orderBy("id", Query.Direction.DESCENDING)
+        docRef.addSnapshotListener { snapshot, e ->
+            snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
+                val data: Trips = queryDocumentSnapshot.toObject(Trips::class.java)
+                trips.add(data)
+            }
+            requestCallback(trips)
+        }
+    }
+
+    fun tripsConvert(trips: Trips, tripsId: String): HashMap<String, Any?> {
+
+        val admin: Boolean = CoreApp.addAdminTrip
+
+        val time = FieldValue.serverTimestamp()
+        val dataMe = hashMapOf(
+            "id" to tripsId,
+            "user" to trips.user,
+            "phone" to trips.phone,
+            "time" to trips.time,
+            "description" to trips.description,
+            "status" to trips.status,
+            "price" to trips.price,
+            "paymentType" to trips.paymentType,
+            "startCity" to City(
+                trips.startCity.id,
+                trips.startCity.name,
+                trips.startCity.latitude,
+                trips.startCity.longitude
+            ),
+            "endCity" to City(
+                trips.endCity.id,
+                trips.endCity.name,
+                trips.endCity.latitude,
+                trips.endCity.longitude
+            ),
+            "startCityName" to trips.startCityName,
+            "endCityName" to trips.endCityName,
+            "firebaseToken" to PrefUtils.getFirebaseToken(),
+            "firebaseTime" to time,
+            "codeCountry" to OtherUtils.getCountryCode(),
+            "documentKey" to trips.documentKey,
+            "adminPost" to admin
+        )
+        return dataMe
+    }
+
+
+    fun getUserRegister(email: String, isUserAvailable: (isAvailable: Boolean) -> Unit) {
+        val docRef = db.collection(test + "users").whereEqualTo("email", email)
+        docRef.addSnapshotListener { snapshot, e ->
+            if (snapshot?.size() == 0) {
+                //kullanıcı yok
+                if (userIsAvailable) {
+                    isUserAvailable(false)
+                    userIsAvailable = false
+                }
+            } else {
+                //kullanıcı var
+                if (userIsAvailable) {
+                    isUserAvailable(true)
+                    userIsAvailable = true
+                }
+            }
+        }
+    }
+
+
+    fun userMe(): User {
+        return PrefUtils.getUser()
+
+    }
+
+
+    fun tripsPremimumCalculate(trips: ArrayList<Trips>): ArrayList<Trips> {
+        //1 gün 86400
+        //1 hafta 604800
+        //1 ay 2629743
+        val tripList: ArrayList<Trips> = arrayListOf()
+        val current = getCurrentDate()
+        val nowTrips = trips.filter {
+            (current - it.firebaseTimeSecond!!) < 86401
+                    && !it.paymentType.equals("day")
+                    && !it.paymentType.equals("week")
+                    && !it.paymentType.equals("monday")
+                    || !it.paymentType.equals("free")
+        }
+        val dayTrips =
+            trips.filter { it.paymentType.equals("day") && (current - it.firebaseTimeSecond!!) >= 86400 }
+        val weekTrips =
+            trips.filter { it.paymentType.equals("week") && (current - it.firebaseTimeSecond!!) >= 86400 }
+        val mondayTrips =
+            trips.filter { it.paymentType.equals("monday") && (current - it.firebaseTimeSecond!!) >= 86400 }
+        val freeTrips =
+            trips.filter { it.paymentType.equals("free") && (current - it.firebaseTimeSecond!!) >= 86400 }
+
+        var sizeSum =
+            dayTrips.size + weekTrips.size + mondayTrips.size + freeTrips.size + nowTrips.size
+
+        tripList.addAll(mondayTrips)
+        tripList.addAll(nowTrips)
+        tripList.addAll(weekTrips)
+        tripList.addAll(dayTrips)
+        tripList.addAll(freeTrips)
+
+        return tripList
+    }
+}

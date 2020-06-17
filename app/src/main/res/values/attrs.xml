@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CVAddItem">
+        <attr name="topTitle" format="string" />
+        <attr name="descTitle" format="string" />
+        <attr name="iconSet" format="reference" />
+        <attr name="price" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="CVChooseStatus">
+        <attr name="status" format="integer" />
+        <attr name="text" format="string" />
+    </declare-styleable>
+    <declare-styleable name="CVItemImage">
+        <attr name="image" format="string" />
+    </declare-styleable>
+    <declare-styleable name="CVBillingView"></declare-styleable>
+    <declare-styleable name="MaskEditText">
+        <attr name="mask_format" format="string" />
+    </declare-styleable>
+    <declare-styleable name="CVSearch">
+        <attr name="text_hint" format="string" />
+    </declare-styleable>
+    <declare-styleable name="CVButton">
+        <attr name="type" format="enum">
+            <enum name="inactive" value="0" />
+            <enum name="active" value="1" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="CVTextInputEditText">
+
+    </declare-styleable>
+
+    <declare-styleable name="Floation">
+        <attr name="android:hint" />
+        <attr name="android:inputType" />
+        <attr name="android:maxLines" />
+        <attr name="android:minLines" />
+        <attr name="android:gravity" />
+        <attr name="android:textColor" />
+        <attr name="android:textColorHint" />
+        <attr name="android:textSize" />
+        <attr name="android:ellipsize" />
+        <attr name="android:drawableLeft" />
+        <attr name="android:drawableRight" />
+        <attr name="android:drawablePadding" />
+        <attr name="android:entries" />
+        <attr name="android:background" />
+        <attr name="flt_iconSize" format="dimension" />
+        <attr name="flt_drawableTint" format="reference|color" />
+        <attr name="flt_textColorOption" format="reference|color" />
+        <attr name="flt_textFont" format="reference" />
+        <attr name="flt_hintFont" format="reference" />
+        <attr name="flt_hintLabelResource" format="reference" />
+        <attr name="flt_optionFont" format="string" />
+        <attr name="flt_errorMessage" format="string" />
+        <attr name="flt_isRequired" format="boolean" />
+        <attr name="flt_type" format="enum">
+            <enum name="editText" value="1"></enum>
+            <enum name="textView" value="2"></enum>
+            <enum name="spinner_dropdown" value="3"></enum>
+            <enum name="spinner_dialog" value="4"></enum>
+            <enum name="email" value="5"></enum>
+        </attr>
+        <attr name="flt_patternType" format="enum">
+            <enum name="none" value="0"></enum>
+            <enum name="card" value="1"></enum>
+            <enum name="phone" value="2"></enum>
+            <enum name="date" value="3"></enum>
+        </attr>
+        <attr name="flt_validationType" format="enum">
+            <enum name="name" value="1"></enum>
+            <enum name="email" value="2"></enum>
+            <enum name="numberOnly" value="3"></enum>
+            <enum name="textOnly" value="4"></enum>
+            <enum name="uppercase" value="5"></enum>
+            <enum name="lowercase" value="6"></enum>
+            <enum name="iban" value="7"></enum>
+            <enum name="passwordBasic6" value="8"></enum>
+            <enum name="passwordBasic8" value="9"></enum>
+            <enum name="passwordNumChar6" value="10"></enum>
+            <enum name="passwordNumChar8" value="11"></enum>
+            <enum name="passwordPowerful" value="12"></enum>
+        </attr>
+        <attr name="flt_errorStyle" format="enum">
+            <enum name="toast" value="1"></enum>
+            <enum name="shake" value="2"></enum>
+            <enum name="snackbar" value="3"></enum>
+            <enum name="dialog" value="4"></enum>
+            <enum name="iconRight" value="5"></enum>
+            <enum name="iconLeft" value="5"></enum>
+            <enum name="underLabel" value="5"></enum>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="EmailAutoCompleteTextView">
+        <attr name="atFontName" format="string" />
+        <attr name="eactSuggestion" format="boolean" />
+        <attr name="android:entries" />
+        <attr name="atDrawableTint" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundedButton">
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="android:text" />
+        <attr name="android:fontFamily" />
+        <attr name="rb_text" format="string" />
+        <attr name="rb_fontPadding" format="dimension" />
+        <attr name="rb_iconSize" format="dimension" />
+        <attr name="rb_rightIcon" format="reference" />
+        <attr name="rb_leftIcon" format="reference" />
+        <attr name="rb_iconTint" format="reference|color" />
+        <attr name="rb_textGravity" format="enum">
+            <enum name="center" value="1"></enum>
+            <enum name="left" value="2"></enum>
+            <enum name="right" value="3"></enum>
+        </attr>
+        <attr name="rb_type" format="enum">
+            <enum name="blue" value="1"></enum>
+            <enum name="stroke" value="2"></enum>
+            <enum name="pink" value="3"></enum>
+            <enum name="transparent" value="4"></enum>
+            <enum name="white" value="5"></enum>
+            <enum name="transparentBlack" value="6"></enum>
+            <enum name="greyStroke" value="7"></enum>
+            <enum name="darkGreyStroke" value="8"></enum>
+            <enum name="blue_rounded" value="9"></enum>
+            <enum name="black" value="10"></enum>
+            <enum name="facebook" value="11"></enum>
+            <enum name="transparentBlue" value="12"></enum>
+            <enum name="instagram" value="13"></enum>
+            <enum name="grey" value="14"></enum>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="TransparentButton">
+        <attr name="tb_text" format="string" />
+        <attr name="tb_font" format="string" />
+        <attr name="tb_textColor" format="reference|color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CVInput">
+        <attr name="android:text" />
+        <attr name="android:hint" />
+        <attr name="android:inputType" />
+        <attr name="cvi_show_bottom_line" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="FilterBarView">
+        <attr name="cvf_type" format="enum">
+            <enum name="dropdown" value="0" />
+            <enum name="pages" value="1" />
+        </attr>
+        <attr name="cvf_buttons">
+            <flag name="none" value="0"></flag>
+            <flag name="room" value="1"></flag>
+            <flag name="category" value="2"></flag>
+            <flag name="date" value="4"></flag>
+        </attr>
+        <attr name="cvf_images">
+            <flag name="none" value="0"></flag>
+            <flag name="saloon" value="1"></flag>
+            <flag name="stage" value="2"></flag>
+            <flag name="stand" value="4"></flag>
+            <flag name="wc" value="8"></flag>
+            <flag name="dinner" value="16"></flag>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="CircleIndicator">
+        <attr name="ci_width" format="dimension" />
+        <attr name="ci_height" format="dimension" />
+        <attr name="ci_margin" format="dimension" />
+        <attr name="ci_animator" format="reference" />
+        <attr name="ci_animator_reverse" format="reference" />
+        <attr name="ci_drawable" format="reference" />
+        <attr name="ci_drawable_unselected" format="reference" />
+
+        <attr name="ci_orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="ci_gravity">
+            <flag name="top" value="0x30" />
+            <flag name="bottom" value="0x50" />
+            <flag name="left" value="0x03" />
+            <flag name="right" value="0x05" />
+            <flag name="center_vertical" value="0x10" />
+            <flag name="fill_vertical" value="0x70" />
+            <flag name="center_horizontal" value="0x01" />
+            <flag name="fill_horizontal" value="0x07" />
+            <flag name="center" value="0x11" />
+            <flag name="fill" value="0x77" />
+            <flag name="clip_vertical" value="0x80" />
+            <flag name="clip_horizontal" value="0x08" />
+            <flag name="start" value="0x00800003" />
+            <flag name="end" value="0x00800005" />
+        </attr>
+
+    </declare-styleable>
+
+
+    <declare-styleable name="ForegroundConstraintLayout">
+        <attr name="foreground_drawable" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CVSettingsItem">
+        <attr name="android:text" />
+        <attr name="android:checked" />
+    </declare-styleable>
+
+    <declare-styleable name="AutofitTextView">
+        <!-- Minimum size of the text. -->
+        <attr name="minTextSize" format="dimension" />
+        <!-- Amount of precision used to calculate the correct text size to fit within its
+        bounds. Lower precision is more precise and takes more time. -->
+        <attr name="precision" format="float" />
+        <!-- Defines whether to automatically resize text to fit to the view's bounds. -->
+        <attr name="sizeToFit" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CustomEditText">
+        <attr name="ce_isRequired" format="boolean" />
+        <attr name="ce_suggestion" format="boolean" />
+        <attr name="ce_showDrawable" format="boolean" />
+        <attr name="android:entries" />
+        <attr name="ce_validationType" format="enum">
+            <enum name="all" value="-1"></enum>
+            <enum name="name" value="1"></enum>
+            <enum name="email" value="2"></enum>
+            <enum name="numberOnly" value="3"></enum>
+            <enum name="textOnly" value="4"></enum>
+            <enum name="uppercase" value="5"></enum>
+            <enum name="lowercase" value="6"></enum>
+            <enum name="iban" value="7"></enum>
+            <enum name="passwordBasic6" value="8"></enum>
+            <enum name="passwordBasic8" value="9"></enum>
+            <enum name="passwordNumChar6" value="10"></enum>
+            <enum name="passwordNumChar8" value="11"></enum>
+            <enum name="passwordPowerful" value="12"></enum>
+            <enum name="tckn" value="13"></enum>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CustomPhoneText">
+        <attr name="cpt_isRequired" format="boolean" />
+        <attr name="cpt_showDrawable" format="boolean" />
+        <attr name="cpt_validationType" format="enum">
+            <enum name="all" value="-1"></enum>
+            <enum name="name" value="1"></enum>
+            <enum name="email" value="2"></enum>
+            <enum name="numberOnly" value="3"></enum>
+            <enum name="textOnly" value="4"></enum>
+            <enum name="uppercase" value="5"></enum>
+            <enum name="lowercase" value="6"></enum>
+            <enum name="iban" value="7"></enum>
+            <enum name="passwordBasic6" value="8"></enum>
+            <enum name="passwordBasic8" value="9"></enum>
+            <enum name="passwordNumChar6" value="10"></enum>
+            <enum name="passwordNumChar8" value="11"></enum>
+            <enum name="passwordPowerful" value="12"></enum>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CustomPasswordText">
+        <attr name="cp_isRequired" format="boolean" />
+        <attr name="cp_showDrawable" format="boolean" />
+        <attr name="cp_validationType" format="enum">
+            <enum name="name" value="1"></enum>
+            <enum name="email" value="2"></enum>
+            <enum name="numberOnly" value="3"></enum>
+            <enum name="textOnly" value="4"></enum>
+            <enum name="uppercase" value="5"></enum>
+            <enum name="lowercase" value="6"></enum>
+            <enum name="iban" value="7"></enum>
+            <enum name="passwordBasic6" value="8"></enum>
+            <enum name="passwordBasic8" value="9"></enum>
+            <enum name="passwordNumChar6" value="10"></enum>
+            <enum name="passwordNumChar8" value="11"></enum>
+            <enum name="passwordPowerful" value="12"></enum>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="FancyTabLayout">
+        <attr name="fancy_tabCount" format="integer" />
+        <attr name="fancy_tabTitleLeft" format="string" />
+        <attr name="fancy_tabTitleMid" format="string" />
+        <attr name="fancy_tabTitleRight" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="StepView">
+        <attr name="sv_step" format="enum">
+            <enum name="cart" value="1"></enum>
+            <enum name="address" value="2"></enum>
+            <enum name="payment" value="3"></enum>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="FilterSectionButton">
+        <attr name="fsb_title" format="string" />
+    </declare-styleable>
+
+    <!-- Seekbar -->
+    <declare-styleable name="CrystalSeekbar">
+        <attr name="corner_radius" />
+        <attr name="min_value" />
+        <attr name="max_value" />
+        <attr name="min_start_value" />
+        <attr name="max_start_value" />
+        <attr name="steps" />
+        <attr name="gap" />
+        <attr name="fix_gap" />
+        <attr name="bar_height" />
+        <attr name="bar_color_mode" />
+        <attr name="bar_color" />
+        <attr name="bar_gradient_start" />
+        <attr name="bar_gradient_end" />
+        <attr name="bar_highlight_color_mode" />
+        <attr name="bar_highlight_color" />
+        <attr name="bar_highlight_gradient_start" />
+        <attr name="bar_highlight_gradient_end" />
+        <attr name="thumb_diameter" />
+        <attr name="position" />
+        <attr name="data_type" />
+        <attr name="thumb_color" format="color" />
+        <attr name="thumb_color_pressed" format="color" />
+        <attr name="thumb_image" format="reference" />
+        <attr name="thumb_image_pressed" format="reference" />
+        <attr name="seek_bar_touch_enabled" />
+    </declare-styleable>
+
+    <!-- Range Seekbar -->
+    <declare-styleable name="RangeSeekbar">
+        <attr name="corner_radius" />
+        <attr name="min_value" />
+        <attr name="max_value" />
+        <attr name="min_start_value" />
+        <attr name="max_start_value" />
+        <attr name="steps" />
+        <attr name="gap" />
+        <attr name="fix_gap" />
+        <attr name="bar_height" />
+        <attr name="bar_color_mode" />
+        <attr name="bar_color" />
+        <attr name="bar_gradient_start" />
+        <attr name="bar_gradient_end" />
+        <attr name="bar_highlight_color_mode" />
+        <attr name="bar_highlight_color" />
+        <attr name="bar_highlight_gradient_start" />
+        <attr name="bar_highlight_gradient_end" />
+        <attr name="thumb_diameter" />
+        <attr name="position" />
+        <attr name="data_type" />
+        <attr name="left_thumb_color" format="color" />
+        <attr name="left_thumb_color_pressed" format="color" />
+        <attr name="left_thumb_image" format="reference" />
+        <attr name="left_thumb_image_pressed" format="reference" />
+        <attr name="right_thumb_color" format="color" />
+        <attr name="right_thumb_color_pressed" format="color" />
+        <attr name="right_thumb_image" format="reference" />
+        <attr name="right_thumb_image_pressed" format="reference" />
+        <attr name="seek_bar_touch_enabled" />
+    </declare-styleable>
+</resources>

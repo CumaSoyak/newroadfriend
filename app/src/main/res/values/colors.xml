@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="card_background_normal">@android:color/white</color>
+    <color name="card_background_pressed">#1f000000</color>
+    <color name="background">#F7F2F2</color>
+
+    <color name="colorTransparent">#43000000</color>
+    <color name="transparent">#0000</color>
+    <color name="white_transparent">#ccffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="grey">#AEAEB4</color>
+    <color name="white_transparent_x">#99ffffff</color>
+    <color name="white_transparent_xx">#66ffffff</color>
+    <color name="black_transparent">#AA000000</color>
+
+    <color name="colorEditText">#cccccc</color>
+
+    <color name="black_alpha">#2000</color>
+    <color name="black_alpha_dark">#A000</color>
+    <color name="black_alpha_darker">#C000</color>
+    <color name="black">#000</color>
+
+    <color name="line">#eeeeee</color>
+
+    <color name="green_1">#1C8E5D</color>
+    <color name="green_2">#1c8e5d</color>
+    <color name="green_3">#1c8e5d</color>
+    <color name="green_4">#bcdecf</color>
+    <color name="yellow">#feac02</color>
+    <color name="floating_shadow">#CBE2D8</color>
+
+    <color name="grey_1">#6A6A77</color>
+
+    <color name="grayDark">#81817F</color>
+    <color name="gray">#BEBEBC</color>
+    <color name="greyLight">#D2D1CE</color>
+    <color name="bgGrayMid">#F4F4F4</color>
+    <color name="bgGray">#FBFBFB</color>
+
+    <color name="hint_gray">@color/grayDark</color>
+    <color name="text_gray">@color/black</color>
+
+    <color name="textColor">#58595b</color>
+    <color name="textExpandableColor">#909091</color>
+
+    <color name="bottom_nav_unstate">#6A6A77</color>
+
+    <color name="lighterx_grey">#eaeaea</color>
+
+    <color name="dark_green">#1E9E33</color>
+    <color name="pink">#F01F81</color>
+    <color name="blue">#4F44FF</color>
+    <color name="border">#04193B</color>
+    <color name="tundura">#4A4A4A</color>
+    <color name="green">#34B55E</color>
+    <color name="red">#DC4E41</color>
+
+    <color name="bg_color">#f8f8f8</color>
+    <color name="color_edittext">#AEAEB4</color>
+    <color name="non_selected_color">#AEAEB4</color>
+    <color name="check_false">#AEAEB4</color>
+    <color name="colorTextColor">#6A6A77</color>
+    <color name="colorViewColor">#EEEEEE</color>
+
+    <color name="viewColor">#AEAEB4</color>
+
+
+    <color name="colorPrimary">@color/btc_white</color>
+    <color name="colorPrimaryDark">@color/btc_white</color>
+    <color name="colorAccent">@color/btc_blue</color>
+
+    <color name="btc_blue">#0064FF</color>
+    <color name="btc_blue_light">#A8F0FF</color>
+    <color name="btc_blue_inactive">#330064FF</color>
+    <color name="btc_green">#7EC027</color>
+    <color name="btc_red">#E74C3C</color>
+    <color name="btc_orange">#F7941D</color>
+    <color name="btc_black">#0A121F</color>
+    <color name="btc_gray">#7C91A2</color>
+    <color name="btc_gray_border">#DDDDDD</color>
+    <color name="btc_gray_light">#EEEEEE</color>
+    <color name="btc_gray_lighter">#FAFAFA</color>
+    <color name="btc_white">#FFFFFF</color>
+    <color name="btc_white_alpha">#B3FFFFFF</color>
+    <color name="btc_black_alpha">#20000000</color>
+    <color name="btc_black_alpha5">#0D000000</color>
+    <color name="btc_black_alpha70">#B3000000</color>
+
+    <!--Dialog renkleri-->
+    <color name="red_ribbon">#F2222E</color>
+    <color name="lima">#7EC027</color>
+
+</resources>

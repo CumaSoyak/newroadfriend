@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="roadfriend.app.data.local.model.chat.ChatAutomaticMessage" />
+    </data>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_background"
+        android:fontFamily="@font/inter_medium"
+        android:onClick='@{(v)-> vm.onListItemViewClickListener.onClick(v, vm.adapterPosition,vm) }'
+        android:paddingStart="16dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="10dp"
+        android:text="@{vm.message}"
+        android:textSize="15sp"
+        tools:text="Merhabalar" />
+</layout>

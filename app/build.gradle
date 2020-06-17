@@ -1,0 +1,233 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'com.google.firebase.crashlytics'
+
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        applicationId "roadfriend.app"
+        minSdkVersion 17
+        targetSdkVersion 29
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        android.defaultConfig.vectorDrawables.useSupportLibrary = true
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../jks/roadfriend.jks')
+            keyPassword 'roadfriend'
+            keyAlias = 'roadfriend'
+            storePassword 'roadfriend'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "\"http://63.32.103.70/api/\"")
+            buildConfigField "String", "BUILD_VARIANT", "\"release\""
+            signingConfig signingConfigs.release
+
+        }
+        debug {
+            minifyEnabled false
+            //applicationIdSuffix ".develop"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "\"http://63.32.103.70/api/\"")
+            buildConfigField "String", "BUILD_VARIANT", "\"debug\""
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    androidExtensions {
+        experimental = true
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//    implementation project(':cropping')
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
+    implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    //messasing
+    implementation 'com.google.firebase:firebase-messaging:20.1.6'
+    implementation "com.google.firebase:firebase-inappmessaging-ktx:19.0.6"
+    implementation "com.google.firebase:firebase-inappmessaging-display-ktx:19.0.6"
+    implementation 'com.google.firebase:firebase-dynamic-links:19.1.0'
+    //firebase
+    implementation 'com.google.firebase:firebase-analytics:17.4.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation 'com.google.firebase:firebase-firestore:21.4.3'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-auth:19.3.0'
+    implementation 'com.facebook.android:facebook-login:5.15.3'
+
+
+    implementation 'com.google.firebase:firebase-ads:19.1.0'
+
+    implementation 'com.google.android.gms:play-services-ads:19.1.0'
+
+
+    implementation group: 'com.google.guava', name: 'guava', version: '28.1-android'
+
+
+    // retrofit
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    // OkHttp interceptors for logging
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.2.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+    // mvvm architecture component
+
+    implementation 'android.arch.work:work-runtime:1.0.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc03'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-rc03'
+    // spots dialog
+    implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    // coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0'
+    implementation 'androidx.room:room-coroutines:2.1.0-alpha04'
+    // Koin for Kotlin
+    implementation 'org.koin:koin-core:1.0.2'
+    implementation 'org.koin:koin-android:1.0.2'
+    implementation 'org.koin:koin-androidx-scope:1.0.2'
+    implementation 'org.koin:koin-androidx-viewmodel:1.0.2'
+    // debug database
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.5'
+    // room database
+    implementation 'androidx.room:room-runtime:2.0.0'
+    kapt "androidx.room:room-compiler:2.0.0"
+    // rxjava-rxandroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1'
+    // circleimageview
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+    //İmage rounded
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    //data binding
+    implementation "com.android.databinding:compiler:3.5.1"
+
+    //navigation
+    implementation "androidx.navigation:navigation-fragment:2.2.0-alpha01"
+    implementation "androidx.navigation:navigation-ui:2.2.0-alpha01"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.2.0-alpha01"
+    implementation "androidx.navigation:navigation-ui-ktx:2.2.0-alpha01"
+
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+
+    implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
+
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+
+
+    //data utils
+    implementation 'net.danlew:android.joda:2.10.3'
+
+    //in app purcase
+    implementation 'com.android.billingclient:billing:2.2.0'
+    implementation 'com.anjlab.android.iab.v3:library:1.0.44'
+
+    //expandable layout
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+    implementation 'jp.wasabeef:glide-transformations:4.1.0'
+    //ImageView
+//    implementation 'com.makeramen:roundedimageview:2.3.0'
+//    implementation 'com.synnapps:carouselview:0.1.5'
+
+
+    //Gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
+    //animation
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
+
+    //facebook shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //lottie animation
+    implementation 'com.airbnb.android:lottie:3.1.0'
+
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.bumptech.glide:annotations:4.9.0'
+    implementation('com.github.bumptech.glide:okhttp3-integration:4.9.0') {
+        exclude group: 'glide-parent'
+    }
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    //maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-places:17.0.0'
+
+    //maps draw route
+
+    implementation 'org.jetbrains.anko:anko-sdk15:0.8.2'
+    implementation 'com.beust:klaxon:0.30'
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
+
+    //ucrop
+    implementation "com.karumi:dexter:5.0.0"
+    implementation 'com.github.yalantis:ucrop:2.2.2'
+
+
+    //alerter
+    implementation 'com.tapadoo.android:alerter:4.0.1'
+
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.3.1'
+
+
+
+}

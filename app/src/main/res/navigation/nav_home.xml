@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_home"
+    app:startDestination="@id/homeFragment2">
+
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="roadfriend.app.ui.home.FirstFragment"
+        android:label="homeFragment"
+        tools:layout="@layout/fragment_home_first">
+        <action
+            android:id="@+id/action_homeFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_messageDetails"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tripDetailFragment"
+            app:destination="@id/tripDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_nav_notification"
+            app:destination="@id/nav_notification" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="roadfriend.app.ui.message.chat.ChatActivity"
+        android:label="chatFragment"
+        tools:layout="@layout/chat_activity" />
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="roadfriend.app.ui.userdetail.UserDetailActivity"
+        android:label="user_detail_fragment"
+        tools:layout="@layout/user_detail_activity" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="roadfriend.app.ui.maps.MapsDialogFragment"
+        android:label="mapsFragment"
+        tools:layout="@layout/maps_dialog_fragment">
+        <argument
+            android:name="maps"
+            app:argType="roadfriend.app.data.local.model.MapsModel"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripDetailFragment"
+        android:name="roadfriend.app.ui.tripdetail.TripDetailActivity"
+        android:label="tripDetailFragment"
+        tools:layout="@layout/trip_detail_activity" />
+    <include app:graph="@navigation/nav_notification" />
+</navigation>

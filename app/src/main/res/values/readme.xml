@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        <?xml version="1.0" encoding="utf-8"?>
+        <layout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+             >
+
+            <data>
+
+                <variable
+                    name="vm"
+                    type="roadfriend.app.databinding.ProfilSettingsActivityBinding" />
+            </data>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </layout>
+
+        -->
+
+
+<!--    /**-->
+<!--    package roadfriend.app.model.trips-->
+
+<!--    import android.os.Parcelable-->
+<!--    import com.google.gson.annotations.SerializedName-->
+<!--    import roadfriend.app.data.remote.model.city.City-->
+<!--    import roadfriend.app.data.remote.model.user.User-->
+<!--    import roadfriend.app.utils.helper.genericadapter.ListItemViewModel-->
+<!--    import kotlinx.android.parcel.Parcelize-->
+
+<!--    @Parcelize-->
+<!--    class Trips constructor(-->
+<!--    @SerializedName("user")-->
+<!--    var user: User?,-->
+<!--    @SerializedName("date")-->
+<!--    var date: String? = "",-->
+<!--    @SerializedName("time")-->
+<!--    var time: String? = "",-->
+<!--    @SerializedName("cityName")-->
+<!--    var city: ArrayList<City>,-->
+<!--    @SerializedName("carStatus")-->
+<!--    var tripOptionstatus: String? = "",-->
+<!--    @SerializedName("description")-->
+<!--    var description: String? = "",-->
+<!--    @SerializedName("tripType")-->
+<!--    var tripType: String?-->
+<!--    ) : Parcelable, ListItemViewModel() {-->
+<!--    @Parcelize-->
+<!--    data class Builder(-->
+<!--    var user: User? = null,-->
+<!--    var date: String? = "",-->
+<!--    var time: String? = "",-->
+<!--    var city: ArrayList<City>? = null,-->
+<!--    var tripOptionstatus: String? = "",-->
+<!--    var description: String? = "",-->
+<!--    var tripType: String? = null-->
+<!--    ):Parcelable {-->
+<!--    fun user(user: User) = apply { this.user = user }-->
+<!--    fun date(date: String) = apply { this.date = date }-->
+<!--    fun time(time: String) = apply { this.time = time }-->
+<!--    fun city(city: ArrayList<City>) = apply { this.city = city }-->
+<!--    fun tripOptionstatus(tripOptionstatus: String?) = apply { this.tripOptionstatus =-->
+<!--    tripOptionstatus }-->
+<!--    fun desciption(description: String?) = apply { this.description = description }-->
+<!--    fun tripType(tripType: String?) = apply { this.tripType = tripType }-->
+<!--    }-->
+<!--    }*/-->
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="gmail.com" />
+    <item android:title="hotmail.com" />
+    <item android:title="hotmail.com.tr" />
+    <item android:title="yahoo.com" />
+    <item android:title="outlook.com" />
+    <item android:title="yandex.com" />
+
+</menu>

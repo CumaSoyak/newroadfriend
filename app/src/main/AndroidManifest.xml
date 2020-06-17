@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="roadfriend.app"
+    android:versionCode="7"
+    android:versionName="1.0.4">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+
+    <application
+        android:name="roadfriend.app.CoreApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_icon"
+        android:label="@string/appname"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_icon_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name="roadfriend.app.ui.dashboard.DashBoardActivity" />
+        <activity android:name="roadfriend.app.ui.sales.SalesActivity" />
+        <activity android:name="roadfriend.app.ui.intro.IntroActivity" />
+        <activity android:name="roadfriend.app.ui.main.MainActivity" />
+        <activity
+            android:name="roadfriend.app.ui.splash.SplashActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.VIEW" />-->
+
+            <!--                <category android:name="android.intent.category.DEFAULT" />-->
+            <!--                <category android:name="android.intent.category.BROWSABLE" />-->
+
+            <!--                <data-->
+            <!--                    android:host="www.roadfriend.app.com"-->
+            <!--                    android:pathPrefix="/1"-->
+            <!--                    android:scheme="https" />-->
+            <!--            </intent-filter>-->
+        </activity>
+        <activity android:name="roadfriend.app.ui.add.AddActivity" />
+        <activity
+            android:name="roadfriend.app.ui.add.detail.AddDetailActivity"
+            android:windowSoftInputMode="stateUnchanged|adjustResize" />
+        <activity android:name="roadfriend.app.ui.add.direction.AddDirectionActivity" />
+        <activity android:name="roadfriend.app.ui.biddetail.BidDetailActivity" />
+        <activity android:name="roadfriend.app.ui.message.chat.ChatActivity" />
+        <activity android:name="roadfriend.app.ui.tripdetail.TripDetailActivity" />
+        <activity android:name="roadfriend.app.ui.userdetail.UserDetailActivity" />
+        <activity android:name="roadfriend.app.ui.profile.setting.ProfilSettingsActivity" />
+        <activity android:name="roadfriend.app.ui.profile.setting.ChangePasswordActivity" />
+        <activity android:name="roadfriend.app.ui.profile.help.HelpActivity" />
+        <activity android:name="roadfriend.app.ui.profile.myaboutcomment.MyAboutCommentsActivity" />
+        <activity android:name="roadfriend.app.ui.profile.mytrip.MyTripsActivity" />
+        <activity android:name="roadfriend.app.ui.profile.savedtrip.SavedTripActivity" />
+        <activity android:name="roadfriend.app.utils.extensions.ImagePickerActivity" />
+        <activity android:name="roadfriend.app.ui.auth.login.LoginActivity" />
+        <activity android:name="roadfriend.app.ui.auth.register.RegisterActivity" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@style/FullyTranslucent"
+            tools:replace="android:theme" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB2iB4YMsbS5MExON-tdkmjYWh7eH3l9YY" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <service android:name="roadfriend.app.utils.firebasemessage.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="roadfriend.app.utils.firebasemessage.NotificationReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification_icon" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/green_3" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7740710689946524~5196412473" />
+    </application>
+
+</manifest>

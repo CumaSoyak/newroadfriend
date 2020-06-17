@@ -1,0 +1,43 @@
+package roadfriend.app.data.remote.model.trips
+
+import android.os.Parcelable
+import roadfriend.app.data.remote.model.city.City
+import roadfriend.app.data.remote.model.user.User
+import roadfriend.app.utils.DummyData
+import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
+import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import java.text.DecimalFormat
+
+@Parcelize
+data class Trips(
+    @SerializedName("id") var id: String? = "",
+    @SerializedName("user") var user: User = DummyData.getUser(),
+    @SerializedName("phone") var phone: String? = "",
+    @SerializedName("time") var time: String? = "",
+    @SerializedName("description") var description: String = "",
+    @SerializedName("status") var status: String = "",
+    @SerializedName("price") var price: String? = "",
+    @SerializedName("paymentType") var paymentType: String? = "free",
+    @SerializedName("startCity") var startCity: City = DummyData.getCity(),
+    @SerializedName("endCity") var endCity: City = DummyData.getCity(),
+    @SerializedName("startCityName") var startCityName: String? = "",
+    @SerializedName("endCityName") var endCityName: String? = "",
+    @SerializedName("firebaseToken") var firebaseToken: String? = "",
+    @SerializedName("firebaseTimeSecond") var firebaseTimeSecond: Long? = 0,
+    @SerializedName("adminPost") var adminPost: Boolean = false,
+    @SerializedName("documentKey") var documentKey: String? = "",
+    @SerializedName("ads") var ads: Boolean = false
+) : Parcelable, ListItemViewModel() {
+    fun calDate(): String {
+        return ""
+    }
+
+    fun callPrice(): String {
+        if (price.isNullOrEmpty()) {
+            return "Fiyat yok"
+        } else {
+            return DecimalFormat("#,###").format(price!!.toDouble()) + " TL"
+        }
+    }
+}

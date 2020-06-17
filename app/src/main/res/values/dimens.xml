@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="iconsize">24dp</dimen>
+    <dimen name="margin_start">24dp</dimen>
+    <dimen name="margin_end">24dp</dimen>
+    <dimen name="margin">24dp</dimen>
+    <dimen name="margin_8">24dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="font_small">12dp</dimen>
+    <dimen name="font_medium">14dp</dimen>
+    <dimen name="font_xlarge">18dp</dimen>
+    <dimen name="elevation">8dp</dimen>
+    <dimen name="tab_paddings">32dp</dimen>
+    <dimen name="indicator">12dp</dimen>
+    <dimen name="indicator_margin">4dp</dimen>
+
+    <dimen name="card_background_radius">8dp</dimen>
+    <dimen name="card_background_radius_4">4dp</dimen>
+
+    <dimen name="view_height">0.5dp</dimen>
+    <dimen name="cv_detail_height">50dp</dimen>
+    <dimen name="button_radius">8dp</dimen>
+    <dimen name="button_width">1dp</dimen>
+    <dimen name="button_margin">24dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">8dp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">9dp</dimen>
+    <dimen name="bottom_tabs">32dp</dimen>
+
+
+    <dimen name="titleTextSize">7sp</dimen>
+    <dimen name="titleTextSizeUnselected">6sp</dimen>
+
+
+    <!-- Font sizes for texs -->
+    <dimen name="font_text_xxsmall">10sp</dimen>
+    <dimen name="font_text_xsmall">12sp</dimen>
+    <dimen name="font_text_small">14sp</dimen>
+    <dimen name="font_text_medium">16sp</dimen>
+    <dimen name="font_text_large">18sp</dimen>
+    <dimen name="font_text_xlarge">20sp</dimen>
+    <dimen name="font_text_xlarger">24sp</dimen>
+    <dimen name="font_text_xxlarge">26sp</dimen>
+    <dimen name="font_text_xxlarger">32sp</dimen>
+    <dimen name="font_text_xxxlarge">40sp</dimen>
+
+    <!-- Font sizes for numbers -->
+    <dimen name="font_number_xxsmall">16sp</dimen>
+    <dimen name="font_number_xsmall">18sp</dimen>
+    <dimen name="font_number_medium">26sp</dimen>
+    <dimen name="font_number_large">30sp</dimen>
+    <dimen name="font_number_larger">38sp</dimen>
+    <dimen name="font_number_xlarge">48sp</dimen>
+    <dimen name="font_number_xxlarge">60sp</dimen>
+
+    <!-- UI widgets properties-->
+    <dimen name="btn_height">44dp</dimen>
+    <dimen name="btn_radius">8dp</dimen>
+    <dimen name="btn_num_pad_radius">12dp</dimen>
+    <dimen name="chart_filter_radius">4dp</dimen>
+    <dimen name="container_radius">8dp</dimen>
+    <dimen name="timeout_item_bg_radius">6dp</dimen>
+    <dimen name="credit_card_cvv_radius">2dp</dimen>
+    <dimen name="tooltip_button_radius">4dp</dimen>
+    <dimen name="dialog_bottom_radius">10dp</dimen>
+    <dimen name="dialog_bottom_elevation">10dp</dimen>
+    <dimen name="img_width">200dp</dimen>
+    <dimen name="img_height">200dp</dimen>
+    <dimen name="img_toolbar_logo_width">80dp</dimen>
+    <dimen name="img_toolbar_profile_wh">30dp</dimen>
+    <dimen name="img_toolbar_piechart_wh">22dp</dimen>
+    <dimen name="img_control_panel_profile_wh">64dp</dimen>
+    <dimen name="ic_width">16dp</dimen>
+    <dimen name="ic_height">16dp</dimen>
+    <dimen name="numpad_height_min">40dp</dimen>
+    <dimen name="activity_item_height">80dp</dimen>
+    <dimen name="secondary_button_width">120dp</dimen>
+    <dimen name="step_granularity">1sp</dimen> <!-- Used for auto sizing textviews-->
+    <dimen name="pin_image_size">36dp</dimen>
+    <dimen name="toolbar_back_icon_margin">10dp</dimen>
+    <dimen name="toolbar_back_icon_padding">10dp</dimen>
+
+    <!-- Margins & Paddings -->
+
+    <dimen name="margin_low">6dp</dimen>
+    <dimen name="margin_medium">12dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_huge">36dp</dimen>
+    <dimen name="margin_mega">80dp</dimen>
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_micro">4dp</dimen>
+    <dimen name="spacing_uber_micro">2dp</dimen>
+
+</resources>

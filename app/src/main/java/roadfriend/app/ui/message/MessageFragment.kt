@@ -1,0 +1,79 @@
+package roadfriend.app.ui.message
+
+
+import android.view.View
+import roadfriend.app.R
+import roadfriend.app.data.remote.model.user.User
+import roadfriend.app.databinding.FragmentMessageBinding
+import roadfriend.app.ui.base.BindingFragment
+import roadfriend.app.ui.message.chat.ChatActivity
+import roadfriend.app.utils.extensions.launchActivity
+import roadfriend.app.utils.firebasedatebase.FirebaseHelper
+import roadfriend.app.utils.helper.genericadapter.GenericAdapter
+import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
+import kotlinx.android.synthetic.main.fragment_message.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import roadfriend.app.utils.extensions.gone
+import roadfriend.app.utils.extensions.visible
+
+class MessageFragment : BindingFragment<FragmentMessageBinding>() {
+    override val getLayoutBindId: Int
+        get() = R.layout.fragment_message
+
+
+    companion object {
+        val TAG: String = MessageFragment::class.java.simpleName
+        fun newInstance(): MessageFragment = MessageFragment().apply {
+
+        }
+    }
+
+    val baseAdapter by lazy { GenericAdapter<User>(R.layout.item_message) }
+
+    val viewModel by viewModel<MessageViewModel>()
+
+    override fun initNavigator() {
+        viewModel.setPresenter(this)
+    }
+
+    override fun initUI(view: View) {
+        binding.vm = viewModel
+        binding.lifecycleOwner = this
+    }
+
+    override fun initListener() {
+        obsreveBidData()
+    }
+
+    fun obsreveBidData() {
+        FirebaseHelper().getMessageList { messageData ->
+            initData(messageData)
+        }
+    }
+
+    private fun initData(data: ArrayList<User>?) {
+        if (data.isNullOrEmpty()) {
+            binding.cvEmptyView.initData(requireContext(), "message")
+            binding.cvEmptyView.visible()
+        } else {
+            binding.cvEmptyView.gone()
+            rvBid.adapter = baseAdapter
+            baseAdapter.clearItems()
+            baseAdapter.addItems(data)
+            adapterListener()
+        }
+    }
+
+    fun adapterListener() {
+        baseAdapter.setOnListItemViewClickListener(object :
+            GenericAdapter.OnListItemViewClickListener {
+            override fun onClick(view: View, position: Int, model: ListItemViewModel) {
+                context?.launchActivity<ChatActivity> {
+                    putExtra("model", model as User)
+                }
+            }
+        })
+    }
+
+
+}

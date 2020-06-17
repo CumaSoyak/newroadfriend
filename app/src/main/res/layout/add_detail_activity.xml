@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.add.detail.AddDetailActivity">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="roadfriend.app.ui.add.detail.AddDetailViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_layout"
+                app:layout_constraintBottom_toTopOf="@+id/iv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/cvPhone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                <roadfriend.app.customviews.CvAdmob
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/TextViewStyleTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:gravity="center"
+                    android:text="@string/add_detail_tarih_saat"
+                    android:textColor="@color/border" />
+            </LinearLayout>
+
+
+            <roadfriend.app.customviews.MaskEditText
+                android:id="@+id/cvPhone"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/card_background"
+                android:drawablePadding="10dp"
+                android:hint="@string/telefon_numarasi"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:paddingEnd="12dp"
+                android:textAlignment="center"
+                android:textColor="@color/border"
+                android:textColorHint="@color/color_edittext"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/cvPrice"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv"
+                app:mask_format="0 (###) ### ## ##"
+                app:topTitle="@string/add_detail_tarih" />
+
+            <roadfriend.app.customviews.CVAddItem
+                android:id="@+id/cvPrice"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/card_background"
+                app:descTitle="@string/edittext_hint"
+                app:iconSet="@drawable/ic_cuzdan"
+                app:layout_constraintBottom_toTopOf="@+id/cvTripOptionstatus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvPhone"
+                app:price="true"
+                app:topTitle="@string/add_detail_para" />
+
+            <roadfriend.app.customviews.CVAddItem
+                android:id="@+id/cvTripOptionstatus"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:visibility="gone"
+                app:descTitle="Araç tipi"
+                app:iconSet="@drawable/ic_boxes"
+                app:layout_constraintBottom_toTopOf="@+id/editText"
+                app:layout_constraintTop_toBottomOf="@+id/cvPrice"
+                app:topTitle="dasdas" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/card_background"
+                android:hint="@string/add_detail_aciklama"
+                android:textAlignment="center"
+                android:textColorHint="@color/color_edittext"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/border"
+                app:layout_constraintBottom_toTopOf="@+id/btnSucces"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.40"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvPrice" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSucces"
+                style="@style/GreenButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/add_detail_paylas"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
