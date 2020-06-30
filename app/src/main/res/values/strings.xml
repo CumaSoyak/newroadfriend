@@ -1,38 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="appname">Yol Arkadaşı</string>
     <string name="facebook_app_id" translatable="false">230560868185861</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb230560868185861</string>
     <string name="web_client_id" translatable="false">1052592609024-sfut0g1t1hpnvi1vieim3lp96chd0brh.apps.googleusercontent.com</string>
-    <string name="home_trip_search">Yolculuk ara</string>
-    <string name="home">Anasayfa</string>
-    <string name="message">Mesajlar</string>
-    <string name="add">İlan ver</string>
-    <string name="bid">Teklifler</string>
-    <string name="profil">Profil</string>
-    <string name="search_home">Bul</string>
-    <!--Intro-->
-    <string name="intro_next">Devam et</string>
-    <string name="intro_start">Başla</string>
-    <string name="add_detail_fiyat">Fiyat giriniz (İsteğe bağlı)</string>
-
+    <string name="ilan_ver">Share post</string>
+    <string name="ad_soyad">Full Name</string>
+    <string name="add_arac_ariyorum">Search Car</string>
+    <string name="add">Create post</string>
     <string name="uzun" translatable="false">uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string</string>
-    <string name="title_trip_detail">İlan Detayı</string>
-    <string name="title_add_direction">Şehir seçiniz</string>
-    <string name="title_add_detail">Yolculuk Detayı</string>
-    <string name="skip">Atla</string>
-    <string name="contract">Devam ederek Kullanım Koşullarını kabul etmiş olursun</string>
-    <string name="show_all_city">Tüm şehirleri gör</string>
-    <string name="hide_all_city">Tüm şehirleri gizle</string>
-
-    <array name="mails">
-        <item>gmail.com</item>
-        <item>hotmail.com</item>
-        <item>hotmail.com.tr</item>
-        <item>yahoo.com</item>
-        <item>outlook.com</item>
-        <item>yandex.com</item>
-    </array>
-    <string name="edittext_hint"><font size="15">Fiyat giriniz (İsteğe bağlı)</font></string>
+    <string name="add_detail_aciklama">Enter description (optional)</string>
+    <string name="add_detail_fiyat">Enter price (optional)</string>
+    <string name="add_detail_para">Price</string>
+    <string name="add_detail_paylas">Share Post</string>
+    <string name="add_detail_sehir_sec">Please Select City</string>
+    <string name="add_detail_tarih">Date</string>
+    <string name="add_detail_tarih_saat">You can enter a date, price, or description.</string>
+    <string name="add_detail_tarih_saat_sec">Select Date (optional)</string>
+    <string name="add_direction_title">Choose where and where to go below</string>
+    <string name="add_ne_yapmak">What you wanna do ?</string>
+    <string name="add_yuk_ariyorum">Search Person</string>
+    <string name="ana_sayfaya_don">No, thanks :(</string>
+    <string name="appname">Road Fried</string>
+    <string name="arac">Car</string>
+    <string name="baslangic_sehrini_giriniz">Enter the start city ...</string>
+    <string name="bitis_sehrini_giriniz">Enter the end city ...</string>
+    <string name="chat_activity_mesaj_yaz">Write your message ...</string>
+    <string name="contract">By continuing, you agree to the Terms of Use</string>
+    <string name="day">day</string>
+    <string name="detaya_git">Go Detail</string>
+    <string name="devam_et">Go On</string>
+    <string name="dialog_sales_one_cikar">Feature it</string>
+    <string name="duzenle">Edit</string>
+    <string name="e_mail">E-mail</string>
+    <string name="e_posta">E-mail</string>
+    <string name="edittext_hint"><font size="15">Enter price (Optional)</font></string>
+    <string name="facebook_ile_giris_yap">Sign in with Facebook</string>
+    <string name="facebook_ile_kaydol">Sign up with Facebook</string>
+    <string name="filtreyi_temizle">Clear filter</string>
+    <string name="fotograf_seciniz">Select Photo</string>
+    <string name="giris_yap">Login</string>
+    <string name="gonder">Send</string>
+    <string name="google_ile_giris_yap">Sign in with Google</string>
+    <string name="google_ile_kaydol">Sign up with Google</string>
+    <string name="haritada_gor">See on the map</string>
+    <string name="help_mesajinizi_giriniz">Enter your message</string>
+    <string name="hide_all_city">Hide all cities</string>
+    <string name="home">Home Page</string>
+    <string name="home_trip_search">Search trip</string>
+    <string name="ilan_paylasildi">Post Shared</string>
+    <string name="ilani_one_cikar">Keep my post on top :)</string>
+    <string name="intro_next">Go On</string>
+    <string name="intro_start">Start</string>
+    <string name="kaydet">Save</string>
+    <string name="kaydol">Sign Up</string>
+    <string name="mesaj_yaz">Send Message</string>
+    <string name="message">Messages</string>
+    <string name="bid">Notifications</string>
+    <string name="parola">Password</string>
+    <string name="profil">Profile</string>
+    <string name="sales_info_text_first">We will highlight the ad to find a faster</string>
+    <string name="sales_info_text_second_24">we will make a 24-hour presentation so you can find</string>
+    <string name="sales_info_text_second_3">we will make a 3-day presentation so you can find</string>
+    <string name="sales_info_text_second_7">\\we will make a 7-day presentation so you can find</string>
+    <string name="search_home">Find</string>
+    <string name="show_all_city">See all cities</string>
+    <string name="sikayet_et">Complain</string>
+    <string name="sil">Delete</string>
+    <string name="skip">Skip</string>
+    <string name="tamam">Ok</string>
+    <string name="title_add_detail">Detail</string>
+    <string name="title_add_direction">Select City</string>
+    <string name="title_trip_detail">Detail</string>
+    <string name="vazgec">Cancel</string>
+    <string name="yuk">Cargo</string>
+    <string name="temizle">Clear</string>
+    <string name="hemen_bul">Move post up</string>
+    <string name="ilan_paylasildi_mesaj">Your Post Has Been Shared Congratulations
+  We want to show you the Post that we loved you so much :)</string>
+    <string name="yolvuluk_silinmistir">Post deleted</string>
+    <string name="telefon_numarasi">Phone number (optional)</string>
+    <string name="teklifinizi_giriniz">Enter your offer</string>
+    <string name="arac_ara">Search Car</string>
+    <string name="yuk_ara">Search Person</string>
+    <string name="fiyat_yok">No Price</string>
+    <string name="yorum">Can you comment us on google play ?</string>
+    <string name="tesekkürler">No thanks</string>
+    <string name="tabikide">Of course</string>
+    <string name="telefon_numarasi_giriniz">Please enter valid Phone Number</string>
+    <string name="telefon_desciption">Would you like to send a phone number so they can reach you?</string>
+    <string name="telefon_numaras">Phone number</string>
+    <string name="update_title">New features have been added so you can find more trips \\ n  Update the application</string>
+    <string name="buton_guncelle">Update</string>
+    <string name="buton_vazgec">Skip</string>
+    <string name="internet">Check your internet connection!</string>
     <string name="contition" translatable="false">
         1.Genel Kullanım Koşulu
         1.1 Kapsam ve tanımlar
@@ -190,63 +250,31 @@ Bu tür içerikler Logistics’ın politikasına aykırıdır ve Logistics bu t�
 
 Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur olmaz, söz konusu içeriği mümkün olduğunca en kısa süre içinde Siteden kaldırmak için elinden geleni yapacaktır.
     </string>
-    <string name="add_ne_yapmak">Ne yapmak istiyorsunuz?</string>
-    <string name="add_yolcuyum">Yolcuyum</string>
-    <string name="add_arac_ariyorum">Araç arıyorum</string>
-    <string name="add_yuk_ariyorum">Kişi arıyorum</string>
-    <string name="devam_et">Devam Et</string>
-    <string name="add_detail_tarih_saat">Tarih, fiyat veya açıklama girebilirsiniz.</string>
-    <string name="add_detail_tarih_saat_sec">Tarih Seçiniz (isteğe bağlı)</string>
-    <string name="add_detail_tarih">Tarih</string>
-    <string name="add_detail_para">Para</string>
-    <string name="add_detail_aciklama">Açıklama giriniz(isteğe bağlı)</string>
-    <string name="add_detail_paylas">İlanı Paylaş</string>
-    <string name="add_direction_title">Nereden, nereye gideceğinizi aşağıdan seçiniz</string>
-    <string name="add_detail_sehir_sec">Lütfen Şehir Seçiniz..</string>
-    <string name="dialog_sales_one_cikar">Öne Çıkar</string>
-    <string name="chat_activity_mesaj_yaz">Mesajınızı yazınız...</string>
-    <string name="tamam">Tamam</string>
-    <string name="vazgec">Vazgeç</string>
-    <string name="ilan_ver">İlan ver</string>
-    <string name="arac_ara">Araç Ara</string>
-    <string name="yuk_ara">Kişi Ara</string>
-    <string name="filtreyi_temizle">Filtreyi temizle</string>
-    <string name="detaya_git">Detaya git</string>
-    <string name="baslangic_sehrini_giriniz">Başlangıç şehrini giriniz...</string>
-    <string name="bitis_sehrini_giriniz">Bitiş şehrini giriniz...</string>
-    <string name="haritada_gor">Haritada Gör</string>
-    <string name="help_mesajinizi_giriniz">Mesajınızı giriniz</string>
-    <string name="gonder">Gönder</string>
-    <string name="e_mail">E-mail</string>
-    <string name="giris_yap">Giriş Yap</string>
-    <string name="facebook_ile_giris_yap">Facebook ile giriş yap</string>
-    <string name="google_ile_giris_yap">Google ile giriş yap</string>
-    <string name="kaydol">Kaydol</string>
-    <string name="fotograf_seciniz">Fotoğraf seçiniz</string>
-    <string name="ad_soyad">Ad Soyad</string>
-    <string name="e_posta">E-posta</string>
-    <string name="parola">Parola</string>
-    <string name="facebook_ile_kaydol">Facebook ile kaydol</string>
-    <string name="google_ile_kaydol">Google ile kaydol</string>
-    <string name="ilan_paylasildi">İlan Paylaşıldı</string>
-    <string name="ilani_one_cikar">İlanı Öne Çıkar</string>
-    <string name="ana_sayfaya_don">Ana sayfaya dön</string>
-    <string name="mesaj_yaz">Mesaj yaz</string>
-    <string name="day">gün</string>
-    <string name="arac">Araç</string>
-    <string name="yuk">Kişi</string>
-    <string name="sil">Sil</string>
-    <string name="duzenle">Düzenle</string>
-    <string name="kaydet">Kaydet</string>
-    <string name="sikayet_et">Şikayet et</string>
-    <string name="sales_info_text_first">Daha hızlı</string>
-    <string name="sales_info_text_second_24">bulabilmen  için ilanı 24 saat öne çıkaracağız</string>
-    <string name="sales_info_text_second_3">bulabilmen  için ilanı 3 saat öne çıkaracağız</string>
-    <string name="sales_info_text_second_7">bulabilmen  için ilanı 7 saat öne çıkaracağız</string>
-    <string name="teklifinizi_giriniz">Teklifinizi giriniz</string>
-    <string name="telefon_numarasi">Telefon numarası (isteğe bağlı)</string>
-    <string name="yolvuluk_silinmistir">Yolculuk silinmiştir</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="yolculuklarım">My Trips</string>
+    <string name="kaydedilen_yolculuklar">Saved Trips</string>
+    <string name="hakkimda_yorumlar">Comments About Me</string>
+    <string name="kosul_sartlar">Terms and Conditions</string>
+    <string name="yardim">Help</string>
+    <string name="yardim_profil">Exit</string>
+    <string name="iletisime_gec">Contact us</string>
+    <string name="gelen_teklif_yok">No incoming offers</string>
+    <string name="mesaj_yok">You have no messages</string>
+    <string name="yolculugunuz_bulunmaktadir">You have no trip</string>
+    <string name="kayitli_yolculugunuz_bulunmaktadir">You have no registered trip.</string>
+    <string name="hakkinizda_yorum_bulunmaktadir">There are no comments about you.</string>
+    <string name="bu_ilan_icin_teklif_yok">No offers for this trip</string>
+    <string name="ilan_bulunamadı">No Trip Found</string>
+    <string name="ilan_vermek_istermisiniz">Would you like to share trip ?</string>
+    <string name="ne_ariyorsun">What are you looking for</string>
+    <string name="start_now">Start Now</string>
+    <string name="login_register">Login / Register</string>
+    <string name="devam">Next</string>
+    <array name="mails">
+        <item>gmail.com</item>
+        <item>hotmail.com</item>
+        <item>hotmail.com.tr</item>
+        <item>yahoo.com</item>
+        <item>outlook.com</item>
+        <item>yandex.com</item>
+    </array>
 </resources>

@@ -36,10 +36,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <roadfriend.app.customviews.CvAdmob
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
                 <roadfriend.app.customviews.CVDetail
                     android:id="@+id/cvDetail"
                     android:layout_width="match_parent"
@@ -135,7 +131,6 @@
                 android:text="@string/mesaj_yaz"
                 android:textColor="@color/white"
                 android:textSize="15sp"
-                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnSendBid"
                 app:layout_constraintStart_toStartOf="parent"
@@ -160,8 +155,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnSendBid"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivUserImage"
-                tools:visibility="visible" />
+                app:layout_constraintTop_toBottomOf="@+id/ivUserImage" />
 
 
             <ImageView

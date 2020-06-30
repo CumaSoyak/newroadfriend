@@ -36,10 +36,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-                <roadfriend.app.customviews.CvAdmob
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
                 <TextView
                     style="@style/TextViewStyleTitle"
                     android:layout_width="match_parent"
@@ -64,7 +60,7 @@
                 app:layout_constraintTop_toBottomOf="@id/containerImage"
                 app:layout_constraintWidth_percent="0.95"
                 app:status="1"
-                app:text="@string/add_yolcuyum" />
+                  />
 
             <roadfriend.app.customviews.CVChooseStatus
                 android:id="@+id/driver"

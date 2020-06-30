@@ -1,6 +1,13 @@
 package roadfriend.app.ui.message.chat
 
 import android.view.View
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
+import kotlinx.android.synthetic.main.chat_activity.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.CoreApp.Companion.chatID
 import roadfriend.app.R
@@ -12,20 +19,12 @@ import roadfriend.app.data.remote.model.user.User
 import roadfriend.app.databinding.ChatActivityBinding
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.main.MainActivity
-import roadfriend.app.utils.DummyData
 import roadfriend.app.utils.OptionData
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.*
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
-import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.SetOptions
-import kotlinx.android.synthetic.main.chat_activity.*
-import kotlinx.android.synthetic.main.toolbar_layout.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class ChatActivity : BindingActivity<ChatActivityBinding>() {
@@ -119,7 +118,7 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
         //Benim chat listeme ekle
         val data = hashMapOf(
             "messageText" to etChatBox.textString(),
-            "fullName" to DummyData.getUser().fullName,
+            "fullName" to chatUser.fullName,
             "messageType" to "me",
             "time" to time
         )
@@ -133,6 +132,7 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
                     sendNotification(etChatBox.textString())
                     if (beforeNoChating) {   //eğer daha önce mesajlaşılmadıysa user oluştur
                         FirebaseHelper().chatCreateUser(chatUser)
+                        FirebaseHelper().setNotificationBadge(chatUser,true)
                     }
                     binding.etChatBox.text.clear()
 

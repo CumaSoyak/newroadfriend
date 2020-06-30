@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/ibm_plex_sans_semi_bold"
         android:gravity="center"
-        android:text="Geçerli Telefon Numarası giriniz"
+        android:text="@string/telefon_numarasi_giriniz"
         android:textColor="@color/red_ribbon"
         android:visibility="gone"
         tools:visibility="visible" />
@@ -27,7 +27,7 @@
         android:layout_marginEnd="@dimen/margin_huge"
         android:fontFamily="@font/ibm_plex_sans_semi_bold"
         android:gravity="center"
-        android:text="Size ulaşabilmeleri için telefon numarası göndermek ister misiniz ?" />
+        android:text="@string/telefon_desciption" />
 
     <roadfriend.app.customviews.MaskEditText
         android:id="@+id/etPhone"
@@ -38,7 +38,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/card_background"
         android:drawablePadding="10dp"
-        android:hint="Telefon numarası"
+        android:hint="@string/telefon_numaras"
         android:inputType="phone"
         android:maxLines="1"
         android:paddingStart="10dp"
@@ -65,7 +65,7 @@
         android:layout_marginEnd="@dimen/margin_huge"
         android:background="@drawable/custom_green_button"
         android:fontFamily="@font/ibm_plex_sans_semi_bold"
-        android:text="Gönder"
+        android:text="@string/gonder"
         android:textColor="@color/white" />
 
 </LinearLayout>

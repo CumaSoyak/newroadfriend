@@ -1,23 +1,20 @@
 package roadfriend.app.ui.splash
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.util.Base64
-import android.util.Log
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.BuildConfig
 import roadfriend.app.R
 import roadfriend.app.ui.base.BaseActivity
 import roadfriend.app.ui.dashboard.DashBoardActivity
+import roadfriend.app.ui.intro.IntroActivity
 import roadfriend.app.ui.main.MainActivity
 import roadfriend.app.utils.DialogUtils
 import roadfriend.app.utils.NetworkUtils
+import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 
 class SplashActivity : BaseActivity() {
     override val layoutId: Int?
@@ -31,6 +28,7 @@ class SplashActivity : BaseActivity() {
 
     override fun initUI() {
         if (NetworkUtils.isConnected(this)) {
+            FirebaseHelper().reklam()
             FirebaseHelper().isAppUpdate { update ->
                 if (update) {
                     updateApp()
@@ -39,50 +37,31 @@ class SplashActivity : BaseActivity() {
                 }
             }
         } else {
-            showError("İnternet bağlantınızı kontrol ediniz !")
+            showError(getString(R.string.internet))
         }
-
-
-        try
-        {
-            val info = getPackageManager().getPackageInfo("roadfriend.app", PackageManager.GET_SIGNATURES)
-            for (signature in info.signatures)
-            {
-                val md = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                Log.e("MYKEYHASH:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
-            }
-        }
-        catch (e:PackageManager.NameNotFoundException) {
-        }
-        catch (e: NoSuchAlgorithmException) {
-        }
-
     }
 
     override fun initListener() {
     }
 
     fun launchActivity() {
-        if (BuildConfig.DEBUG) {
-            launchActivity<DashBoardActivity>()
-        } else {
-            launchActivity<MainActivity>()
-        }
-//        if (PrefUtils.checkIsFirstTimeOpen()) {
-//            launchActivity<IntroActivity> { }
-//        } else if (!PrefUtils.getToken().isNullOrEmpty()) {
-//            launchActivity<MainActivity> {}
+//        if (BuildConfig.DEBUG) {
+//            launchActivity<DashBoardActivity>()
 //        } else {
-//            launchActivity<RegisterActivity> { }
+//            launchActivity<MainActivity>()
 //        }
+        if (PrefUtils.checkIsFirstTimeOpen()) {
+            launchActivity<IntroActivity> { }
+        } else if (!PrefUtils.checkIsFirstTimeOpen()) {
+            launchActivity<MainActivity> {}
+        }
     }
 
     fun updateApp() {
         val model = DialogUtils.DialogModel(
-            "Daha fazla yük bulabilmen için yeni özelliler eklendi \n Uygulamayı güncelleyiniz",
-            "Güncelle",
-            "Vazgeç",
+            resources.getString(R.string.update_title),
+            getString(R.string.buton_guncelle),
+            getString(R.string.buton_vazgec),
             R.drawable.ic_alert,
             false
         )

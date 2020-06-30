@@ -3,13 +3,16 @@ package roadfriend.app.utils
 import android.annotation.SuppressLint
 import android.view.View
 import android.widget.*
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
+import org.jetbrains.anko.imageResource
 import roadfriend.app.R
 import roadfriend.app.customviews.CVAddItem
+import roadfriend.app.ui.intro.TutorialType
 import roadfriend.app.utils.extensions.backgroundColor
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.load
-import org.jetbrains.anko.imageResource
+import roadfriend.app.utils.extensions.visible
 
 
 @SuppressLint("StaticFieldLeak")
@@ -133,8 +136,50 @@ object BindingUtils {
     }
 
     @JvmStatic
+    @BindingAdapter("premium")
+    fun premium(view: View, text: String?) {
+        if (!text.equals("free")) {
+            view.visible()
+        }
+        else{
+            view.gone()
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("tutorialType")
+    fun setTutorialImage(view: ImageView, tutorialType: TutorialType) {
+        val imageId = when (tutorialType) {
+            TutorialType.TUTORIAL_FIRST -> R.drawable.ic_car
+            TutorialType.TUTORIAL_SECOND -> R.drawable.ic_car
+            TutorialType.TUTORIAL_THIRD -> R.drawable.ic_car
+            TutorialType.TUTORIAL_FOURTH -> R.drawable.ic_car
+            TutorialType.TUTORIAL_FIFTH -> R.drawable.ic_car
+        }
+
+        view.setImageResource(imageId)
+    }
+    @JvmStatic
+    @BindingAdapter("tutorialTitle")
+    fun setTutorialTitle(
+        view: AppCompatTextView, tutorialType: TutorialType) {
+        view.text = when (tutorialType) {
+            TutorialType.TUTORIAL_FIRST -> "translation.globalMobileTutorialText1"
+            TutorialType.TUTORIAL_SECOND -> "translation.globalMobileTutorialText2"
+            TutorialType.TUTORIAL_THIRD -> "translation.globalMobileTutorialText3"
+            TutorialType.TUTORIAL_FOURTH -> "translation.globalMobileTutorialText4"
+            TutorialType.TUTORIAL_FIFTH -> "translation.globalMobileTutorialText5"
+        }
+    }
+    @JvmStatic
+    @BindingAdapter("visibleGone")
+    fun showHide(view: View, show: Boolean?) {
+        view.visibility = if (show != null && show) View.VISIBLE else View.GONE
+    }
+    @JvmStatic
     @BindingAdapter(value = ["app:progressScaled", "android:max"], requireAll = true)
     fun setProgress(progressBar: ProgressBar, likes: Int, max: Int) {
         progressBar.progress = (likes * max / 5).coerceAtMost(max)
     }
+
 }

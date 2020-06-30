@@ -13,6 +13,7 @@ object AppConstants {
     const val ADD_SEARCH_STATION = "ADD_SEARCH_STATION"
     const val HOME_SEARCH = "HOME_SEARCH"
     const val IS_USER_LOGGED = "is_user_logged"
+    const val IS_RATED = "is_rated"
     const val IS_PHONE_AVAILABLE = "is_phoneis_available"
     const val USER_DETAIL = "USER_DETAIL"
     const val TOKEN = "token"

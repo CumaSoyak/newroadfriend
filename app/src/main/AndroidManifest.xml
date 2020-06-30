@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="roadfriend.app"
-    android:versionCode="7"
-    android:versionName="1.0.4">
+    android:versionCode="18"
+    android:versionName="1.0.15">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -91,7 +91,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB2iB4YMsbS5MExON-tdkmjYWh7eH3l9YY" />
+            android:value="AIzaSyD618ZT6OcspQrhu04pBBLP-ieac5BZJVU" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

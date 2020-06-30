@@ -9,6 +9,7 @@ import roadfriend.app.CoreApp
 import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.data.remote.model.user.User
 import roadfriend.app.utils.AppConstants.FIRABESE_TOKEN
+import roadfriend.app.utils.AppConstants.IS_RATED
 import roadfriend.app.utils.AppConstants.IS_USER_LOGGED
 import roadfriend.app.utils.AppConstants.KEEP_SEASRCH
 import roadfriend.app.utils.AppConstants.PREF_NAME
@@ -38,8 +39,12 @@ object PrefUtils {
     fun isLogin(): Boolean = instance.getBoolean(IS_USER_LOGGED, false)
 
     fun getUser(): User {
-        return GsonBuilder().create()
-            .fromJson(instance.getString(USER_DETAIL, ""), User::class.java)
+        if (instance.getString(USER_DETAIL, "").isNullOrEmpty()) {
+            logOut()
+            return User()
+        } else
+            return GsonBuilder().create()
+                .fromJson(instance.getString(USER_DETAIL, ""), User::class.java)
     }
 
     fun getUserId(): String {
@@ -55,20 +60,22 @@ object PrefUtils {
         }
     }
 
-    fun createKeepSearchCity(status: String) {
-        instance.setValue(KEEP_SEASRCH, status)
-    }
-
     fun createUser(user: User) {
         user.firebaseToken = getFirebaseToken()
         val userJson = GsonBuilder().serializeNulls().create().toJson(user)
         if (!isLogin()) {
-
             instance.setValue(IS_USER_LOGGED, true)
-
         }
         instance.setValue(USER_DETAIL, userJson)
 
+    }
+
+    fun setRated() {
+        instance.setValue(IS_RATED, true)
+    }
+
+    fun isRated(): Boolean {
+        return instance.getBoolean(IS_RATED, false)
     }
 
     fun createToken(token: String) {

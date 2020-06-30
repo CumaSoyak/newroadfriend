@@ -1,10 +1,13 @@
 package roadfriend.app.utils
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.telephony.TelephonyManager
-import com.google.i18n.phonenumbers.PhoneNumberUtil
 import roadfriend.app.CoreApp.Companion.context
+import roadfriend.app.CoreApp.Companion.reklam
+import roadfriend.app.ui.sales.SalesActivity
 import java.io.IOException
 
 
@@ -22,7 +25,8 @@ object OtherUtils {
     }
 
     fun getCountryCode(): String {
-        return getCurrentCountryCode()
+        if (reklam) return getCurrentCountryCode()
+        else return "tr"
     }
 
     fun getCurrentCountryCode(): String {
@@ -42,6 +46,25 @@ object OtherUtils {
             return null
         }
         return jsonString
+    }
+
+    fun openGooglePlay(activity: SalesActivity) {
+        val appPackageName = activity.getPackageName()
+        try {
+            activity.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=" + appPackageName)
+                )
+            )
+        } catch (anfe: android.content.ActivityNotFoundException) {
+            activity.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)
+                )
+            )
+        }
     }
 
 

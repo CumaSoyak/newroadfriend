@@ -54,6 +54,11 @@ class FirebaseHelper {
             .set(dataMe, SetOptions.merge())
     }
 
+    fun setNotificationBadge(user: User, type: Boolean) {
+        db.collection(test + "notification")
+            .document(user.id)
+            .set(hashMapOf("message" to type), SetOptions.merge())
+    }
 
     fun getMessageList(requestCallback: (data: ArrayList<User>) -> Unit) {
         val messageData: ArrayList<User> = arrayListOf()
@@ -66,6 +71,15 @@ class FirebaseHelper {
                 messageData.add(data)
             }
             requestCallback(messageData)
+        }
+    }
+
+    fun getNotification(callBack: (result: Boolean) -> Unit) {
+        val docRef =
+            db.collection(test + "notification").document(PrefUtils.getUserId())
+        docRef.addSnapshotListener { snapshot, e ->
+            if (snapshot?.data != null)
+                callBack(snapshot.data!!["message"] as Boolean)
         }
     }
 
@@ -88,6 +102,18 @@ class FirebaseHelper {
 
                         }
                     }
+                }
+            }
+        }
+    }
+
+    fun reklam() {
+        val docRef = db.collection("reklam")
+        docRef.addSnapshotListener { snapshot, e ->
+            if (snapshot != null) {
+                if (!snapshot.documents.isNullOrEmpty()) {
+                    val updateVersion = snapshot.documents.get(0)["reklam"] as Boolean
+                    CoreApp.reklam = updateVersion
                 }
             }
         }
@@ -124,7 +150,7 @@ class FirebaseHelper {
 
                 trips.add(data)
             }
-            requestCallback(trips)
+            requestCallback(tripsPremimumCalculate(trips))
         }
     }
 
@@ -266,30 +292,26 @@ class FirebaseHelper {
         //1 ay 2629743
         val tripList: ArrayList<Trips> = arrayListOf()
         val current = getCurrentDate()
+
         val nowTrips = trips.filter {
-            (current - it.firebaseTimeSecond!!) < 86401
-                    && !it.paymentType.equals("day")
-                    && !it.paymentType.equals("week")
-                    && !it.paymentType.equals("monday")
-                    || !it.paymentType.equals("free")
+            (current - it.firebaseTimeSecond!!) < 1800
         }
-        val dayTrips =
-            trips.filter { it.paymentType.equals("day") && (current - it.firebaseTimeSecond!!) >= 86400 }
-        val weekTrips =
-            trips.filter { it.paymentType.equals("week") && (current - it.firebaseTimeSecond!!) >= 86400 }
-        val mondayTrips =
-            trips.filter { it.paymentType.equals("monday") && (current - it.firebaseTimeSecond!!) >= 86400 }
-        val freeTrips =
-            trips.filter { it.paymentType.equals("free") && (current - it.firebaseTimeSecond!!) >= 86400 }
+        val premium = trips.filter {
+            it.paymentType.equals("day")
+                    || it.paymentType.equals("week")
+                    || it.paymentType.equals("monday")
 
-        var sizeSum =
-            dayTrips.size + weekTrips.size + mondayTrips.size + freeTrips.size + nowTrips.size
+        }
+        val notPremium = trips.filter {
+            !it.paymentType.equals("day")
+                    && !it.paymentType.equals("week")
+                    && !it.paymentType.equals("monday") && (current - it.firebaseTimeSecond!!) >= 1800
 
-        tripList.addAll(mondayTrips)
+        }
+
         tripList.addAll(nowTrips)
-        tripList.addAll(weekTrips)
-        tripList.addAll(dayTrips)
-        tripList.addAll(freeTrips)
+        tripList.addAll(premium)
+        tripList.addAll(notPremium)
 
         return tripList
     }

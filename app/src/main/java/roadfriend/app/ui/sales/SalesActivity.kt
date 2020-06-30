@@ -1,6 +1,12 @@
 package roadfriend.app.ui.sales
 
+import android.os.Bundle
 import android.widget.Button
+import com.android.billingclient.api.*
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.analytics.FirebaseAnalytics
+import kotlinx.android.synthetic.main.bottom_dialog_sales.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.CoreApp.Companion.db
 import roadfriend.app.R
@@ -14,16 +20,15 @@ import roadfriend.app.ui.home.SecondFragment
 import roadfriend.app.ui.main.MainActivity
 import roadfriend.app.utils.DialogUtils
 import roadfriend.app.utils.OptionData
+import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.logger
 import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.extensions.showSucces
-import com.android.billingclient.api.*
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.bottom_dialog_sales.view.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import roadfriend.app.utils.manager.EventManager
 
-class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedListener {
+class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedListener,
+    AcknowledgePurchaseResponseListener {
     override val getLayoutBindId: Int
         get() = R.layout.sales_activity
 
@@ -59,15 +64,18 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
     }
 
     override fun initListener() {
-        binding.btnPayment.setOnClickListener { openPaymentBottomSheet() }
+        binding.btnPayment.setOnClickListener {
+            EventManager.clickSatisOnizleme()
+            openPaymentBottomSheet()
+        }
         binding.btnNoThanks.setOnClickListener {
-            launchActivity<MainActivity> { }
+            onBackPressed()
         }
     }
 
     fun whereComing() {
         if (intent.getStringExtra("intent") == AddDetailActivity::class.java.name) {
-            showSucces("İlanınız Paylaşıldı Tebrikler")
+            showSucces(getString(R.string.ilan_paylasildi_mesaj))
         }
     }
 
@@ -105,7 +113,7 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
         billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
             // Process the result.
             viewModel.getPresenter()?.hideLoading()
-            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList.isNotEmpty()) {
+            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList!!.isNotEmpty()) {
                 for (skuDetails in skuDetailsList) {
                     if (skuDetails.sku == moneyType) {
                         val billingFlowParams = BillingFlowParams
@@ -116,8 +124,6 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
                     }
                 }
             }
-            //logger(skuDetailsList.get(0).description)
-
         }
 
     } else {
@@ -125,59 +131,49 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
     }
 
     override fun onPurchasesUpdated(
-        billingResult: BillingResult?,
+        billingResult: BillingResult,
         purchases: MutableList<Purchase>?
     ) {
-        if (billingResult?.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
             for (purchase in purchases) {
-
                 salesBottomDialog.dismiss()
-
                 tripUpdatePremium()
+                handlePurchase(purchase)
                 // acknowledgePurchase(purchase.purchaseToken)
 
             }
-        } else if (billingResult?.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
+        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
             // Handle an error caused by a user cancelling the purchase flow.
             logger("User Cancelled")
             logger(billingResult.debugMessage.toString())
 
 
         } else {
-            logger(billingResult?.debugMessage.toString())
+            logger(billingResult.debugMessage.toString())
             // Handle any other error codes.
         }
     }
 
 
-    private fun acknowledgePurchase(purchaseToken: String) {
-        val params = AcknowledgePurchaseParams.newBuilder()
-            .setPurchaseToken(purchaseToken)
-            .build()
-        billingClient.acknowledgePurchase(params) { billingResult ->
-            val responseCode = billingResult.responseCode
-            val debugMessage = billingResult.debugMessage
-            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                showSucces("Başarılı")
-                logger(responseCode.toString() + "BasariliOdemeTebrikler")
-            }
-            logger(debugMessage)
-            logger(responseCode)
-        }
-    }
-
     override fun onBackPressed() {
-        if (intent.getStringExtra("intent") == AddDetailActivity::class.java.name) {
-            launchActivity<MainActivity> { }
-        }
-        if (intent.getStringExtra("intent") == FirstFragment::class.java.name) {
-            finish()
-        }
-        if (intent.getStringExtra("intent") == SecondFragment::class.java.name) {
-            finish()
+        if (PrefUtils.isRated()) {
+            if (intent.getStringExtra("intent") == AddDetailActivity::class.java.name) {
+                launchActivity<MainActivity> { }
+            }
+            if (intent.getStringExtra("intent") == FirstFragment::class.java.name) {
+                finish()
+            }
+            if (intent.getStringExtra("intent") == SecondFragment::class.java.name) {
+                finish()
+            } else {
+                finish()
+            }
         } else {
-            finish()
+            DialogUtils.showPopupRate(this, this) {
+                launchActivity<MainActivity> { }
+            }
         }
+
     }
 
     fun openPaymentBottomSheet() {
@@ -244,5 +240,39 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
                 showError("Bir şeyler ters gitti")
             }
     }
+
+    fun handlePurchase(purchase: Purchase) {
+        if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
+            if (!purchase.isAcknowledged) {
+                var acknowledgePurchaseParams =
+                    AcknowledgePurchaseParams.newBuilder()
+                        .setPurchaseToken(purchase.purchaseToken)
+                        .build();
+                billingClient.acknowledgePurchase(
+                    acknowledgePurchaseParams,
+                    this
+                )
+
+            }
+        }
+        val consumeParams =
+            ConsumeParams.newBuilder()
+                .setPurchaseToken(purchase.purchaseToken)
+                .build()
+
+        billingClient.consumeAsync(consumeParams) { billingResult, outToken ->
+            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                var firebaseAnalytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+                var bundle = Bundle()
+                bundle.putString(CoreApp.testDatabase + "tuketildi", "tuketildi")
+                firebaseAnalytics.logEvent(CoreApp.testDatabase + "tuketildi", bundle)
+            }
+        }
+    }
+
+    override fun onAcknowledgePurchaseResponse(p0: BillingResult) {
+        EventManager.analyticsSendOrderComplete(tripData, moneyType)
+    }
+
 
 }

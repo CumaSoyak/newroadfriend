@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.badge.BadgeDrawable
+import kotlinx.android.synthetic.main.activity_main.*
 import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.ui.add.AddActivity
@@ -12,9 +14,10 @@ import roadfriend.app.ui.homemain.HomeMainFragment
 import roadfriend.app.ui.message.MessageFragment
 import roadfriend.app.ui.notification.NotificationFragment
 import roadfriend.app.ui.profile.ProfilFragment
+import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.PrefUtils.isLogin
 import roadfriend.app.utils.extensions.overridePendingTransitionEnter
-import kotlinx.android.synthetic.main.activity_main.*
+import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     var notificationFragment: Fragment? = null
     var bidFragment: Fragment? = null
     var profilFragment: Fragment? = null
-
+    lateinit var badge: BadgeDrawable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +36,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigationBar() {
-//        var badge = bottom_nav.getOrCreateBadge(R.id.nav_notification)
-
+        badge = bottom_nav.getOrCreateBadge(R.id.nav_message)
+        badge.isVisible = false
 
         bottom_nav.setOnNavigationItemSelectedListener { menuItem ->
             var selectedFragment: Fragment? = null
@@ -73,6 +76,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_message -> {
                     if (isLogin()) {
+                        notidficationDisable()
                         if (bidFragment == null) {
                             bidFragment = MessageFragment.newInstance()
                             addFragmentMethod(bidFragment!!)
@@ -110,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         bottom_nav.selectedItemId = R.id.nav_home
-
+        checkBadgeNotification()
 
     }
 
@@ -143,5 +147,20 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         CoreApp.notLogin = false
 
+    }
+
+    fun checkBadgeNotification() {
+        if (isLogin()) {
+            FirebaseHelper().getNotification {
+                if (it) {
+                    badge.isVisible = true
+                }
+            }
+        }
+    }
+
+    fun notidficationDisable() {
+        badge.isVisible = false
+        FirebaseHelper().setNotificationBadge(PrefUtils.getUser(), false)
     }
 }

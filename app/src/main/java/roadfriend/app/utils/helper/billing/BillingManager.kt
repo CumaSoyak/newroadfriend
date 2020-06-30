@@ -76,7 +76,7 @@ class BillingManager(
         if (isSubscriptionPurchaseSupported()) {
             val purchasesResult = billingClient.queryPurchases(BillingClient.SkuType.SUBS)
             if (purchasesResult.responseCode == BillingResponseCode.OK) {
-                onEntitledPurchases(purchasesResult.purchasesList)
+                purchasesResult.purchasesList?.let { onEntitledPurchases(it) }
             } else {
                 log("Error trying to query purchases: $purchasesResult")
             }

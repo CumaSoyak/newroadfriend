@@ -11,14 +11,15 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
-import roadfriend.app.R
-import roadfriend.app.customviews.MaskEditText
-import roadfriend.app.utils.extensions.checkPhoNumber
-import roadfriend.app.utils.extensions.visible
-import roadfriend.app.utils.helper.BottomSheetAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.bottom_dialog_choose.view.*
 import org.jetbrains.anko.layoutInflater
+import roadfriend.app.R
+import roadfriend.app.customviews.MaskEditText
+import roadfriend.app.ui.sales.SalesActivity
+import roadfriend.app.utils.extensions.checkPhoNumber
+import roadfriend.app.utils.extensions.visible
+import roadfriend.app.utils.helper.BottomSheetAdapter
 
 object DialogUtils {
     private var myDialog: Dialog? = null
@@ -181,6 +182,23 @@ object DialogUtils {
             }
         }
 
+        myDialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myDialog!!.show()
+    }
+
+    fun showPopupRate(context: Context, activity: SalesActivity, noRate: () -> Unit) {
+        myDialog = Dialog(context)
+        myDialog?.setContentView(R.layout.dialog_rate)
+        val btnNo: AppCompatButton = myDialog!!.findViewById(R.id.btnNo)
+        val btnYes: AppCompatButton = myDialog!!.findViewById(R.id.btnOk)
+        btnNo.setOnClickListener {
+            noRate.invoke()
+        }
+        btnYes.setOnClickListener {
+            PrefUtils.setRated()
+            myDialog?.dismiss()
+            OtherUtils.openGooglePlay(activity)
+        }
         myDialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         myDialog!!.show()
     }

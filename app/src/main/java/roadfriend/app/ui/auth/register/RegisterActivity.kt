@@ -14,19 +14,6 @@ import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import roadfriend.app.CoreApp
-import roadfriend.app.R
-import roadfriend.app.data.remote.model.user.User
-import roadfriend.app.databinding.RegisterActivityBinding
-import roadfriend.app.ui.auth.login.LoginActivity
-import roadfriend.app.ui.base.BindingActivity
-import roadfriend.app.ui.main.MainActivity
-import roadfriend.app.ui.profile.help.HelpActivity
-import roadfriend.app.utils.PrefUtils
-import roadfriend.app.utils.extensions.*
-import roadfriend.app.utils.extensions.ImagePickerActivity.Companion.REQUEST_IMAGE
-import roadfriend.app.utils.firebasedatebase.AuthFirebase
-import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -46,8 +33,23 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.register_activity.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import roadfriend.app.CoreApp
+import roadfriend.app.R
+import roadfriend.app.data.remote.model.user.User
+import roadfriend.app.databinding.RegisterActivityBinding
+import roadfriend.app.ui.auth.login.LoginActivity
+import roadfriend.app.ui.base.BindingActivity
+import roadfriend.app.ui.main.MainActivity
+import roadfriend.app.ui.profile.help.HelpActivity
+import roadfriend.app.utils.OtherUtils
+import roadfriend.app.utils.PrefUtils
+import roadfriend.app.utils.extensions.*
+import roadfriend.app.utils.extensions.ImagePickerActivity.Companion.REQUEST_IMAGE
+import roadfriend.app.utils.firebasedatebase.AuthFirebase
+import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import java.io.IOException
 import java.util.*
+import java.util.regex.Pattern
 
 /**
  * A simple [Fragment] subclass.
@@ -209,7 +211,7 @@ class RegisterActivity : BindingActivity<RegisterActivityBinding>(),
                             etPassword.textString(),
                             it.toString(),
                             0,
-                            PrefUtils.getFirebaseToken()
+                            PrefUtils.getFirebaseToken(), country = OtherUtils.getCountryCode()
                         )
                         , succes = {
                             nextMainActivity()
@@ -241,7 +243,11 @@ class RegisterActivity : BindingActivity<RegisterActivityBinding>(),
     }
 
     fun inputValidate(): Boolean {
-        if (etFullName.textString().isNullOrEmpty()) {
+        if (etFullName.textString().isNullOrEmpty() || !Pattern.matches(
+                "[A-Za-zçıüğöşİĞÜÖŞÇ]{2,}+\\s[A-Za-zçıüğöşİĞÜÖŞÇ]{2,}",
+                etFullName.text
+            )
+        ) {
             etFullName.error = "Ad soyad arasında boşluk olmalıdır"
             return false
         } else if (etEmail.textString().isNullOrEmpty() || !etEmail.textString().contains("@")) {
@@ -326,7 +332,7 @@ class RegisterActivity : BindingActivity<RegisterActivityBinding>(),
             "google",
             imageURL.toString(),
             0,
-            PrefUtils.getFirebaseToken()
+            PrefUtils.getFirebaseToken(), country = OtherUtils.getCountryCode()
         )
         AuthFirebase().getUserSocialLogin(user) {
             nextMainActivity()
@@ -351,7 +357,7 @@ class RegisterActivity : BindingActivity<RegisterActivityBinding>(),
                             "facebook",
                             imageURL,
                             0,
-                            PrefUtils.getFirebaseToken()
+                            PrefUtils.getFirebaseToken(), country = OtherUtils.getCountryCode()
                         )
                         AuthFirebase().getUserSocialLogin(user) {
                             nextMainActivity()

@@ -20,6 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_12"
             android:layout_marginTop="@dimen/margin_normal">
 
             <TextView
@@ -40,6 +41,11 @@
                 android:text="@{vmDashBoard.userSizeData.toString()}"
                 android:textSize="15sp"
                 tools:text="Size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="@{vmDashBoard.foreignuserSizeData.toString()}"
+                android:layout_height="wrap_content"/>
 
 
         </LinearLayout>

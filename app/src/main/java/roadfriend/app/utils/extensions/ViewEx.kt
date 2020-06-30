@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.SystemClock
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.viewpager.widget.ViewPager
 
 
 fun View.clickWithDebounce(debounceTime: Long = 600L, action: () -> Unit) {
@@ -52,4 +53,20 @@ fun View.hideKeyboard(): Boolean {
     } catch (ignored: RuntimeException) {
     }
     return false
+}
+fun ViewPager.onPageSelected(onPageSelected: (Int) -> Unit) {
+    this.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        override fun onPageScrollStateChanged(state: Int) {}
+
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
+        }
+
+        override fun onPageSelected(position: Int) {
+            onPageSelected.invoke(position)
+        }
+    })
 }

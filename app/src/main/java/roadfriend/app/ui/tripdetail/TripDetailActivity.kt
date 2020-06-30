@@ -3,6 +3,11 @@ package roadfriend.app.ui.tripdetail
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import kotlinx.android.synthetic.main.toolbar_layout.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.customviews.CvOption
@@ -18,11 +23,6 @@ import roadfriend.app.utils.DialogUtils
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.*
 import roadfriend.app.utils.firebasedatebase.TripFirebase
-import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
-import kotlinx.android.synthetic.main.toolbar_layout.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
@@ -81,16 +81,7 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
     }
 
     fun listenerBidEditText() {
-        if (trips.status.equals("1"))
-        /**Araç arıyorum*/
-        {
-            binding.etBid.visible()
-        }
-        if (trips.status.equals("2"))
-        /**Yük arıyorum*/
-        {
-            binding.btnMessage.visible()
-        }
+
         binding.etBid.listener { text ->
             if (!text.isNullOrEmpty()) {
                 binding.btnSendBid.visible()
@@ -158,11 +149,11 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
     fun sendBid() {
         if (PrefUtils.isLogin()) {
             val userMe = PrefUtils.getUser()
-            if (userMe?.phone.isNullOrEmpty()) {
+            if (userMe.phone.isNullOrEmpty()) {
                 val time = FieldValue.serverTimestamp()
                 DialogUtils.showPopupPhone(this) { phoneNumber ->
                     val bid = hashMapOf(
-                        "id" to userMe?.id,
+                        "id" to userMe.id,
                         "fullName" to userMe?.fullName,
                         "phone" to phoneNumber,
                         "price" to binding.etBid.textString(),
@@ -192,7 +183,8 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
 
     fun sendData(bid: HashMap<String, Any>) {
         val userMe = PrefUtils.getUser()
-        val message = trips.startCityName + " -> " + trips.endCityName + " ilanına " + bid["price"] + " tl teklif verdi \uD83C\uDF89"
+        val message =
+            trips.startCityName + " -> " + trips.endCityName + " ilanına " + bid["price"] + " tl teklif verdi \uD83C\uDF89"
 
         db.collection(CoreApp.testDatabase + "bid")
             .document(trips.user.id)

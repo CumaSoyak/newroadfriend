@@ -24,8 +24,8 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import roadfriend.app.R
 import com.yalantis.ucrop.UCrop
+import roadfriend.app.R
 import java.io.File
 import java.util.*
 
@@ -77,7 +77,7 @@ class ImagePickerActivity : AppCompatActivity() {
                         showImagePickerOptions()
                     } else {
                         if (report.isAnyPermissionPermanentlyDenied)
-                            showSettingsDialog()
+                            showSettingsDialog(context)
                     }
                 }
 
@@ -95,15 +95,15 @@ class ImagePickerActivity : AppCompatActivity() {
     }
 
 
-    private fun showSettingsDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.add))
-        builder.setMessage(getString(R.string.add))
-        builder.setPositiveButton(getString(R.string.add)) { dialog, which ->
+    private fun showSettingsDialog(context: Activity) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Please allow me")
+        builder.setMessage("Please allow to use camera or gallery")
+        builder.setPositiveButton("Ok") { dialog, which ->
             dialog.cancel()
             openSettings()
         }
-        builder.setNegativeButton(getString(android.R.string.cancel)) { dialog, which -> dialog.cancel() }
+        builder.setNegativeButton("No") { dialog, which -> dialog.cancel() }
         builder.show()
     }
 

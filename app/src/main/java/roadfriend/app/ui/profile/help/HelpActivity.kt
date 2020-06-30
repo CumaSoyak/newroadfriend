@@ -1,7 +1,8 @@
 package roadfriend.app.ui.profile.help
 
-import roadfriend.app.CoreApp
 import com.google.firebase.firestore.SetOptions
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import roadfriend.app.CoreApp
 import roadfriend.app.CoreApp.Companion.db
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.Help
@@ -9,12 +10,11 @@ import roadfriend.app.databinding.HelpActivityBinding
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.utils.OptionData
 import roadfriend.app.utils.PrefUtils
-import roadfriend.app.utils.extensions.showSucces
-import roadfriend.app.utils.helper.genericadapter.GenericAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.listener
+import roadfriend.app.utils.extensions.showSucces
 import roadfriend.app.utils.extensions.visible
+import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import java.util.*
 
 class HelpActivity : BindingActivity<HelpActivityBinding>() {
@@ -47,14 +47,14 @@ class HelpActivity : BindingActivity<HelpActivityBinding>() {
     fun initHelpType() {
         if (intent.hasExtra("kosul")) {
             adapter.addItems(OptionData.getConditionList())
-            toolBarTitle("Koşul ve Şartlar")
+            toolBarTitle(getString(R.string.kosul_sartlar))
         } else if (intent.hasExtra("support")) {
-            toolBarTitle("İletişime geç")
+            toolBarTitle(getString(R.string.iletisime_gec))
             binding.containerSupport.visible()
             binding.rv.gone()
         } else {
             adapter.addItems(OptionData.getHelpMessageList())
-            toolBarTitle("Yardım")
+            toolBarTitle(getString(R.string.yardim_profil))
         }
     }
 
@@ -69,16 +69,20 @@ class HelpActivity : BindingActivity<HelpActivityBinding>() {
     }
 
     fun createSupport() {
-        val uuid = UUID.randomUUID().toString()
-        val data = hashMapOf(
-            "text" to binding.etMessage.text.toString(),
-            "user" to PrefUtils.getUser()
-        )
-        db.collection(CoreApp.testDatabase+"supportMessage")
-            .document(uuid)
-            .set(data, SetOptions.merge()).addOnSuccessListener {
-                showSucces("Mesajınız alındı \n Sizinle iletişime geçilecektir.")
-            }
+        if (binding.etMessage.text.toString().isNullOrEmpty()) {
+            val uuid = UUID.randomUUID().toString()
+            val data = hashMapOf(
+                "text" to binding.etMessage.text.toString(),
+                "user" to PrefUtils.getUser()
+            )
+            db.collection(CoreApp.testDatabase + "supportMessage")
+                .document(uuid)
+                .set(data, SetOptions.merge()).addOnSuccessListener {
+                    showSucces("Mesajınız alındı \n Sizinle iletişime geçilecektir.")
+                }
+        } else {
+            showSucces("Mesaj giriniz")
+        }
 
     }
 

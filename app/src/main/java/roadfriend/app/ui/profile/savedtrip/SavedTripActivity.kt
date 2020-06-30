@@ -1,6 +1,7 @@
 package roadfriend.app.ui.profile.savedtrip
 
 import android.view.View
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.CoreApp.Companion.db
 import roadfriend.app.R
@@ -12,13 +13,12 @@ import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.tripdetail.TripDetailActivity
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.launchActivity
+import roadfriend.app.utils.extensions.showEmpty
 import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.extensions.showSucces
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import roadfriend.app.utils.extensions.showEmpty
 import java.util.*
 
 class SavedTripActivity : BindingActivity<SavedTripActivityBinding>() {
@@ -36,7 +36,7 @@ class SavedTripActivity : BindingActivity<SavedTripActivityBinding>() {
     }
 
     override fun initUI() {
-        toolBarTitle("Kaydedilen Yolculuklar")
+        toolBarTitle(getString(R.string.kaydedilen_yolculuklar))
         binding.vm = viewModel
         binding.lifecycleOwner = this
     }

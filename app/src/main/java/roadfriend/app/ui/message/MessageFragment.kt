@@ -2,19 +2,19 @@ package roadfriend.app.ui.message
 
 
 import android.view.View
+import kotlinx.android.synthetic.main.fragment_message.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.user.User
 import roadfriend.app.databinding.FragmentMessageBinding
 import roadfriend.app.ui.base.BindingFragment
 import roadfriend.app.ui.message.chat.ChatActivity
+import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.launchActivity
+import roadfriend.app.utils.extensions.visible
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
-import kotlinx.android.synthetic.main.fragment_message.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import roadfriend.app.utils.extensions.gone
-import roadfriend.app.utils.extensions.visible
 
 class MessageFragment : BindingFragment<FragmentMessageBinding>() {
     override val getLayoutBindId: Int
@@ -52,16 +52,21 @@ class MessageFragment : BindingFragment<FragmentMessageBinding>() {
     }
 
     private fun initData(data: ArrayList<User>?) {
-        if (data.isNullOrEmpty()) {
-            binding.cvEmptyView.initData(requireContext(), "message")
-            binding.cvEmptyView.visible()
-        } else {
-            binding.cvEmptyView.gone()
-            rvBid.adapter = baseAdapter
-            baseAdapter.clearItems()
-            baseAdapter.addItems(data)
-            adapterListener()
+        try {
+            if (data.isNullOrEmpty()) {
+                binding.cvEmptyView.initData(requireContext(), "message")
+                binding.cvEmptyView.visible()
+            } else {
+                binding.cvEmptyView.gone()
+                rvBid.adapter = baseAdapter
+                baseAdapter.clearItems()
+                baseAdapter.addItems(data)
+                adapterListener()
+            }
+        } catch (e: Exception) {
+
         }
+
     }
 
     fun adapterListener() {

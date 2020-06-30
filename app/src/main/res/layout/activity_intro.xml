@@ -1,76 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clIntro"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vpIntro"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/indicatorIntro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="position"
+            type="Integer" />
 
-    <roadfriend.app.customviews.CircleIndicator
-        android:id="@+id/indicatorIntro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vpIntro">
+        <variable
+            name="tutorialType"
+            type="roadfriend.app.ui.intro.TutorialType" />
+    </data>
 
-    </roadfriend.app.customviews.CircleIndicator>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/card_background"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/indicatorIntro">
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView8"
-            style="@style/TextViewStyleTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="knskjdfnksjdfn"
-            app:layout_constraintBottom_toTopOf="@+id/btnIntro"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4">
 
-        <roadfriend.app.customviews.CVButton
-            android:id="@+id/btnIntro"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/intro_next"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8"
-            app:layout_constraintVertical_bias="1.0"
-            app:type="inactive" />
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pager_tutorial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_skip"
+                visibleGone="@{position != 4}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/margin_normal"
+                android:fontFamily="@font/ibm_plex_sans_semi_bold"
+                android:foreground="?selectableItemBackground" />
 
+        </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:adjustViewBounds="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/margin_normal"
+            android:paddingBottom="@dimen/margin_normal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                tutorialTitle="@{tutorialType}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ibm_plex_sans_semi_bold"
+                android:gravity="center"
+                android:paddingLeft="@dimen/margin_normal"
+                android:paddingRight="@dimen/margin_normal" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_login"
+                visibleGone="@{!tutorialType.isNext}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/page_indicator"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="48dp"
+                android:text="@string/login_register"
+                android:textAllCaps="true" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_start"
+                visibleGone="@{!tutorialType.isNext}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/button_login"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:foreground="?selectableItemBackground"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardElevation="12dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_normal"
+                    android:fontFamily="@font/ibm_plex_sans_semi_bold"
+                    android:text="@string/start_now"
+                    android:textSize="18sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_next"
+                visibleGone="@{tutorialType.isNext}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/page_indicator"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:foreground="?selectableItemBackground"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardElevation="12dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_normal"
+                    android:drawablePadding="@dimen/margin_normal"
+                    android:fontFamily="@font/ibm_plex_sans_semi_bold"
+                    android:text="@string/devam"
+                    android:textSize="18sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <com.rd.PageIndicatorView
+                android:id="@+id/page_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_large"
+                app:piv_animationType="scale"
+                app:piv_interactiveAnimation="true"
+                app:piv_padding="8dp"
+                app:piv_radius="5dp"
+                app:piv_selectedColor="@color/tundora"
+                app:piv_unselectedColor="@color/alto"
+                app:piv_viewPager="@id/pager_tutorial" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

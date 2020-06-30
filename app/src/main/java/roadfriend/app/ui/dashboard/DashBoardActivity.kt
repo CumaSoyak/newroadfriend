@@ -1,12 +1,17 @@
 package roadfriend.app.ui.dashboard
 
+import com.google.firebase.Timestamp
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.R
+import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.databinding.ActivityDashBoardBinding
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.main.MainActivity
+import roadfriend.app.utils.extensions.getCurrentDate
 import roadfriend.app.utils.extensions.launchActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import roadfriend.app.utils.extensions.showError
+import roadfriend.app.utils.extensions.showToast
 
 class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
 
@@ -22,6 +27,7 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
     override fun initUI() {
         binding.vmDashBoard = viewModel
         binding.lifecycleOwner = this
+        getDefaultTrip()
     }
 
     override fun initListener() {
@@ -40,5 +46,43 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
         }
     }
 
+    fun getDefaultTrip() {
+        //1 gün 86400
+        //1 hafta 604800
+        //1 ay 2629743
+        val docRef = CoreApp.db.collection("trip")
+        docRef.addSnapshotListener { snapshot, e ->
+            snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
+                val data: Trips = queryDocumentSnapshot.toObject(Trips::class.java)
+                if (queryDocumentSnapshot["firebaseTime"] != null) {
+                    val seconds = (queryDocumentSnapshot["firebaseTime"] as Timestamp)
+                    data.firebaseTimeSecond = seconds.seconds
+                } else {
+                    data.firebaseTimeSecond = 1000
+                }
+                if (!data.paymentType.equals("free")) {
+                    val current = getCurrentDate()
+                    if (data.paymentType.equals("day") && current - data.firebaseTimeSecond!! > 86400)
+                        updateTrip(data)
+                    if (data.paymentType.equals("week") && current - data.firebaseTimeSecond!! > 604800)
+                        updateTrip(data)
+                    if (data.paymentType.equals("monday") && current - data.firebaseTimeSecond!! > 2629743)
+                        updateTrip(data)
+                }
+            }
+
+        }
+    }
+
+    fun updateTrip(trips: Trips) {
+        CoreApp.db.collection("trip").document(trips.documentKey!!)
+            .update("paymentType", "free")
+            .addOnSuccessListener {
+                showToast("Güncellendi")
+            }
+            .addOnFailureListener {
+                showError("Bir şeyler ters gitti")
+            }
+    }
 
 }

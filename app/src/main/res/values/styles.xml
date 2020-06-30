@@ -38,9 +38,9 @@
 
     <style name="SearchViewTheme" parent="Base.Widget.AppCompat.SearchView">
         <item name="android:fontFamily">@font/ibm_plex_sans_bold</item>
-        <item name="android:textColorHint">@color/tundura</item>
-        <item name="android:textColor">@color/border</item>
+         <item name="android:textColor">@color/border</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textColorHint">@color/grey</item>
         <item name="android:layout_width">12dp</item>
         <item name="android:layout_height">12dp</item>
         <item name="searchIcon">@drawable/ic_search</item>

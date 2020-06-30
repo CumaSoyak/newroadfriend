@@ -2,11 +2,12 @@ package roadfriend.app
 
 import android.content.Context
 import androidx.multidex.MultiDexApplication
-import roadfriend.app.di.appModule
 import com.google.android.gms.ads.MobileAds
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.firestore.FirebaseFirestore
 import net.danlew.android.joda.JodaTimeAndroid
 import org.koin.android.ext.android.startKoin
+import roadfriend.app.di.appModule
 import java.io.File
 
 
@@ -20,6 +21,8 @@ class CoreApp : MultiDexApplication() {
         var testDatabase = ""
         var addAdminTrip = false
         var statusSearch: String = "1"
+        var reklam: Boolean = true
+        lateinit var  firebaseAnalytics: FirebaseAnalytics
     }
 
     override fun onCreate() {
@@ -27,6 +30,7 @@ class CoreApp : MultiDexApplication() {
         context = applicationContext
         configureDi()
         MobileAds.initialize(this, "ca-app-pub-7740710689946524~5196412473")
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         JodaTimeAndroid.init(this)
         db = FirebaseFirestore.getInstance()
 

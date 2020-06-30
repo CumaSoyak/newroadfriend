@@ -1,5 +1,7 @@
 package roadfriend.app.ui.add.direction
 
+import kotlinx.android.synthetic.main.add_direction_activity.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.databinding.AddDirectionActivityBinding
@@ -9,15 +11,12 @@ import roadfriend.app.ui.add.detail.AddDetailActivity
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.base.IBasePresenter
 import roadfriend.app.ui.searchcity.SearchCityDialog
-import roadfriend.app.utils.AppConstants.ADD_SEARCH
-import roadfriend.app.utils.AppConstants.ADD_SEARCH_STATION
+import roadfriend.app.utils.AppConstants.HOME_SEARCH
+import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.extensions.visible
 import roadfriend.app.utils.helper.TripBundle
-import kotlinx.android.synthetic.main.add_direction_activity.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import roadfriend.app.utils.extensions.gone
 
 class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
     IBasePresenter, SearchCityDialog.ISearchCityListener, IRemoveStationListener {
@@ -38,7 +37,7 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
     private val status: String by lazy { intent.getStringExtra("status") }
 
     enum class StationType {
-        FROMANDTO, ADD
+        FROMANDTO
     }
 
     var GLOBAL_STATION: StationType? = null
@@ -65,10 +64,14 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
             GLOBAL_STATION = StationType.FROMANDTO
             goSearchCityPage()
         }
-        binding.btnAddStation.setOnClickListener {
-            GLOBAL_STATION = StationType.ADD
-            goSearchCityPage()
+        binding.tvClear.setOnClickListener {
+            binding.svStartCity.visible()
+            binding.recyclerview.gone()
+            containerEnd.gone()
+            containerStart.gone()
+            binding.tvClear.gone()
         }
+
 
         binding.btnNext.setOnClickListener {
             if (mStationStart == null && mStationEnd == null) {
@@ -77,7 +80,7 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
                 cityList.add(mStationStart!!)
                 cityList.add(mStationEnd!!)
                 launchActivity<AddDetailActivity> {
-                    putExtra("tripModel", TripBundle(status,cityList))
+                    putExtra("tripModel", TripBundle(status, cityList))
                 }
             }
 
@@ -85,27 +88,19 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
 
     }
 
-    override fun city(stationStart: City?, stationEnd: City?) {
-        when (GLOBAL_STATION) {
-            StationType.FROMANDTO -> {
-                binding.svStartCity.gone()
-                binding.recyclerview.visible()
-                containerEnd.visible()
-                containerStart.visible()
+    override fun cityAndStatus(stationStart: City?, stationEnd: City?, status: String?) {
+        binding.svStartCity.gone()
+        binding.recyclerview.visible()
+        containerEnd.visible()
+        containerStart.visible()
 
-                tvStartCity.text = stationStart?.name
-                tvEndCity.text = stationEnd?.name
+        tvStartCity.text = stationStart?.name
+        tvEndCity.text = stationEnd?.name
 
-                mStationStart = stationStart
-                mStationEnd = stationEnd
+        mStationStart = stationStart
+        mStationEnd = stationEnd
 
-                checkStartStationAndEndStation()
-
-            }
-            StationType.ADD -> {
-                addStation(stationStart!!)
-            }
-        }
+        checkStartStationAndEndStation()
     }
 
     override fun removeStation(position: Int) {
@@ -113,36 +108,16 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
     }
 
     fun goSearchCityPage() {
-        when (GLOBAL_STATION) {
-            StationType.FROMANDTO -> {
-                supportFragmentManager.beginTransaction().let { it1 ->
-                    SearchCityDialog.newInstance(ADD_SEARCH, this)
-                        .show(it1, "")
-                }
-            }
-            StationType.ADD -> {
-                supportFragmentManager.beginTransaction().let { it1 ->
-                    SearchCityDialog.newInstance(ADD_SEARCH_STATION, this)
-                        .show(it1, "")
-                }
-            }
+        supportFragmentManager.beginTransaction().let { it1 ->
+            SearchCityDialog.newInstance(HOME_SEARCH, this)
+                .show(it1, "")
         }
 
-    }
-
-    fun addStation(station: City) {
-        if (cityList.size > 7) {
-            // DialogUtils.showPopupInfo(this, "En fazla 8 durak ekleyebilirsiniz")
-        } else {
-            cityList.add(station)
-            val citySingleList: ArrayList<City> = arrayListOf(station)
-            adapter.add(citySingleList)
-            citySingleList.clear()
-        }
     }
 
     fun checkStartStationAndEndStation() {
         binding.btnNext.visible()
+        binding.tvClear.visible()
 
     }
 

@@ -1,16 +1,17 @@
 package roadfriend.app.ui.base
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import roadfriend.app.R
 import roadfriend.app.utils.customscreen.LoadingDialog
+import roadfriend.app.utils.extensions.logger
 import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.extensions.showSucces
 
@@ -27,7 +28,7 @@ abstract class BaseFragment : Fragment(), IBasePresenter {
 
     protected abstract fun initListener()
 
-    private val dialog: AlertDialog by lazy {
+    private val dialog: AlertDialog? by lazy {
         LoadingDialog.Builder().setContext(context)
             .setCancelable(false)
             .setTheme(R.style.LoadingDialogDefault)
@@ -37,14 +38,17 @@ abstract class BaseFragment : Fragment(), IBasePresenter {
 
 
     override fun showLoading() {
-        if (!(context as Activity).isFinishing) { //show dialog
-            dialog.show()
+        try {
+            dialog?.show()
+        } catch (e: WindowManager.BadTokenException) {
+            logger("" + e.localizedMessage)
         }
+
     }
 
 
     override fun hideLoading() {
-        dialog.dismiss()
+        dialog?.dismiss()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,16 +106,16 @@ abstract class BaseFragment : Fragment(), IBasePresenter {
 
     override fun onPause() {
         super.onPause()
-        dialog.dismiss()
+        dialog?.dismiss()
     }
 
     override fun onStop() {
         super.onStop()
-        dialog.dismiss()
+        dialog?.dismiss()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        dialog.dismiss()
+        dialog?.dismiss()
     }
 }

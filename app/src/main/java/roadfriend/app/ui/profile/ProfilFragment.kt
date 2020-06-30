@@ -3,6 +3,8 @@ package roadfriend.app.ui.profile
 
 import android.view.View
 import com.facebook.login.LoginManager
+import kotlinx.android.synthetic.main.fragment_profil.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.local.model.ProfilMenu
 import roadfriend.app.databinding.FragmentProfilBinding
@@ -18,8 +20,6 @@ import roadfriend.app.utils.extensions.getDrawable
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
-import kotlinx.android.synthetic.main.fragment_profil.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
@@ -60,28 +60,56 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
 //            )
         }
         menuItem.add(
-            ProfilMenu("mytrips", getDrawable(R.drawable.ic_mytrips), "Yolculuklarım")
+            ProfilMenu(
+                "mytrips",
+                getDrawable(R.drawable.ic_mytrips),
+                getString(R.string.yolculuklarım)
+            )
         )
         menuItem.add(
-            ProfilMenu("saved", getDrawable(R.drawable.ic_save), "Kaydedilen Yolculuklar")
+            ProfilMenu(
+                "saved",
+                getDrawable(R.drawable.ic_save),
+                getString(R.string.kaydedilen_yolculuklar)
+            )
         )
         menuItem.add(
-            ProfilMenu("comment", getDrawable(R.drawable.ic_comment), "Hakkımda yorumlar")
+            ProfilMenu(
+                "comment",
+                getDrawable(R.drawable.ic_comment),
+                getString(R.string.hakkimda_yorumlar)
+            )
         )
         menuItem.add(
-            ProfilMenu("condition", getDrawable(R.drawable.ic_condition), "Koşul ve Şartlar")
+            ProfilMenu(
+                "condition",
+                getDrawable(R.drawable.ic_condition),
+                getString(R.string.kosul_sartlar)
+            )
         )
-        menuItem.add(ProfilMenu("help", getDrawable(R.drawable.ic_help), "Yardım"))
+        menuItem.add(
+            ProfilMenu(
+                "help",
+                getDrawable(R.drawable.ic_help),
+                getString(R.string.yardim)
+            )
+        )
 
         menuItem.add(
             ProfilMenu(
                 "support",
                 getDrawable(R.drawable.ic_technical_support),
-                "İletişime geç"
+                getString(R.string.iletisime_gec)
             )
         )
 
-        menuItem.add(ProfilMenu("exit", getDrawable(R.drawable.ic_exit), "Çıkış"))
+        menuItem.add(
+            ProfilMenu(
+                "exit",
+                getDrawable(R.drawable.ic_exit),
+                getString(R.string.yardim_profil)
+            )
+        )
         rv.adapter = adapter
         adapter.addItems(menuItem)
     }

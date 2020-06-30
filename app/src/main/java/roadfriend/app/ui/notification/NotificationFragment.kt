@@ -3,6 +3,8 @@ package roadfriend.app.ui.notification
 
 import android.view.View
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_notification.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.CoreApp.Companion.db
 import roadfriend.app.R
@@ -15,8 +17,6 @@ import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.showEmpty
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
-import kotlinx.android.synthetic.main.fragment_notification.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -82,9 +82,14 @@ class NotificationFragment : BindingFragment<FragmentNotificationBinding>() {
         if (data.isEmpty()) {
             clContainer.showEmpty(requireContext(), "notification")
         } else {
-            binding.rv.adapter = adapterNotification
-            adapterNotification.clearItems()
-            adapterNotification.addItems(data)
+            try {
+                binding.rv.adapter = adapterNotification
+                adapterNotification.clearItems()
+                adapterNotification.addItems(data)
+            } catch (e: Exception) {
+
+            }
+
         }
     }
 }

@@ -2,6 +2,7 @@ package roadfriend.app.utils
 
 import android.app.Activity
 import android.content.Context
+import com.google.firebase.firestore.FieldValue
 import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.data.local.model.TripStatus
@@ -12,7 +13,6 @@ import roadfriend.app.ui.profile.mytrip.MyTripsActivity
 import roadfriend.app.ui.profile.savedtrip.SavedTripActivity
 import roadfriend.app.ui.tripdetail.TripDetailActivity
 import roadfriend.app.utils.extensions.getString
-import com.google.firebase.firestore.FieldValue
 
 object OptionData {
     val context = CoreApp.context
@@ -53,19 +53,24 @@ object OptionData {
         if (activity is MyTripsActivity) {
             if (isMyTrip) {
                 searchList.add("Sil")
-             }
+            }
         } else if (activity is SavedTripActivity) {
             searchList.add("Sil")
         } else if (activity is TripDetailActivity) {
             if (isMyTrip) {
                 searchList.add("Sil")
-             }
+            }
             if (!isMyTrip) {
                 searchList.add("Kaydet")
                 searchList.add("Şikayet et")
             }
         }
         return searchList
+    }
+
+    fun premiumOption() {
+        val premium: ArrayList<String> = arrayListOf()
+        premium.add("Hemen yol arkadaşı bul")
     }
 
     fun tripStatusChooseList(type: String?): ArrayList<String> {
@@ -136,9 +141,15 @@ object OptionData {
     fun getPaymanetInfoText(position: Int, tripSatus: String): String {
         val list: ArrayList<String> =
             arrayListOf(
-                getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) +" "+ getString(R.string.sales_info_text_second_24),
-                getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) +" "+ getString(R.string.sales_info_text_second_24),
-                getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) +" "+ getString(R.string.sales_info_text_second_24)
+                getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) + " " + getString(
+                    R.string.sales_info_text_second_24
+                ),
+                getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) + " " + getString(
+                    R.string.sales_info_text_second_3
+                ),
+                getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) + " " + getString(
+                    R.string.sales_info_text_second_7
+                )
             )
         return list.get(position)
     }

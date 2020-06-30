@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
 import kotlinx.android.synthetic.main.dialog_search_city.*
-import org.json.JSONException
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp.Companion.statusSearch
 import roadfriend.app.R
@@ -12,10 +11,10 @@ import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.databinding.DialogSearchCityBinding
 import roadfriend.app.ui.base.BindingDialogFragment
 import roadfriend.app.ui.base.IBasePresenter
-import roadfriend.app.utils.*
-import roadfriend.app.utils.extensions.gone
+import roadfriend.app.utils.AppConstants
+import roadfriend.app.utils.OtherUtils
+import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.hideKeyboard
-import roadfriend.app.utils.extensions.jsonArray
 import roadfriend.app.utils.extensions.visible
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
@@ -83,17 +82,7 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
 
     fun searchType() {
         searchType = arguments?.getString("type", "")
-
         when (searchType) {
-            AppConstants.ADD_SEARCH_STATION -> {
-                llEnd.gone()
-                stationEnd = City(
-                    -1,
-                    "-1",
-                    0.0,
-                    0.0
-                )
-            }
             AppConstants.HOME_SEARCH -> {
                 keepCity.clear()
             }
@@ -143,7 +132,6 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
                 }
                 if (stationStart != null && stationEnd != null) {
                     if (searchType.equals(AppConstants.HOME_SEARCH) && isOpen) {
-                        //openSearchTypeBottomSheet()
                         searchCityListener?.cityAndStatus(stationStart, stationEnd, statusSearch)
                         dismiss()
                     } else {
@@ -195,28 +183,6 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
                 return false
             }
         })
-    }
-
-
-    fun addStation(city: String) {
-        try {
-            for (i in 0 until city.jsonArray!!.length()) {
-                val city = city.jsonArray!!.getJSONObject(i)
-                var id: Int = 0
-                if (city["id"] is String) {
-                    id = (city["id"] as String).toInt()
-                }
-                if (city["id"] is Int) {
-                    id = city["id"] as Int
-                }
-                val name = city["name"] as String
-                val latitude = city["latitude"] as Double
-                val longitude = city["longitude"] as Double
-                mCityList.add(City(id, name, latitude, longitude))
-            }
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
     }
 
     fun filter(text: String) {
@@ -274,21 +240,6 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
         if (!searchType.equals(AppConstants.HOME_SEARCH)) {
             btnDecline.visible()
         }
-    }
-
-    fun openSearchTypeBottomSheet() {
-        isOpen = false
-        var status = ""
-        DialogUtils.bottomSheet(
-            requireActivity(),
-            OptionData.searchType(),
-            object : DialogUtils.IBottomSheetListener {
-                override fun selectOption(position: Int, model: String) {
-                    dismiss()
-                    status = (position + 1).toString()
-                }
-            }, DialogUtils.BottomSheetModel("Yolculuk Tipini Seçiniz", false)
-        )
     }
 
 

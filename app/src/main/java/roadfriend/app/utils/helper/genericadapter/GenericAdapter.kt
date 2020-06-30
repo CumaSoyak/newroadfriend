@@ -8,12 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
+import kotlinx.android.synthetic.main.item_admob.view.*
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.notification.NotificationModel
 import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.utils.AppConstants
-import com.google.android.gms.ads.AdRequest
-import kotlinx.android.synthetic.main.item_admob.view.*
 
 class GenericAdapter<T : ListItemViewModel>(
     @LayoutRes val layoutId: Int, val listener: OnListItemViewClickListener? = null,

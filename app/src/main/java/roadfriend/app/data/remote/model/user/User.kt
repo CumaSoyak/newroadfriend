@@ -1,9 +1,10 @@
 package roadfriend.app.data.remote.model.user
 
 import android.os.Parcelable
-import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import roadfriend.app.utils.OtherUtils
+import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 
 @Parcelize
 class User(
@@ -15,8 +16,9 @@ class User(
     @SerializedName("rate") var rate: Int = 2,
     @SerializedName("firebaseToken") var firebaseToken: String = "",
     @SerializedName("documentKey") var documentKey: String = "",
-    @SerializedName("phone") var phone: String = ""
-    ) : Parcelable, ListItemViewModel() {
+    @SerializedName("phone") var phone: String = "",
+    @SerializedName("country") var country: String = OtherUtils.getCountryCode()
+) : Parcelable, ListItemViewModel() {
     fun getRateCustom(): Float {
         return rate.toFloat()
     }

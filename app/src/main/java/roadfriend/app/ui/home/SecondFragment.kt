@@ -2,6 +2,8 @@ package roadfriend.app.ui.home
 
 import android.content.Intent
 import android.view.View
+import kotlinx.android.synthetic.main.fragment_home_first.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.CoreApp.Companion.notLogin
 import roadfriend.app.R
@@ -21,17 +23,16 @@ import roadfriend.app.ui.userdetail.UserDetailActivity
 import roadfriend.app.utils.OptionData
 import roadfriend.app.utils.OtherUtils
 import roadfriend.app.utils.PrefUtils
+import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.logger
+import roadfriend.app.utils.extensions.visible
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.helper.LiveBus
 import roadfriend.app.utils.helper.TripBundle
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
-import kotlinx.android.synthetic.main.fragment_home_first.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import roadfriend.app.utils.extensions.gone
-import roadfriend.app.utils.extensions.visible
+import roadfriend.app.utils.manager.EventManager
 
 class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
     override val getLayoutBindId: Int
@@ -139,13 +140,18 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
     fun addData(trips: ArrayList<Trips>) {
         if (trips.isEmpty()) {
             isAvailabledata(false)
-            getTripRequest?.let {
-                cvEmptyView.initData(requireContext(), "home", getTripRequest)
-                cvEmptyView.initlistener(click = {
-                    passAddDetail()
-                })
+            try {
+                getTripRequest?.let {
+                    cvEmptyView.initData(requireContext(), "home", getTripRequest)
+                    cvEmptyView.initlistener(click = {
+                        passAddDetail()
+                    })
+
+                }
+            } catch (e: Exception) {
 
             }
+
         } else {
             try {
                 isAvailabledata(true)
@@ -188,13 +194,15 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
         val listSize = trips.size + trips.size / 5
         var tripsIndex = 0
         for (index in 0 until listSize) {
-            if (index == 3) {
-                listWithAds.add(OptionData.admobTrip())
-            }
-            if (index % 5 == 0 && index != 0) {
+//            if (index == 3) {
+//                listWithAds.add(OptionData.admobTrip())
+//            }
+            if (index % 15 == 0 && index != 0) {
                 listWithAds.add(OptionData.admobTrip())
             } else {
-                listWithAds.add(trips.get(tripsIndex))
+                if (trips.size > tripsIndex) {
+                    listWithAds.add(trips.get(tripsIndex))
+                }
                 tripsIndex++
             }
         }
@@ -226,6 +234,7 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
 
     fun passAddDetail() {
         if (PrefUtils.isLogin()) {
+            EventManager.clickNoSearch(tripBundle)
             val intent = Intent(context, AddDetailActivity::class.java)
             intent.putExtra("tripModel", tripBundle)
             startActivityForResult(intent, 1)

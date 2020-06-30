@@ -41,10 +41,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-                <roadfriend.app.customviews.CvAdmob
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
                 <TextView
                     style="@style/TextViewStyleTitle"
                     android:layout_width="match_parent"
@@ -135,6 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
                 android:text="@string/add_detail_paylas"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

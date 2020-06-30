@@ -30,7 +30,7 @@ class MyTripsActivity : BindingActivity<MyTripsActivityBinding>() {
 
     override fun initUI() {
         setActivity(this)
-        toolBarTitle("Yolculuklarım")
+        toolBarTitle(getString(R.string.yolculuklarım))
         binding.vm = viewModel
         binding.lifecycleOwner = this
     }
@@ -77,6 +77,7 @@ class MyTripsActivity : BindingActivity<MyTripsActivityBinding>() {
                         this@MyTripsActivity,
                         (model as Trips).documentKey!!
                     )
+                    requestTrip()
                 })
             }
         })

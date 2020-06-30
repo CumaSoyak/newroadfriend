@@ -59,10 +59,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback,
     }
 
     override fun initUI(view: View) {
-        if (!mapModel.type.equals("tripDetail")) {
-            val adRequest = AdRequest.Builder().build()
-            iAdView.adView.loadAd(adRequest)
-        }
+
 
     }
 
@@ -220,8 +217,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback,
         centerMapZooming(map!!, zoomLocationList)
 
         val apiServices = RetrofitClient.apiServices()
-        viewModel.getPresenter()?.showLoading()
-        apiServices.getDirection(from, to, "AIzaSyC60rrlZZSSVhIfop-vsDzYaoayDwS5fFo")
+         apiServices.getDirection(from, to, "AIzaSyC60rrlZZSSVhIfop-vsDzYaoayDwS5fFo")
             .enqueue(object : Callback<MapsResponse> {
                 override fun onResponse(
                     call: Call<MapsResponse>,
@@ -293,8 +289,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback,
     }
 
     private fun drawPolyline(data: MapsResponse) {
-        viewModel.getPresenter()?.hideLoading()
-        if (!data.routes.isNullOrEmpty()) {
+         if (!data.routes.isNullOrEmpty()) {
             val shape = data.routes?.get(0)?.overviewPolyline?.points
             val polyline = PolylineOptions()
                 .addAll(PolyUtil.decode(shape))

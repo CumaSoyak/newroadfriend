@@ -42,12 +42,12 @@
                     android:id="@+id/containerImage"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-
-                    <include layout="@layout/item_admob" />
 
                     <TextView
                         style="@style/TextViewStyleTitle"
@@ -56,6 +56,19 @@
                         android:layout_weight="1"
                         android:text="@string/add_direction_title"
                         android:textColor="@color/border" />
+
+                    <TextView
+                        android:id="@+id/tvClear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:background="@color/red"
+                        android:fontFamily="@font/ibm_plex_sans_semi_bold"
+                        android:padding="16dp"
+                        android:text="@string/temizle"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
