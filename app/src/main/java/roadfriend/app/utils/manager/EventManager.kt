@@ -37,4 +37,18 @@ object EventManager {
         bundle.putString(CoreApp.testDatabase + "satisOnizleme", "satisOnizleme")
         firebaseAnalytics.logEvent(CoreApp.testDatabase + "satisOnizleme", bundle)
     }
+
+    fun premiumShow() {
+        firebaseAnalytics.logEvent(CoreApp.testDatabase + "premiumShow", Bundle())
+    }
+    fun setupBillingClient(){
+        firebaseAnalytics.logEvent(CoreApp.testDatabase + "onPurchasesUpdatedSetupBillingClientFail", Bundle())
+    }
+    fun userCancelled(){
+        firebaseAnalytics.logEvent(CoreApp.testDatabase + "onPurchasesUpdatedUserCanceled", Bundle())
+    }
+    fun salesError() {
+        firebaseAnalytics.logEvent(CoreApp.testDatabase + "onPurchasesUpdatedError", Bundle())
+    }
+
 }

@@ -29,6 +29,9 @@
     <declare-styleable name="CVTextInputEditText">
 
     </declare-styleable>
+    <declare-styleable name="CvPremium">
+       
+    </declare-styleable>
 
     <declare-styleable name="Floation">
         <attr name="android:hint" />

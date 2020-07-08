@@ -6,8 +6,8 @@
     <string name="ilan_ver">Share post</string>
     <string name="ad_soyad">Full Name</string>
     <string name="add_arac_ariyorum">Search Car</string>
-    <string name="add">Create post</string>
-    <string name="uzun" translatable="false">uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string</string>
+    <string name="add">Post</string>
+    <string name="uzun">uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string</string>
     <string name="add_detail_aciklama">Enter description (optional)</string>
     <string name="add_detail_fiyat">Enter price (optional)</string>
     <string name="add_detail_para">Price</string>
@@ -59,9 +59,9 @@
     <string name="parola">Password</string>
     <string name="profil">Profile</string>
     <string name="sales_info_text_first">We will highlight the ad to find a faster</string>
-    <string name="sales_info_text_second_24">we will make a 24-hour presentation so you can find</string>
-    <string name="sales_info_text_second_3">we will make a 3-day presentation so you can find</string>
-    <string name="sales_info_text_second_7">\\we will make a 7-day presentation so you can find</string>
+    <string name="sales_info_text_second_24">we will make a 5-day presentation so you can find</string>
+    <string name="sales_info_text_second_3">we will make a 7-day presentation so you can find</string>
+    <string name="sales_info_text_second_7">we will make a 10-day presentation so you can find</string>
     <string name="search_home">Find</string>
     <string name="show_all_city">See all cities</string>
     <string name="sikayet_et">Complain</string>
@@ -93,6 +93,42 @@
     <string name="buton_guncelle">Update</string>
     <string name="buton_vazgec">Skip</string>
     <string name="internet">Check your internet connection!</string>
+    <string name="yolculuklarım">My Trips</string>
+    <string name="kaydedilen_yolculuklar">Saved Trips</string>
+    <string name="hakkimda_yorumlar">Comments About Me</string>
+    <string name="kosul_sartlar">Terms and Conditions</string>
+    <string name="yardim">Help</string>
+    <string name="yardim_profil">Exit</string>
+    <string name="iletisime_gec">Contact us</string>
+    <string name="gelen_teklif_yok">No incoming offers</string>
+    <string name="ilk_ilanı_sen_ver">Be the first person to share a travel in your country, earn a gift</string>
+    <string name="mesaj_yok">You have no messages</string>
+    <string name="yolculugunuz_bulunmaktadir">You have no trip</string>
+    <string name="kayitli_yolculugunuz_bulunmaktadir">You have no registered trip.</string>
+    <string name="hakkinizda_yorum_bulunmaktadir">There are no comments about you.</string>
+    <string name="bu_ilan_icin_teklif_yok">No offers for this trip</string>
+    <string name="ilan_bulunamadı">No Trip Found</string>
+    <string name="ilan_vermek_istermisiniz">Would you like to share trip ?</string>
+    <string name="ne_ariyorsun">What are you looking for</string>
+    <string name="start_now">Start Now</string>
+    <string name="login_register">Login / Register</string>
+    <string name="devam">Next</string>
+    <string name="tutorial_first">Choose travel  type</string>
+    <string name="tutorial_second">Select start and end cities</string>
+    <string name="tutorial_thirty">If you haven\'t found a travel, share a travel for the cities you\'re looking for</string>
+    <string name="tutorial_fourthy">Chat about the travel</string>
+    <string name="tutorial_five">If you want to see the travel you share, make it stand out immediately</string>
+    <string name="premium">Premium</string>
+    <string name="show">Show</string>
+    <string name="premium_text">Do you want everyone to see your journey and want to find a road friend now?</string>
+    <array name="mails">
+        <item>gmail.com</item>
+        <item>hotmail.com</item>
+        <item>hotmail.com.tr</item>
+        <item>yahoo.com</item>
+        <item>outlook.com</item>
+        <item>yandex.com</item>
+    </array>
     <string name="contition" translatable="false">
         1.Genel Kullanım Koşulu
         1.1 Kapsam ve tanımlar
@@ -250,31 +286,6 @@ Bu tür içerikler Logistics’ın politikasına aykırıdır ve Logistics bu t�
 
 Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur olmaz, söz konusu içeriği mümkün olduğunca en kısa süre içinde Siteden kaldırmak için elinden geleni yapacaktır.
     </string>
-    <string name="yolculuklarım">My Trips</string>
-    <string name="kaydedilen_yolculuklar">Saved Trips</string>
-    <string name="hakkimda_yorumlar">Comments About Me</string>
-    <string name="kosul_sartlar">Terms and Conditions</string>
-    <string name="yardim">Help</string>
-    <string name="yardim_profil">Exit</string>
-    <string name="iletisime_gec">Contact us</string>
-    <string name="gelen_teklif_yok">No incoming offers</string>
-    <string name="mesaj_yok">You have no messages</string>
-    <string name="yolculugunuz_bulunmaktadir">You have no trip</string>
-    <string name="kayitli_yolculugunuz_bulunmaktadir">You have no registered trip.</string>
-    <string name="hakkinizda_yorum_bulunmaktadir">There are no comments about you.</string>
-    <string name="bu_ilan_icin_teklif_yok">No offers for this trip</string>
-    <string name="ilan_bulunamadı">No Trip Found</string>
-    <string name="ilan_vermek_istermisiniz">Would you like to share trip ?</string>
-    <string name="ne_ariyorsun">What are you looking for</string>
-    <string name="start_now">Start Now</string>
-    <string name="login_register">Login / Register</string>
-    <string name="devam">Next</string>
-    <array name="mails">
-        <item>gmail.com</item>
-        <item>hotmail.com</item>
-        <item>hotmail.com.tr</item>
-        <item>yahoo.com</item>
-        <item>outlook.com</item>
-        <item>yandex.com</item>
-    </array>
+    <string name="cikis_yap">Exit</string>
+
 </resources>

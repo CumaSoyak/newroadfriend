@@ -46,6 +46,15 @@
         app:tabTextAppearance="@style/TabStyle"
         app:tabTextColor="@color/tab_content_color_selector" />
 
+    <roadfriend.app.customviews.CvPremium
+        android:id="@+id/cvPremium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"

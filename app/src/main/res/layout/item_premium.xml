@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/red"
+    android:clickable="true"
+    android:paddingStart="@dimen/margin_low"
+    android:paddingEnd="@dimen/margin_low"
+    tools:visibility="visible">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:fontFamily="@font/ibm_plex_sans_semi_bold"
+        android:gravity="left|center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="@string/premium_text"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/custom_full_black"
+        android:paddingStart="7dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="7dp"
+        android:paddingBottom="4dp"
+        android:text="@string/show"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</LinearLayout>

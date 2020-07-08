@@ -6,7 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.telephony.TelephonyManager
 import roadfriend.app.CoreApp.Companion.context
-import roadfriend.app.CoreApp.Companion.reklam
+import roadfriend.app.R
 import roadfriend.app.ui.sales.SalesActivity
 import java.io.IOException
 
@@ -24,9 +24,12 @@ object OtherUtils {
         return version
     }
 
+    fun countryIsTurkey(): Boolean {
+        return getCountryCode().equals("tr")
+    }
+
     fun getCountryCode(): String {
-        if (reklam) return getCurrentCountryCode()
-        else return "tr"
+        return getCurrentCountryCode()
     }
 
     fun getCurrentCountryCode(): String {
@@ -65,6 +68,49 @@ object OtherUtils {
                 )
             )
         }
+    }
+
+    fun introImage(position: Int): Int {
+        when (position) {
+            1 -> {
+                if (countryIsTurkey())
+                    return R.drawable.img_select_status_tr
+                else
+                    return R.drawable.img_select_status_en
+            }
+            2 -> {
+                if (countryIsTurkey())
+                    return R.drawable.img_select_city_tr
+                else
+                    return R.drawable.img_select_city_en
+
+            }
+            3 -> {
+                if (countryIsTurkey())
+                    return R.drawable.img_no_trip_tr
+                else
+                    return R.drawable.img_no_trip_en
+
+            }
+            4 -> {
+                if (countryIsTurkey())
+                    return R.drawable.img_chat
+                else
+                    return R.drawable.img_chat
+
+            }
+            5 -> {
+                if (countryIsTurkey())
+                    return R.drawable.img_sales_tr
+                else
+                    return R.drawable.img_sales_en
+
+            }
+            else -> {
+                return R.drawable.img_sales_tr
+            }
+        }
+
     }
 
 

@@ -1,13 +1,13 @@
 package roadfriend.app.ui.add
 
 
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.customviews.CVChooseStatus
 import roadfriend.app.databinding.ActivityAddBinding
 import roadfriend.app.ui.add.direction.AddDirectionActivity
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.utils.extensions.launchActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class AddActivity : BindingActivity<ActivityAddBinding>() {
@@ -31,7 +31,7 @@ class AddActivity : BindingActivity<ActivityAddBinding>() {
         binding.btnSucces.setOnClickListener {
             passPage()
         }
-        toolBarTitle("Ne arıyorsunuz")
+        toolBarTitle(getString(R.string.ne_ariyorsun))
     }
 
     private fun passPage() {

@@ -34,6 +34,8 @@ class CVEmptyView @JvmOverloads constructor(
             if (fragmentName.equals("home")) {
                 ilanVer.visible()
                 setData(homeSetring(getTripRequest), R.drawable.ic_search)
+            } else if (fragmentName.equals("homedefault")) {
+                setData(context.getString(R.string.ilk_ilanı_sen_ver), R.drawable.ic_fireworks)
             } else if (fragmentName.equals("notification")) {
                 setData(context.getString(R.string.gelen_teklif_yok), R.drawable.ic_cuzdan)
             } else if (fragmentName.equals("message")) {

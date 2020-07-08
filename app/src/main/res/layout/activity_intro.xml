@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -27,7 +28,9 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/pager_tutorial"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@color/white" />
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_skip"
@@ -55,22 +58,29 @@
                 tutorialTitle="@{tutorialType}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_huge"
                 android:fontFamily="@font/ibm_plex_sans_semi_bold"
                 android:gravity="center"
                 android:paddingLeft="@dimen/margin_normal"
-                android:paddingRight="@dimen/margin_normal" />
+                android:paddingRight="@dimen/margin_normal"
+                android:textColor="@color/border"
+                android:textSize="19sp"
+                tools:text="Paylaştığım yolculuğu herkes görsün istiyorsan hemen öne çıkar" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_login"
-                visibleGone="@{!tutorialType.isNext}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/page_indicator"
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:layout_marginEnd="48dp"
+                android:background="@drawable/custom_full_black"
+                android:fontFamily="@font/ibm_plex_sans_semi_bold"
                 android:text="@string/login_register"
-                android:textAllCaps="true" />
+                android:textAllCaps="true"
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_start"
@@ -83,7 +93,7 @@
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:foreground="?selectableItemBackground"
-                app:cardBackgroundColor="@android:color/white"
+                app:cardBackgroundColor="@color/tundora"
                 app:cardElevation="12dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -93,6 +103,7 @@
                     android:layout_margin="@dimen/margin_normal"
                     android:fontFamily="@font/ibm_plex_sans_semi_bold"
                     android:text="@string/start_now"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
             </androidx.cardview.widget.CardView>
@@ -108,7 +119,7 @@
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:foreground="?selectableItemBackground"
-                app:cardBackgroundColor="@android:color/white"
+                app:cardBackgroundColor="@color/tundora"
                 app:cardElevation="12dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -119,6 +130,7 @@
                     android:drawablePadding="@dimen/margin_normal"
                     android:fontFamily="@font/ibm_plex_sans_semi_bold"
                     android:text="@string/devam"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
             </androidx.cardview.widget.CardView>

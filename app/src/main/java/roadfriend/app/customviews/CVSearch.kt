@@ -13,6 +13,7 @@ import roadfriend.app.utils.AppConstants
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.visible
 import kotlinx.android.synthetic.main.cv_search.view.*
+import roadfriend.app.utils.extensions.clickWithDebounce
 
 class CVSearch @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -34,7 +35,7 @@ class CVSearch @JvmOverloads constructor(
         callback: (start: City?, end: City?, status: String?) -> Unit
     ) {
         this.callbackCity = callback
-        containerSearch.setOnClickListener {
+        containerSearch.clickWithDebounce {
             fragment.fragmentManager?.beginTransaction()?.let { it1 ->
                 SearchCityDialog.newInstance(AppConstants.HOME_SEARCH, this)
                     .show(it1, "")

@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:onClick='@{(v)-> vm.onListItemViewClickListener.onClickOptionSettings(v, vm.adapterPosition,vm) }'
             android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_three_doit" />
 
@@ -90,6 +90,37 @@
             app:layout_constraintStart_toStartOf="@+id/imageView15"
             app:layout_constraintTop_toBottomOf="@+id/imageView15"
             tools:text="445 TL" />
+
+        <TextView
+            premium="@{vm.paymentType}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/btc_orange"
+            android:rotation="25"
+            android:text="sdfsdfhfhghffghfsd"
+            android:textColor="@color/btc_orange"
+            android:textSize="18dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/textView7"
+            app:layout_constraintEnd_toEndOf="@+id/textView7"
+            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView7"
+            premium="@{vm.paymentType}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ibm_plex_sans_semi_bold"
+            android:rotation="25"
+            android:text="@string/premium"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

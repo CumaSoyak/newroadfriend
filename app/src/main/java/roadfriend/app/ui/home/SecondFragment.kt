@@ -76,7 +76,7 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
     fun defaultRequest() {
         try {
             FirebaseHelper().getDefaultTrip("2") { data ->
-                addData(data)
+                addData(data, "homedefault")
             }
         } catch (e: Exception) {
             logger(e.localizedMessage + "")
@@ -89,12 +89,11 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
         LiveBus.get(Search::class.java).observeForeverSticky {
             when (it.type) {
                 VALUE.SECONDDATA -> {
-                    addData(mTrips)
+                    addData(mTrips, "home")
 
                 }
                 VALUE.SECONDFILTER -> {
-                    viewModel.getPresenter()?.showLoading()
-                    getTripRequest =
+                     getTripRequest =
                         GetTripRequest(
                             OtherUtils.getCountryCode(),
                             CoreApp.statusSearch,
@@ -127,8 +126,7 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
     fun getTrip(getTripRequest: GetTripRequest) {
         try {
             FirebaseHelper().getFilterTrip(getTripRequest) { data ->
-                viewModel.getPresenter()?.hideLoading()
-                addData(data)
+                 addData(data, "home")
             }
         } catch (e: Exception) {
             logger(e.localizedMessage)
@@ -137,17 +135,19 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
     }
 
 
-    fun addData(trips: ArrayList<Trips>) {
+    fun addData(trips: ArrayList<Trips>, emptyKey: String) {
         if (trips.isEmpty()) {
             isAvailabledata(false)
             try {
-                getTripRequest?.let {
-                    cvEmptyView.initData(requireContext(), "home", getTripRequest)
+                if (getTripRequest != null) {
+                    cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
                     cvEmptyView.initlistener(click = {
                         passAddDetail()
                     })
-
+                } else {
+                    cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
                 }
+
             } catch (e: Exception) {
 
             }
@@ -194,10 +194,10 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
         val listSize = trips.size + trips.size / 5
         var tripsIndex = 0
         for (index in 0 until listSize) {
-//            if (index == 3) {
-//                listWithAds.add(OptionData.admobTrip())
-//            }
-            if (index % 15 == 0 && index != 0) {
+            if (index == 2) {
+                listWithAds.add(OptionData.admobTrip())
+            }
+            if (index % 5 == 0 && index != 0) {
                 listWithAds.add(OptionData.admobTrip())
             } else {
                 if (trips.size > tripsIndex) {
@@ -213,11 +213,9 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
         try {
             if (available) {
                 binding.recyclerview.visible()
-                binding.ivMap.visible()
                 binding.cvEmptyView.gone()
             } else {
                 binding.recyclerview.gone()
-                binding.ivMap.gone()
                 binding.cvEmptyView.visible()
             }
         } catch (e: Exception) {
@@ -229,7 +227,7 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         binding.cvEmptyView.hideView()
-        addData(mTrips)
+        addData(mTrips, "home")
     }
 
     fun passAddDetail() {

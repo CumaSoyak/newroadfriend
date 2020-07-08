@@ -1,6 +1,7 @@
 package roadfriend.app.ui.profile.mytrip
 
 import android.view.View
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.customviews.CvOption
 import roadfriend.app.data.remote.model.trips.Trips
@@ -8,11 +9,11 @@ import roadfriend.app.databinding.MyTripsActivityBinding
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.sales.SalesActivity
 import roadfriend.app.utils.extensions.launchActivity
+import roadfriend.app.utils.extensions.showSucces
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.firebasedatebase.TripFirebase
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyTripsActivity : BindingActivity<MyTripsActivityBinding>() {
     override val getLayoutBindId: Int
@@ -38,6 +39,10 @@ class MyTripsActivity : BindingActivity<MyTripsActivityBinding>() {
     override fun initListener() {
         requestTrip()
         listener()
+        if (intent.hasExtra("premium")) {
+            showSucces("Öne çıkarmak istediğiniz ilanı seçin lütfen")
+        }
+
     }
 
     fun requestTrip() {
@@ -58,13 +63,18 @@ class MyTripsActivity : BindingActivity<MyTripsActivityBinding>() {
 
     }
 
+    fun goSalesScreen(trips: Trips) {
+        launchActivity<SalesActivity> {
+            putExtra("data", trips)
+            putExtra("intent", TAG)
+            putExtra("premium", "premium")
+        }
+    }
+
     fun listener() {
         adapter.setOnListItemViewClickListener(object : GenericAdapter.OnListItemViewClickListener {
             override fun onClickDetail(view: View, position: Int, model: ListItemViewModel) {
-                launchActivity<SalesActivity> {
-                    putExtra("data", model as Trips)
-                    putExtra("intent", TAG)
-                }
+                goSalesScreen(model as Trips)
             }
 
             override fun onClickOptionSettings(

@@ -62,11 +62,11 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
                 }
                 if (!data.paymentType.equals("free")) {
                     val current = getCurrentDate()
-                    if (data.paymentType.equals("day") && current - data.firebaseTimeSecond!! > 86400)
+                    if (data.paymentType.equals("day") && current - data.firebaseTimeSecond!! > 432000000)
                         updateTrip(data)
-                    if (data.paymentType.equals("week") && current - data.firebaseTimeSecond!! > 604800)
+                    if (data.paymentType.equals("week") && current - data.firebaseTimeSecond!! > 604800000)
                         updateTrip(data)
-                    if (data.paymentType.equals("monday") && current - data.firebaseTimeSecond!! > 2629743)
+                    if (data.paymentType.equals("monday") && current - data.firebaseTimeSecond!! > 864000000)
                         updateTrip(data)
                 }
             }

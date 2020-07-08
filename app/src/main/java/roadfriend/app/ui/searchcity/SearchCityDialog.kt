@@ -66,7 +66,7 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
     }
 
     override fun initUI() {
-        toolBarTitle("Şehir seç")
+        toolBarTitle(getString(R.string.title_add_direction))
         binding.recyclerview.adapter = adapter
         getCity()
         searchType()

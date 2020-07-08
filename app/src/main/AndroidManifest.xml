@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="roadfriend.app"
-    android:versionCode="18"
-    android:versionName="1.0.15">
+    android:versionCode="23"
+    android:versionName="1.0.20">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -29,6 +29,8 @@
         android:label="@string/appname"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_icon_round"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"

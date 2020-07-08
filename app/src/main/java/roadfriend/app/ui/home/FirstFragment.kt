@@ -23,10 +23,7 @@ import roadfriend.app.ui.userdetail.UserDetailActivity
 import roadfriend.app.utils.OptionData
 import roadfriend.app.utils.OtherUtils
 import roadfriend.app.utils.PrefUtils
-import roadfriend.app.utils.extensions.gone
-import roadfriend.app.utils.extensions.launchActivity
-import roadfriend.app.utils.extensions.logger
-import roadfriend.app.utils.extensions.visible
+import roadfriend.app.utils.extensions.*
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.helper.LiveBus
 import roadfriend.app.utils.helper.TripBundle
@@ -78,7 +75,7 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
         try {
             FirebaseHelper().getDefaultTrip("1") { data ->
                 viewModel.getPresenter()?.hideLoading()
-                addData(data)
+                addData(data, "homedefault")
             }
         } catch (e: Exception) {
             logger(e.localizedMessage + "")
@@ -90,7 +87,7 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
     fun listenerSearch() {
         /**ilkinde komple tarihe göre sıralı gelsin*/
 
-        binding.ivMap.setOnClickListener {
+        binding.ivMap.clickWithDebounce {
             fragmentManager!!.beginTransaction().let { it1 ->
                 MapsDialogFragment.newInstance(mapsModel!!)
                     .show(it1, "")
@@ -104,13 +101,13 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
         LiveBus.get(Search::class.java).observeForeverSticky {
             when (it.type) {
                 VALUE.FIRSTDATA -> {
-                    addData(mTrips)
+                    addData(mTrips, "home")
 
                 }
                 VALUE.FIRSTFILTER -> {
-                    viewModel.getPresenter()?.let {
-                        it.showLoading()
-                    }
+//                    viewModel.getPresenter()?.let {
+//                        it.showLoading()
+//                    }
                     getTripRequest =
                         GetTripRequest(
                             OtherUtils.getCountryCode(),
@@ -133,8 +130,7 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
     fun getTrip(getTripRequest: GetTripRequest) {
         try {
             FirebaseHelper().getFilterTrip(getTripRequest) { data ->
-                viewModel.getPresenter()?.hideLoading()
-                addData(data)
+                 addData(data, "home")
             }
         } catch (e: Exception) {
             logger(e.localizedMessage)
@@ -143,18 +139,20 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
     }
 
 
-    fun addData(trips: ArrayList<Trips>) {
+    fun addData(trips: ArrayList<Trips>, emptyKey: String) {
         if (trips.isEmpty()) {
             isAvailabledata(false)
-            getTripRequest?.let {
-                try {
-                    cvEmptyView.initData(requireContext(), "home", getTripRequest)
+            try {
+                if (getTripRequest != null) {
+                    cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
                     cvEmptyView.initlistener(click = {
                         passAddDetail()
                     })
-                } catch (e: Exception) {
-
+                } else {
+                    cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
                 }
+
+            } catch (e: Exception) {
 
             }
         } else {
@@ -199,13 +197,13 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
         val listSize = trips.size + trips.size / 5
         var tripsIndex = 0
         for (index in 0 until listSize) {
-//            if (index == 3) {
-//                listWithAds.add(OptionData.admobTrip())
-//            }
-            if (index % 15 == 0 && index != 0) {
+            if (index == 3) {
+                listWithAds.add(OptionData.admobTrip())
+            }
+            if (index % 5 == 0 && index != 0) {
                 listWithAds.add(OptionData.admobTrip())
             } else {
-                if (trips.size>tripsIndex) {
+                if (trips.size > tripsIndex) {
                     listWithAds.add(trips.get(tripsIndex))
                 }
                 tripsIndex++
@@ -218,11 +216,9 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
         try {
             if (available) {
                 binding.recyclerview.visible()
-                binding.ivMap.visible()
                 binding.cvEmptyView.gone()
             } else {
                 binding.recyclerview.gone()
-                binding.ivMap.gone()
                 binding.cvEmptyView.visible()
             }
         } catch (e: Exception) {
@@ -235,7 +231,7 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
         super.onActivityResult(requestCode, resultCode, data)
         binding.cvEmptyView.hideView()
         //  binding.cvSearch.cleanedFilter()
-        addData(mTrips)
+        addData(mTrips, "home")
     }
 
     fun passAddDetail() {
@@ -259,6 +255,7 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
             passAddDetail()
         }
     }
+
 
 }
 

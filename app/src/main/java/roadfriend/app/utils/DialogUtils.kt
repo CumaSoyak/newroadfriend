@@ -36,7 +36,8 @@ object DialogUtils {
         var icon: Int,
         @DrawableRes
 
-        var isNegativeButton: Boolean = false
+        var isNegativeButton: Boolean = false,
+        var imageVisibilty: Boolean = true
 
     )
 
@@ -54,7 +55,12 @@ object DialogUtils {
 
 
     /**Bilgilendirme mesajı*/
-    fun showPopupInfo(context: Context, model: DialogModel, btnOk: () -> Unit) {
+    fun showPopupInfo(
+        context: Context,
+        model: DialogModel,
+        btnOk: () -> Unit,
+        btnDesc: (() -> Unit?)? =null
+    ) {
         myDialog = Dialog(context)
         myDialog?.setContentView(R.layout.custom_dialog)
         val btnDecline: AppCompatButton = myDialog!!.findViewById(R.id.btnDecline)
@@ -63,7 +69,9 @@ object DialogUtils {
         val close: ImageView = myDialog!!.findViewById(R.id.ivClose)
         val image: AppCompatImageView = myDialog!!.findViewById(R.id.lAnimationView)
 
-
+        if (model.imageVisibilty) {
+            image.visible()
+        }
         if (model.isNegativeButton) {
             btnDecline.visible()
         }
@@ -74,7 +82,9 @@ object DialogUtils {
         btnAccept.setOnClickListener {
             btnOk.invoke()
             myDialog?.dismiss()
-
+        }
+        btnDecline.setOnClickListener {
+            btnDesc?.invoke()
         }
 
         btnDecline.setOnClickListener {

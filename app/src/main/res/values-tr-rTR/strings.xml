@@ -238,9 +238,9 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="kaydet">Kaydet</string>
     <string name="sikayet_et">Şikayet et</string>
     <string name="sales_info_text_first">Daha hızlı</string>
-    <string name="sales_info_text_second_24">bulabilmen  için ilanı 24 saat öne çıkaracağız</string>
-    <string name="sales_info_text_second_3">bulabilmen  için ilanı 3 gün  öne çıkaracağız</string>
-    <string name="sales_info_text_second_7">bulabilmen  için ilanı 7 gün öne çıkaracağız</string>
+    <string name="sales_info_text_second_24">bulabilmen  için ilanı 3 gün öne çıkaracağız</string>
+    <string name="sales_info_text_second_3">bulabilmen  için ilanı 7 gün  öne çıkaracağız</string>
+    <string name="sales_info_text_second_7">bulabilmen  için ilanı 10 gün öne çıkaracağız</string>
     <string name="teklifinizi_giriniz">Teklifinizi giriniz</string>
     <string name="telefon_numarasi">Telefon numarası (isteğe bağlı)</string>
     <string name="yolvuluk_silinmistir">Yolculuk silinmiştir</string>
@@ -251,7 +251,7 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="hemen_bul">İlanımı üste taşı</string>
     <string name="temizle">Temizle</string>
     <string name="fiyat_yok">Fiyat yok</string>
-    <string name="yorum">Lütfen Uygulamaya puan verirmisin birde güzel bir yorum yazarsan şahane olur be :)</string>
+    <string name="yorum">Lütfen Uygulamaya puan verirmisin birde güzel bir yorum yazarsan şahane olur :)</string>
     <string name="tesekkürler">Hayır teşekkürler</string>
     <string name="tabikide">Tabikide :)</string>
     <string name="telefon_numarasi_giriniz">Geçerli Telefon Numarası giriniz</string>
@@ -282,4 +282,14 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="start_now">Başla</string>
     <string name="login_register">Kaydol / Giriş yap</string>
     <string name="devam">Devam</string>
+    <string name="show">Göster</string>
+    <string name="premium">Öne çıkan</string>
+    <string name="tutorial_first">"Yolculuk  tipini seç "</string>
+    <string name="tutorial_second">"Başlangıç ve bitiş şehirlerini seç "</string>
+    <string name="tutorial_thirty">"Aradığın şehirler için yolculuk bulamadıysan kolayca ilan ver "</string>
+    <string name="tutorial_fourthy">"Yolculuk  hakkında mesajlaş "</string>
+    <string name="tutorial_five">Paylaştığın yolculuğu herkes görsün istiyorsan hemen öne çıkar</string>
+    <string name="ilk_ilanı_sen_ver">Ülkenizde bir yolculuğu paylaşan, hediye kazanan ilk kişi olun</string>
+    <string name="cikis_yap">Çıkış yap</string>
+    <string name="premium_text">Herkesin yolculuğunuzu görmesini ve hemen bir yol arkadaşı bulmak ister misiniz?</string>
 </resources>

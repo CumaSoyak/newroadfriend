@@ -107,7 +107,7 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
             ProfilMenu(
                 "exit",
                 getDrawable(R.drawable.ic_exit),
-                getString(R.string.yardim_profil)
+                getString(R.string.cikis_yap)
             )
         )
         rv.adapter = adapter

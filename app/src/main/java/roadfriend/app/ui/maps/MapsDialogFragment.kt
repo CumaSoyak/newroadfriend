@@ -39,7 +39,7 @@ class MapsDialogFragment : DialogFragment() {
     }
 
     fun setToolbar() {
-        tvToolbarTitle.text = "Haritada Gör"
+        tvToolbarTitle.text = getString(R.string.haritada_gor)
     //    containerToolbar.backgroundColor(R.color.white)
         back.setOnClickListener {
             dismiss()

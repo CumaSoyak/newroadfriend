@@ -77,6 +77,9 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
         if (intent.getStringExtra("intent") == AddDetailActivity::class.java.name) {
             showSucces(getString(R.string.ilan_paylasildi_mesaj))
         }
+        if (intent.hasExtra("premium")){
+            openPaymentBottomSheet()
+        }
     }
 
 
@@ -127,6 +130,8 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
         }
 
     } else {
+        setupBillingClient()
+        EventManager.setupBillingClient()
         println("Billing Client not ready")
     }
 
@@ -145,12 +150,15 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
         } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
             // Handle an error caused by a user cancelling the purchase flow.
             logger("User Cancelled")
+            EventManager.userCancelled()
             logger(billingResult.debugMessage.toString())
+
 
 
         } else {
             logger(billingResult.debugMessage.toString())
             // Handle any other error codes.
+            EventManager.salesError()
         }
     }
 
@@ -184,9 +192,9 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
             view.billingOne, view.billingTwo, view.billingThree
         )
 
-        view.billingOne.setDay("1 " + resources.getString(R.string.day))
-        view.billingTwo.setDay("3 " + resources.getString(R.string.day))
-        view.billingThree.setDay("7 " + resources.getString(R.string.day))
+        view.billingOne.setDay("5 " + resources.getString(R.string.day))
+        view.billingTwo.setDay("7 " + resources.getString(R.string.day))
+        view.billingThree.setDay("10 " + resources.getString(R.string.day))
 
         /**Default select*/
         view.billingOne.select(view.billingOne, view.btnPayment, list)

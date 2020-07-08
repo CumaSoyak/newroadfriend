@@ -59,6 +59,7 @@ class HelpActivity : BindingActivity<HelpActivityBinding>() {
     }
 
     fun support() {
+        binding.btnMessage.gone()
         binding.etMessage.listener { text ->
             if (text.isNullOrEmpty()) {
                 binding.btnMessage.gone()
@@ -69,7 +70,7 @@ class HelpActivity : BindingActivity<HelpActivityBinding>() {
     }
 
     fun createSupport() {
-        if (binding.etMessage.text.toString().isNullOrEmpty()) {
+        if (!binding.etMessage.text.toString().isNullOrEmpty()) {
             val uuid = UUID.randomUUID().toString()
             val data = hashMapOf(
                 "text" to binding.etMessage.text.toString(),

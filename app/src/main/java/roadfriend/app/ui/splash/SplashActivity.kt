@@ -28,8 +28,7 @@ class SplashActivity : BaseActivity() {
 
     override fun initUI() {
         if (NetworkUtils.isConnected(this)) {
-            FirebaseHelper().reklam()
-            FirebaseHelper().isAppUpdate { update ->
+             FirebaseHelper().isAppUpdate { update ->
                 if (update) {
                     updateApp()
                 } else {
@@ -45,12 +44,9 @@ class SplashActivity : BaseActivity() {
     }
 
     fun launchActivity() {
-//        if (BuildConfig.DEBUG) {
-//            launchActivity<DashBoardActivity>()
-//        } else {
-//            launchActivity<MainActivity>()
-//        }
-        if (PrefUtils.checkIsFirstTimeOpen()) {
+        if (BuildConfig.DEBUG) {
+            launchActivity<DashBoardActivity>()
+        } else if (PrefUtils.checkIsFirstTimeOpen()) {
             launchActivity<IntroActivity> { }
         } else if (!PrefUtils.checkIsFirstTimeOpen()) {
             launchActivity<MainActivity> {}

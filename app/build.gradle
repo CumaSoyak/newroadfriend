@@ -51,6 +51,23 @@ android {
             buildConfigField "String", "BUILD_VARIANT", "\"debug\""
         }
     }
+    flavorDimensions "version"
+    productFlavors {
+        develop {
+            dimension "version"
+            applicationIdSuffix ".develop"
+            ext.crunchPngs = false
+        }
+        staging {
+            dimension "version"
+            applicationIdSuffix ".staging"
+            signingConfig signingConfigs.debug
+        }
+        production {
+            dimension "version"
+            signingConfig signingConfigs.release
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -150,8 +167,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1'
     // circleimageview
     implementation 'de.hdodenhof:circleimageview:3.0.0'
-    //İmage rounded
-    implementation 'com.makeramen:roundedimageview:2.3.0'
+
 
     //data binding
     implementation "com.android.databinding:compiler:3.5.1"
@@ -181,9 +197,7 @@ dependencies {
     //expandable layout
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     implementation 'jp.wasabeef:glide-transformations:4.1.0'
-    //ImageView
-//    implementation 'com.makeramen:roundedimageview:2.3.0'
-//    implementation 'com.synnapps:carouselview:0.1.5'
+
 
 
     //Gif

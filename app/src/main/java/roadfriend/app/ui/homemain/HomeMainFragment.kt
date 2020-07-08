@@ -4,6 +4,8 @@ package roadfriend.app.ui.homemain
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import kotlinx.android.synthetic.main.fragment_home_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.data.local.model.Search
@@ -12,12 +14,12 @@ import roadfriend.app.ui.base.BaseFragment
 import roadfriend.app.ui.home.FirstFragment
 import roadfriend.app.ui.home.HomeViewModel
 import roadfriend.app.ui.home.SecondFragment
+import roadfriend.app.utils.PrefUtils.isLogin
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.visible
+import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.helper.LiveBus
 import roadfriend.app.utils.helper.ViewPagerAdapter
-import kotlinx.android.synthetic.main.fragment_home_main.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -39,6 +41,17 @@ class HomeMainFragment : BaseFragment() {
     }
 
     override fun initUI(view: View) {
+        if (isLogin()) {
+            FirebaseHelper().getMyTrip { data ->
+                if (data.size > 0) {
+                    if (cvPremium != null) {
+                        cvPremium.visible()
+                        cvPremium.visibleContainer(data)
+                    }
+
+                }
+            }
+        }
     }
 
     override fun initListener() {
