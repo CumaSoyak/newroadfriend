@@ -1,6 +1,7 @@
 package roadfriend.app.utils.extensions
 
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.widget.EditText
 import com.facebook.CallbackManager
@@ -57,6 +58,7 @@ fun TextInputEditText.listener(iEditTextCallBack: (text: String) -> Unit) {
         }
     })
 }
+
 fun LoginButton.registerSimpleCallback(
     callbackManager: CallbackManager,
     onSuccess: (loginResult: LoginResult) -> Unit
@@ -73,6 +75,17 @@ fun LoginButton.registerSimpleCallback(
         }
     })
 }
+
+fun EditText.numberFormat() {
+    val myFilter = InputFilter { source, _, _, dest, _, _ ->
+        if (dest.toString() == "0" && source.toString() == "0") {
+            ""
+        } else null
+    }
+    this.filters = arrayOf(myFilter)
+
+}
+
 interface IEditTextCallBack {
     fun afterTextChanged(text: String?)
     fun onTextChanged(text: String?)

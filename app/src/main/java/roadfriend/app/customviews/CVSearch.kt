@@ -5,15 +5,16 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.cv_search.view.*
 import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.ui.searchcity.SearchCityDialog
 import roadfriend.app.utils.AppConstants
+import roadfriend.app.utils.extensions.clickWithDebounce
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.visible
-import kotlinx.android.synthetic.main.cv_search.view.*
-import roadfriend.app.utils.extensions.clickWithDebounce
+import roadfriend.app.utils.manager.EventManager
 
 class CVSearch @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -36,6 +37,7 @@ class CVSearch @JvmOverloads constructor(
     ) {
         this.callbackCity = callback
         containerSearch.clickWithDebounce {
+            EventManager.searchClick()
             fragment.fragmentManager?.beginTransaction()?.let { it1 ->
                 SearchCityDialog.newInstance(AppConstants.HOME_SEARCH, this)
                     .show(it1, "")
@@ -53,7 +55,7 @@ class CVSearch @JvmOverloads constructor(
         tvStartCity.text = stationStart?.name
         tvEndCity.text = stationEnd?.name
         callbackCity(stationStart, stationEnd, CoreApp.statusSearch)
-     }
+    }
 
     fun visibleCotainer() {
         groupNoChoose.gone()

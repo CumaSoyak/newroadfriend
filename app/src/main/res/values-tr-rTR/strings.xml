@@ -292,4 +292,8 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="ilk_ilanı_sen_ver">Ülkenizde bir yolculuğu paylaşan, hediye kazanan ilk kişi olun</string>
     <string name="cikis_yap">Çıkış yap</string>
     <string name="premium_text">Herkesin yolculuğunuzu görmesini ve hemen bir yol arkadaşı bulmak ister misiniz?</string>
+    <string name="instagram">Yol arkadaşı için takipte kal</string>
+    <string name="numarayi_ara">Numarayı ara</string>
+    <string name="teklif_iletildi">Teklifiniz iletilmiştir</string>
+    <string name="yolculuk_silinmistir">Yolculuk silinmişir</string>
 </resources>

@@ -22,6 +22,7 @@ import roadfriend.app.ui.message.chat.ChatActivity
 import roadfriend.app.utils.DialogUtils
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.*
+import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.firebasedatebase.TripFirebase
 import java.util.*
 
@@ -57,7 +58,6 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
         }
         if (trips.adminPost) {
             binding.clBottomContainer.gone()
-            binding.btnCall.visible()
         }
     }
 
@@ -70,6 +70,7 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
             initOption()
         }
         listenerBidEditText()
+        visibiltyContactChoose()
     }
 
     fun addStation() {
@@ -119,6 +120,23 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
         }
     }
 
+    fun visibiltyContactChoose() {
+        if (!trips.phone.isNullOrEmpty()) {
+            binding.btnCall.visible()
+        }
+        if (trips.bidOption) {
+            //sadece fiyat teklifi almak istiyor
+            binding.etBid.visible()
+            binding.btnMessage.gone() //  mesaj gönderemez
+        } else if (!trips.bidOption) {
+            //sadece mesaj gönderebilir
+            binding.etBid.gone()
+            binding.btnMessage.visible()
+        }
+
+
+    }
+
     @SuppressLint("MissingPermission")
     fun callPhone() {
         val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + trips.phone))
@@ -154,20 +172,20 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
                 DialogUtils.showPopupPhone(this) { phoneNumber ->
                     val bid = hashMapOf(
                         "id" to userMe.id,
-                        "fullName" to userMe?.fullName,
+                        "fullName" to userMe.fullName,
                         "phone" to phoneNumber,
                         "price" to binding.etBid.textString(),
                         "firebaseTime" to time
                     )
                     sendData(bid)
-                    viewModel.userPhoheUpdate(userMe!!.id, phoneNumber)
+                    viewModel.userPhoheUpdate(userMe.id, phoneNumber)
                 }
             } else {
                 val time = FieldValue.serverTimestamp()
                 val bid = hashMapOf(
-                    "id" to userMe?.id,
-                    "fullName" to userMe?.fullName,
-                    "phone" to userMe?.phone,
+                    "id" to userMe.id,
+                    "fullName" to userMe.fullName,
+                    "phone" to userMe.phone,
                     "price" to binding.etBid.textString(),
                     "firebaseTime" to time
                 )
@@ -191,7 +209,7 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
             .collection(trips.id!!)
             .document(userMe.id)
             .set(bid, SetOptions.merge()).addOnSuccessListener {
-                showSucces("Teklifiniz iletilmiştir")
+                showSucces(getString(R.string.teklif_iletildi))
                 val data = Data(
                     trips.id!!,
                     userMe.image,
@@ -201,9 +219,12 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
                 )
                 val request = NotificationRequest(data, trips.user.firebaseToken)
                 viewModel.postNotification(request)
+                FirebaseHelper().setBidNotificationBadge(trips.user, true)
+                hideKeyboard()
             }
 
         binding.etBid.setText("")
     }
+
 
 }

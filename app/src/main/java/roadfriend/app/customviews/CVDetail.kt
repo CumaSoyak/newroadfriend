@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import kotlinx.android.synthetic.main.cv_detail.view.*
 import roadfriend.app.R
 import roadfriend.app.data.local.model.MapsModel
 import roadfriend.app.data.remote.model.city.City
@@ -12,12 +13,11 @@ import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.ui.base.BaseActivity
 import roadfriend.app.ui.maps.MapFragment
 import roadfriend.app.ui.sales.SalesActivity
+import roadfriend.app.ui.tripdetail.TripDetailActivity
 import roadfriend.app.utils.OptionData
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.phoneFormat
-import roadfriend.app.utils.extensions.setString
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
-import kotlinx.android.synthetic.main.cv_detail.view.*
 
 class CVDetail @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -32,10 +32,15 @@ class CVDetail @JvmOverloads constructor(
 
     fun initData(trips: Trips, activity: BaseActivity) {
         setStatus(trips)
-        setMaps(trips, activity)
-        setPhone(trips.phone)
+        if (activity is TripDetailActivity) {
+            setPhone("")
+        } else {
+            setPhone(trips.phone)
+        }
+
         setPrice(trips.callPrice())
         setDescription(trips.description)
+        setCity(trips)
     }
 
     private fun setStatus(trips: Trips) {
@@ -61,20 +66,10 @@ class CVDetail @JvmOverloads constructor(
     }
 
     private fun setCity(trips: Trips) {
-        cityShowListener()
+        tvFirstCity.text = trips.startCityName
+        tvSecondCity.text = trips.endCityName
     }
 
-    fun cityShowListener() {
-        tvAllCityShow.setOnClickListener {
-            if (expandedLayout.isExpanded) {
-                tvAllCityShow.setString(R.string.hide_all_city)
-                expandedLayout.isExpanded = false
-            } else {
-                tvAllCityShow.setString(R.string.show_all_city)
-                expandedLayout.isExpanded = true
-            }
-        }
-    }
 
     fun setPhone(phone: String?) {
         if (phone.isNullOrEmpty()) {

@@ -1,6 +1,9 @@
 package roadfriend.app.ui.profile
 
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import com.facebook.login.LoginManager
 import kotlinx.android.synthetic.main.fragment_profil.*
@@ -103,6 +106,8 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
             )
         )
 
+        menuItem.add(ProfilMenu("instagram", getDrawable(R.drawable.ic_instagram), getString(R.string.instagram)))
+
         menuItem.add(
             ProfilMenu(
                 "exit",
@@ -155,6 +160,24 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
                 //iletişime geç
                 requireContext().launchActivity<HelpActivity> {
                     this.putExtra("support", "support")
+                }
+            }
+            "instagram" -> {
+                var uri = Uri.parse("http://instagram.com/roadfriendapp");
+                var likeIng = Intent(Intent.ACTION_VIEW, uri);
+
+                likeIng.setPackage("com.instagram.android");
+
+                try {
+                    startActivity(likeIng);
+                } catch (e: ActivityNotFoundException) {
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("http://instagram.com/roadfriendapp")
+                        )
+                    );
+
                 }
             }
             "exit" -> {

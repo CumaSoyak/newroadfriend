@@ -290,7 +290,7 @@
 
     <style name="NonSelectedText">
         <item name="android:textColor">@color/non_selected_color</item>
-        <item name="android:fontFamily">@font/sfprodisplay_medium</item>
+        <item name="android:fontFamily">@font/ibm_plex_sans_semi_bold</item>
     </style>
 
     <style name="RatingBar" parent="android:style/Widget.Material.RatingBar.Small">

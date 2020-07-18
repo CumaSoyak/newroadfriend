@@ -29,7 +29,7 @@ object OtherUtils {
     }
 
     fun getCountryCode(): String {
-        return getCurrentCountryCode()
+        return  "tr"
     }
 
     fun getCurrentCountryCode(): String {

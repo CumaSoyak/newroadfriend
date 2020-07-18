@@ -1,13 +1,10 @@
 package roadfriend.app.ui.add.detail
 
-import android.os.Bundle
-import com.android.billingclient.api.*
+import com.android.billingclient.api.BillingClient
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.bottom_dialog_choose.view.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.databinding.AddDetailActivityBinding
@@ -20,8 +17,7 @@ import roadfriend.app.utils.extensions.*
 import roadfriend.app.utils.helper.BottomSheetAdapter
 import roadfriend.app.utils.helper.TripBundle
 
-class AddDetailActivity : BindingActivity<AddDetailActivityBinding>(), DateUtils.DataListener,
-    PurchasesUpdatedListener, AcknowledgePurchaseResponseListener {
+class AddDetailActivity : BindingActivity<AddDetailActivityBinding>(), DateUtils.DataListener {
     override val getLayoutBindId: Int
         get() = R.layout.add_detail_activity
 
@@ -118,75 +114,6 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>(), DateUtils
         onBackPressedSetResult()
     }
 
-    private fun setupBillingClient() {
-        billingClient = BillingClient.newBuilder(this)
-            .enablePendingPurchases()
-            .setListener(this)
-            .build()
-        billingClient.startConnection(object : BillingClientStateListener {
-            override fun onBillingSetupFinished(billingResult: BillingResult) {
-                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                    // The BillingClient is ready. You can query purchases here.
-                    logger("Setup Billing Done")
-                    isBillingSetupFinished = true
-                }
-            }
-
-            override fun onBillingServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
-                logger("Failed")
-
-            }
-        })
-
-    }
-
-    private fun loadAllSKUs() = if (billingClient.isReady) {
-        val params = SkuDetailsParams
-            .newBuilder()
-            .setSkusList(skuList)
-            .setType(BillingClient.SkuType.INAPP)
-            .build()
-        billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
-            // Process the result.
-            viewModel.getPresenter()?.hideLoading()
-            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList!!.isNotEmpty()) {
-                for (skuDetails in skuDetailsList) {
-                    if (skuDetails.sku == "post") {
-                        val billingFlowParams = BillingFlowParams
-                            .newBuilder()
-                            .setSkuDetails(skuDetails)
-                            .build()
-                        billingClient.launchBillingFlow(this, billingFlowParams)
-                    }
-                }
-            }
-
-        }
-
-    } else {
-        println("Billing Client not ready")
-    }
-
-    override fun onPurchasesUpdated(
-        billingResult: BillingResult,
-        purchases: MutableList<Purchase>?
-    ) {
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
-            for (purchase in purchases) {
-                handlePurchase(purchase)
-            }
-        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
-            // Handle an error caused by a user cancelling the purchase flow.
-            logger(billingResult.debugMessage.toString())
-
-
-        } else {
-            logger(billingResult.debugMessage.toString())
-            // Handle any other error codes.
-        }
-    }
 
     fun postTrip() {
         val userMe = PrefUtils.getUser()
@@ -202,7 +129,8 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>(), DateUtils
             endCity = tripModel.tripsList.get(1),
             startCityName = tripModel.tripsList.get(0).name,
             endCityName = tripModel.tripsList.get(1).name,
-            ads = false
+            ads = false, bidOption = binding.bidCheckBox.isChecked
+
         )
 
 
@@ -218,38 +146,6 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>(), DateUtils
         }
     }
 
-    fun handlePurchase(purchase: Purchase) {
-        val consumeParams =
-            ConsumeParams.newBuilder()
-                .setPurchaseToken(purchase.purchaseToken)
-                .build()
-
-        billingClient.consumeAsync(consumeParams) { billingResult, outToken ->
-            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                //Toast.makeText(this, "KAldırıldı", Toast.LENGTH_SHORT).show()
-            }
-        }
-        if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
-            if (!purchase.isAcknowledged) {
-                var acknowledgePurchaseParams =
-                    AcknowledgePurchaseParams.newBuilder()
-                        .setPurchaseToken(purchase.purchaseToken)
-                        .build();
-                billingClient.acknowledgePurchase(
-                    acknowledgePurchaseParams,
-                    this
-                );
-
-            }
-        }
-    }
-
-    override fun onAcknowledgePurchaseResponse(p0: BillingResult) {
-        var firebaseAnalytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        var bundle = Bundle()
-        bundle.putString(CoreApp.testDatabase + "post", "post")
-        firebaseAnalytics.logEvent(CoreApp.testDatabase + "satin_alma", bundle)
-    }
 
 }
 

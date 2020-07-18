@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "956325725386",
+    "firebase_url": "https://airsims.firebaseio.com",
+    "project_id": "airsims",
+    "storage_bucket": "airsims.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956325725386:android:e52eec9405543279252033",
+        "android_client_info": {
+          "package_name": "com.mobillium.airalo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956325725386-7d2j8u7rml6u5i5hd8n4k64emdlm5mu5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mobillium.airalo",
+            "certificate_hash": "77ff731170f8caa65a9dfe8387d2d1db6cbe97dc"
+          }
+        },
+        {
+          "client_id": "956325725386-rkmaafpa3eib12etacic3mk1ogmj5kqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkcOP59Fe2UW7oYTASy77B7OF_WTtbSOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956325725386-rkmaafpa3eib12etacic3mk1ogmj5kqv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "956325725386-brpsvl97c173lc00m6tfk4c2ototg6sg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mobillium.airalo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956325725386:android:9f952fda0ed790ad252033",
+        "android_client_info": {
+          "package_name": "com.mobillium.airalo.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956325725386-emg0c2cgduluagacd6jml85ebgttghsm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mobillium.airalo.staging",
+            "certificate_hash": "624dc3b0b52afadd1410495cd4ef76c2f7876cd9"
+          }
+        },
+        {
+          "client_id": "956325725386-rkmaafpa3eib12etacic3mk1ogmj5kqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkcOP59Fe2UW7oYTASy77B7OF_WTtbSOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956325725386-rkmaafpa3eib12etacic3mk1ogmj5kqv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "956325725386-brpsvl97c173lc00m6tfk4c2ototg6sg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mobillium.airalo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,6 +8,7 @@ import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.extensions.showSucces
 import com.google.firebase.firestore.SetOptions
+import roadfriend.app.R
 
 class TripFirebase {
     val test = CoreApp.testDatabase
@@ -15,7 +16,7 @@ class TripFirebase {
         db.collection(test + "trip").document(document)
             .delete()
             .addOnSuccessListener {
-                context.showSucces("Yolculuk Silinmiştir")
+                context.showSucces(context.getString(R.string.yolculuk_silinmistir))
                 deleteBidList(context, document)
             }
             .addOnFailureListener {
@@ -49,7 +50,4 @@ class TripFirebase {
             .delete()
     }
 
-    fun tripBidListInBoxMessage() {
-
-    }
 }

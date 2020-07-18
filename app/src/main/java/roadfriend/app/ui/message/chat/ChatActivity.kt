@@ -8,7 +8,6 @@ import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.chat_activity.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import roadfriend.app.CoreApp
 import roadfriend.app.CoreApp.Companion.chatID
 import roadfriend.app.R
 import roadfriend.app.data.local.model.chat.ChatAutomaticMessage
@@ -62,7 +61,11 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
         db = FirebaseFirestore.getInstance()
         initAutomaticMessage()
         getConversitionId()
-        getMessage()
+        try {
+            getMessage()
+        } catch (e: Exception) {
+            logger("" + e.localizedMessage)
+        }
         initUserData()
         chatID = chatUser.id
     }
@@ -132,7 +135,7 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
                     sendNotification(etChatBox.textString())
                     if (beforeNoChating) {   //eğer daha önce mesajlaşılmadıysa user oluştur
                         FirebaseHelper().chatCreateUser(chatUser)
-                        FirebaseHelper().setNotificationBadge(chatUser,true)
+                        FirebaseHelper().setNotificationBadge(chatUser, true)
                     }
                     binding.etChatBox.text.clear()
 
@@ -145,7 +148,7 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
         val userMe = PrefUtils.getUser()
         val dataYou = hashMapOf(
             "messageText" to etChatBox.textString(),
-            "fullName" to userMe?.fullName,
+            "fullName" to userMe.fullName,
             "messageType" to "you",
             "time" to time
         )
@@ -207,11 +210,6 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
         )
         val request = NotificationRequest(data, chatUser.firebaseToken)
         viewModel.postNotification(request)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        CoreApp.chatID = ""
     }
 
     override fun onBackPressed() {

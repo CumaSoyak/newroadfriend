@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.toolbar_layout.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.CoreApp.Companion.db
 import roadfriend.app.R
@@ -13,12 +16,10 @@ import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.main.MainActivity
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.launchActivity
+import roadfriend.app.utils.extensions.showEmpty
+import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
-import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.toolbar_layout.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import roadfriend.app.utils.extensions.showEmpty
 
 class BidDetailActivity : BindingActivity<BidDetailActivityBinding>() {
     override val getLayoutBindId: Int
@@ -38,6 +39,7 @@ class BidDetailActivity : BindingActivity<BidDetailActivityBinding>() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
         toolBarTitle("Teklif Detayı")
+        FirebaseHelper().setBidNotificationBadge(PrefUtils.getUser(), false)
     }
 
     override fun initListener() {
@@ -58,6 +60,7 @@ class BidDetailActivity : BindingActivity<BidDetailActivityBinding>() {
             }
         })
     }
+
     fun getBidList() {
         val userMe = PrefUtils.getUser()
         val trips: ArrayList<Bid> = arrayListOf()
@@ -71,7 +74,7 @@ class BidDetailActivity : BindingActivity<BidDetailActivityBinding>() {
                 val data: Bid = queryDocumentSnapshot.toObject(Bid::class.java)
                 trips.add(data)
             }
-           initData(trips)
+            initData(trips)
         }
     }
 

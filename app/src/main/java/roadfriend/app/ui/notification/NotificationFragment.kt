@@ -68,8 +68,9 @@ class NotificationFragment : BindingFragment<FragmentNotificationBinding>() {
         val trips: ArrayList<Trips> = arrayListOf()
         val userMe = PrefUtils.getUser()
         val docRef = db.collection(CoreApp.testDatabase + "bidList")
-            .document(userMe!!.id).collection("info")
+            .document(userMe.id).collection("info")
         docRef.addSnapshotListener { snapshot, e ->
+            trips.clear()
             snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
                 val data: Trips = queryDocumentSnapshot.toObject(Trips::class.java)
                 trips.add(data)

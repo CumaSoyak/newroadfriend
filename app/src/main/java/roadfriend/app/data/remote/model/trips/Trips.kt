@@ -1,14 +1,14 @@
 package roadfriend.app.data.remote.model.trips
 
 import android.os.Parcelable
-import roadfriend.app.data.remote.model.city.City
-import roadfriend.app.data.remote.model.user.User
-import roadfriend.app.utils.DummyData
-import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import roadfriend.app.R
+import roadfriend.app.data.remote.model.city.City
+import roadfriend.app.data.remote.model.user.User
+import roadfriend.app.utils.DummyData
 import roadfriend.app.utils.extensions.getString
+import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 import java.text.DecimalFormat
 
 @Parcelize
@@ -29,7 +29,8 @@ data class Trips(
     @SerializedName("firebaseTimeSecond") var firebaseTimeSecond: Long? = 0,
     @SerializedName("adminPost") var adminPost: Boolean = false,
     @SerializedName("documentKey") var documentKey: String? = "",
-    @SerializedName("ads") var ads: Boolean = false
+    @SerializedName("ads") var ads: Boolean = false,
+    @SerializedName("bidOption") var bidOption: Boolean = false
 ) : Parcelable, ListItemViewModel() {
     fun calDate(): String {
         return ""

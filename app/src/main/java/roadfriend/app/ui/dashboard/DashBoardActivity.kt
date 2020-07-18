@@ -27,12 +27,12 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
     override fun initUI() {
         binding.vmDashBoard = viewModel
         binding.lifecycleOwner = this
-        getDefaultTrip()
+        //getDefaultTrip()
     }
 
     override fun initListener() {
-        viewModel.tripSize()
-        viewModel.userSize()
+//        viewModel.tripSize()
+//        viewModel.userSize()
         binding.devam.setOnClickListener {
             launchActivity<MainActivity> { }
         }

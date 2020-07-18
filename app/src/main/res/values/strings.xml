@@ -101,7 +101,7 @@
     <string name="yardim_profil">Exit</string>
     <string name="iletisime_gec">Contact us</string>
     <string name="gelen_teklif_yok">No incoming offers</string>
-    <string name="ilk_ilanı_sen_ver">Be the first person to share a travel in your country, earn a gift</string>
+    <string name="ilk_ilanı_sen_ver">Come on share travel post</string>
     <string name="mesaj_yok">You have no messages</string>
     <string name="yolculugunuz_bulunmaktadir">You have no trip</string>
     <string name="kayitli_yolculugunuz_bulunmaktadir">You have no registered trip.</string>
@@ -287,5 +287,9 @@ Bu tür içerikler Logistics’ın politikasına aykırıdır ve Logistics bu t�
 Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur olmaz, söz konusu içeriği mümkün olduğunca en kısa süre içinde Siteden kaldırmak için elinden geleni yapacaktır.
     </string>
     <string name="cikis_yap">Exit</string>
+    <string name="instagram">Follow for more friends</string>
+    <string name="numarayi_ara">Call Phone</string>
+    <string name="yolculuk_silinmistir">Trip deleted</string>
+    <string name="teklif_iletildi">Your offer has been submitted</string>
 
 </resources>

@@ -50,5 +50,8 @@ object EventManager {
     fun salesError() {
         firebaseAnalytics.logEvent(CoreApp.testDatabase + "onPurchasesUpdatedError", Bundle())
     }
+    fun searchClick() {
+        firebaseAnalytics.logEvent(CoreApp.testDatabase + "searchClick"+CoreApp.statusSearch, Bundle())
+    }
 
 }

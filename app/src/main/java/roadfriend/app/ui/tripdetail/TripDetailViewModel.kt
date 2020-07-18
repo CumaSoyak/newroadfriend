@@ -28,8 +28,8 @@ class TripDetailViewModel(dataManager: DataManager) : BaseViewModel<IBasePresent
         CoreApp.db.collection(CoreApp.testDatabase + "users").document(documentKey)
             .update("phone", phonoNumber).addOnSuccessListener {
                 val user = PrefUtils.getUser()
-                user?.phone = phonoNumber
-                PrefUtils.createUser(user!!)
+                user.phone = phonoNumber
+                PrefUtils.createUser(user)
             }
     }
 

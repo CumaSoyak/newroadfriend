@@ -60,6 +60,12 @@ class FirebaseHelper {
             .set(hashMapOf("message" to type), SetOptions.merge())
     }
 
+    fun setBidNotificationBadge(user: User, type: Boolean) {
+        db.collection(test + "notification")
+            .document(user.id)
+            .set(hashMapOf("bid" to type), SetOptions.merge())
+    }
+
     fun getMessageList(requestCallback: (data: ArrayList<User>) -> Unit) {
         val messageData: ArrayList<User> = arrayListOf()
         val docRef =
@@ -79,7 +85,18 @@ class FirebaseHelper {
             db.collection(test + "notification").document(PrefUtils.getUserId())
         docRef.addSnapshotListener { snapshot, e ->
             if (snapshot?.data != null)
-                callBack(snapshot.data!!["message"] as Boolean)
+                if (snapshot.data!!["message"] != null)
+                    callBack(snapshot.data!!["message"] as Boolean)
+        }
+    }
+
+    fun getNotificationBid(callBack: (result: Boolean) -> Unit) {
+        val docRef =
+            db.collection(test + "notification").document(PrefUtils.getUserId())
+        docRef.addSnapshotListener { snapshot, e ->
+            if (snapshot?.data != null)
+                if (snapshot.data!!["bid"] != null)
+                    callBack(snapshot.data!!["bid"] as Boolean)
         }
     }
 
@@ -107,17 +124,7 @@ class FirebaseHelper {
         }
     }
 
-    fun reklam() {
-        val docRef = db.collection("reklam")
-        docRef.addSnapshotListener { snapshot, e ->
-            if (snapshot != null) {
-                if (!snapshot.documents.isNullOrEmpty()) {
-                    val updateVersion = snapshot.documents.get(0)["reklam"] as Boolean
-                    CoreApp.reklam = updateVersion
-                }
-            }
-        }
-    }
+
 
     fun createTrip(trips: Trips, result: (trips: Trips, tripId: String) -> Unit) {
         val uuid = UUID.randomUUID().toString()
@@ -139,13 +146,14 @@ class FirebaseHelper {
             .whereEqualTo("status", status)
             .orderBy("firebaseTime", Query.Direction.DESCENDING).limit(80)
         docRef.addSnapshotListener { snapshot, e ->
+            trips.clear()
             snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
                 val data: Trips = queryDocumentSnapshot.toObject(Trips::class.java)
                 if (queryDocumentSnapshot["firebaseTime"] != null) {
                     val seconds = (queryDocumentSnapshot["firebaseTime"] as Timestamp)
                     data.firebaseTimeSecond = seconds.seconds
                 } else {
-                    data.firebaseTimeSecond = 1000
+                    data.firebaseTimeSecond = 100
                 }
 
                 trips.add(data)
@@ -248,6 +256,7 @@ class FirebaseHelper {
             ),
             "startCityName" to trips.startCityName,
             "endCityName" to trips.endCityName,
+            "bidOption" to trips.bidOption,
             "firebaseToken" to PrefUtils.getFirebaseToken(),
             "firebaseTime" to time,
             "codeCountry" to OtherUtils.getCountryCode(),
@@ -288,11 +297,13 @@ class FirebaseHelper {
         //1 gün 86400
         //1 hafta 604800
         //1 ay 2629743
+
         val tripList: ArrayList<Trips> = arrayListOf()
+        tripList.clear()
         val current = getCurrentDate()
 
         val nowTrips = trips.filter {
-            (current - it.firebaseTimeSecond!!) < 1800
+            (current - it.firebaseTimeSecond!!) < 200
         }
         val premium = trips.filter {
             it.paymentType.equals("day")
@@ -303,7 +314,7 @@ class FirebaseHelper {
         val notPremium = trips.filter {
             !it.paymentType.equals("day")
                     && !it.paymentType.equals("week")
-                    && !it.paymentType.equals("monday") && (current - it.firebaseTimeSecond!!) >= 1800
+                    && !it.paymentType.equals("monday") && (current - it.firebaseTimeSecond!!) >= 200
 
         }
 

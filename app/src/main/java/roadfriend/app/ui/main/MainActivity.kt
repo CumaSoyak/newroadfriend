@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
     var notificationFragment: Fragment? = null
     var bidFragment: Fragment? = null
     var profilFragment: Fragment? = null
-    lateinit var badge: BadgeDrawable
+    lateinit var badgeMessage: BadgeDrawable
+    lateinit var badgeBid: BadgeDrawable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +37,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigationBar() {
-        badge = bottom_nav.getOrCreateBadge(R.id.nav_message)
-        badge.isVisible = false
+        badgeMessage = bottom_nav.getOrCreateBadge(R.id.nav_message)
+        badgeMessage.isVisible = false
+        badgeBid = bottom_nav.getOrCreateBadge(R.id.nav_notification)
+        badgeBid.isVisible = false
 
         bottom_nav.setOnNavigationItemSelectedListener { menuItem ->
             var selectedFragment: Fragment? = null
@@ -52,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_notification -> {
                     if (isLogin()) {
-                        //      bottom_nav.removeBadge(R.id.nav_notification)
+                        bidNotification()
                         if (notificationFragment == null) {
                             notificationFragment = NotificationFragment.newInstance()
                             addFragmentMethod(notificationFragment!!)
@@ -153,14 +156,24 @@ class MainActivity : AppCompatActivity() {
         if (isLogin()) {
             FirebaseHelper().getNotification {
                 if (it) {
-                    badge.isVisible = true
+                    badgeMessage.isVisible = true
+                }
+            }
+            FirebaseHelper().getNotificationBid {
+                if (it) {
+                    badgeBid.isVisible = true
                 }
             }
         }
     }
 
     fun notidficationDisable() {
-        badge.isVisible = false
+        badgeMessage.isVisible = false
         FirebaseHelper().setNotificationBadge(PrefUtils.getUser(), false)
+    }
+
+    fun bidNotification() {
+        badgeBid.isVisible = false
+        FirebaseHelper().setBidNotificationBadge(PrefUtils.getUser(), false)
     }
 }
