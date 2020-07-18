@@ -41,10 +41,10 @@
         app:tabIconTint="@color/tab_content_color_selector"
         app:tabIndicatorColor="@color/green"
         app:tabIndicatorFullWidth="true"
-        app:tabIndicatorHeight="2dp"
+        app:tabIndicatorHeight="3dp"
         app:tabMode="fixed"
         app:tabTextAppearance="@style/TabStyle"
-        app:tabTextColor="@color/tab_content_color_selector" />
+        app:tabTextColor="@color/tab_text_color_selector" />
 
     <roadfriend.app.customviews.CvPremium
         android:id="@+id/cvPremium"
