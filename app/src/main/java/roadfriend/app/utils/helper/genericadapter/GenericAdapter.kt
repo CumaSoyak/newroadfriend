@@ -10,6 +10,7 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.item_admob.view.*
+import kotlinx.android.synthetic.main.item_admob_yerel_gelismis.view.*
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.notification.NotificationModel
 import roadfriend.app.data.remote.model.trips.Trips

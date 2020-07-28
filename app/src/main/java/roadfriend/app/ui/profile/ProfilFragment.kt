@@ -6,6 +6,11 @@ import android.content.Intent
 import android.net.Uri
 import android.view.View
 import com.facebook.login.LoginManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.reward.RewardItem
+import com.google.android.gms.ads.reward.RewardedVideoAd
+import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import kotlinx.android.synthetic.main.fragment_profil.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
@@ -32,6 +37,7 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
     private val viewModel by viewModel<ProfilViewModel>()
 
     private val adapter = GenericAdapter<ProfilMenu>(R.layout.item_profil_menu)
+    private var mRewardedVideoAd: RewardedVideoAd? = null
 
     companion object {
         val TAG: String = ProfilFragment::class.java.simpleName
@@ -52,6 +58,7 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
 
     override fun initListener() {
         menuListener()
+        rewardListener()
     }
 
     private fun addMenu() {
@@ -62,6 +69,13 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
 //                ProfilMenu("settings", getDrawable(R.drawable.ic_settings), "Bilgileri Düzenle")
 //            )
         }
+        menuItem.add(
+            ProfilMenu(
+                "destek",
+                getDrawable(R.drawable.ic_gift),
+                "Ücretsiz destek olur musun :)"
+            )
+        )
         menuItem.add(
             ProfilMenu(
                 "mytrips",
@@ -106,7 +120,13 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
             )
         )
 
-        menuItem.add(ProfilMenu("instagram", getDrawable(R.drawable.ic_instagram), getString(R.string.instagram)))
+        menuItem.add(
+            ProfilMenu(
+                "instagram",
+                getDrawable(R.drawable.ic_instagram),
+                getString(R.string.instagram)
+            )
+        )
 
         menuItem.add(
             ProfilMenu(
@@ -130,6 +150,11 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
 
     private fun openDetail(position: ProfilMenu) {
         when (position.id) {
+            "destek" -> {
+                if (mRewardedVideoAd?.isLoaded!!) {
+                    mRewardedVideoAd!!.show()
+                }
+            }
             "settings" -> {
                 /*settings*/
                 requireContext().launchActivity<ProfilSettingsActivity> { }
@@ -192,6 +217,47 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
                 //Çıkış
             }
         }
+    }
+
+    fun rewardListener() {
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(requireContext())
+        mRewardedVideoAd?.loadAd(
+            "ca-app-pub-7740710689946524/5882913386",
+            AdRequest.Builder().build()
+        )
+        mRewardedVideoAd?.rewardedVideoAdListener = object : RewardedVideoAdListener {
+            override fun onRewardedVideoAdClosed() {
+                print("")
+            }
+
+            override fun onRewardedVideoAdLeftApplication() {
+                print("")
+            }
+
+            override fun onRewardedVideoAdLoaded() {
+                print("")
+            }
+
+            override fun onRewardedVideoAdOpened() {
+                print("")
+            }
+
+            override fun onRewardedVideoCompleted() {
+            }
+
+            override fun onRewarded(reward: RewardItem?) {
+
+            }
+
+            override fun onRewardedVideoStarted() {
+
+            }
+
+            override fun onRewardedVideoAdFailedToLoad(p0: Int) {
+
+            }
+        }
+
     }
 
 

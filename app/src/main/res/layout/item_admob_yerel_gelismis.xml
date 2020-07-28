@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
+        <com.google.android.gms.ads.NativeExpressAdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adViewNativeExpress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            ads:adSize="LARGE_BANNER"
-            ads:adUnitId="ca-app-pub-7740710689946524/3369638566" />
+            ads:adSize="320x150"
+            ads:adUnitId="ca-app-pub-7740710689946524/8772499288" />
      </LinearLayout>
 
 </layout>

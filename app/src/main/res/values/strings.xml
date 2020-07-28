@@ -291,5 +291,6 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="numarayi_ara">Call Phone</string>
     <string name="yolculuk_silinmistir">Trip deleted</string>
     <string name="teklif_iletildi">Your offer has been submitted</string>
+    <string name="fiyat_teklif_almak">Only, I want to price get a  quote.</string>
 
 </resources>
