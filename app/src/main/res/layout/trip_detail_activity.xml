@@ -36,9 +36,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <roadfriend.app.customviews.CvAdmob
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
 
                 <roadfriend.app.customviews.CVDetail
                     android:id="@+id/cvDetail"
@@ -49,6 +46,10 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_chainStyle="spread_inside"
                     app:layout_constraintWidth_percent="0.95" />
+
+                <roadfriend.app.customviews.CvAdmob
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

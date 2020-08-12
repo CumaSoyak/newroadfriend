@@ -29,7 +29,13 @@ object OtherUtils {
     }
 
     fun getCountryCode(): String {
-        return  "tr"
+        if ( arrayListOf("at","be","bg","dk","fi","fr","de","gr","hu","ıt","ıe","lt","mt","pl","pt","ro","sk","si","es","gb").contains(getCurrentCountryCode()))
+        {
+            return "europe"
+        }
+        else{
+         return   getCurrentCountryCode()
+        }
     }
 
     fun getCurrentCountryCode(): String {

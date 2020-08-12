@@ -136,7 +136,7 @@
             android:resource="@color/green_3" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7740710689946524~5196412473" />
+            android:value="ca-app-pub-6449577219947127~7608577534" />
     </application>
 
 </manifest>

@@ -29,7 +29,7 @@ class CoreApp : MultiDexApplication() {
         super.onCreate()
         context = applicationContext
         configureDi()
-        MobileAds.initialize(this, "ca-app-pub-7740710689946524~5196412473")
+        MobileAds.initialize(this, "ca-app-pub-6449577219947127~7608577534")
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         JodaTimeAndroid.init(this)
         db = FirebaseFirestore.getInstance()
