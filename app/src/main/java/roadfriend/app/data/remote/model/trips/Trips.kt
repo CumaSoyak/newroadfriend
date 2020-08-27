@@ -29,6 +29,7 @@ data class Trips(
     @SerializedName("firebaseTimeSecond") var firebaseTimeSecond: Long? = 0,
     @SerializedName("adminPost") var adminPost: Boolean = false,
     @SerializedName("documentKey") var documentKey: String? = "",
+    @SerializedName("codeCountry") var codeCountry: String? = "",
     @SerializedName("ads") var ads: Boolean = false,
     @SerializedName("bidOption") var bidOption: Boolean = false
 ) : Parcelable, ListItemViewModel() {

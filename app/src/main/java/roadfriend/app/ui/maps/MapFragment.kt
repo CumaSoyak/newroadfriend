@@ -156,8 +156,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback,
             val locationDrawable: Drawable
             val cityStatu: String
             val tripsLocation = LatLng(
-                city.latitude,
-                city.longitude
+                0.0,0.0
             )
 
 //            if (index == 0) {
@@ -202,18 +201,18 @@ class MapFragment : BaseFragment(), OnMapReadyCallback,
         mCityList.add(tripsModel.get(position).startCity!!)
         mCityList.add(tripsModel.get(position).endCity!!)
 
-        mCityList.forEachIndexed { index, city ->
-            if (index == 0) {
-                /**start*/
-                from = city.latitude.toString() + "," + city.longitude.toString()
-            } else {
-                /**end*/
-                to = city.latitude.toString() + "," + city.longitude.toString()
-            }
-            zoomLang = LatLng(city.latitude, city.longitude)
-            zoomLocationList.add(zoomLang!!)
-
-        }
+//        mCityList.forEachIndexed { index, city ->
+//            if (index == 0) {
+//                /**start*/
+//                from = city.latitude.toString() + "," + city.longitude.toString()
+//            } else {
+//                /**end*/
+//                to = city.latitude.toString() + "," + city.longitude.toString()
+//            }
+//            zoomLang = LatLng(city.latitude, city.longitude)
+//            zoomLocationList.add(zoomLang!!)
+//
+//        }
         centerMapZooming(map!!, zoomLocationList)
 
         val apiServices = RetrofitClient.apiServices()

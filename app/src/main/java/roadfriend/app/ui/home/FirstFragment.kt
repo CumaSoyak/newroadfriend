@@ -68,7 +68,8 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
         listenerSearch()
         defaultRequest()
         tripFilter()
-    }
+
+     }
 
     fun defaultRequest() {
         viewModel.getPresenter()?.showLoading()

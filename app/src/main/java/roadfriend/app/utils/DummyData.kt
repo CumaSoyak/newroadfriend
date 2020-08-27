@@ -21,7 +21,7 @@ object DummyData {
     }
 
     fun getCity(): City {
-        return City( "", 0.0, 0.0, false)
+        return City( "", false)
     }
 
 

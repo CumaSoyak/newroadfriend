@@ -34,7 +34,11 @@ class CVChooseStatus : ConstraintLayout {
 
     fun init(attrs: AttributeSet?, context: Context?) {
         LayoutInflater.from(context).inflate(R.layout.cv_choose_status, this)
-        setTextData(attrs, context)
+        try {
+            setTextData(attrs, context)
+        } catch (e: Exception) {
+
+        }
 
 
     }

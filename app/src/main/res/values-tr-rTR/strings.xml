@@ -297,4 +297,5 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="teklif_iletildi">Teklifiniz iletilmiştir</string>
     <string name="yolculuk_silinmistir">Yolculuk silinmişir</string>
     <string name="fiyat_teklif_almak">Sadece fiyat teklifi almak istiyorum.</string>
+    <string name="hesabi_sil">Hesabımı sil</string>
 </resources>

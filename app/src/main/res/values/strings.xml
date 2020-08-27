@@ -292,5 +292,6 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="yolculuk_silinmistir">Trip deleted</string>
     <string name="teklif_iletildi">Your offer has been submitted</string>
     <string name="fiyat_teklif_almak">Only, I want to price get a  quote.</string>
+    <string name="hesabi_sil">Delete Account</string>
 
 </resources>

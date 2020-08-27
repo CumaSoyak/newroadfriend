@@ -80,17 +80,22 @@ class NotificationFragment : BindingFragment<FragmentNotificationBinding>() {
     }
 
     private fun initData(data: ArrayList<Trips>) {
-        if (data.isEmpty()) {
-            clContainer.showEmpty(requireContext(), "notification")
-        } else {
-            try {
-                binding.rv.adapter = adapterNotification
-                adapterNotification.clearItems()
-                adapterNotification.addItems(data)
-            } catch (e: Exception) {
+        try {
+            if (data.isEmpty()) {
+                clContainer.showEmpty(requireContext(), "notification")
+            } else {
+                try {
+                    binding.rv.adapter = adapterNotification
+                    adapterNotification.clearItems()
+                    adapterNotification.addItems(data)
+                } catch (e: Exception) {
+
+                }
 
             }
-
+        } catch (e: Exception) {
+            print(e.localizedMessage + "")
         }
+
     }
 }

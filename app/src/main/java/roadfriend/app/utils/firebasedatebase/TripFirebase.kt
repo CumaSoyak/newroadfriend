@@ -23,6 +23,17 @@ class TripFirebase {
                 context.showError("Bir şeyler ters gitti tekrar deneyiniz")
             }
     }
+    fun deleteTripAccount(context: Activity, document: String) {
+        db.collection(test + "trip").document(document)
+            .delete()
+            .addOnSuccessListener {
+                context.showSucces(context.getString(R.string.yolculuk_silinmistir))
+             }
+            .addOnFailureListener {
+                context.showError("Bir şeyler ters gitti tekrar deneyiniz")
+            }
+    }
+
 
     fun bidTableCreate(trips: Trips) {
         val userMe = PrefUtils.getUser()

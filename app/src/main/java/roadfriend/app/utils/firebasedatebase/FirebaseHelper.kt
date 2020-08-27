@@ -245,14 +245,10 @@ class FirebaseHelper {
             "price" to trips.price,
             "paymentType" to trips.paymentType,
             "startCity" to City(
-                trips.startCity.name,
-                trips.startCity.latitude,
-                trips.startCity.longitude
+                trips.startCity.name
             ),
             "endCity" to City(
-                trips.endCity.name,
-                trips.endCity.latitude,
-                trips.endCity.longitude
+                trips.endCity.name
             ),
             "startCityName" to trips.startCityName,
             "endCityName" to trips.endCityName,

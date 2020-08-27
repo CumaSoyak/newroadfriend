@@ -6,10 +6,10 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import roadfriend.app.R
-import roadfriend.app.utils.extensions.*
 import kotlinx.android.synthetic.main.cv_add_item.view.*
 import org.jetbrains.anko.textColor
+import roadfriend.app.R
+import roadfriend.app.utils.extensions.*
 
 class CVAddItem : ConstraintLayout {
     var mTopTitle = ""
@@ -39,7 +39,11 @@ class CVAddItem : ConstraintLayout {
     fun init(attrs: AttributeSet?, context: Context?) {
         LayoutInflater.from(context).inflate(R.layout.cv_add_item, this)
 
-        setTextData(attrs, context)
+        try {
+            setTextData(attrs, context)
+        } catch (e: Exception) {
+            print(e.localizedMessage + "")
+        }
     }
 
     @SuppressLint("Recycle")

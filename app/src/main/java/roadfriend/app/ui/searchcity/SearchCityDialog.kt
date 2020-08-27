@@ -15,6 +15,8 @@ import roadfriend.app.utils.AppConstants
 import roadfriend.app.utils.OtherUtils
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.hideKeyboard
+import roadfriend.app.utils.extensions.showSucces
+import roadfriend.app.utils.extensions.showToast
 import roadfriend.app.utils.extensions.visible
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
@@ -72,10 +74,21 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
         searchType()
         adapterListener()
 
+        if (OtherUtils.isEurope()) {
+            showToast("You can select all European cities")
+        }
+
     }
 
     fun getCity() {
-        PrefUtils.getCity(OtherUtils.getCountryCode() + ".json")?.let { mCityList.addAll(it) }
+        if (OtherUtils.getCountryCode().equals("europe")) {
+            OtherUtils.europeList.forEachIndexed { index, s ->
+                PrefUtils.getCity(s + ".json")
+                    ?.let { mCityList.addAll(it) }
+            }
+        } else {
+            PrefUtils.getCity(OtherUtils.getCountryCode() + ".json")?.let { mCityList.addAll(it) }
+        }
         adapter.addItems(mCityList)
 
     }

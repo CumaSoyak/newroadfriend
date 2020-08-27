@@ -26,6 +26,8 @@ import roadfriend.app.ui.profile.setting.ProfilSettingsActivity
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.getDrawable
 import roadfriend.app.utils.extensions.launchActivity
+import roadfriend.app.utils.firebasedatebase.FirebaseHelper
+import roadfriend.app.utils.firebasedatebase.TripFirebase
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 
@@ -63,7 +65,7 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
 
     private fun addMenu() {
         val menuItem: ArrayList<ProfilMenu> = arrayListOf()
-        val password = PrefUtils.getUser()?.password
+        val password = PrefUtils.getUser().password
         if (!password.equals("facebook") && !password.equals("google")) {
 //            menuItem.add(
 //                ProfilMenu("settings", getDrawable(R.drawable.ic_settings), "Bilgileri Düzenle")
@@ -135,6 +137,14 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
                 getString(R.string.cikis_yap)
             )
         )
+        menuItem.add(
+            ProfilMenu(
+                "delete",
+                getDrawable(R.drawable.ic_delete),
+                getString(R.string.hesabi_sil)
+            )
+        )
+
         rv.adapter = adapter
         adapter.addItems(menuItem)
     }
@@ -205,16 +215,21 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
 
                 }
             }
+            "delete" -> {
+                viewModel.getPresenter()?.showLoading()
+                FirebaseHelper().getMyTrip { data ->
+                    data.forEachIndexed { index, trips ->
+                        TripFirebase().deleteTripAccount(
+                            requireActivity(),
+                            trips.documentKey!!
+                        )
+                    }
+                    viewModel.getPresenter()?.hideLoading()
+                    logout()
+                }
+            }
             "exit" -> {
-                if (PrefUtils.getUser().password.equals("facebook")) {
-                    LoginManager.getInstance().logOut()
-                }
-                if (PrefUtils.getUser().password.equals("google")) {
-                    LoginManager.getInstance().logOut()
-                }
-                PrefUtils.logOut()
-                requireContext().launchActivity<LoginActivity> { }
-                //Çıkış
+                logout()
             }
         }
     }
@@ -258,6 +273,18 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
             }
         }
 
+    }
+
+    fun logout() {
+        if (PrefUtils.getUser().password.equals("facebook")) {
+            LoginManager.getInstance().logOut()
+        }
+        if (PrefUtils.getUser().password.equals("google")) {
+            LoginManager.getInstance().logOut()
+        }
+        PrefUtils.logOut()
+        requireContext().launchActivity<LoginActivity> { }
+        //Çıkış
     }
 
 

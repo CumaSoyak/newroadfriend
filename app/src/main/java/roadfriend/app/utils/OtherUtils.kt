@@ -12,6 +12,30 @@ import java.io.IOException
 
 
 object OtherUtils {
+
+    var europeList: ArrayList<String> = arrayListOf(
+        "at",
+        "be",
+        "bg",
+        "dk",
+        "fi",
+        "fr",
+        "de",
+        "gr",
+        "hu",
+        "ıt",
+        "ıe",
+        "lt",
+        "mt",
+        "pl",
+        "pt",
+        "ro",
+        "sk",
+        "si",
+        "es",
+        "gb"
+    )
+
     fun versionNumber(): String? {
         var version: String = ""
         try {
@@ -28,13 +52,15 @@ object OtherUtils {
         return getCountryCode().equals("tr")
     }
 
+    fun isEurope(): Boolean {
+        return europeList.contains(getCurrentCountryCode())
+    }
+
     fun getCountryCode(): String {
-        if ( arrayListOf("at","be","bg","dk","fi","fr","de","gr","hu","ıt","ıe","lt","mt","pl","pt","ro","sk","si","es","gb").contains(getCurrentCountryCode()))
-        {
+        if (europeList.contains(getCurrentCountryCode())) {
             return "europe"
-        }
-        else{
-         return   getCurrentCountryCode()
+        } else {
+            return getCurrentCountryCode()
         }
     }
 

@@ -69,6 +69,17 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
                     if (data.paymentType.equals("monday") && current - data.firebaseTimeSecond!! > 864000000)
                         updateTrip(data)
                 }
+                if (data.documentKey != null) {
+                    if (arrayListOf("at","be","bg","dk","fi","fr","de","gr","hu","ıt","ıe","lt","mt","pl","pt","ro","sk","si","es","gb").contains(data.codeCountry))
+                    {
+                        CoreApp.db.collection("trip").document(data.documentKey!!)
+                            .update("codeCountry", "europe").addOnSuccessListener {
+                                print("CumaSoyak")
+                            }
+                    }
+
+                }
+
             }
 
         }
