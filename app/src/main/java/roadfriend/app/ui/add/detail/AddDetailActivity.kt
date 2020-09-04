@@ -55,10 +55,10 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>(), DateUtils
             }
         }
 
-        binding.cvTripOptionstatus.setOnClickListener {
-            openCarTypeBottomSheet()
-
-        }
+//        binding.cvTripOptionstatus.setOnClickListener {
+//            openCarTypeBottomSheet()
+//
+//        }
         back.setOnClickListener {
             onBackPressedSetResult()
         }
@@ -77,8 +77,7 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>(), DateUtils
     private fun initTripStatus() {
 
         val tripType = OptionData.tripsDetailIcon(tripModel.tripStatus, this)
-        binding.cvTripOptionstatus.setTopTextNotColor(tripType?.title!!)
-        binding.cvTripOptionstatus.setIconNotColor(tripType.icon!!)
+
 
     }
 

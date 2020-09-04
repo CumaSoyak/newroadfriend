@@ -11,8 +11,7 @@ import roadfriend.app.data.remote.model.user.User
 import roadfriend.app.utils.AppConstants.FIRABESE_TOKEN
 import roadfriend.app.utils.AppConstants.IS_RATED
 import roadfriend.app.utils.AppConstants.IS_USER_LOGGED
-import roadfriend.app.utils.AppConstants.KEEP_SEASRCH
-import roadfriend.app.utils.AppConstants.PREF_NAME
+ import roadfriend.app.utils.AppConstants.PREF_NAME
 import roadfriend.app.utils.AppConstants.TOKEN
 import roadfriend.app.utils.AppConstants.USER_DETAIL
 import roadfriend.app.utils.OtherUtils.getJsonDataFromAsset

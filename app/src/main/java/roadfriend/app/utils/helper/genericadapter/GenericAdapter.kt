@@ -108,6 +108,7 @@ class GenericAdapter<T : ListItemViewModel>(
         fun onClickDetail(view: View, position: Int, model: ListItemViewModel) {}
         fun onClickUserDetail(view: View, position: Int, model: ListItemViewModel) {}
         fun onClickOptionSettings(view: View, position: Int, model: ListItemViewModel) {}
+        fun onClickRefundPayment(view: View, position: Int, model: ListItemViewModel) {}
     }
 
     fun viewTypeNotification(model: NotificationModel): Int {

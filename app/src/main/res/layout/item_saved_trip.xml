@@ -8,42 +8,123 @@
         <variable
             name="vm"
             type="roadfriend.app.data.remote.model.trips.Trips" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="130dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/card_background"
+        android:onClick='@{(v)-> vm.onListItemViewClickListener.onClickDetail(v, vm.adapterPosition,vm) }'>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/userImage"
-            toImageUrl="@{vm.user.image}"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="w,1:1"
+
+        <TextView
+            android:id="@+id/textView20"
+            style="@style/StaionTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.3"
-            tools:src="@drawable/user" />
+            app:statusTrip="@{vm.status}"
+            tools:text="jnjknk" />
 
-        <TextView
-            android:id="@+id/tvStartCity"
+        <ImageView
+            android:id="@+id/imageView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvEndCity"
-            app:layout_constraintStart_toEndOf="@+id/userImage"
+            android:onClick='@{(v)-> vm.onListItemViewClickListener.onClickOptionSettings(v, vm.adapterPosition,vm) }'
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Niğde" />
+            app:srcCompat="@drawable/ic_three_doit" />
 
         <TextView
-            android:id="@+id/tvEndCity"
+            android:id="@+id/textView17"
+            style="@style/TextViewStyleTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center_vertical"
+            android:text="@{vm.endCity.name}"
+            app:layout_constraintBottom_toBottomOf="@+id/textView18"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvStartCity"
+            app:layout_constraintStart_toEndOf="@+id/imageView15"
+            app:layout_constraintTop_toTopOf="@+id/textView18"
+            tools:text="Ankara" />
+
+        <TextView
+            android:id="@+id/textView18"
+            style="@style/TextViewStyleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@{vm.startCity.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView15"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Niğde" />
+            tools:text="Gazieantep " />
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/textView18"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView18"
+            app:srcCompat="@drawable/ic_right_icon" />
+
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:fontFamily="@font/ibm_plex_sans_bold"
+            android:text="@{vm.callPrice()}"
+            android:textColor="@color/green"
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="@+id/imageView15"
+            app:layout_constraintStart_toStartOf="@+id/imageView15"
+            app:layout_constraintTop_toBottomOf="@+id/imageView15"
+            tools:text="445 TL" />
+
+        <TextView
+            premium="@{vm.paymentType}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/btc_orange"
+            android:rotation="25"
+            android:text="sdfsdfhfhghffghfsd"
+            android:textColor="@color/btc_orange"
+            android:textSize="18dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/textView7"
+            app:layout_constraintEnd_toEndOf="@+id/textView7"
+            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView7"
+            premium="@{vm.paymentType}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ibm_plex_sans_semi_bold"
+            android:rotation="25"
+            android:text="@string/premium"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

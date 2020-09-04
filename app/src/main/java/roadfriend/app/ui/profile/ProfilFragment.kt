@@ -71,13 +71,7 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
 //                ProfilMenu("settings", getDrawable(R.drawable.ic_settings), "Bilgileri Düzenle")
 //            )
         }
-        menuItem.add(
-            ProfilMenu(
-                "destek",
-                getDrawable(R.drawable.ic_gift),
-                "Ücretsiz destek olur musun :)"
-            )
-        )
+
         menuItem.add(
             ProfilMenu(
                 "mytrips",

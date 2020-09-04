@@ -20,7 +20,7 @@ data class Trips(
     @SerializedName("description") var description: String = "",
     @SerializedName("status") var status: String = "",
     @SerializedName("price") var price: String? = "",
-    @SerializedName("paymentType") var paymentType: String? = "free",
+    @SerializedName("paymentType") var paymentType: String = "free",
     @SerializedName("startCity") var startCity: City = DummyData.getCity(),
     @SerializedName("endCity") var endCity: City = DummyData.getCity(),
     @SerializedName("startCityName") var startCityName: String? = "",
@@ -31,7 +31,8 @@ data class Trips(
     @SerializedName("documentKey") var documentKey: String? = "",
     @SerializedName("codeCountry") var codeCountry: String? = "",
     @SerializedName("ads") var ads: Boolean = false,
-    @SerializedName("bidOption") var bidOption: Boolean = false
+    @SerializedName("bidOption") var bidOption: Boolean = false,
+    @SerializedName("purchaseToken") var purchaseToken: String = ""
 ) : Parcelable, ListItemViewModel() {
     fun calDate(): String {
         return ""

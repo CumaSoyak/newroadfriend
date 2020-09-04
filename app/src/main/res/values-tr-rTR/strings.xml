@@ -227,8 +227,8 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="facebook_ile_kaydol">Facebook ile kaydol</string>
     <string name="google_ile_kaydol">Google ile kaydol</string>
     <string name="ilan_paylasildi">İlan Paylaşıldı</string>
-    <string name="ilani_one_cikar">Benim ilanım en üstte dursun :)</string>
-    <string name="ana_sayfaya_don">Teşekkürler istemiyorum :(</string>
+    <string name="ilani_one_cikar">Fırsattan yararlanmak istiyorum</string>
+    <string name="ana_sayfaya_don">Belki daha sonra</string>
     <string name="mesaj_yaz">Mesaj yaz</string>
     <string name="day">gün</string>
     <string name="arac">Araç</string>
@@ -238,7 +238,7 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="kaydet">Kaydet</string>
     <string name="sikayet_et">Şikayet et</string>
     <string name="sales_info_text_first">Daha hızlı</string>
-    <string name="sales_info_text_second_24">bulabilmen  için ilanı 3 gün öne çıkaracağız</string>
+    <string name="sales_info_text_second_24">bulabilmen  için ilanı 5 gün öne çıkaracağız</string>
     <string name="sales_info_text_second_3">bulabilmen  için ilanı 7 gün  öne çıkaracağız</string>
     <string name="sales_info_text_second_7">bulabilmen  için ilanı 10 gün öne çıkaracağız</string>
     <string name="teklifinizi_giriniz">Teklifinizi giriniz</string>
@@ -298,4 +298,12 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="yolculuk_silinmistir">Yolculuk silinmişir</string>
     <string name="fiyat_teklif_almak">Sadece fiyat teklifi almak istiyorum.</string>
     <string name="hesabi_sil">Hesabımı sil</string>
+    <string name="order_terms_condition">➤Para iadesini yolculuklarım ekranından "iade et" seçeneği ile alabilirsiniz.\n➤ İlanı öne çıkardığınız gün paketi süresince iade alabilirsiniz </string>
+    <string name="please_read">Lütfen okuyunuz</string>
+    <string name="order_desc">Yolculuğunuzu üste çıkarın ve hemen yol arkadaşı bulun,\n bulamazsanız {MONEY_REFUNED}</string>
+    <string name="order_money_refuned">paranızı iade edelim.</string>
+    <string name="geri_odeme_al">Geri ödeme al</string>
+    <string name="odeme_iade_edildi">Ödemeniz iade edildi</string>
+    <string name="bir_seyler_ters_gitti">Bir şeyler ters gitti. Tekrar deneyiniz</string>
+
 </resources>

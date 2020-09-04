@@ -125,7 +125,6 @@ class FirebaseHelper {
     }
 
 
-
     fun createTrip(trips: Trips, result: (trips: Trips, tripId: String) -> Unit) {
         val uuid = UUID.randomUUID().toString()
         trips.documentKey = uuid
@@ -144,7 +143,7 @@ class FirebaseHelper {
         val docRef = db.collection(test + "trip")
             .whereEqualTo("codeCountry", OtherUtils.getCountryCode())
             .whereEqualTo("status", status)
-            .orderBy("firebaseTime", Query.Direction.DESCENDING).limit(80)
+            .orderBy("firebaseTime", Query.Direction.DESCENDING).limit(30)
         docRef.addSnapshotListener { snapshot, e ->
             trips.clear()
             snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
@@ -257,6 +256,7 @@ class FirebaseHelper {
             "firebaseTime" to time,
             "codeCountry" to OtherUtils.getCountryCode(),
             "documentKey" to trips.documentKey,
+            "purchaseToken" to trips.purchaseToken,
             "adminPost" to admin
         )
         return dataMe

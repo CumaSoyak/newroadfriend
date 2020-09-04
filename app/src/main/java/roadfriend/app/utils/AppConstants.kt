@@ -18,13 +18,10 @@ object AppConstants {
     const val USER_DETAIL = "USER_DETAIL"
     const val TOKEN = "token"
     const val FIRABESE_TOKEN = "FIRABESE_TOKEN"
-    const val CITY = "CITY_OF_COUNTRY"
-    const val KEEP_SEASRCH = "KEEP_SEASRCH"
-    const val TRAVEL = "TRAVEL"
-    const val GOOGLE_SIGN_IN = 100
-    const val SPACE = " "
-    const val OAUTH2 = "oauth2:"
-
+    const val MONEY_REFUNED = "{MONEY_REFUNED}"
+    const val ORDER_DAY = 5
+    const val ORDER_WEEK = 5
+    const val ORDER_MONDAY = 5
 
 
     /***/

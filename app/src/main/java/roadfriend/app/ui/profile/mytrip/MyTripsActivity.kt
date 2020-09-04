@@ -90,6 +90,11 @@ class MyTripsActivity : BindingActivity<MyTripsActivityBinding>() {
                     requestTrip()
                 })
             }
+
+            override fun onClickRefundPayment(view: View, position: Int, model: ListItemViewModel) {
+                val trips = model as Trips
+                viewModel.postRefundOrder(trips.paymentType, trips.purchaseToken)
+            }
         })
     }
 

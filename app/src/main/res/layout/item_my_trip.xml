@@ -13,9 +13,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/card_background"
-        android:onClick='@{(v)-> vm.onListItemViewClickListener.onClickDetail(v, vm.adapterPosition,vm) }'>
+        android:onClick='@{(v)-> vm.onListItemViewClickListener.onClickDetail(v, vm.adapterPosition,vm) }'
+        >
 
 
         <TextView
@@ -60,11 +62,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+
             android:text="@{vm.startCity.name}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
             app:layout_constraintEnd_toStartOf="@+id/imageView15"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView14"
             tools:text="Gazieantep " />
 
         <ImageView
@@ -82,10 +85,11 @@
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
             android:fontFamily="@font/ibm_plex_sans_bold"
             android:text="@{vm.callPrice()}"
             android:textColor="@color/green"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
             app:layout_constraintEnd_toEndOf="@+id/imageView15"
             app:layout_constraintStart_toStartOf="@+id/imageView15"
             app:layout_constraintTop_toBottomOf="@+id/imageView15"
@@ -121,6 +125,23 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView8"
+            tripsRefund="@{vm}"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:background="@color/green"
+            android:fontFamily="@font/ibm_plex_sans_semi_bold"
+            android:gravity="center"
+            android:text="@string/geri_odeme_al"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:onClick='@{(v)-> vm.onListItemViewClickListener.onClickRefundPayment(v, vm.adapterPosition,vm) }'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

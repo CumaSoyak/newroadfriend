@@ -58,11 +58,6 @@ android {
             applicationIdSuffix ".develop"
             ext.crunchPngs = false
         }
-        staging {
-            dimension "version"
-            applicationIdSuffix ".staging"
-            signingConfig signingConfigs.debug
-        }
         production {
             dimension "version"
             signingConfig signingConfigs.release
@@ -243,6 +238,7 @@ dependencies {
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.3.1'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3@aar'
     implementation 'android.arch.paging:runtime:1.0.1'
+    implementation 'lt.neworld:spanner:1.1.0'
 
 
 }

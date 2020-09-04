@@ -8,7 +8,6 @@ import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.databinding.ActivityDashBoardBinding
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.main.MainActivity
-import roadfriend.app.utils.extensions.getCurrentDate
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.extensions.showToast
@@ -60,25 +59,49 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
                 } else {
                     data.firebaseTimeSecond = 1000
                 }
-                if (!data.paymentType.equals("free")) {
-                    val current = getCurrentDate()
-                    if (data.paymentType.equals("day") && current - data.firebaseTimeSecond!! > 432000000)
-                        updateTrip(data)
-                    if (data.paymentType.equals("week") && current - data.firebaseTimeSecond!! > 604800000)
-                        updateTrip(data)
-                    if (data.paymentType.equals("monday") && current - data.firebaseTimeSecond!! > 864000000)
-                        updateTrip(data)
+                if (!data.purchaseToken.isNullOrEmpty()) {
+                    print("")
                 }
-                if (data.documentKey != null) {
-                    if (arrayListOf("at","be","bg","dk","fi","fr","de","gr","hu","ıt","ıe","lt","mt","pl","pt","ro","sk","si","es","gb").contains(data.codeCountry))
-                    {
-                        CoreApp.db.collection("trip").document(data.documentKey!!)
-                            .update("codeCountry", "europe").addOnSuccessListener {
-                                print("CumaSoyak")
-                            }
-                    }
-
-                }
+//                if (!data.paymentType.equals("free")) {
+//                    val current = getCurrentDate()
+//                    if (data.paymentType.equals("day") && current - data.firebaseTimeSecond!! > 432000000)
+//                        updateTrip(data)
+//                    if (data.paymentType.equals("week") && current - data.firebaseTimeSecond!! > 604800000)
+//                        updateTrip(data)
+//                    if (data.paymentType.equals("monday") && current - data.firebaseTimeSecond!! > 864000000)
+//                        updateTrip(data)
+//                }
+//                if (data.documentKey != null) {
+//                    if (arrayListOf(
+//                            "at",
+//                            "be",
+//                            "bg",
+//                            "dk",
+//                            "fi",
+//                            "fr",
+//                            "de",
+//                            "gr",
+//                            "hu",
+//                            "ıt",
+//                            "ıe",
+//                            "lt",
+//                            "mt",
+//                            "pl",
+//                            "pt",
+//                            "ro",
+//                            "sk",
+//                            "si",
+//                            "es",
+//                            "gb"
+//                        ).contains(data.codeCountry)
+//                    ) {
+//                        CoreApp.db.collection("trip").document(data.documentKey!!)
+//                            .update("codeCountry", "europe").addOnSuccessListener {
+//                                print("CumaSoyak")
+//                            }
+//                    }
+//
+//                }
 
             }
 

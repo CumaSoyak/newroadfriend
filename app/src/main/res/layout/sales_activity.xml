@@ -8,6 +8,10 @@
         <variable
             name="vm"
             type="roadfriend.app.ui.sales.SalesViewModel" />
+
+        <variable
+            name="postShared"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,20 +35,91 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    style="@style/TextViewStyleTitle"
+                <LinearLayout
+                    android:id="@+id/llPostShared"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/semibold"
-                    android:gravity="center"
-                    android:text="@string/ilan_paylasildi"
-                    android:textColor="@color/green"
-                    android:textSize="23sp" />
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                <roadfriend.app.customviews.CVDetail
-                    android:id="@+id/cvDetail"
+                    <TextView
+                        style="@style/TextViewStyleTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/semibold"
+                        android:gravity="center"
+                        android:text="@string/ilan_paylasildi"
+                        android:textColor="@color/green"
+                        android:textSize="23sp" />
+
+                    <roadfriend.app.customviews.CVDetail
+                        android:id="@+id/cvDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_huge"
+                    android:gravity="center|top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        visibleGone="@{postShared}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_normal"
+                        android:fontFamily="@font/ibm_plex_sans_semi_bold"
+                        android:text="@string/ilan_paylasildi"
+                        android:textColor="@color/tundora"
+                        android:textSize="27sp"
+                        tools:text="İlanınız paylaşıldı" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="@dimen/margin_normal"
+                        app:srcCompat="@drawable/ic_order_success" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_normal"
+                        android:fontFamily="@font/ibm_plex_sans_semi_bold"
+                        android:text="@string/please_read"
+                        android:textColor="@color/tundora"
+                        android:textSize="24sp"
+                        tools:text="Lütfen Okuyunuz" />
+
+                    <TextView
+                        android:id="@+id/tvOrderDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:fontFamily="@font/ibm_plex_sans_semi_bold"
+                        android:gravity="center"
+                        android:textColor="@color/tundora"
+                        android:textSize="21sp" />
+
+
+                    <TextView
+                        android:id="@+id/tvTermsCondition"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:background="#F4EFEF"
+                        android:drawableRight="@drawable/ic_right"
+                        android:fontFamily="@font/ibm_plex_sans_semi_bold"
+                        android:gravity="start"
+                        android:padding="8dp"
+                        android:text="@string/kosul_sartlar"
+                        android:textColor="@color/tundora"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

@@ -1,16 +1,16 @@
 package roadfriend.app.data.remote.service
 
-import roadfriend.app.data.remote.model.auth.RegisterResponse
-import roadfriend.app.data.remote.model.auth.login.LoginRequest
-import roadfriend.app.data.remote.model.auth.login.LoginResponse
-import roadfriend.app.data.remote.model.base.EmptyResponse
-import roadfriend.app.data.remote.model.firebasemessage.NotificationRequest
 import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
+import roadfriend.app.data.remote.model.auth.RegisterResponse
+import roadfriend.app.data.remote.model.auth.login.LoginRequest
+import roadfriend.app.data.remote.model.auth.login.LoginResponse
+import roadfriend.app.data.remote.model.base.EmptyResponse
+import roadfriend.app.data.remote.model.firebasemessage.NotificationRequest
 
 interface IUserService {
 
@@ -41,4 +41,11 @@ interface IUserService {
     )
     @POST("fcm/send")
     fun postNotification(@Body body: NotificationRequest): Call<EmptyResponse>
+
+    @POST(" androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund")
+    fun postRefundOrder(
+        @Path("packageName") packageName: String,
+        @Path("subscriptionId") subscriptionId: String,
+        @Path("token") token: String
+    ): Call<EmptyResponse>
 }

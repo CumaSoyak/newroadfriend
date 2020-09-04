@@ -19,8 +19,8 @@
     <string name="add_direction_title">Choose where and where to go below</string>
     <string name="add_ne_yapmak">What you wanna do ?</string>
     <string name="add_yuk_ariyorum">Search Person</string>
-    <string name="ana_sayfaya_don">No, thanks :(</string>
-    <string name="appname">Road Fried</string>
+    <string name="ana_sayfaya_don">Maybe Later</string>
+    <string name="appname">Travel Fried</string>
     <string name="arac">Car</string>
     <string name="baslangic_sehrini_giriniz">Enter the start city ...</string>
     <string name="bitis_sehrini_giriniz">Enter the end city ...</string>
@@ -48,7 +48,7 @@
     <string name="home">Home Page</string>
     <string name="home_trip_search">Search trip</string>
     <string name="ilan_paylasildi">Post Shared</string>
-    <string name="ilani_one_cikar">Keep my post on top :)</string>
+    <string name="ilani_one_cikar">I want to take advantage</string>
     <string name="intro_next">Go On</string>
     <string name="intro_start">Start</string>
     <string name="kaydet">Save</string>
@@ -293,5 +293,11 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="teklif_iletildi">Your offer has been submitted</string>
     <string name="fiyat_teklif_almak">Only, I want to price get a  quote.</string>
     <string name="hesabi_sil">Delete Account</string>
-
+    <string name="order_terms_condition">➤Para iadesini yolculuklarım ekranından "iade et" seçeneği ile alabilirsiniz.\n➤ İlanı öne çıkardığınız gün paketi süresince iade alabilirsiniz </string>
+    <string name="please_read">Please read</string>
+    <string name="order_desc">Yolculuğunuzu üste çıkarın ve hemen yol arkadaşı bulun, yolculuk bulamazsanız {MONEY_REFUNED}</string>
+    <string name="order_money_refuned">paranızı iade edebilim.</string>
+    <string name="geri_odeme_al">Geri ödeme al</string>
+    <string name="odeme_iade_edildi">Ödemeniz iade edildi</string>
+    <string name="bir_seyler_ters_gitti">Bir şeyler ters gitti. Tekrar deneyiniz</string>
 </resources>

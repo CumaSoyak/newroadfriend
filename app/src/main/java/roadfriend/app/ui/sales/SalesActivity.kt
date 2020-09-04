@@ -1,11 +1,11 @@
 package roadfriend.app.ui.sales
 
 import android.os.Bundle
-import android.widget.Button
 import com.android.billingclient.api.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.bottom_dialog_sales.view.*
+import kotlinx.android.synthetic.main.sales_activity.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.CoreApp.Companion.db
@@ -18,13 +18,14 @@ import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.home.FirstFragment
 import roadfriend.app.ui.home.SecondFragment
 import roadfriend.app.ui.main.MainActivity
+import roadfriend.app.utils.AppConstants.MONEY_REFUNED
 import roadfriend.app.utils.DialogUtils
 import roadfriend.app.utils.OptionData
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.logger
 import roadfriend.app.utils.extensions.showError
-import roadfriend.app.utils.extensions.showSucces
+import roadfriend.app.utils.extensions.spnableChangeColor
 import roadfriend.app.utils.manager.EventManager
 
 class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedListener,
@@ -61,6 +62,7 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
     fun initData() {
         binding.vm!!.setTrips(tripData)
         binding.cvDetail.initData(tripData, this)
+        changeDescriptionColor()
     }
 
     override fun initListener() {
@@ -71,17 +73,38 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
         binding.btnNoThanks.setOnClickListener {
             onBackPressed()
         }
+        binding.tvTermsCondition.setOnClickListener {
+            showTermsAndContion()
+        }
     }
 
     fun whereComing() {
-        if (intent.getStringExtra("intent") == AddDetailActivity::class.java.name) {
-            showSucces(getString(R.string.ilan_paylasildi_mesaj))
-        }
-        if (intent.hasExtra("premium")){
-            openPaymentBottomSheet()
-        }
+        binding.postShared = intent.getStringExtra("intent") == AddDetailActivity::class.java.name
+//        if (intent.hasExtra("premium")) {
+//            openPaymentBottomSheet()
+//        }
     }
 
+    fun showTermsAndContion() {
+        val model = DialogUtils.DialogModel(
+            getString(R.string.order_terms_condition),
+            "Tamam",
+            "",
+            null,
+            false
+        )
+        DialogUtils.showPopupInfo(this, model)
+    }
+
+    fun changeDescriptionColor() {
+
+        tvOrderDescription.text = spnableChangeColor(
+            resources.getString(R.string.order_desc),
+            MONEY_REFUNED,
+            resources.getString(R.string.order_money_refuned),
+            resources.getColor(R.color.red)
+        )
+    }
 
     private fun setupBillingClient() {
         billingClient = BillingClient.newBuilder(this)
@@ -107,7 +130,7 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
 
     }
 
-    private fun loadAllSKUs(btnPayment: Button) = if (billingClient.isReady) {
+    private fun loadAllSKUs() = if (billingClient.isReady) {
         val params = SkuDetailsParams
             .newBuilder()
             .setSkusList(skuList)
@@ -130,7 +153,7 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
         }
 
     } else {
-        setupBillingClient()
+        //setupBillingClient()
         EventManager.setupBillingClient()
         println("Billing Client not ready")
     }
@@ -142,9 +165,8 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
             for (purchase in purchases) {
                 salesBottomDialog.dismiss()
-                tripUpdatePremium()
+                tripUpdatePremium(purchase.purchaseToken)
                 handlePurchase(purchase)
-                // acknowledgePurchase(purchase.purchaseToken)
 
             }
         } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
@@ -152,7 +174,6 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
             logger("User Cancelled")
             EventManager.userCancelled()
             logger(billingResult.debugMessage.toString())
-
 
 
         } else {
@@ -219,7 +240,7 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
 
         view.btnPayment.setOnClickListener {
             if (isBillingSetupFinished) {
-                loadAllSKUs(view.btnPayment)
+                loadAllSKUs()
             }
         }
         view.ivClose.setOnClickListener {
@@ -229,27 +250,36 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
         salesBottomDialog.show()
     }
 
-    fun tripUpdatePremium() {
+    fun tripUpdatePremium(purchaseToken: String) {
         db.collection(CoreApp.testDatabase + "trip").document(tripData.documentKey!!)
             .update("paymentType", moneyType)
             .addOnSuccessListener {
-                val model = DialogUtils.DialogModel(
-                    "Tebrikler ilanınız daha fazla kişiye ulaşacaktır.",
-                    "Tamam",
-                    "",
-                    R.drawable.ic_success,
-                    false
-                )
-                DialogUtils.showPopupInfo(this, model, btnOk = {
-                    onBackPressed()
-                })
+                db.collection(CoreApp.testDatabase + "trip").document(tripData.documentKey!!)
+                    .update("purchaseToken", purchaseToken).addOnSuccessListener {
+                        showUpdatedPopup()
+                    }
+                    .addOnFailureListener {
+                        showError("Bir şeyler ters gitti")
+                    }
             }
-            .addOnFailureListener {
-                showError("Bir şeyler ters gitti")
-            }
+
+    }
+
+    fun showUpdatedPopup() {
+        val model = DialogUtils.DialogModel(
+            "Tebrikler ilanınız daha fazla kişiye ulaşacaktır.",
+            "Tamam",
+            "",
+            R.drawable.ic_success,
+            false
+        )
+        DialogUtils.showPopupInfo(this, model, btnOk = {
+            onBackPressed()
+        })
     }
 
     fun handlePurchase(purchase: Purchase) {
+        println("PurchaseToken=>" + purchase.purchaseToken)
         if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
             if (!purchase.isAcknowledged) {
                 var acknowledgePurchaseParams =
@@ -272,8 +302,8 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
             if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                 var firebaseAnalytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
                 var bundle = Bundle()
-                bundle.putString(CoreApp.testDatabase + "tuketildi", "tuketildi")
-                firebaseAnalytics.logEvent(CoreApp.testDatabase + "tuketildi", bundle)
+                bundle.putString("consumed", purchase.purchaseToken)
+                firebaseAnalytics.logEvent("purchase_consumed", bundle)
             }
         }
     }

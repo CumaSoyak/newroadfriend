@@ -18,6 +18,7 @@ import roadfriend.app.R
 import roadfriend.app.customviews.MaskEditText
 import roadfriend.app.ui.sales.SalesActivity
 import roadfriend.app.utils.extensions.checkPhoNumber
+import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.visible
 import roadfriend.app.utils.helper.BottomSheetAdapter
 
@@ -33,7 +34,7 @@ object DialogUtils {
 
         var negative: String? = null,
 
-        var icon: Int,
+        var icon: Int?=null,
         @DrawableRes
 
         var isNegativeButton: Boolean = false,
@@ -58,7 +59,7 @@ object DialogUtils {
     fun showPopupInfo(
         context: Context,
         model: DialogModel,
-        btnOk: () -> Unit,
+        btnOk: (() -> Unit?)?=null,
         btnDesc: (() -> Unit?)? =null
     ) {
         myDialog = Dialog(context)
@@ -75,12 +76,18 @@ object DialogUtils {
         if (model.isNegativeButton) {
             btnDecline.visible()
         }
+        if (model.icon==null){
+            image.gone()
+        }
+        else{
+            image.visible()
+        }
         txtPopup.text = model.title
         btnDecline.text = model.negative
         btnAccept.text = model.positive
 
         btnAccept.setOnClickListener {
-            btnOk.invoke()
+            btnOk?.invoke()
             myDialog?.dismiss()
         }
         btnDecline.setOnClickListener {
@@ -108,7 +115,9 @@ object DialogUtils {
         if (model.isNegativeButton) {
             btnDecline.visible()
         }
-        image.setImageDrawable(context.resources.getDrawable(model.icon))
+        model.icon?.let {
+            image.setImageDrawable(context.resources.getDrawable(it))
+        }
         txtPopup.text = model.title
         btnDecline.text = model.negative
         btnAccept.text = model.positive

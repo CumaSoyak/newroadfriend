@@ -27,7 +27,7 @@ class SavedTripActivity : BindingActivity<SavedTripActivityBinding>() {
 
     private val viewModel by viewModel<SavedTripViewModel>()
 
-    private val adapter by lazy { GenericAdapter<Trips>(R.layout.item_my_trip) }
+    private val adapter by lazy { GenericAdapter<Trips>(R.layout.item_saved_trip) }
 
     var mapsModel: MapsModel? = null
 

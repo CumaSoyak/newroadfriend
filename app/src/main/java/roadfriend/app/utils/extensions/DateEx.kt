@@ -1,5 +1,6 @@
 package roadfriend.app.utils.extensions
 
+import roadfriend.app.utils.OtherUtils
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -7,7 +8,8 @@ import java.util.concurrent.TimeUnit
 
 fun String.toDate(): String {
     var date = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(this)
-    return SimpleDateFormat("dd MMMM yyyy", Locale("tr", "TR")).format(date).toString()
+    return SimpleDateFormat("dd MMMM yyyy", Locale(OtherUtils.getCurrentCountryCode())).format(date)
+        .toString()
 }
 
 fun String.toDateMonthDay(): String {

@@ -9,11 +9,12 @@ import org.jetbrains.anko.imageResource
 import roadfriend.app.CoreApp.Companion.context
 import roadfriend.app.R
 import roadfriend.app.customviews.CVAddItem
+import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.ui.intro.TutorialType
-import roadfriend.app.utils.extensions.backgroundColor
-import roadfriend.app.utils.extensions.gone
-import roadfriend.app.utils.extensions.load
-import roadfriend.app.utils.extensions.visible
+import roadfriend.app.utils.AppConstants.ORDER_DAY
+import roadfriend.app.utils.AppConstants.ORDER_MONDAY
+import roadfriend.app.utils.AppConstants.ORDER_WEEK
+import roadfriend.app.utils.extensions.*
 
 
 @SuppressLint("StaticFieldLeak")
@@ -141,6 +142,34 @@ object BindingUtils {
     fun premium(view: View, text: String?) {
         if (!text.equals("free")) {
             view.visible()
+        } else {
+            view.gone()
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("tripsRefund")
+    fun premium(view: TextView, trips: Trips) {
+        if (!trips.paymentType.equals("free") && !trips.paymentType.isNullOrEmpty() && !trips.purchaseToken.isNullOrEmpty()) {
+            val current = getCurrentDate()
+            when (trips.paymentType) {
+                "day" -> {   //8-7=1    //9-7=2
+                    if (current - trips.firebaseTimeSecond!! < ORDER_DAY.calculateDaySecond()) {
+                        //daha bitmemiş
+                        view.visible()
+                    }
+                }
+                "week" -> {
+                    if (current - trips.firebaseTimeSecond!! < ORDER_WEEK.calculateDaySecond()) {
+                        view.visible()
+                    }
+                }
+                "monday" -> {
+                    if (current - trips.firebaseTimeSecond!! < ORDER_MONDAY.calculateDaySecond()) {
+                        view.visible()
+                    }
+                }
+            }
         } else {
             view.gone()
         }
