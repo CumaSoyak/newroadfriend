@@ -293,11 +293,16 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="teklif_iletildi">Your offer has been submitted</string>
     <string name="fiyat_teklif_almak">Only, I want to price get a  quote.</string>
     <string name="hesabi_sil">Delete Account</string>
-    <string name="order_terms_condition">➤Para iadesini yolculuklarım ekranından "iade et" seçeneği ile alabilirsiniz.\n➤ İlanı öne çıkardığınız gün paketi süresince iade alabilirsiniz </string>
+    <string name="order_terms_condition">" ➤ You can get the refund from the My Trips screen with the option to return.\n ➤ You can get a refund during the package the day you highlight the advertisement"</string>
     <string name="please_read">Please read</string>
-    <string name="order_desc">Yolculuğunuzu üste çıkarın ve hemen yol arkadaşı bulun, yolculuk bulamazsanız {MONEY_REFUNED}</string>
+    <string name="order_desc">Make your travel stand out find a friend right away, if you can\'t find it, we\'ll refund your money.</string>
     <string name="order_money_refuned">paranızı iade edebilim.</string>
-    <string name="geri_odeme_al">Geri ödeme al</string>
-    <string name="odeme_iade_edildi">Ödemeniz iade edildi</string>
-    <string name="bir_seyler_ters_gitti">Bir şeyler ters gitti. Tekrar deneyiniz</string>
+    <string name="geri_odeme_al">Get a refund</string>
+    <string name="odeme_iade_edildi">Your payment has been returned Your money will be deposited into your account within 24 hours.</string>
+    <string name="bir_seyler_ters_gitti">Something went wrong. Try again</string>
+    <string name="takvim_tarih_sec">Date Choose</string>
+    <string name="takvim_sec">CHOOSE</string>
+    <string name="takvim_iptal">CANCEL</string>
+    <string name="tarih_belirtilmemis">Tarih Belirsiz</string>
+    <string name="not_found_refund">. If you can\'t find it, we\'ll refund your money.</string>
 </resources>

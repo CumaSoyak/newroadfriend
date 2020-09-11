@@ -9,12 +9,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.cv_add_item.view.*
 import org.jetbrains.anko.textColor
 import roadfriend.app.R
+import roadfriend.app.utils.OtherUtils
 import roadfriend.app.utils.extensions.*
 
 class CVAddItem : ConstraintLayout {
     var mTopTitle = ""
     var mDescTitle = ""
-    var mIcon: Drawable? = null
     lateinit var mContext: Context
     var date: String = ""
 
@@ -57,8 +57,8 @@ class CVAddItem : ConstraintLayout {
             mDescTitle = it
         }
         values?.getDrawable(R.styleable.CVAddItem_iconSet).let {
-            imageView2.setImageDrawable(it)
-            imageView2.filter(R.color.color_edittext)
+            ivOption.setImageDrawable(it)
+            ivOption.filter(R.color.color_edittext)
         }
         values?.getBoolean(R.styleable.CVAddItem_price, false)?.let {
             if (it) {
@@ -66,13 +66,15 @@ class CVAddItem : ConstraintLayout {
                 etPrice.visible()
                 etPrice.listener {
                     if (it.length > 0) {
-                        setTopText("Para")
-                        imageView2.filter(R.color.border)
+                        setTopText(getString(R.string.add_detail_para))
+                        ivOption.filter(R.color.border)
                         tvTL.visible()
+                        tvTL.text = OtherUtils.getCurrentCountryCode().toUpperCase()
+                        groupNonSelected.visible()
                     } else {
                         tvTL.gone()
                         tvTopTitle.textColor = resources.getColor(R.color.color_edittext)
-                        imageView2.filter(R.color.color_edittext)
+                        ivOption.filter(R.color.color_edittext)
                     }
 
                 }
@@ -103,10 +105,11 @@ class CVAddItem : ConstraintLayout {
 
 
     fun setDescText(descText: String?) {
+        groupNonSelected.visible()
         tvDescTitle.text = descText
         tvDescTitle.textColor = resources.getColor(R.color.border)
         tvTopTitle.textColor = resources.getColor(R.color.border)
-        imageView2.filter(R.color.border)
+        ivOption.filter(R.color.border)
     }
 
     fun getDescText(): String {
@@ -126,11 +129,11 @@ class CVAddItem : ConstraintLayout {
     }
 
     fun setIcon(icon: Drawable) {
-        imageView2.setImageDrawable(icon)
-        imageView2.filter(R.color.border)
+        ivOption.setImageDrawable(icon)
+        ivOption.filter(R.color.border)
     }
 
     fun setIconNotColor(icon: Drawable) {
-        imageView2.setImageDrawable(icon)
+        ivOption.setImageDrawable(icon)
     }
 }

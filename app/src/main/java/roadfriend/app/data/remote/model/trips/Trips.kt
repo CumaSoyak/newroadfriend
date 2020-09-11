@@ -16,7 +16,7 @@ data class Trips(
     @SerializedName("id") var id: String? = "",
     @SerializedName("user") var user: User = DummyData.getUser(),
     @SerializedName("phone") var phone: String? = "",
-    @SerializedName("time") var time: String? = "",
+    @SerializedName("date") var date: String = "",
     @SerializedName("description") var description: String = "",
     @SerializedName("status") var status: String = "",
     @SerializedName("price") var price: String? = "",
@@ -34,8 +34,8 @@ data class Trips(
     @SerializedName("bidOption") var bidOption: Boolean = false,
     @SerializedName("purchaseToken") var purchaseToken: String = ""
 ) : Parcelable, ListItemViewModel() {
-    fun calDate(): String {
-        return ""
+    fun dateIsNull(): Boolean {
+        return !date.isNullOrEmpty()
     }
 
     fun callPrice(): String {

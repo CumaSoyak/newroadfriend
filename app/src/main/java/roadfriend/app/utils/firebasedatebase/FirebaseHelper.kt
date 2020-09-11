@@ -238,7 +238,7 @@ class FirebaseHelper {
             "id" to tripsId,
             "user" to trips.user,
             "phone" to trips.phone,
-            "time" to trips.time,
+            "date" to trips.date,
             "description" to trips.description,
             "status" to trips.status,
             "price" to trips.price,

@@ -42,7 +42,7 @@ interface IUserService {
     @POST("fcm/send")
     fun postNotification(@Body body: NotificationRequest): Call<EmptyResponse>
 
-    @POST(" androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund")
+    @POST("androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund")
     fun postRefundOrder(
         @Path("packageName") packageName: String,
         @Path("subscriptionId") subscriptionId: String,

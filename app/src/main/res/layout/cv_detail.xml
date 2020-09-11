@@ -32,9 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_normal"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/custom_background_not_radius"
         android:orientation="horizontal"
         android:padding="4dp"
-        android:background="@drawable/custom_background_not_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.4"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,18 +82,19 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <roadfriend.app.customviews.CVAddItem
-        android:id="@+id/cvPhone"
+        android:id="@+id/cvDate"
         android:layout_width="match_parent"
         android:layout_height="@dimen/cv_detail_height"
         android:fontFamily="@font/ibm_plex_sans_semi_bold"
         android:gravity="center"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:descTitle="@string/add_detail_para"
-        app:iconSet="@drawable/ic_phone"
+        app:descTitle="@string/add_detail_tarih"
+        app:iconSet="@drawable/ic_calendar"
         app:layout_constraintVertical_chainStyle="spread_inside"
-        app:topTitle="Tel"
-        tools:text="0538 639 90 39" />
+        app:topTitle="@string/add_detail_tarih"
+        tools:text="23 Eylül 2020" />
+
 
     <roadfriend.app.customviews.CVAddItem
         android:id="@+id/cvPrice"
@@ -120,6 +121,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:background="@drawable/custom_background_not_radius"
+        android:fontFamily="@font/ibm_plex_sans_regular"
         android:padding="12dp"
-        android:text="@string/uzun" />
+        android:text="@string/uzun"
+        android:textColor="@color/gray_54"
+        android:textSize="15sp" />
 </LinearLayout>

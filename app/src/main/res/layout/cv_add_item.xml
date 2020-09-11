@@ -14,8 +14,15 @@
         android:background="@drawable/custom_background_not_radius">
 
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupNonSelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="ivOption,imageView8,tvTopTitle" />
+
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/ivOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -29,9 +36,10 @@
             android:id="@+id/tvDescTitle"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:fontFamily="@font/ibm_plex_sans_semi_bold"
             android:gravity="center"
-            android:text="Araba Cinsi seç"
             android:textColor="@color/color_edittext"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView8"
@@ -42,11 +50,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_low"
+            android:fontFamily="@font/ibm_plex_sans_semi_bold"
             android:hint="@string/edittext_hint"
             android:inputType="number"
             android:textAlignment="center"
             android:textColor="@color/border"
             android:textColorHint="@color/color_edittext"
+            android:textSize="16sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvTL"
@@ -59,8 +69,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="@dimen/margin_low"
-            android:text="TL"
+            android:fontFamily="@font/ibm_plex_sans_semi_bold"
             android:textColor="@color/border"
+            android:textSize="16sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,10 +82,9 @@
             android:id="@+id/imageView8"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/margin_normal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.33"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTopTitle"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_more_vert_black_24dp" />
 
@@ -83,13 +93,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
+            android:fontFamily="@font/ibm_plex_sans_semi_bold"
             android:textColor="@color/color_edittext"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/ivOption"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Binek Araç" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </merge>

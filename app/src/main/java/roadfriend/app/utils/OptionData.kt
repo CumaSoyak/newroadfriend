@@ -143,16 +143,17 @@ object OptionData {
             arrayListOf(
                 getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) + " " + getString(
                     R.string.sales_info_text_second_24
-                ),
+                )+ notFoundRefund(),
                 getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) + " " + getString(
                     R.string.sales_info_text_second_3
-                ),
+                )+notFoundRefund(),
                 getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) + " " + getString(
                     R.string.sales_info_text_second_7
-                )
+                )+notFoundRefund()
             )
         return list.get(position)
     }
+    fun notFoundRefund()= getString(R.string.not_found_refund)
 
     fun gettAutomaticMessage(): ArrayList<ChatAutomaticMessage> {
         val listMessage: ArrayList<ChatAutomaticMessage> = arrayListOf()

@@ -16,7 +16,7 @@ import roadfriend.app.ui.base.IBasePresenter
 class MyTripsViewModel(dataManager: DataManager) : BaseViewModel<IBasePresenter>(dataManager) {
 
 
-    fun postRefundOrder(subscriptionId: String, token: String) {
+    fun postRefundOrder(subscriptionId: String, token: String,callBackSucces:()->Unit) {
         getPresenter()?.showLoading()
         val apiServices = RetrofitClient.apiServices()
         apiServices.postRefundOrder("roadfriend.app", subscriptionId, token)
@@ -27,6 +27,7 @@ class MyTripsViewModel(dataManager: DataManager) : BaseViewModel<IBasePresenter>
                 ) {
                     getPresenter()?.hideLoading()
                     getPresenter()?.onSucces(context.getString(R.string.odeme_iade_edildi))
+                    callBackSucces.invoke()
                 }
 
                 override fun onFailure(call: Call<EmptyResponse>, t: Throwable) {

@@ -1,8 +1,6 @@
 package roadfriend.app.ui.add.detail
 
 import com.android.billingclient.api.BillingClient
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.bottom_dialog_choose.view.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
@@ -10,14 +8,12 @@ import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.databinding.AddDetailActivityBinding
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.sales.SalesActivity
-import roadfriend.app.utils.DateUtils
-import roadfriend.app.utils.OptionData
+import roadfriend.app.utils.DateUtils.getDate
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.*
-import roadfriend.app.utils.helper.BottomSheetAdapter
 import roadfriend.app.utils.helper.TripBundle
 
-class AddDetailActivity : BindingActivity<AddDetailActivityBinding>(), DateUtils.DataListener {
+class AddDetailActivity : BindingActivity<AddDetailActivityBinding>() {
     override val getLayoutBindId: Int
         get() = R.layout.add_detail_activity
 
@@ -40,7 +36,6 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>(), DateUtils
         binding.vm = viewModel
         binding.lifecycleOwner = this
         toolBarTitle(getString(R.string.title_add_detail))
-        initTripStatus()
     }
 
 
@@ -54,60 +49,30 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>(), DateUtils
 
             }
         }
-
-//        binding.cvTripOptionstatus.setOnClickListener {
-//            openCarTypeBottomSheet()
-//
-//        }
         back.setOnClickListener {
             onBackPressedSetResult()
+        }
+        binding.cvDate.setOnClickListener {
+            getDate {
+                binding.cvDate.setDescText(it)
+                binding.cvDate.setTagDesc(it)
+            }
         }
     }
 
     fun checkPhone(): Boolean {
-        if (binding.cvPhone.rawText.toString().checkPhoNumber()) {
-            return true
-        } else {
-            showError("Telefon numarasını kontrol ediniz")
+        if (!binding.cvPhone.rawText.toString().checkPhoNumber()) {
+            showError(getString(R.string.telefon_numarasi_giriniz))
             return false
+        } else if (binding.cvDate.getTagDesc().isNullOrEmpty()) {
+            showError(getString(R.string.takvim_tarih_sec))
+            return false
+        } else {
+            return true
         }
 
     }
 
-    private fun initTripStatus() {
-
-        val tripType = OptionData.tripsDetailIcon(tripModel.tripStatus, this)
-
-
-    }
-
-    override fun date(date: String, serviceDate: String) {
-//        binding.cvDate.setDescText(date)
-//        binding.cvDate.setTagDesc(serviceDate)
-    }
-
-    override fun time(time: String) {
-        // binding.cvTime.setDescText(time)
-    }
-
-
-    fun openCarTypeBottomSheet() {
-        var chooseCarType: String? = null
-        val dialog = BottomSheetDialog(this, R.style.SheetDialog)
-        val view = layoutInflater.inflate(R.layout.bottom_dialog_choose, null)
-        val adapterChoose by lazy {
-            BottomSheetAdapter(this, arrayListOf(), object : BottomSheetAdapter.IChooseListener {
-                override fun choose(position: Int, model: String) {
-                    chooseCarType = model
-                }
-            })
-        }
-        view.rv.adapter = adapterChoose
-        adapterChoose.add(OptionData.tripStatusChooseList(tripModel.tripStatus))
-
-        dialog.setContentView(view)
-        dialog.show()
-    }
 
     override fun onBackPressed() {
         onBackPressedSetResult()
@@ -122,6 +87,7 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>(), DateUtils
             phone = binding.cvPhone.rawText.toString(),
             description = binding.editText.textString(),
             status = tripModel.tripStatus!!,
+            date = binding.cvDate.getTagDesc(),
             price = binding.cvPrice.getPrice(),
             paymentType = "free",
             startCity = tripModel.tripsList.get(0),

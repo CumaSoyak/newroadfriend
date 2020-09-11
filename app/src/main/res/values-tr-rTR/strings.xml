@@ -303,7 +303,12 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="order_desc">Yolculuğunuzu üste çıkarın ve hemen yol arkadaşı bulun,\n bulamazsanız {MONEY_REFUNED}</string>
     <string name="order_money_refuned">paranızı iade edelim.</string>
     <string name="geri_odeme_al">Geri ödeme al</string>
-    <string name="odeme_iade_edildi">Ödemeniz iade edildi</string>
+    <string name="odeme_iade_edildi">Ödemeniz iade edildi 24 Saat içerisinde paranız hesabınıza yatırılacaktır</string>
     <string name="bir_seyler_ters_gitti">Bir şeyler ters gitti. Tekrar deneyiniz</string>
+    <string name="takvim_tarih_sec">Tarih Seçiniz</string>
+    <string name="takvim_sec">SEÇ</string>
+    <string name="takvim_iptal">İPTAL</string>
+    <string name="tarih_belirtilmemis">Tarih Belirsiz</string>
+    <string name="not_found_refund">. Bulamazsan paranı iade ederiz.</string>
 
 </resources>

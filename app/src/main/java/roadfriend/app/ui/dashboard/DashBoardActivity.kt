@@ -43,6 +43,7 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
             CoreApp.addAdminTrip = true
             launchActivity<MainActivity> { }
         }
+      //  getDefaultTrip()
     }
 
     fun getDefaultTrip() {

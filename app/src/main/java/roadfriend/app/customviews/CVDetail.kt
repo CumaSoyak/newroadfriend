@@ -13,10 +13,8 @@ import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.ui.base.BaseActivity
 import roadfriend.app.ui.maps.MapFragment
 import roadfriend.app.ui.sales.SalesActivity
-import roadfriend.app.ui.tripdetail.TripDetailActivity
 import roadfriend.app.utils.OptionData
 import roadfriend.app.utils.extensions.gone
-import roadfriend.app.utils.extensions.phoneFormat
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 
 class CVDetail @JvmOverloads constructor(
@@ -32,11 +30,7 @@ class CVDetail @JvmOverloads constructor(
 
     fun initData(trips: Trips, activity: BaseActivity) {
         setStatus(trips)
-        if (activity is TripDetailActivity) {
-            setPhone("")
-        } else {
-            setPhone(trips.phone)
-        }
+        setDate(trips.date)
 
         setPrice(trips.callPrice())
         setDescription(trips.description)
@@ -71,11 +65,11 @@ class CVDetail @JvmOverloads constructor(
     }
 
 
-    fun setPhone(phone: String?) {
-        if (phone.isNullOrEmpty()) {
-            cvPhone.gone()
+    fun setDate(date: String?) {
+        if (date.isNullOrEmpty()) {
+            cvDate.gone()
         } else {
-            cvPhone.setDescText(phone.phoneFormat())
+            cvDate.setDescText(date)
         }
     }
 

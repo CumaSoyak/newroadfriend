@@ -1,7 +1,9 @@
 package roadfriend.app.ui.profile.mytrip
 
 import android.view.View
+import com.google.firebase.firestore.SetOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.customviews.CvOption
 import roadfriend.app.data.remote.model.trips.Trips
@@ -14,6 +16,8 @@ import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.firebasedatebase.TripFirebase
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
+import roadfriend.app.utils.manager.EventManager
+import java.util.*
 
 class MyTripsActivity : BindingActivity<MyTripsActivityBinding>() {
     override val getLayoutBindId: Int
@@ -93,9 +97,37 @@ class MyTripsActivity : BindingActivity<MyTripsActivityBinding>() {
 
             override fun onClickRefundPayment(view: View, position: Int, model: ListItemViewModel) {
                 val trips = model as Trips
-                viewModel.postRefundOrder(trips.paymentType, trips.purchaseToken)
+//                viewModel.postRefundOrder(trips.paymentType, trips.purchaseToken) {
+//                    removedPremium(trips)
+//                    EventManager.orderRefuned(trips)
+//                }
+                val uuid = UUID.randomUUID().toString()
+                CoreApp.db.collection(CoreApp.testDatabase + "refundOrder")
+                    .document(uuid)
+                    .set(trips, SetOptions.merge()).addOnSuccessListener {
+                        removedPremium(trips)
+                        EventManager.orderRefuned(trips)
+                        viewModel.getPresenter()?.onSucces(CoreApp.context.getString(R.string.odeme_iade_edildi))
+                    }
             }
+
+
         })
+    }
+
+    fun removedPremium(trips: Trips) {
+        CoreApp.db.collection(CoreApp.testDatabase + "trip").document(trips.documentKey!!)
+            .update("paymentType", "free")
+            .addOnSuccessListener {
+                CoreApp.db.collection(CoreApp.testDatabase + "trip").document(trips.documentKey!!)
+                    .update("purchaseToken", "").addOnSuccessListener {
+                        requestTrip()
+                    }
+                    .addOnFailureListener {
+
+                    }
+            }
+
     }
 
 

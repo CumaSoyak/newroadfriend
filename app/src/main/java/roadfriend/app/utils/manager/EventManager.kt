@@ -54,4 +54,10 @@ object EventManager {
         firebaseAnalytics.logEvent(CoreApp.testDatabase + "searchClick"+CoreApp.statusSearch, Bundle())
     }
 
+    fun orderRefuned(trips: Trips) {
+        var bundle = Bundle()
+        bundle.putParcelable(CoreApp.testDatabase + "trip", trips)
+        firebaseAnalytics.logEvent(CoreApp.testDatabase + "order_refund", bundle)
+    }
+
 }

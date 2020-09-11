@@ -4,7 +4,8 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
-import roadfriend.app.utils.extensions.toDateDayofMonthYear
+import roadfriend.app.R
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,6 +20,7 @@ object DateUtils {
     }
 
     var d = Date()
+
     @SuppressLint("SimpleDateFormat")
     fun currentDate(): String {
         val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
@@ -32,36 +34,30 @@ object DateUtils {
 
     }
 
-    fun getDate(context: Context, dataListener: DataListener) {
-        val takvim = Calendar.getInstance() // Takvim objesini oluşturuyoruz.
-        val year = takvim.get(Calendar.YEAR) //Güncel Yılı alıyoruz.
-        val month = takvim.get(Calendar.MONTH) //Güncel Ayı alıyoruz.
-        val day = takvim.get(Calendar.DAY_OF_MONTH) //Güncel Günü alıyoruz.
+    fun Context.getDate(callBackDate: (date: String) -> Unit) {
+        val calendar = Calendar.getInstance() // Takvim objesini oluşturuyoruz.
+        val calendarYear = calendar.get(Calendar.YEAR) //Güncel Yılı alıyoruz.
+        val calendarMonth = calendar.get(Calendar.MONTH) //Güncel Ayı alıyoruz.
+        val calendarDay = calendar.get(Calendar.DAY_OF_MONTH) //Güncel Günü alıyoruz.
         val datePicker = DatePickerDialog(
-            context,
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-
-                var day: Int = dayOfMonth
-                var month: Int = (monthOfYear + 1)
-                var monthString: String = month.toString()
-                var dayString: String = day.toString()
-
-                if (month < 10) {
-                    monthString = "0" + month.toString()
-                }
-                if (dayOfMonth < 10) {
-                    dayString = "0" + day.toString()
-                }
-
-                val normalDate = "$year-$monthString-$dayString"
-                val serviceDate = "$year/$month/$day"
-                dataListener.date(toDateDayofMonthYear(normalDate), serviceDate)
-
-            }, year, month, day
+            this,R.style.DialogTheme,
+            DatePickerDialog.OnDateSetListener { view, year, month, day ->
+                val cal = Calendar.getInstance()
+                cal.timeInMillis = 0
+                cal[year, month, day, 0, 0] = 0
+                val chosenDate = cal.time
+                val df_medium_country: DateFormat = DateFormat.getDateInstance(
+                    DateFormat.MEDIUM,
+                    Locale(OtherUtils.getCurrentCountryCode())
+                )
+                val resultDate: String = df_medium_country.format(chosenDate)
+                callBackDate(resultDate)
+            }, calendarYear, calendarMonth, calendarDay
         )
-        datePicker.setTitle("Tarih Seçiniz")
-        datePicker.setButton(DatePickerDialog.BUTTON_POSITIVE, "SEÇ", datePicker)
-        datePicker.setButton(DatePickerDialog.BUTTON_NEGATIVE, "İPTAL", datePicker)
+        datePicker.setTitle(this.getString(R.string.takvim_tarih_sec))
+        datePicker.setButton(DatePickerDialog.BUTTON_POSITIVE, getString(R.string.takvim_sec), datePicker)
+
+        datePicker.setButton(DatePickerDialog.BUTTON_NEGATIVE, getString(R.string.takvim_iptal), datePicker)
         datePicker.show()
     }
 

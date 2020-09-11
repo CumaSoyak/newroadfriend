@@ -30,27 +30,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/iv"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/llDetail"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.15"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-                <TextView
-                    style="@style/TextViewStyleTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:gravity="center"
-                    android:text="@string/add_detail_tarih_saat"
-                    android:textColor="@color/border" />
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llDetail"
@@ -60,7 +39,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/editText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv">
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
                 <roadfriend.app.customviews.CVAddItem
                     android:id="@+id/cvDate"
@@ -69,12 +48,12 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/card_background"
-                    app:descTitle="@string/edittext_hint"
+                    app:descTitle="@string/takvim_tarih_sec"
                     app:iconSet="@drawable/ic_calendar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cvPhone"
-                    app:price="true"
+                    app:price="false"
                     app:topTitle="@string/add_detail_tarih" />
 
 
@@ -101,6 +80,7 @@
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/card_background"
                     android:drawablePadding="10dp"
+                    android:fontFamily="@font/ibm_plex_sans_semi_bold"
                     android:hint="@string/telefon_numarasi"
                     android:inputType="phone"
                     android:maxLines="1"
@@ -112,7 +92,6 @@
                     android:textCursorDrawable="@null"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toTopOf="@+id/cvPrice"
-
                     app:mask_format="0 (###) ### ## ##"
                     app:topTitle="@string/add_detail_tarih" />
 
