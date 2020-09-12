@@ -116,7 +116,8 @@
                         android:padding="8dp"
                         android:text="@string/kosul_sartlar"
                         android:textColor="@color/tundora"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:visibility="gone" />
 
 
                 </LinearLayout>
