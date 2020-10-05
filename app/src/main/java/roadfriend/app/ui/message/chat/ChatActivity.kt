@@ -18,6 +18,7 @@ import roadfriend.app.data.remote.model.user.User
 import roadfriend.app.databinding.ChatActivityBinding
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.main.MainActivity
+import roadfriend.app.ui.profile.myaboutcomment.MyAboutCommentsActivity
 import roadfriend.app.utils.OptionData
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.*
@@ -74,6 +75,11 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
         ivUserImage.load(chatUser.image)
         ivUserImage.visible()
         toolBarTitle(chatUser.fullName)
+        ivUserImage.setOnClickListener {
+            launchActivity<MyAboutCommentsActivity> {
+                putExtra("data", chatUser)
+            }
+        }
     }
 
     override fun initListener() {
@@ -196,6 +202,7 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
             override fun onClick(view: View, position: Int, model: ListItemViewModel) {
                 binding.etChatBox.setText((model as ChatAutomaticMessage).message)
             }
+
         })
     }
 

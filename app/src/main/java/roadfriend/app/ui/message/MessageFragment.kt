@@ -5,10 +5,12 @@ import android.view.View
 import kotlinx.android.synthetic.main.fragment_message.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
+import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.data.remote.model.user.User
 import roadfriend.app.databinding.FragmentMessageBinding
 import roadfriend.app.ui.base.BindingFragment
 import roadfriend.app.ui.message.chat.ChatActivity
+import roadfriend.app.ui.profile.myaboutcomment.MyAboutCommentsActivity
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.visible
@@ -75,6 +77,15 @@ class MessageFragment : BindingFragment<FragmentMessageBinding>() {
             override fun onClick(view: View, position: Int, model: ListItemViewModel) {
                 context?.launchActivity<ChatActivity> {
                     putExtra("model", model as User)
+                }
+            }
+
+            override fun onClickCommentDetail(view: View, position: Int, model: ListItemViewModel) {
+                requireContext().launchActivity<MyAboutCommentsActivity> {
+                    putExtra(
+                        "data",
+                        (model as Trips).user
+                    )
                 }
             }
         })

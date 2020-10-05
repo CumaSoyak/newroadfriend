@@ -23,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="8dp"
-            android:onClick='@{(v)-> vm.onListItemViewClickListener.onClick(v, vm.adapterPosition,vm) }'
+            android:onClick='@{(v)-> vm.onListItemViewClickListener.onClickCommentDetail(v, vm.adapterPosition,vm) }'
             app:srcCompat="@drawable/user"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
