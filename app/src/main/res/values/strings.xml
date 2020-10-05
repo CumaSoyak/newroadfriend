@@ -105,7 +105,7 @@
     <string name="mesaj_yok">You have no messages</string>
     <string name="yolculugunuz_bulunmaktadir">You have no trip</string>
     <string name="kayitli_yolculugunuz_bulunmaktadir">You have no registered trip.</string>
-    <string name="hakkinizda_yorum_bulunmaktadir">There are no comments about you.</string>
+    <string name="hakkinizda_yorum_bulunmaktadir">There are no comments about.</string>
     <string name="bu_ilan_icin_teklif_yok">No offers for this trip</string>
     <string name="ilan_bulunamadı">No Trip Found</string>
     <string name="ilan_vermek_istermisiniz">Would you like to share trip ?</string>

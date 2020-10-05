@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_profil.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.local.model.ProfilMenu
+import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.databinding.FragmentProfilBinding
 import roadfriend.app.ui.auth.login.LoginActivity
 import roadfriend.app.ui.base.BindingFragment
@@ -173,7 +174,10 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
             }
             "comment" -> {
                 //"Hakkımda yorumlar"
-                requireContext().launchActivity<MyAboutCommentsActivity> { }
+                requireContext().launchActivity<MyAboutCommentsActivity> {
+                    putExtra("data", PrefUtils.getUser())
+                    putExtra("myComment","myComment")
+                }
             }
             "condition" -> {
                 //Koşul ve şartlar

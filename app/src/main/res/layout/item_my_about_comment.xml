@@ -28,7 +28,7 @@
             app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintWidth_percent="0.09"
             tools:src="@drawable/user" />
 
         <LinearLayout
@@ -45,6 +45,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{vm.user.fullName}"
+                android:fontFamily="@font/ibm_plex_sans_semi_bold"
+                android:textColor="@color/tundora"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/ratingBarCommentsItem"
                 app:layout_constraintStart_toEndOf="@+id/userImage"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -67,6 +70,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@{vm.comment}"
+            android:fontFamily="@font/ibm_plex_sans_regular"
+            android:textColor="@color/border"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/userImage"

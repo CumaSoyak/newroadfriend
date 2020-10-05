@@ -14,8 +14,7 @@ class UserDetailViewModel(dataManager: DataManager) : BaseViewModel<IBasePresent
     val commentOfUser: MutableLiveData<ArrayList<Comment>> = MutableLiveData()
 
     fun getCommentOfUser() {
-        commentOfUser.value = DummyData.getMyComment()
-    }
+     }
 
     fun setUser(user: User?) {
         userDetail.value = user

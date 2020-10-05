@@ -1,5 +1,8 @@
 package roadfriend.app.ui.profile.myaboutcomment
 
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
@@ -35,16 +38,17 @@ class MyAboutCommentsActivity : BindingActivity<MyAboutCommentsActivityBinding>(
     }
 
     override fun initListener() {
-        binding.clContainer.showEmpty(this)
         binding.rv.adapter = adapter
-        // adapter.addItems(DummyData.getComment())
         getComent()
         messageBoxListener()
+
+        if (intent.hasExtra("myComment")) {
+            binding.chatContainer.gone()
+        }
         binding.btnSendMessage.setOnClickListener {
             if (PrefUtils.isLogin()) {
                 setComment()
-            }
-            else{
+            } else {
                 launchActivity<RegisterActivity> {
                     putExtra("comment", "comment")
                     CoreApp.notLogin = true
@@ -68,9 +72,16 @@ class MyAboutCommentsActivity : BindingActivity<MyAboutCommentsActivityBinding>(
         val docRef =
             CoreApp.db.collection(CoreApp.testDatabase + "comment")
                 .document(user.id).collection("info")
+                .orderBy("firebaseTime", Query.Direction.DESCENDING)
         docRef.addSnapshotListener { snapshot, e ->
             snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
                 val data: Comment = queryDocumentSnapshot.toObject(Comment::class.java)
+                if (queryDocumentSnapshot["firebaseTime"] != null) {
+                    val seconds = (queryDocumentSnapshot["firebaseTime"] as Timestamp)
+                    data.firebaseTimeSecond = seconds.seconds
+                } else {
+                    data.firebaseTimeSecond = 100
+                }
                 comment.add(data)
             }
             addData(comment)
@@ -88,14 +99,23 @@ class MyAboutCommentsActivity : BindingActivity<MyAboutCommentsActivityBinding>(
     }
 
     fun setComment() {
+        val time = FieldValue.serverTimestamp()
         val uuid = UUID.randomUUID().toString()
-        val comment = Comment(uuid, binding.etChatBox.textString(), PrefUtils.getUser())
+
+        val data = hashMapOf(
+            "id" to uuid,
+            "comment" to binding.etChatBox.textString(),
+            "user" to PrefUtils.getUser(),
+            "firebaseTime" to time
+        )
+
         CoreApp.db.collection(CoreApp.testDatabase + "comment")
             .document(user.id)
             .collection("info")
             .document(PrefUtils.getUserId())
-            .set(comment, SetOptions.merge()).addOnSuccessListener {
-                showSucces("Yolculuk kaydedilmiştir")
+            .set(data, SetOptions.merge()).addOnSuccessListener {
+                binding.etChatBox.setText("")
+                getComent()
             }
     }
 }
