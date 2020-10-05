@@ -311,5 +311,6 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="takvim_iptal">İPTAL</string>
     <string name="tarih_belirtilmemis">Tarih Belirsiz</string>
     <string name="not_found_refund">. Bulamazsan paranı iade ederiz.</string>
+    <string name="yorumu_yaz">Yorumunuzu yazınız..</string>
 
 </resources>

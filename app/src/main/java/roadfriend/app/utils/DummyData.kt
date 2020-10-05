@@ -34,14 +34,7 @@ object DummyData {
         return items
     }
 
-    fun getMyComment(): ArrayList<Comment> {
-        val comment: ArrayList<Comment> = arrayListOf()
-        comment.add(Comment(1, 3.8, "Merhabalar", getUser()))
-        comment.add(Comment(1, 3.8, "Merhabalar", getUser()))
-        comment.add(Comment(1, 3.8, "Merhabalar", getUser()))
-        comment.add(Comment(1, 3.8, "Merhabalar", getUser()))
-        return comment
-    }
+
 
     fun getNotification(): ArrayList<NotificationModel> {
         val list: ArrayList<NotificationModel> = arrayListOf()
@@ -69,14 +62,7 @@ object DummyData {
         return list
     }
 
-    fun getComment(): ArrayList<Comment> {
-        val commentist: ArrayList<Comment> = arrayListOf()
-        commentist.add(Comment(1, 3.4, "Merhabalar nasılsın", getUser()))
-        commentist.add(Comment(1, 1.4, "Merhaba sdkksdm csmd", getUser()))
-        commentist.add(Comment(1, 4.4, "mfskldcmslkmc Merhaba", getUser()))
-        commentist.add(Comment(1, 2.4, "Meskdmskdmc pcmksdmcrhaba", getUser()))
-        return commentist
-    }
+
 
     fun getMessageData(): ArrayList<MessageModel> {
 

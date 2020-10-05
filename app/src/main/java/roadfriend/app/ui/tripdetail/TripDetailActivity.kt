@@ -19,6 +19,7 @@ import roadfriend.app.databinding.TripDetailActivityBinding
 import roadfriend.app.ui.auth.register.RegisterActivity
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.message.chat.ChatActivity
+import roadfriend.app.ui.profile.myaboutcomment.MyAboutCommentsActivity
 import roadfriend.app.utils.DialogUtils
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.*
@@ -71,6 +72,10 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
         }
         listenerBidEditText()
         visibiltyContactChoose()
+
+        binding.ivUserDetail.setOnClickListener {
+            launchActivity<MyAboutCommentsActivity> { putExtra("data", trips.user) }
+        }
     }
 
     fun addStation() {

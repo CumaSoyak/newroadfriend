@@ -192,7 +192,7 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
                 }
             }
             "instagram" -> {
-                var uri = Uri.parse("http://instagram.com/roadfriendapp");
+                var uri = Uri.parse("http://instagram.com/apptravelfriend");
                 var likeIng = Intent(Intent.ACTION_VIEW, uri);
 
                 likeIng.setPackage("com.instagram.android");
@@ -203,7 +203,7 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
                     startActivity(
                         Intent(
                             Intent.ACTION_VIEW,
-                            Uri.parse("http://instagram.com/roadfriendapp")
+                            Uri.parse("http://instagram.com/apptravelfriend")
                         )
                     );
 

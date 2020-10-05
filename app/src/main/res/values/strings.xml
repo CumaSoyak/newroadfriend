@@ -305,4 +305,5 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="takvim_iptal">CANCEL</string>
     <string name="tarih_belirtilmemis">Tarih Belirsiz</string>
     <string name="not_found_refund">. If you can\'t find it, we\'ll refund your money.</string>
+    <string name="yorumu_yaz">Write your comments..</string>
 </resources>

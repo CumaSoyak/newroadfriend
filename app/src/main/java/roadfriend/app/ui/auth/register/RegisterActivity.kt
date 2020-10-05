@@ -89,6 +89,9 @@ class RegisterActivity : BindingActivity<RegisterActivityBinding>(),
         if (intent.hasExtra("ilan")) {
             showError("İlan paylaşabilmek için kaydolmalısınız")
         }
+        if (intent.hasExtra("comment")) {
+            showError("Yorum yazabilmek için kaydolmalısınız")
+        }
         if (intent.hasExtra("default")) {
             showError("Lütfen üye olunuz.")
         }

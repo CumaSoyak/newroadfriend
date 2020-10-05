@@ -18,6 +18,7 @@ import roadfriend.app.ui.add.detail.AddDetailActivity
 import roadfriend.app.ui.auth.register.RegisterActivity
 import roadfriend.app.ui.base.BindingFragment
 import roadfriend.app.ui.maps.MapsDialogFragment
+import roadfriend.app.ui.profile.myaboutcomment.MyAboutCommentsActivity
 import roadfriend.app.ui.tripdetail.TripDetailActivity
 import roadfriend.app.ui.userdetail.UserDetailActivity
 import roadfriend.app.utils.OptionData
@@ -189,6 +190,10 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
                 context!!.launchActivity<UserDetailActivity> {
                     putExtra("model", model as Trips)
                 }
+            }
+
+            override fun onClickCommentDetail(view: View, position: Int, model: ListItemViewModel) {
+               requireContext().launchActivity<MyAboutCommentsActivity> { putExtra("data", (model as Trips).user) }
             }
         })
     }

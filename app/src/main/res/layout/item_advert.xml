@@ -46,11 +46,12 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_normal"
             android:src="@color/green"
+            android:onClick='@{(v)-> vm.onListItemViewClickListener.onClickCommentDetail(v, vm.adapterPosition,vm) }'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView18"
-            app:layout_constraintWidth_percent="0.07"
+            app:layout_constraintWidth_percent="0.10"
             tools:src="@drawable/user" />
 
         <TextView

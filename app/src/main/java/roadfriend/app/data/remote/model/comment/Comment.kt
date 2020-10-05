@@ -8,8 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class Comment(
-    @SerializedName("id") var id: Int?,
-    @SerializedName("rate") var rate: Double?,
+    @SerializedName("id") var id: String?,
     @SerializedName("comment") var comment: String?,
     @SerializedName("user") var user: User?
 ) : Parcelable, ListItemViewModel()
