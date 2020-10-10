@@ -84,7 +84,7 @@ class MessageFragment : BindingFragment<FragmentMessageBinding>() {
                 requireContext().launchActivity<MyAboutCommentsActivity> {
                     putExtra(
                         "data",
-                        (model as Trips).user
+                        (model as User)
                     )
                 }
             }

@@ -76,6 +76,9 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
         binding.ivUserDetail.setOnClickListener {
             launchActivity<MyAboutCommentsActivity> { putExtra("data", trips.user) }
         }
+        binding.ivComment.setOnClickListener {
+            launchActivity<MyAboutCommentsActivity> { putExtra("data", trips.user) }
+        }
     }
 
     fun addStation() {

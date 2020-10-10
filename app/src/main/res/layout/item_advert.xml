@@ -161,6 +161,16 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/imageView14"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:onClick='@{(v)-> vm.onListItemViewClickListener.onClickCommentDetail(v, vm.adapterPosition,vm) }'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_comment" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

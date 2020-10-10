@@ -272,9 +272,9 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="iletisime_gec">İletişime geç</string>
     <string name="gelen_teklif_yok">Gelen teklif yok</string>
     <string name="mesaj_yok">Mesaj yok</string>
-    <string name="yolculugunuz_bulunmaktadir">Yolculuğunuz bulunmamaktadır</string>
-    <string name="kayitli_yolculugunuz_bulunmaktadir">Yolculuk bulunmamaktadır</string>
-    <string name="hakkinizda_yorum_bulunmaktadir">Hakkınızda yorum bulunmamaktadır</string>
+    <string name="yolculugunuz_bulunmaktadir">Yolculuğunuz bulunmamaktadır.</string>
+    <string name="kayitli_yolculugunuz_bulunmaktadir">Yolculuk bulunmamaktadır.</string>
+    <string name="hakkinizda_yorum_bulunmaktadir">Yorum bulunmamaktadır.</string>
     <string name="bu_ilan_icin_teklif_yok">Bu ilan için teklif yok</string>
     <string name="ilan_bulunamadı">İlan bulunamadı</string>
     <string name="ilan_vermek_istermisiniz">İlan vermek ister misiniz ?</string>
