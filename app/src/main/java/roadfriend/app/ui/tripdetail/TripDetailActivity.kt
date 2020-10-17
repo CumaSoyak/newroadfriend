@@ -3,6 +3,8 @@ package roadfriend.app.ui.tripdetail
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -35,6 +37,7 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
 
     private val trips: Trips by lazy { intent.getParcelableExtra("data") as Trips }
 
+    lateinit var mInterstitialAd: InterstitialAd
 
     var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
@@ -52,6 +55,10 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
     }
 
     fun initData() {
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd.adUnitId = "ca-app-pub-6449577219947127/5558552088"
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+
         if (PrefUtils.isLogin()) {
             if (trips.user.id.equals(PrefUtils.getUser().id)) {
                 binding.clBottomContainer.gone()
@@ -234,5 +241,11 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
         binding.etBid.setText("")
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (mInterstitialAd.isLoaded) {
+            mInterstitialAd.show();
+        }
+    }
 
 }
