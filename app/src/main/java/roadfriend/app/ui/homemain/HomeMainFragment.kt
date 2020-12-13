@@ -1,6 +1,9 @@
 package roadfriend.app.ui.homemain
 
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -14,6 +17,7 @@ import roadfriend.app.ui.base.BaseFragment
 import roadfriend.app.ui.home.FirstFragment
 import roadfriend.app.ui.home.HomeViewModel
 import roadfriend.app.ui.home.SecondFragment
+import roadfriend.app.utils.DialogUtils
 import roadfriend.app.utils.PrefUtils.isLogin
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.visible
@@ -47,11 +51,45 @@ class HomeMainFragment : BaseFragment() {
                     if (cvPremium != null) {
                         cvPremium.visible()
                         cvPremium.visibleContainer(data)
+                        showDietician()
                     }
 
                 }
             }
         }
+    }
+    fun showDietician() {
+        val model = DialogUtils.DialogModel(
+            "Tebrikler ücretsiz beslenme danışmanlığı kazandınız  \n ⚫ Hediye için Dm'den iletişime geçin. \n⚫ Takip edin ",
+            "Hemen ",
+            "",
+            R.drawable.diyet_kocu,
+            false
+        )
+        DialogUtils.showPopupModel(requireContext(), model, object : DialogUtils.DialogListener {
+            override fun onNegativeClick() {
+
+            }
+
+            override fun onPositiveClick() {
+                var uri = Uri.parse("http://instagram.com/diyet.kocu");
+                var likeIng = Intent(Intent.ACTION_VIEW, uri);
+
+                likeIng.setPackage("com.instagram.android");
+
+                try {
+                    startActivity(likeIng);
+                } catch (e: ActivityNotFoundException) {
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("http://instagram.com/apptravelfriend")
+                        )
+                    );
+
+                }
+            }
+        })
     }
 
     override fun initListener() {

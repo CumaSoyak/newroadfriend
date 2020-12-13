@@ -116,6 +116,7 @@ object DialogUtils {
             btnDecline.visible()
         }
         model.icon?.let {
+            image.visible()
             image.setImageDrawable(context.resources.getDrawable(it))
         }
         txtPopup.text = model.title
