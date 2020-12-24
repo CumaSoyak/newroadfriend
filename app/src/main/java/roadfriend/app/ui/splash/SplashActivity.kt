@@ -9,6 +9,7 @@ import roadfriend.app.ui.base.BaseActivity
 import roadfriend.app.ui.dashboard.DashBoardActivity
 import roadfriend.app.ui.intro.IntroActivity
 import roadfriend.app.ui.main.MainActivity
+import roadfriend.app.ui.search.SearchStatusActivity
 import roadfriend.app.utils.DialogUtils
 import roadfriend.app.utils.NetworkUtils
 import roadfriend.app.utils.PrefUtils
@@ -44,12 +45,12 @@ class SplashActivity : BaseActivity() {
     }
 
     fun launchActivity() {
-        if (BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             launchActivity<DashBoardActivity>()
         } else if (PrefUtils.checkIsFirstTimeOpen()) {
             launchActivity<IntroActivity> { }
         } else if (!PrefUtils.checkIsFirstTimeOpen()) {
-            launchActivity<MainActivity> {}
+            launchActivity<SearchStatusActivity> {}
         }
     }
 

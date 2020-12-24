@@ -9,8 +9,7 @@ import roadfriend.app.CoreApp.Companion.notLogin
 import roadfriend.app.R
 import roadfriend.app.data.local.model.MapsModel
 import roadfriend.app.data.local.model.Search
-import roadfriend.app.data.local.model.VALUE
-import roadfriend.app.data.remote.model.city.City
+ import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.data.remote.model.trips.GetTripRequest
 import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.databinding.FragmentHomeSecondBinding
@@ -70,7 +69,7 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
 
         listenerItem()
         listenerSearch()
-        defaultRequest()
+      //  defaultRequest()
         tripFilter()
     }
 
@@ -87,29 +86,7 @@ class SecondFragment : BindingFragment<FragmentHomeSecondBinding>() {
 
 
     fun tripFilter() {
-        LiveBus.get(Search::class.java).observeForeverSticky {
-            when (it.type) {
-                VALUE.SECONDDATA -> {
-                    addData(mTrips, "home")
 
-                }
-                VALUE.SECONDFILTER -> {
-                     getTripRequest =
-                        GetTripRequest(
-                            OtherUtils.getCountryCode(),
-                            CoreApp.statusSearch,
-                            it.startCity?.name,
-                            it.endCity?.name
-                        )
-
-                    val cityList: ArrayList<City> = arrayListOf(it.startCity!!, it.endCity!!)
-                    tripBundle?.tripStatus = CoreApp.statusSearch
-                    tripBundle?.tripsList?.clear()
-                    tripBundle?.tripsList?.addAll(cityList)
-                    getTrip(getTripRequest!!)
-                }
-            }
-        }
 
     }
 

@@ -1,15 +1,16 @@
 package roadfriend.app.ui.home
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_home_first.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp.Companion.notLogin
 import roadfriend.app.CoreApp.Companion.statusSearch
 import roadfriend.app.R
 import roadfriend.app.data.local.model.MapsModel
 import roadfriend.app.data.local.model.Search
-import roadfriend.app.data.local.model.VALUE
 import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.data.remote.model.trips.GetTripRequest
 import roadfriend.app.data.remote.model.trips.Trips
@@ -19,6 +20,7 @@ import roadfriend.app.ui.auth.register.RegisterActivity
 import roadfriend.app.ui.base.BindingFragment
 import roadfriend.app.ui.maps.MapsDialogFragment
 import roadfriend.app.ui.profile.myaboutcomment.MyAboutCommentsActivity
+import roadfriend.app.ui.search.SearchStatusActivity
 import roadfriend.app.ui.tripdetail.TripDetailActivity
 import roadfriend.app.ui.userdetail.UserDetailActivity
 import roadfriend.app.utils.OptionData
@@ -51,7 +53,12 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
 
     companion object {
         val TAG: String = FirstFragment::class.java.name
-        fun newInstance(): FirstFragment = FirstFragment().apply {}
+        fun newInstance(parcelableExtra: Search?): FirstFragment =
+            FirstFragment().apply {
+                val args = Bundle()
+                args.putParcelable("data", parcelableExtra)
+                this.arguments = args
+            }
     }
 
     override fun initNavigator() {
@@ -67,10 +74,11 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
 
         listenerItem()
         listenerSearch()
-        defaultRequest()
         tripFilter()
 
-     }
+        back.setOnClickListener { requireContext().launchActivity<SearchStatusActivity> { } }
+
+    }
 
     fun defaultRequest() {
         viewModel.getPresenter()?.showLoading()
@@ -99,40 +107,27 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
 
 
     fun tripFilter() {
-
         LiveBus.get(Search::class.java).observeForeverSticky {
-            when (it.type) {
-                VALUE.FIRSTDATA -> {
-                    addData(mTrips, "home")
+            getTripRequest =
+                GetTripRequest(
+                    OtherUtils.getCountryCode(),
+                    statusSearch,
+                    it.startCity?.name,
+                    it.endCity?.name
+                )
 
-                }
-                VALUE.FIRSTFILTER -> {
-//                    viewModel.getPresenter()?.let {
-//                        it.showLoading()
-//                    }
-                    getTripRequest =
-                        GetTripRequest(
-                            OtherUtils.getCountryCode(),
-                            statusSearch,
-                            it.startCity?.name,
-                            it.endCity?.name
-                        )
-
-                    val cityList: ArrayList<City> = arrayListOf(it.startCity!!, it.endCity!!)
-                    tripBundle?.tripStatus = statusSearch
-                    tripBundle?.tripsList?.clear()
-                    tripBundle?.tripsList?.addAll(cityList)
-                    getTrip(getTripRequest!!)
-                }
-            }
+            val cityList: ArrayList<City> = arrayListOf(it.startCity!!, it.endCity!!)
+            tripBundle?.tripStatus = statusSearch
+            tripBundle?.tripsList?.clear()
+            tripBundle?.tripsList?.addAll(cityList)
+            getTrip(getTripRequest!!)
         }
-
     }
 
     fun getTrip(getTripRequest: GetTripRequest) {
         try {
             FirebaseHelper().getFilterTrip(getTripRequest) { data ->
-                 addData(data, "home")
+                addData(data, "home")
             }
         } catch (e: Exception) {
             logger(e.localizedMessage)
@@ -193,7 +188,12 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
             }
 
             override fun onClickCommentDetail(view: View, position: Int, model: ListItemViewModel) {
-               requireContext().launchActivity<MyAboutCommentsActivity> { putExtra("data", (model as Trips).user) }
+                requireContext().launchActivity<MyAboutCommentsActivity> {
+                    putExtra(
+                        "data",
+                        (model as Trips).user
+                    )
+                }
             }
         })
     }

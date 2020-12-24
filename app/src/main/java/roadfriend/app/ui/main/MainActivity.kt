@@ -8,9 +8,10 @@ import com.google.android.material.badge.BadgeDrawable
 import kotlinx.android.synthetic.main.activity_main.*
 import roadfriend.app.CoreApp
 import roadfriend.app.R
+import roadfriend.app.data.local.model.Search
 import roadfriend.app.ui.add.AddActivity
 import roadfriend.app.ui.auth.login.LoginActivity
-import roadfriend.app.ui.homemain.HomeMainFragment
+import roadfriend.app.ui.home.FirstFragment
 import roadfriend.app.ui.message.MessageFragment
 import roadfriend.app.ui.notification.NotificationFragment
 import roadfriend.app.ui.profile.ProfilFragment
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.nav_home -> {
                     if (homeFragment == null) {
-                        homeFragment = HomeMainFragment.newInstance()
+                        homeFragment = FirstFragment.newInstance(intent.getParcelableExtra("data"))
                         addFragmentMethod(homeFragment!!)
                         activeFragment = homeFragment
                     }

@@ -30,6 +30,7 @@ import roadfriend.app.ui.tripdetail.TripDetailViewModel
 import roadfriend.app.ui.userdetail.UserDetailViewModel
 import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
+import roadfriend.app.ui.search.SearchViewModel
 
 val viewModelModule = module {
     viewModel { HomeViewModel(get()) }
@@ -60,6 +61,7 @@ val viewModelModule = module {
     viewModel { SalesViewModel(get()) }
     viewModel { IntroViewModel(get()) }
     viewModel { DashBoardViewModel(get()) }
+    viewModel { SearchViewModel(get()) }
 
 
 

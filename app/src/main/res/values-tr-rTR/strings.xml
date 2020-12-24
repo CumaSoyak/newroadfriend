@@ -250,6 +250,7 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hemen_bul">İlanımı üste taşı</string>
     <string name="temizle">Temizle</string>
+    <string name="temizle_city">Şehri temizle</string>
     <string name="fiyat_yok">Fiyat yok</string>
     <string name="yorum">Lütfen Uygulamaya puan verirmisin birde güzel bir yorum yazarsan şahane olur :)</string>
     <string name="tesekkürler">Hayır teşekkürler</string>

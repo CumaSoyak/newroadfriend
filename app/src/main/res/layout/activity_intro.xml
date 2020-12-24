@@ -55,8 +55,7 @@
             android:paddingBottom="@dimen/margin_normal">
 
             <androidx.appcompat.widget.AppCompatTextView
-                tutorialTitle="@{tutorialType}"
-                android:layout_width="match_parent"
+                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_huge"
                 android:fontFamily="@font/ibm_plex_sans_semi_bold"

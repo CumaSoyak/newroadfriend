@@ -1,15 +1,12 @@
 package roadfriend.app.data.local.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import roadfriend.app.data.remote.model.city.City
-
+@Parcelize
 class Search(
-    var type: VALUE,
-    var startCity: City?,
+     var startCity: City?,
     var endCity: City?
 
-)
+):Parcelable
 
-enum class VALUE {
-    FIRSTDATA, FIRSTFILTER,
-    SECONDDATA, SECONDFILTER
-}
