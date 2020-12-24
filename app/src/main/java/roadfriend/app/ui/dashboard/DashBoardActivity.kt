@@ -8,6 +8,7 @@ import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.databinding.ActivityDashBoardBinding
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.main.MainActivity
+import roadfriend.app.ui.search.SearchStatusActivity
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.extensions.showToast
@@ -33,7 +34,7 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
 //        viewModel.tripSize()
 //        viewModel.userSize()
         binding.devam.setOnClickListener {
-            launchActivity<MainActivity> { }
+            launchActivity<SearchStatusActivity> { }
         }
         binding.btnTest.setOnClickListener {
             CoreApp.testDatabase = "testDataBase-"

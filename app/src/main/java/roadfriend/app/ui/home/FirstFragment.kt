@@ -18,6 +18,7 @@ import roadfriend.app.databinding.FragmentHomeFirstBinding
 import roadfriend.app.ui.add.detail.AddDetailActivity
 import roadfriend.app.ui.auth.register.RegisterActivity
 import roadfriend.app.ui.base.BindingFragment
+import roadfriend.app.ui.main.MainActivity
 import roadfriend.app.ui.maps.MapsDialogFragment
 import roadfriend.app.ui.profile.myaboutcomment.MyAboutCommentsActivity
 import roadfriend.app.ui.search.SearchStatusActivity
@@ -76,23 +77,10 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
         listenerSearch()
         tripFilter()
 
-        back.setOnClickListener { requireContext().launchActivity<SearchStatusActivity> { } }
+        back.setOnClickListener { MainActivity().finish()
+        LiveBus.removeStickyEvent(Search::class.java)}
 
     }
-
-    fun defaultRequest() {
-        viewModel.getPresenter()?.showLoading()
-        try {
-            FirebaseHelper().getDefaultTrip("1") { data ->
-                viewModel.getPresenter()?.hideLoading()
-                addData(data, "homedefault")
-            }
-        } catch (e: Exception) {
-            logger(e.localizedMessage + "")
-        }
-
-    }
-
 
     fun listenerSearch() {
         /**ilkinde komple tarihe göre sıralı gelsin*/
@@ -107,7 +95,8 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
 
 
     fun tripFilter() {
-        LiveBus.get(Search::class.java).observeForeverSticky {
+         LiveBus.get(Search::class.java).observeForeverSticky {
+
             getTripRequest =
                 GetTripRequest(
                     OtherUtils.getCountryCode(),
@@ -127,7 +116,7 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
     fun getTrip(getTripRequest: GetTripRequest) {
         try {
             FirebaseHelper().getFilterTrip(getTripRequest) { data ->
-                addData(data, "home")
+                 addData(data, "home")
             }
         } catch (e: Exception) {
             logger(e.localizedMessage)

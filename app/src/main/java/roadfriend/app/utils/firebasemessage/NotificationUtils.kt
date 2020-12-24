@@ -19,7 +19,7 @@ object NotificationUtils {
         get() {
             val useWhiteIcon =
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
-            return if (useWhiteIcon) R.drawable.ic_notification_icon else R.drawable.ic_notification_icon
+            return   R.drawable.ic_icon
         }
 
      fun sendNotification(activity: Activity, messageBody: String?, title: String?) {

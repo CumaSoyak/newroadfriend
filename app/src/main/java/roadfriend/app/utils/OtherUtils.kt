@@ -70,7 +70,7 @@ object OtherUtils {
         val telephonyManager =
             context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         val countryIso = telephonyManager.simCountryIso.toLowerCase()
-        return countryIso
+        return "tr"
     }
 
 

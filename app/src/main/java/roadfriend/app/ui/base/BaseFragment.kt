@@ -39,7 +39,7 @@ abstract class BaseFragment : Fragment(), IBasePresenter {
 
     override fun showLoading() {
         try {
-            if (!requireActivity().isFinishing && dialog != null) {
+            if ( dialog != null) {
                 dialog?.show()
             }
         } catch (e: WindowManager.BadTokenException) {
