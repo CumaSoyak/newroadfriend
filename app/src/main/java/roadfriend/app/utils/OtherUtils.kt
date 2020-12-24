@@ -9,6 +9,8 @@ import roadfriend.app.CoreApp.Companion.context
 import roadfriend.app.R
 import roadfriend.app.ui.sales.SalesActivity
 import java.io.IOException
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 object OtherUtils {
@@ -81,6 +83,16 @@ object OtherUtils {
             return null
         }
         return jsonString
+    }
+
+    fun getCurreny():String{
+        if (getCountryCode().equals("europe"))
+        {
+            return "Eur"
+        }
+        else{
+            return Currency.getInstance(Locale.getDefault()).toString()
+        }
     }
 
     fun openGooglePlay(activity: SalesActivity) {

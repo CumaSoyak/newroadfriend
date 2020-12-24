@@ -14,6 +14,7 @@ import roadfriend.app.data.local.model.chat.ChatAutomaticMessage
 import roadfriend.app.data.remote.model.firebasemessage.Data
 import roadfriend.app.data.remote.model.firebasemessage.NotificationRequest
 import roadfriend.app.data.remote.model.message.MessageModel
+import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.data.remote.model.user.User
 import roadfriend.app.databinding.ChatActivityBinding
 import roadfriend.app.ui.base.BindingActivity
@@ -96,6 +97,12 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
         }
         if (intent.hasExtra("tripDetail")) {
             beforeNoChating = true
+        }
+        tvDegerlendir.setOnClickListener {
+          launchActivity<MyAboutCommentsActivity> {
+              putExtra("data", chatUser)
+          putExtra("visibleComment","visibleComment")
+          }
         }
 
     }

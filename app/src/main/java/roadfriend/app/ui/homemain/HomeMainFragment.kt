@@ -51,8 +51,7 @@ class HomeMainFragment : BaseFragment() {
                     if (cvPremium != null) {
                         cvPremium.visible()
                         cvPremium.visibleContainer(data)
-                        showDietician()
-                    }
+                     }
 
                 }
             }

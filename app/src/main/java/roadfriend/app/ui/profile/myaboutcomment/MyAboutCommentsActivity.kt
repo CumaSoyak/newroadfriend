@@ -35,6 +35,10 @@ class MyAboutCommentsActivity : BindingActivity<MyAboutCommentsActivityBinding>(
         toolBarTitle(getString(R.string.hakkimda_yorumlar))
         binding.vm = viewModel
         binding.lifecycleOwner = this
+
+        if (intent.hasExtra("visibleComment")) {
+            binding.chatContainer.visible()
+        }
     }
 
     override fun initListener() {

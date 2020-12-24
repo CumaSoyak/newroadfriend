@@ -42,7 +42,7 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>() {
     override fun initListener() {
 
         binding.btnSucces.clickWithDebounce {
-            if (checkPhone()) {
+            if (true) {
                 if (isPost) {
                     postTrip()
                 }
@@ -84,7 +84,7 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>() {
         val trips = Trips(
             id = "",
             user = userMe,
-            phone = binding.cvPhone.rawText.toString(),
+            phone = "",
             description = binding.editText.textString(),
             status = tripModel.tripStatus!!,
             date = binding.cvDate.getTagDesc(),
@@ -94,7 +94,7 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>() {
             endCity = tripModel.tripsList.get(1),
             startCityName = tripModel.tripsList.get(0).name,
             endCityName = tripModel.tripsList.get(1).name,
-            ads = false, bidOption = binding.bidCheckBox.isChecked
+            ads = false, bidOption = false
 
         )
 

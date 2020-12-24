@@ -34,8 +34,22 @@
             app:layout_constraintBottom_toTopOf="@+id/rvAuthomaticMessage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintTop_toBottomOf="@id/tvDegerlendir"
             tools:listitem="@layout/item_chat" />
+
+        <TextView
+            android:id="@+id/tvDegerlendir"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/border"
+            android:drawableRight="@drawable/ic_right"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/ibm_plex_sans_semi_bold"
+            android:gravity="center"
+            android:text="Tıkla Bu kişiyi değerlendir."
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvAuthomaticMessage"

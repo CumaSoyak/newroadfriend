@@ -69,7 +69,7 @@ class CVAddItem : ConstraintLayout {
                         setTopText(getString(R.string.add_detail_para))
                         ivOption.filter(R.color.border)
                         tvTL.visible()
-                        tvTL.text = OtherUtils.getCurrentCountryCode().toUpperCase()
+                        tvTL.text = OtherUtils.getCurreny().toUpperCase()
                         groupNonSelected.visible()
                     } else {
                         tvTL.gone()
