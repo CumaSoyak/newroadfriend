@@ -34,7 +34,7 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
     private var mStationEnd: City? = null
 
 
-    private val status: String by lazy { intent.getStringExtra("status") }
+    private val status: String by lazy { intent.getStringExtra("status") as String }
 
     enum class StationType {
         FROMANDTO

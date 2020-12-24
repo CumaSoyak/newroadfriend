@@ -45,7 +45,7 @@ class SplashActivity : BaseActivity() {
     }
 
     fun launchActivity() {
-        if (!BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             launchActivity<DashBoardActivity>()
         } else if (PrefUtils.checkIsFirstTimeOpen()) {
             launchActivity<IntroActivity> { }

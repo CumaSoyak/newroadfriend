@@ -25,7 +25,7 @@ class BidDetailActivity : BindingActivity<BidDetailActivityBinding>() {
     override val getLayoutBindId: Int
         get() = R.layout.bid_detail_activity
 
-    private val tripsId: String by lazy { intent.getStringExtra("model") }
+    private val tripsId: String by lazy { intent.getStringExtra("model") as String }
 
     private val viewModel by viewModel<BidDetailViewModel>()
 

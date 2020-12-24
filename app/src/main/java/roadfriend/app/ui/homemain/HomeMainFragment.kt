@@ -12,8 +12,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.data.local.model.Search
-import roadfriend.app.data.local.model.VALUE
-import roadfriend.app.ui.base.BaseFragment
+ import roadfriend.app.ui.base.BaseFragment
 import roadfriend.app.ui.home.FirstFragment
 import roadfriend.app.ui.home.HomeViewModel
 import roadfriend.app.ui.home.SecondFragment
@@ -99,16 +98,7 @@ class HomeMainFragment : BaseFragment() {
         tabs.setupWithViewPager(viewPager)
 
 
-        cvSearchFirst.openSearchCityDialog(this, callBackFilter = {
-            LiveBus.setAndSendSticky(Search(VALUE.FIRSTDATA, null, null))
-        }) { startCity, endCity, status ->
-            LiveBus.setAndSendSticky(Search(VALUE.FIRSTFILTER, startCity, endCity))
-        }
-        cvSearchSecond.openSearchCityDialog(this, callBackFilter = {
-            LiveBus.setAndSendSticky(Search(VALUE.SECONDDATA, null, null))
-        }) { startCity, endCity, status ->
-            LiveBus.setAndSendSticky(Search(VALUE.SECONDFILTER, startCity, endCity))
-        }
+
 //        tabs.getTabAt(0)?.setIcon(getDrawable(R.drawable.ic_truck))
 //        tabs.getTabAt(1)?.setIcon(getDrawable(R.drawable.ic_boxes))
 

@@ -37,7 +37,7 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
     private val adapter by lazy { GenericAdapter<MessageModel>(R.layout.item_chat) }
 
 
-    private val chatUser: User by lazy { intent.getParcelableExtra("model") as User }
+    private val chatUser: User by lazy { intent.getParcelableExtra<User>("model") as User  }
 
     private lateinit var db: FirebaseFirestore
     var conversationsId: String? = null

@@ -26,7 +26,7 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>() {
     val TAG = this::class.java.name
     private var isPost: Boolean = true
 
-    private val tripModel: TripBundle by lazy { intent.getParcelableExtra("tripModel") as TripBundle }
+    private val tripModel: TripBundle by lazy { intent.getParcelableExtra<TripBundle>("tripModel") as TripBundle }
 
     override fun initNavigator() {
         viewModel.setPresenter(this)

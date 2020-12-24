@@ -23,7 +23,7 @@ class MyAboutCommentsActivity : BindingActivity<MyAboutCommentsActivityBinding>(
 
     private val viewModel by viewModel<MyAboutCommentsViewModel>()
 
-    private val user: User by lazy { intent.getParcelableExtra("data") as User }
+    private val user: User by lazy { intent.getParcelableExtra<User>("data") as User }
 
     private val adapter by lazy { GenericAdapter<Comment>(R.layout.item_my_about_comment) }
 

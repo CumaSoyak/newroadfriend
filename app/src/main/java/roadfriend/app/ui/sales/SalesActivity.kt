@@ -45,7 +45,7 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
 
 
     /**get data*/
-    private val tripData: Trips by lazy { intent.getParcelableExtra("data") as Trips }
+    private val tripData: Trips by lazy { intent.getParcelableExtra<Trips>("data") as Trips }
 
     override fun initNavigator() {
         viewModel.setPresenter(this)

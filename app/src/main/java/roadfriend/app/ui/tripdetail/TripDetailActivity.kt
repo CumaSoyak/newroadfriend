@@ -35,7 +35,7 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
 
     private val viewModel by viewModel<TripDetailViewModel>()
 
-    private val trips: Trips by lazy { intent.getParcelableExtra("data") as Trips }
+    private val trips: Trips by lazy { intent.getParcelableExtra<Trips>("data") as Trips }
 
     lateinit var mInterstitialAd: InterstitialAd
 

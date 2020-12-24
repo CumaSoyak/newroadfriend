@@ -17,7 +17,7 @@ class UserDetailActivity : BindingActivity<UserDetailActivityBinding>() {
     private val viewModel by viewModel<UserDetailViewModel>()
     private val adapter by lazy { GenericAdapter<Comment>(R.layout.item_my_about_comment) }
     private val userDetailData by lazy {
-        intent.getParcelableExtra("model") as Trips
+        intent.getParcelableExtra<Trips>("model") as Trips
     }
 
     companion object {
