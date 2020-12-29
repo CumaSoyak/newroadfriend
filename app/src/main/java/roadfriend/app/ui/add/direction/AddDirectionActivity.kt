@@ -34,7 +34,6 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
     private var mStationEnd: City? = null
 
 
-    private val status: String by lazy { intent.getStringExtra("status") as String }
 
     enum class StationType {
         FROMANDTO
@@ -57,30 +56,24 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
 
         cityList.clear()
 
-        recyclerview.adapter = adapter
-
-
-        binding.svStartCity.setOnClickListener {
+        binding.btnSelectCity.setOnClickListener {
             GLOBAL_STATION = StationType.FROMANDTO
             goSearchCityPage()
         }
         binding.tvClear.setOnClickListener {
-            binding.svStartCity.visible()
-            binding.recyclerview.gone()
-            containerEnd.gone()
-            containerStart.gone()
-            binding.tvClear.gone()
+            binding.btnSelectCity.visible()
+            binding.gropSelected.gone()
         }
 
 
-        binding.btnNext.setOnClickListener {
+        binding.next.setOnClickListener {
             if (mStationStart == null && mStationEnd == null) {
                 showError("Şehir seçilirken bir hata oluştu tekrar seçiniz !")
             } else {
                 cityList.add(mStationStart!!)
                 cityList.add(mStationEnd!!)
                 launchActivity<AddDetailActivity> {
-                    putExtra("tripModel", TripBundle(status, cityList))
+                    putExtra("tripModel", TripBundle(cityList))
                 }
             }
 
@@ -89,18 +82,12 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
     }
 
     override fun cityAndStatus(stationStart: City?, stationEnd: City?, status: String?) {
-        binding.svStartCity.gone()
-        binding.recyclerview.visible()
-        containerEnd.visible()
-        containerStart.visible()
-
-        tvStartCity.text = stationStart?.name
-        tvEndCity.text = stationEnd?.name
-
+        binding.btnSelectCity.gone()
+        binding.gropSelected.visible()
+        containerStart.text = stationStart?.name
+        containerEnd.text = stationEnd?.name
         mStationStart = stationStart
         mStationEnd = stationEnd
-
-        checkStartStationAndEndStation()
     }
 
     override fun removeStation(position: Int) {
@@ -115,10 +102,7 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
 
     }
 
-    fun checkStartStationAndEndStation() {
-        binding.btnNext.visible()
-        binding.tvClear.visible()
-
+    override fun onBackPressed() {
+        onBackPressedSetResult()
     }
-
 }

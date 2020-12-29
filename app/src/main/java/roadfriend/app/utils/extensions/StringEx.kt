@@ -29,7 +29,7 @@ fun String.toSpanned(): Spanned {
 }
 
 fun Double.formatMoney(): String {
-    val symbols = DecimalFormatSymbols.getInstance(Locale("tr", "TR"))
+    val symbols = DecimalFormatSymbols.getInstance(Locale.getDefault())
     symbols.groupingSeparator = '.'
     symbols.decimalSeparator = ','
     val df = DecimalFormat("#,##", symbols)

@@ -35,7 +35,7 @@ object OptionData {
     fun tripatusSales(status: String): String {
         when (status) {
             "1" -> return getString(R.string.arac)
-            "2" -> return getString(R.string.yuk)
+            "2" -> return getString(R.string.traveler)
             else -> return ""
         }
     }
@@ -138,16 +138,16 @@ object OptionData {
         return tripStatus
     }
 
-    fun getPaymanetInfoText(position: Int, tripSatus: String): String {
+    fun getPaymanetInfoText(position: Int ): String {
         val list: ArrayList<String> =
             arrayListOf(
-                getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) + " " + getString(
+                getString(R.string.sales_info_text_first) + " " + getString(R.string.traveler) + " " + getString(
                     R.string.sales_info_text_second_24
                 )+ notFoundRefund(),
-                getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) + " " + getString(
+                getString(R.string.sales_info_text_first) + " " + getString(R.string.traveler) + " " + getString(
                     R.string.sales_info_text_second_3
                 )+notFoundRefund(),
-                getString(R.string.sales_info_text_first) + " " + tripatusSales(tripSatus) + " " + getString(
+                getString(R.string.sales_info_text_first) + " " +getString(R.string.traveler) + " " + getString(
                     R.string.sales_info_text_second_7
                 )+notFoundRefund()
             )

@@ -11,8 +11,7 @@ object EventManager {
 
     fun clickNoSearch(tripBundle: TripBundle?) {
         var bundle = Bundle()
-        bundle.putString("tripStatus", tripBundle?.tripStatus)
-        bundle.putString("cityFirst", tripBundle?.tripsList?.get(0)?.name)
+         bundle.putString("cityFirst", tripBundle?.tripsList?.get(0)?.name)
         bundle.putString("citySecond", tripBundle?.tripsList?.get(1)?.name)
         firebaseAnalytics.logEvent("no_search", bundle)
     }

@@ -41,9 +41,8 @@ class TripFirebase {
         val bidList = hashMapOf(
             "id" to trips.id,
             "startCityName" to trips.startCityName,
-            "endCityName" to trips.endCityName,
-            "status" to trips.status
-        )
+            "endCityName" to trips.endCityName
+         )
 
         db.collection(test + "bidList")
             .document(userMe.id)

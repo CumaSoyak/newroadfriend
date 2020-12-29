@@ -16,6 +16,7 @@ object AppConstants {
     const val IS_RATED = "is_rated"
     const val IS_PHONE_AVAILABLE = "is_phoneis_available"
     const val USER_DETAIL = "USER_DETAIL"
+    const val TRIP_DETAIL = "TRIP_DETAIL"
     const val TOKEN = "token"
     const val FIRABESE_TOKEN = "FIRABESE_TOKEN"
     const val MONEY_REFUNED = "{MONEY_REFUNED}"

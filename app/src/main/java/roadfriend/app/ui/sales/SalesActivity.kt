@@ -16,7 +16,6 @@ import roadfriend.app.databinding.SalesActivityBinding
 import roadfriend.app.ui.add.detail.AddDetailActivity
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.home.FirstFragment
-import roadfriend.app.ui.home.SecondFragment
 import roadfriend.app.ui.main.MainActivity
 import roadfriend.app.utils.AppConstants.MONEY_REFUNED
 import roadfriend.app.utils.DialogUtils
@@ -68,7 +67,9 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
     override fun initListener() {
         binding.btnPayment.setOnClickListener {
             EventManager.clickSatisOnizleme()
-            openPaymentBottomSheet()
+            if (isBillingSetupFinished) {
+                loadAllSKUs()
+            }
         }
         binding.btnNoThanks.setOnClickListener {
             onBackPressed()
@@ -192,9 +193,7 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
             if (intent.getStringExtra("intent") == FirstFragment::class.java.name) {
                 finish()
             }
-            if (intent.getStringExtra("intent") == SecondFragment::class.java.name) {
-                finish()
-            } else {
+             else {
                 finish()
             }
         } else {
@@ -220,22 +219,22 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
         /**Default select*/
         view.billingOne.select(view.billingOne, view.btnPayment, list)
         moneyType = skuList.get(0)
-        view.tvContent.text = OptionData.getPaymanetInfoText(0, tripData.status)
+        view.tvContent.text = OptionData.getPaymanetInfoText(0 )
 
         view.billingOne.setOnClickListener {
             moneyType = skuList.get(0)
             view.billingOne.select(view.billingOne, view.btnPayment, list)
-            view.tvContent.text = OptionData.getPaymanetInfoText(0, tripData.status)
+            view.tvContent.text = OptionData.getPaymanetInfoText(0 )
         }
         view.billingTwo.setOnClickListener {
             moneyType = skuList.get(1)
             view.billingTwo.select(view.billingTwo, view.btnPayment, list)
-            view.tvContent.text = OptionData.getPaymanetInfoText(1, tripData.status)
+            view.tvContent.text = OptionData.getPaymanetInfoText(1 )
         }
         view.billingThree.setOnClickListener {
             moneyType = skuList.get(2)
             view.billingThree.select(view.billingThree, view.btnPayment, list)
-            view.tvContent.text = OptionData.getPaymanetInfoText(2, tripData.status)
+            view.tvContent.text = OptionData.getPaymanetInfoText(2)
         }
 
         view.btnPayment.setOnClickListener {

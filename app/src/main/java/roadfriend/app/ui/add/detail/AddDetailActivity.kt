@@ -54,6 +54,7 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>() {
         }
         binding.cvDate.setOnClickListener {
             getDate {
+                binding.btnSucces.visible()
                 binding.cvDate.setDescText(it)
                 binding.cvDate.setTagDesc(it)
             }
@@ -86,8 +87,7 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>() {
             user = userMe,
             phone = "",
             description = binding.editText.textString(),
-            status = tripModel.tripStatus!!,
-            date = binding.cvDate.getTagDesc(),
+             date = binding.cvDate.getTagDesc(),
             price = binding.cvPrice.getPrice(),
             paymentType = "free",
             startCity = tripModel.tripsList.get(0),

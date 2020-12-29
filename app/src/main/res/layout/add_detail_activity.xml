@@ -11,145 +11,148 @@
             type="roadfriend.app.ui.add.detail.AddDetailViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:background="@color/white">
 
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar_layout"
-                app:layout_constraintBottom_toTopOf="@+id/iv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-            <LinearLayout
-                android:id="@+id/llDetail"
+        <LinearLayout
+            android:id="@+id/llDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/editText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <roadfriend.app.customviews.CVAddItem
+                android:id="@+id/cvDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/editText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-                <roadfriend.app.customviews.CVAddItem
-                    android:id="@+id/cvDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/card_background"
-                    app:descTitle="@string/takvim_tarih_sec"
-                    app:iconSet="@drawable/ic_calendar"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cvPhone"
-                    app:price="false"
-                    app:topTitle="@string/add_detail_tarih" />
-
-
-                <roadfriend.app.customviews.CVAddItem
-                    android:id="@+id/cvPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/card_background"
-                    app:descTitle="@string/edittext_hint"
-                    app:iconSet="@drawable/ic_cuzdan"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cvPhone"
-                    app:price="true"
-                    app:topTitle="@string/add_detail_para" />
-
-                <roadfriend.app.customviews.MaskEditText
-                    android:id="@+id/cvPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/card_background"
-                    android:drawablePadding="10dp"
-                    android:visibility="gone"
-                    android:fontFamily="@font/ibm_plex_sans_semi_bold"
-                    android:hint="@string/telefon_numarasi"
-                    android:inputType="phone"
-                    android:maxLines="1"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="12dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/border"
-                    android:textColorHint="@color/color_edittext"
-                    android:textCursorDrawable="@null"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/cvPrice"
-                    app:mask_format="0 (###) ### ## ##"
-                    app:topTitle="@string/add_detail_tarih" />
-
-            </LinearLayout>
-
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/editText"
-                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_weight="1"
                 android:background="@drawable/card_background"
-                android:hint="@string/add_detail_aciklama"
-                android:textAlignment="center"
-                android:textColorHint="@color/color_edittext"
-                app:boxBackgroundColor="@color/white"
-                app:boxStrokeColor="@color/border"
-                app:layout_constraintBottom_toTopOf="@+id/bidCheckBox"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.30"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/llDetail" />
-
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/bidCheckBox"
-                style="@style/CheckBoxStyle"
-                android:layout_width="0dp"
-                android:visibility="gone"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_normal"
-                android:layout_marginEnd="@dimen/margin_normal"
-                android:layout_marginBottom="@dimen/margin_normal"
-                android:fontFamily="@font/sfprodisplay_semibold"
-                android:text="@string/fiyat_teklif_almak"
-                app:layout_constraintBottom_toTopOf="@+id/btnSucces"
+                app:descTitle="@string/takvim_tarih_sec"
+                app:iconSet="@drawable/ic_calendar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                app:layout_constraintTop_toBottomOf="@+id/cvPhone"
+                app:price="false"
+                app:topTitle="@string/add_detail_tarih" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSucces"
-                style="@style/GreenButtonStyle"
+
+            <roadfriend.app.customviews.CVAddItem
+                android:id="@+id/cvPrice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_background"
+                app:descTitle="@string/edittext_hint"
+                app:iconSet="@drawable/ic_cuzdan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvPhone"
+                app:price="true"
+                app:topTitle="@string/add_detail_para" />
+
+            <roadfriend.app.customviews.MaskEditText
+                android:id="@+id/cvPhone"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
-                android:text="@string/add_detail_paylas"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bidCheckBox" />
+                android:background="@drawable/card_background"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/ibm_plex_sans_semi_bold"
+                android:hint="@string/telefon_numarasi"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:paddingEnd="12dp"
+                android:textAlignment="center"
+                android:textColor="@color/border"
+                android:textColorHint="@color/color_edittext"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/cvPrice"
+                app:mask_format="0 (###) ### ## ##"
+                app:topTitle="@string/add_detail_tarih" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
 
-    </androidx.core.widget.NestedScrollView>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/card_background"
+            android:hint="@string/add_detail_aciklama"
+            android:textAlignment="center"
+            android:textColorHint="@color/color_edittext"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeColor="@color/border"
+            app:layout_constraintBottom_toTopOf="@+id/bidCheckBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.30"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llDetail" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/bidCheckBox"
+            style="@style/CheckBoxStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:fontFamily="@font/sfprodisplay_semibold"
+            android:text="@string/fiyat_teklif_almak"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btnSucces"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSucces"
+            style="@style/GreenButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/ibm_plex_sans_bold"
+            android:text="@string/add_detail_paylas"
+            android:textSize="24sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bidCheckBox"
+            app:layout_constraintWidth_percent="0.9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>

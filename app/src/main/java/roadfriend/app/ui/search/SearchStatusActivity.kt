@@ -3,6 +3,7 @@ package roadfriend.app.ui.search
 import android.view.View
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.selects.select
+import org.jetbrains.anko.textColor
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.R
@@ -32,11 +33,17 @@ class SearchStatusActivity : BindingActivity<ActivitySearchBinding>() {
             select(it)
             unSelect(binding.human)
             CoreApp.statusSearch = "1"
+            binding.tvCar.textColor=resources.getColor(R.color.border)
+            binding.tvPerson.textColor=resources.getColor(R.color.color_edittext)
+
         }
         binding.human.setOnClickListener {
             select(it)
             unSelect(binding.car)
             CoreApp.statusSearch = "2"
+            binding.tvCar.textColor=resources.getColor(R.color.color_edittext)
+            binding.tvPerson.textColor=resources.getColor(R.color.border)
+
 
         }
         binding.next.setOnClickListener {
@@ -52,6 +59,9 @@ class SearchStatusActivity : BindingActivity<ActivitySearchBinding>() {
 
     fun unSelect(view: View) {
         view.background = resources.getDrawable(R.drawable.card_background)
+    }
+    override fun onBackPressed() {
+        onBackPressedSetResult()
     }
 
 

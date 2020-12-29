@@ -29,9 +29,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="12dp"
+        android:padding="10dp"
         app:srcCompat="@drawable/ic_back"
         android:visibility="visible"
+        android:tint="@color/border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,10 +42,12 @@
         android:id="@+id/tvToolbarTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:fontFamily="@font/ultrabold"
+        android:fontFamily="@font/ibm_plex_sans_semi_bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivUserImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/border"
+        android:textSize="21sp"
+        app:layout_constraintStart_toStartOf="@+id/back"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Baslik" />
 
@@ -59,5 +62,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#F8F8FF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,9 @@
     <string name="bid">Teklifler</string>
     <string name="profil">Profil</string>
     <string name="search_home">Bul</string>
+    <string name="search_trip">Yolculuklar</string>
+    <string name="search_progress">Aranıyor...</string>
+
     <!--Intro-->
     <string name="intro_next">Devam et</string>
     <string name="intro_start">Başla</string>
@@ -202,7 +205,7 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="add_detail_paylas">İlanı Paylaş</string>
     <string name="add_direction_title">Nereden, nereye gideceğinizi aşağıdan seçiniz</string>
     <string name="add_detail_sehir_sec">Lütfen Şehir Seçiniz..</string>
-    <string name="dialog_sales_one_cikar">En üste çıkar</string>
+    <string name="dialog_sales_one_cikar">Yol arkadaşını hemen bul</string>
     <string name="chat_activity_mesaj_yaz">Mesajınızı yazınız...</string>
     <string name="tamam">Tamam</string>
     <string name="vazgec">Vazgeç</string>
@@ -226,13 +229,13 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
     <string name="parola">Parola</string>
     <string name="facebook_ile_kaydol">Facebook ile kaydol</string>
     <string name="google_ile_kaydol">Google ile kaydol</string>
-    <string name="ilan_paylasildi">İlan Paylaşıldı</string>
+    <string name="ilan_paylasildi">Yolculuk Paylaşıldı</string>
     <string name="ilani_one_cikar">Fırsattan yararlanmak istiyorum</string>
-    <string name="ana_sayfaya_don">Belki daha sonra</string>
+    <string name="ana_sayfaya_don">Teşekkürler bekleyebilirim</string>
     <string name="mesaj_yaz">Mesaj yaz</string>
     <string name="day">gün</string>
     <string name="arac">Araç</string>
-    <string name="yuk">Kişi</string>
+    <string name="traveler">yolcu</string>
     <string name="sil">Sil</string>
     <string name="duzenle">Düzenle</string>
     <string name="kaydet">Kaydet</string>
@@ -248,7 +251,7 @@ Ancak Logistics ihlale neden olan içeriğe ilişkin olarak bilgi sahibi olur ol
  Seni çok sevdik ilanını en yukarda göstermek istiyoruz :)</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hemen_bul">İlanımı üste taşı</string>
+    <string name="hemen_bul">Yolculuğumu üste taşı</string>
     <string name="temizle">Temizle</string>
     <string name="temizle_city">Şehri temizle</string>
     <string name="fiyat_yok">Fiyat yok</string>

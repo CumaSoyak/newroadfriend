@@ -33,7 +33,7 @@ class RemoteDataManager(
 
     override suspend fun getTrips(getTripRequest: GetTripRequest): ResultWrapper<TripsResponse> =
         withContext(Dispatchers.Main) {
-            resultWrapper(iTripService.getTrip(getTripRequest.status,getTripRequest.startCity,getTripRequest.endCity))
+            resultWrapper(iTripService.getTrip(getTripRequest.countryCode,getTripRequest.startCity,getTripRequest.endCity))
         }
 
     override suspend fun postTrip(request: TripRequest): ResultWrapper<PostTripResponse> {

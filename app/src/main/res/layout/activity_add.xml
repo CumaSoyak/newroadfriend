@@ -11,119 +11,73 @@
     </data>
 
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_gravity="center_vertical"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar_layout" />
+        <roadfriend.app.customviews.CVChooseStatus
+            android:id="@+id/truckDriver"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toTopOf="@id/truckPacket"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintWidth_percent="0.9"
+            app:status="1"
+            app:text="@string/add_arac_ariyorum" />
 
-            <LinearLayout
-                android:id="@+id/containerImage"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.20"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-                <TextView
-                    style="@style/TextViewStyleTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/add_ne_yapmak"
-                    android:textColor="@color/border"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </LinearLayout>
-
-            <roadfriend.app.customviews.CVChooseStatus
-                android:id="@+id/travel"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/driver"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/containerImage"
-                app:layout_constraintWidth_percent="0.95"
-                app:status="1"
-                  />
-
-            <roadfriend.app.customviews.CVChooseStatus
-                android:id="@+id/driver"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/truckDriver"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/travel"
-                app:layout_constraintWidth_percent="0.95"
-                app:status="2"
-                app:text="Arabam ile seyehat edeceğim" />
-
-            <roadfriend.app.customviews.CVChooseStatus
-                android:id="@+id/truckDriver"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@id/truckPacket"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/driver"
-                app:layout_constraintWidth_percent="0.95"
-                app:status="1"
-                app:text="@string/add_arac_ariyorum" />
-
-            <roadfriend.app.customviews.CVChooseStatus
-                android:id="@+id/truckPacket"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@id/btnSucces"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/truckDriver"
-                app:layout_constraintWidth_percent="0.95"
-                app:status="2"
-                app:text="@string/add_yuk_ariyorum" />
+        <roadfriend.app.customviews.CVChooseStatus
+            android:id="@+id/truckPacket"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toTopOf="@id/btnSucces"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/truckDriver"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintWidth_percent="0.9"
+            app:status="2"
+            app:text="@string/add_yuk_ariyorum" />
 
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSucces"
-                style="@style/GreenButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:text="@string/devam_et"
-                android:visibility="invisible"
-                app:icon="@drawable/ic_right"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/truckPacket"
-                tools:visibility="visible" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSucces"
+            style="@style/GreenButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/ibm_plex_sans_bold"
+            android:text="@string/devam_et"
+            android:textSize="24sp"
+            android:visibility="invisible"
+            app:icon="@drawable/ic_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/truckPacket"
+            app:layout_constraintWidth_percent="0.9"
+            tools:visibility="visible" />
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.core.widget.NestedScrollView>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -110,6 +110,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.google.firebase:firebase-auth:19.3.0'
     implementation 'com.facebook.android:facebook-login:5.15.3'
+    implementation 'com.google.firebase:firebase-crashlytics-ndk:17.3.0'
 
 
     implementation 'com.google.firebase:firebase-ads:19.1.0'
@@ -167,12 +168,6 @@ dependencies {
     //data binding
     implementation "com.android.databinding:compiler:3.5.1"
 
-    //navigation
-    implementation "androidx.navigation:navigation-fragment:2.2.0-alpha01"
-    implementation "androidx.navigation:navigation-ui:2.2.0-alpha01"
-    implementation "androidx.navigation:navigation-fragment-ktx:2.2.0-alpha01"
-    implementation "androidx.navigation:navigation-ui-ktx:2.2.0-alpha01"
-
 
     implementation 'com.android.support:multidex:1.0.3'
 
@@ -195,13 +190,7 @@ dependencies {
 
 
 
-    //Gif
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
-    //animation
-    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
 
-    //facebook shimmer
-    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     //lottie animation
     implementation 'com.airbnb.android:lottie:3.1.0'
@@ -239,6 +228,7 @@ dependencies {
     implementation 'com.romandanylyk:pageindicatorview:1.0.3@aar'
     implementation 'android.arch.paging:runtime:1.0.1'
     implementation 'lt.neworld:spanner:1.1.0'
-
+    implementation 'com.google.android.play:core:1.9.0'
+    compile 'com.github.BlacKCaT27:CurrencyEditText:2.0.2'
 
 }

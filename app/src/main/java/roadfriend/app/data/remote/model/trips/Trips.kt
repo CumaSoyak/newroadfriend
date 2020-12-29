@@ -18,7 +18,6 @@ data class Trips(
     @SerializedName("phone") var phone: String? = "",
     @SerializedName("date") var date: String = "",
     @SerializedName("description") var description: String = "",
-    @SerializedName("status") var status: String = "",
     @SerializedName("price") var price: String? = "",
     @SerializedName("paymentType") var paymentType: String = "free",
     @SerializedName("startCity") var startCity: City = DummyData.getCity(),

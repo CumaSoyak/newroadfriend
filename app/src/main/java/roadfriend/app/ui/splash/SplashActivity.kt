@@ -9,7 +9,7 @@ import roadfriend.app.ui.base.BaseActivity
 import roadfriend.app.ui.dashboard.DashBoardActivity
 import roadfriend.app.ui.intro.IntroActivity
 import roadfriend.app.ui.main.MainActivity
-import roadfriend.app.ui.search.SearchStatusActivity
+import roadfriend.app.ui.search.SearchCityActivity
 import roadfriend.app.utils.DialogUtils
 import roadfriend.app.utils.NetworkUtils
 import roadfriend.app.utils.PrefUtils
@@ -29,7 +29,7 @@ class SplashActivity : BaseActivity() {
 
     override fun initUI() {
         if (NetworkUtils.isConnected(this)) {
-             FirebaseHelper().isAppUpdate { update ->
+            FirebaseHelper().isAppUpdate { update ->
                 if (update) {
                     updateApp()
                 } else {
@@ -48,9 +48,9 @@ class SplashActivity : BaseActivity() {
         if (BuildConfig.DEBUG) {
             launchActivity<DashBoardActivity>()
         } else if (PrefUtils.checkIsFirstTimeOpen()) {
-            launchActivity<IntroActivity> { }
+            launchActivity<SearchCityActivity> { }
         } else if (!PrefUtils.checkIsFirstTimeOpen()) {
-            launchActivity<SearchStatusActivity> {}
+            launchActivity<MainActivity> {}
         }
     }
 

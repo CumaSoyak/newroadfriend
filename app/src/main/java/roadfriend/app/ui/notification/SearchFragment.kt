@@ -1,12 +1,16 @@
-package roadfriend.app.ui.search
+package roadfriend.app.ui.notification
 
+
+import android.view.View
+import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.local.model.Search
 import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.databinding.FragmentSearchCityBinding
-import roadfriend.app.ui.base.BindingActivity
+import roadfriend.app.ui.base.BindingFragment
 import roadfriend.app.ui.main.MainActivity
 import roadfriend.app.ui.searchcity.SearchCityDialog
 import roadfriend.app.utils.AppConstants
@@ -14,40 +18,42 @@ import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.visible
-import roadfriend.app.utils.helper.LiveBus
 
-
-class SearchCityActivity : BindingActivity<FragmentSearchCityBinding>(),
+/**
+ * A simple [Fragment] subclass.
+ */
+class SearchFragment : BindingFragment<FragmentSearchCityBinding>(),
     SearchCityDialog.ISearchCityListener {
     override val getLayoutBindId: Int
         get() = R.layout.fragment_search_city
-    private val cityList: ArrayList<City> = arrayListOf()
 
     companion object {
-        val TAG: String = SearchCityActivity::class.java.simpleName
-        fun newInstance(): SearchCityActivity = SearchCityActivity().apply {
+        val TAG: String = SearchFragment::class.java.simpleName
+        fun newInstance(): SearchFragment = SearchFragment().apply {
 
         }
     }
 
-    private val viewModel by viewModel<SearchViewModel>()
+    private val cityList: ArrayList<City> = arrayListOf()
+
+
+    private val viewModel by viewModel<NotificationViewModel>()
 
 
     override fun initNavigator() {
         viewModel.setPresenter(this)
     }
 
-    override fun initUI() {
-        // binding.vm = viewModel
+    override fun initUI(view: View) {
         binding.lifecycleOwner = this
-    }
+        back.gone()
 
+    }
 
     override fun initListener() {
         binding.selectCity.setOnClickListener {
             goSearchCityPage()
         }
-        back.gone()
         binding.tvClear.setOnClickListener {
             binding.selectCity.visible()
             binding.gropSelected.gone()
@@ -65,12 +71,12 @@ class SearchCityActivity : BindingActivity<FragmentSearchCityBinding>(),
 
         binding.next.setOnClickListener {
             PrefUtils.createTrip(Search(stationStart, stationEnd))
-            launchActivity<MainActivity> {}
+            requireActivity().bottom_nav.selectedItemId = R.id.nav_home
         }
     }
 
     fun goSearchCityPage() {
-        supportFragmentManager.beginTransaction().let { it1 ->
+        requireActivity().supportFragmentManager.beginTransaction().let { it1 ->
             SearchCityDialog.newInstance(AppConstants.HOME_SEARCH, this)
                 .show(it1, "")
         }

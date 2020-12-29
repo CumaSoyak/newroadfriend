@@ -9,19 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.fragment_home_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import roadfriend.app.CoreApp
 import roadfriend.app.R
-import roadfriend.app.data.local.model.Search
- import roadfriend.app.ui.base.BaseFragment
+import roadfriend.app.ui.base.BaseFragment
 import roadfriend.app.ui.home.FirstFragment
 import roadfriend.app.ui.home.HomeViewModel
-import roadfriend.app.ui.home.SecondFragment
 import roadfriend.app.utils.DialogUtils
 import roadfriend.app.utils.PrefUtils.isLogin
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.visible
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
-import roadfriend.app.utils.helper.LiveBus
 import roadfriend.app.utils.helper.ViewPagerAdapter
 
 /**
@@ -93,8 +89,7 @@ class HomeMainFragment : BaseFragment() {
     override fun initListener() {
         val adapter = ViewPagerAdapter(childFragmentManager)
         adapter.addFragment(FirstFragment(), resources.getString(R.string.add_arac_ariyorum))
-        adapter.addFragment(SecondFragment(), resources.getString(R.string.add_yuk_ariyorum))
-        viewPager.adapter = adapter
+         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
 
 
@@ -117,12 +112,10 @@ class HomeMainFragment : BaseFragment() {
 
             override fun onPageSelected(position: Int) {
                 if (position == 0) {
-                    CoreApp.statusSearch = "1"
-                    cvSearchFirst.visible()
+                     cvSearchFirst.visible()
                     cvSearchSecond.gone()
                 } else {
-                    CoreApp.statusSearch = "2"
-                    cvSearchFirst.gone()
+                     cvSearchFirst.gone()
                     cvSearchSecond.visible()
                 }
             }

@@ -106,7 +106,7 @@
             style="@style/GreenButtonStyle"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/ibm_plex_sans_bold"
             android:text="@string/devam_et"
             android:textSize="24sp"

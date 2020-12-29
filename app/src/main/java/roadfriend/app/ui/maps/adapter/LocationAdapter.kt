@@ -48,8 +48,7 @@ class LocationAdapter(
 
         price.text = model.callPrice()
 
-        tvUserStatu.text = OptionData.tripatus(trips[position].status)
-        btnDetail.setOnClickListener {
+         btnDetail.setOnClickListener {
             viewPagerItemClick.onItemClickListener(trips[position], it, position)
         }
         val vp = container as ViewPager

@@ -56,8 +56,6 @@ class CVChooseStatus : ConstraintLayout {
         when (status) {
             1 -> ivChooseStatus.setImageDrawable(resources.getDrawable(R.drawable.ic_car))
             2 -> ivChooseStatus.setImageDrawable(resources.getDrawable(R.drawable.ic_travel))
-//            1 -> ivChooseStatus.setImageDrawable(resources.getDrawable(R.drawable.ic_suitcase))
-//            2 -> ivChooseStatus.setImageDrawable(resources.getDrawable(R.drawable.ic_car))
 
         }
 

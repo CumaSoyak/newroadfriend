@@ -6,13 +6,15 @@ import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import roadfriend.app.CoreApp
+import roadfriend.app.data.local.model.Search
 import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.data.remote.model.user.User
 import roadfriend.app.utils.AppConstants.FIRABESE_TOKEN
 import roadfriend.app.utils.AppConstants.IS_RATED
 import roadfriend.app.utils.AppConstants.IS_USER_LOGGED
- import roadfriend.app.utils.AppConstants.PREF_NAME
+import roadfriend.app.utils.AppConstants.PREF_NAME
 import roadfriend.app.utils.AppConstants.TOKEN
+import roadfriend.app.utils.AppConstants.TRIP_DETAIL
 import roadfriend.app.utils.AppConstants.USER_DETAIL
 import roadfriend.app.utils.OtherUtils.getJsonDataFromAsset
 import roadfriend.app.utils.extensions.get
@@ -68,6 +70,17 @@ object PrefUtils {
         instance.setValue(USER_DETAIL, userJson)
 
     }
+
+    fun createTrip(search: Search) {
+        val tripJson = GsonBuilder().serializeNulls().create().toJson(search)
+        instance.setValue(TRIP_DETAIL, tripJson)
+    }
+
+    fun getTrip(): Search {
+        return GsonBuilder().create()
+            .fromJson(instance.getString(TRIP_DETAIL, ""), Search::class.java)
+    }
+
 
     fun setRated() {
         instance.setValue(IS_RATED, true)

@@ -3,15 +3,17 @@
     <string name="facebook_app_id" translatable="false">230560868185861</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb230560868185861</string>
     <string name="web_client_id" translatable="false">1052592609024-sfut0g1t1hpnvi1vieim3lp96chd0brh.apps.googleusercontent.com</string>
-    <string name="ilan_ver">Share post</string>
+    <string name="ilan_ver">Share Travel</string>
     <string name="ad_soyad">Full Name</string>
     <string name="add_arac_ariyorum">Search Car</string>
-    <string name="add">Post</string>
+    <string name="add">Offer a ride</string>
+    <string name="search_trip">Travels</string>
+    <string name="search_progress">Searching...</string>
     <string name="uzun">uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string uzun string</string>
     <string name="add_detail_aciklama">Enter description (optional)</string>
     <string name="add_detail_fiyat">Enter price (optional)</string>
     <string name="add_detail_para">Price</string>
-    <string name="add_detail_paylas">Share Post</string>
+    <string name="add_detail_paylas">Share Trip</string>
     <string name="add_detail_sehir_sec">Please Select City</string>
     <string name="add_detail_tarih">Date</string>
     <string name="add_detail_tarih_saat">You can enter a date, price, or description.</string>
@@ -19,7 +21,7 @@
     <string name="add_direction_title">Choose where and where to go below</string>
     <string name="add_ne_yapmak">What you wanna do ?</string>
     <string name="add_yuk_ariyorum">Search Person</string>
-    <string name="ana_sayfaya_don">Maybe Later</string>
+    <string name="ana_sayfaya_don">Thanks I can wait</string>
     <string name="appname">Travel Fried</string>
     <string name="arac">Car</string>
     <string name="baslangic_sehrini_giriniz">Enter the start city ...</string>
@@ -30,7 +32,7 @@
     <string name="detaya_git">Go Detail</string>
     <string name="devam_et">Go On</string>
     <string name="temizle_city">Clear city</string>
-    <string name="dialog_sales_one_cikar">Feature it</string>
+    <string name="dialog_sales_one_cikar">Now find a travel friend</string>
     <string name="duzenle">Edit</string>
     <string name="e_mail">E-mail</string>
     <string name="e_posta">E-mail</string>
@@ -48,7 +50,7 @@
     <string name="hide_all_city">Hide all cities</string>
     <string name="home">Home Page</string>
     <string name="home_trip_search">Search trip</string>
-    <string name="ilan_paylasildi">Post Shared</string>
+    <string name="ilan_paylasildi">Travel Shared</string>
     <string name="ilani_one_cikar">I want to take advantage</string>
     <string name="intro_next">Go On</string>
     <string name="intro_start">Start</string>
@@ -73,12 +75,12 @@
     <string name="title_add_direction">Select City</string>
     <string name="title_trip_detail">Detail</string>
     <string name="vazgec">Cancel</string>
-    <string name="yuk">Cargo</string>
+    <string name="traveler">traveler</string>
     <string name="temizle">Clear</string>
-    <string name="hemen_bul">Move post up</string>
-    <string name="ilan_paylasildi_mesaj">Your Post Has Been Shared Congratulations
-  We want to show you the Post that we loved you so much :)</string>
-    <string name="yolvuluk_silinmistir">Post deleted</string>
+    <string name="hemen_bul">Move travel up</string>
+    <string name="ilan_paylasildi_mesaj">Your Trip Has Been Shared Congratulations
+  We want to show you the Trip that we loved you so much :)</string>
+    <string name="yolvuluk_silinmistir">Trip deleted</string>
     <string name="telefon_numarasi">Phone number (optional)</string>
     <string name="teklifinizi_giriniz">Enter your offer</string>
     <string name="arac_ara">Search Car</string>
@@ -102,7 +104,7 @@
     <string name="yardim_profil">Exit</string>
     <string name="iletisime_gec">Contact us</string>
     <string name="gelen_teklif_yok">No incoming offers</string>
-    <string name="ilk_ilanı_sen_ver">Come on share travel post</string>
+    <string name="ilk_ilanı_sen_ver">Come on share travel Trip</string>
     <string name="mesaj_yok">You have no messages</string>
     <string name="yolculugunuz_bulunmaktadir">You have no trip</string>
     <string name="kayitli_yolculugunuz_bulunmaktadir">You have no registered trip.</string>

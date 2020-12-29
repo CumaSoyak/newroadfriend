@@ -2,27 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/search_trip" />
+
+    <item
+        android:id="@+id/nav_find"
         android:icon="@drawable/ic_search"
         android:title="@string/search_home" />
 
     <item
-        android:id="@+id/nav_notification"
-        android:icon="@drawable/ic_cuzdan"
-        android:title="@string/bid" />
-
-    <item
         android:id="@+id/nav_add"
-        android:icon="@drawable/ic_add"
+        android:icon="@drawable/ic_add_dolu"
         android:title="@string/add" />
 
     <item
         android:id="@+id/nav_message"
-        android:icon="@drawable/ic_message"
+        android:icon="@drawable/ic_email_dolu"
         android:title="@string/message" />
 
     <item
         android:id="@+id/nav_profil"
-        android:icon="@drawable/ic_profil"
+        android:icon="@drawable/ic_user_dolu"
         android:title="@string/profil" />
 
 

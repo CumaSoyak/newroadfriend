@@ -11,7 +11,11 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.play.core.review.ReviewInfo
+import com.google.android.play.core.review.ReviewManager
+import com.google.android.play.core.review.ReviewManagerFactory
 import kotlinx.android.synthetic.main.bottom_dialog_choose.view.*
 import org.jetbrains.anko.layoutInflater
 import roadfriend.app.R
@@ -217,9 +221,27 @@ object DialogUtils {
         btnYes.setOnClickListener {
             PrefUtils.setRated()
             myDialog?.dismiss()
-            OtherUtils.openGooglePlay(activity)
+            activity.inAppReview()
         }
         myDialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         myDialog!!.show()
     }
+
+    fun FragmentActivity.inAppReview() {
+        var reviewInfo: ReviewInfo? = null
+        var manager: ReviewManager = ReviewManagerFactory.create(this)
+        val requestFlow = manager.requestReviewFlow()
+        requestFlow.addOnCompleteListener { request ->
+            if (request.isSuccessful) {
+                reviewInfo = request.result
+                reviewInfo?.let {
+                    val flow = manager.launchReviewFlow(this, it)
+                }
+
+            } else {
+                reviewInfo = null
+            }
+        }
+    }
+
 }

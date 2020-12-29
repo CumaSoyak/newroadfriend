@@ -169,8 +169,7 @@ class FirebaseHelper {
         val docRef = db.collection(test + "trip")
             .whereEqualTo("startCityName", getTripRequest?.startCity)
             .whereEqualTo("endCityName", getTripRequest?.endCity)
-            .whereEqualTo("status", getTripRequest?.status)
-            .whereEqualTo("codeCountry", OtherUtils.getCountryCode())
+             .whereEqualTo("codeCountry", OtherUtils.getCountryCode())
             .orderBy("firebaseTime", Query.Direction.DESCENDING)
         docRef.addSnapshotListener { snapshot, e ->
             snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
@@ -240,8 +239,7 @@ class FirebaseHelper {
             "phone" to trips.phone,
             "date" to trips.date,
             "description" to trips.description,
-            "status" to trips.status,
-            "price" to trips.price,
+             "price" to trips.price,
             "paymentType" to trips.paymentType,
             "startCity" to City(
                 trips.startCity.name

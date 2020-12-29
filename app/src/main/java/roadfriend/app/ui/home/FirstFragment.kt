@@ -21,7 +21,6 @@ import roadfriend.app.ui.base.BindingFragment
 import roadfriend.app.ui.main.MainActivity
 import roadfriend.app.ui.maps.MapsDialogFragment
 import roadfriend.app.ui.profile.myaboutcomment.MyAboutCommentsActivity
-import roadfriend.app.ui.search.SearchStatusActivity
 import roadfriend.app.ui.tripdetail.TripDetailActivity
 import roadfriend.app.ui.userdetail.UserDetailActivity
 import roadfriend.app.utils.OptionData
@@ -54,11 +53,9 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
 
     companion object {
         val TAG: String = FirstFragment::class.java.name
-        fun newInstance(parcelableExtra: Search?): FirstFragment =
+        fun newInstance(): FirstFragment =
             FirstFragment().apply {
-                val args = Bundle()
-                args.putParcelable("data", parcelableExtra)
-                this.arguments = args
+
             }
     }
 
@@ -69,54 +66,42 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
     override fun initUI(view: View) {
         binding.vmHome = viewModel
         binding.lifecycleOwner = this
+
+        tvToolbarTitle.text = resources.getString(R.string.search_trip)
     }
 
     override fun initListener() {
 
         listenerItem()
-        listenerSearch()
         tripFilter()
 
-        back.setOnClickListener { MainActivity().finish()
-        LiveBus.removeStickyEvent(Search::class.java)}
+        back.gone()
 
-    }
-
-    fun listenerSearch() {
-        /**ilkinde komple tarihe göre sıralı gelsin*/
-
-        binding.ivMap.clickWithDebounce {
-            fragmentManager!!.beginTransaction().let { it1 ->
-                MapsDialogFragment.newInstance(mapsModel!!)
-                    .show(it1, "")
-            }
-        }
     }
 
 
     fun tripFilter() {
-         LiveBus.get(Search::class.java).observeForeverSticky {
+        binding.progressBar.visible()
+        val data = PrefUtils.getTrip()
+        getTripRequest =
+            GetTripRequest(
+                OtherUtils.getCountryCode(),
+                data.startCity?.name,
+                data.endCity?.name
+            )
+        val cityList: ArrayList<City> = arrayListOf(data.startCity!!, data.endCity!!)
+        tripBundle?.tripsList?.clear()
+        tripBundle?.tripsList?.addAll(cityList)
+        getTrip(getTripRequest!!)
 
-            getTripRequest =
-                GetTripRequest(
-                    OtherUtils.getCountryCode(),
-                    statusSearch,
-                    it.startCity?.name,
-                    it.endCity?.name
-                )
-
-            val cityList: ArrayList<City> = arrayListOf(it.startCity!!, it.endCity!!)
-            tripBundle?.tripStatus = statusSearch
-            tripBundle?.tripsList?.clear()
-            tripBundle?.tripsList?.addAll(cityList)
-            getTrip(getTripRequest!!)
-        }
     }
 
     fun getTrip(getTripRequest: GetTripRequest) {
+
         try {
             FirebaseHelper().getFilterTrip(getTripRequest) { data ->
-                 addData(data, "home")
+                addData(data, "home")
+                binding.progressBar.gone()
             }
         } catch (e: Exception) {
             logger(e.localizedMessage)
@@ -210,9 +195,11 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
     fun isAvailabledata(available: Boolean) {
         try {
             if (available) {
+                tvToolbarTitle.text = resources.getString(R.string.search_trip)
                 binding.recyclerview.visible()
                 binding.cvEmptyView.gone()
             } else {
+                tvToolbarTitle.text = resources.getString(R.string.search_trip)
                 binding.recyclerview.gone()
                 binding.cvEmptyView.visible()
             }

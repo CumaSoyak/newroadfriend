@@ -8,12 +8,11 @@ import com.google.android.material.badge.BadgeDrawable
 import kotlinx.android.synthetic.main.activity_main.*
 import roadfriend.app.CoreApp
 import roadfriend.app.R
-import roadfriend.app.data.local.model.Search
-import roadfriend.app.ui.add.AddActivity
+import roadfriend.app.ui.add.direction.AddDirectionActivity
 import roadfriend.app.ui.auth.login.LoginActivity
 import roadfriend.app.ui.home.FirstFragment
 import roadfriend.app.ui.message.MessageFragment
-import roadfriend.app.ui.notification.NotificationFragment
+import roadfriend.app.ui.notification.SearchFragment
 import roadfriend.app.ui.profile.ProfilFragment
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.PrefUtils.isLogin
@@ -25,11 +24,10 @@ class MainActivity : AppCompatActivity() {
 
     var activeFragment: Fragment? = null
     var homeFragment: Fragment? = null
-    var notificationFragment: Fragment? = null
+    var searchFragment: Fragment? = null
     var bidFragment: Fragment? = null
     var profilFragment: Fragment? = null
     lateinit var badgeMessage: BadgeDrawable
-    lateinit var badgeBid: BadgeDrawable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,38 +38,27 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavigationBar() {
         badgeMessage = bottom_nav.getOrCreateBadge(R.id.nav_message)
         badgeMessage.isVisible = false
-        badgeBid = bottom_nav.getOrCreateBadge(R.id.nav_notification)
-        badgeBid.isVisible = false
+
 
         bottom_nav.setOnNavigationItemSelectedListener { menuItem ->
             var selectedFragment: Fragment? = null
             when (menuItem.itemId) {
                 R.id.nav_home -> {
-                    if (homeFragment == null) {
-                        homeFragment = FirstFragment.newInstance(intent.getParcelableExtra("data"))
-                        addFragmentMethod(homeFragment!!)
-                        activeFragment = homeFragment
-                    }
-                    selectedFragment = homeFragment
+                     replaceFragmentMethod(FirstFragment.newInstance())
                 }
-                R.id.nav_notification -> {
-                    if (isLogin()) {
-                        bidNotification()
-                        if (notificationFragment == null) {
-                            notificationFragment = NotificationFragment.newInstance()
-                            addFragmentMethod(notificationFragment!!)
-
-                        }
-                        selectedFragment = notificationFragment
-                    } else {
-                        openAuthActivity()
-                    }
-
+                R.id.nav_find -> {
+                   // if (searchFragment == null) {
+                 //       searchFragment = SearchFragment.newInstance()
+                 //       activeFragment = searchFragment
+                 //       addFragmentMethod(searchFragment!!)
+                 //    }
+                 //   selectedFragment = searchFragment
+                    replaceFragmentMethod(SearchFragment.newInstance())
                 }
                 R.id.nav_add -> {
                     if (isLogin()) {
                         selectedFragment = null
-                        val intent = Intent(this, AddActivity::class.java)
+                        val intent = Intent(this, AddDirectionActivity::class.java)
                         startActivityForResult(intent, 0)
                         overridePendingTransitionEnter()
                     } else {
@@ -81,12 +68,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_message -> {
                     if (isLogin()) {
                         notidficationDisable()
-                        if (bidFragment == null) {
-                            bidFragment = MessageFragment.newInstance()
-                            addFragmentMethod(bidFragment!!)
-
-                        }
-                        selectedFragment = bidFragment
+                    //    if (bidFragment == null) {
+                    //        bidFragment = MessageFragment.newInstance()
+                    //        addFragmentMethod(bidFragment!!)
+//
+                    //    }
+                    //    selectedFragment = bidFragment
+                        replaceFragmentMethod(MessageFragment.newInstance())
                     } else {
                         openAuthActivity()
                     }
@@ -94,11 +82,13 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_profil -> {
                     if (isLogin()) {
-                        if (profilFragment == null) {
-                            profilFragment = ProfilFragment.newInstance()
-                            addFragmentMethod(profilFragment!!)
-                        }
-                        selectedFragment = profilFragment
+                      //  if (profilFragment == null) {
+                      //      profilFragment = ProfilFragment.newInstance()
+                      //      addFragmentMethod(profilFragment!!)
+                      //  }
+                      //  selectedFragment = profilFragment
+                        replaceFragmentMethod(ProfilFragment.newInstance())
+
                     } else {
                         openAuthActivity()
                     }
@@ -107,11 +97,11 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            if (isLogin()) {
-                if (selectedFragment != null) {
-                    showFragment(selectedFragment)
-                }
-            }
+        //   if (true) {
+        //       if (selectedFragment != null) {
+        //           showFragment(selectedFragment)
+        //       }
+        //   }
 
 
             true
@@ -133,6 +123,11 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().add(R.id.container, fragment).commit()
     }
+    fun replaceFragmentMethod(fragment: Fragment) {
+
+        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+    }
+
 
     fun showFragment(fragment: Fragment) {
         if (fragment != activeFragment) {
@@ -162,7 +157,7 @@ class MainActivity : AppCompatActivity() {
             }
             FirebaseHelper().getNotificationBid {
                 if (it) {
-                    badgeBid.isVisible = true
+                  //  badgeBid.isVisible = true
                 }
             }
         }
@@ -174,7 +169,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun bidNotification() {
-        badgeBid.isVisible = false
+       // badgeBid.isVisible = false
         FirebaseHelper().setBidNotificationBadge(PrefUtils.getUser(), false)
     }
 }

@@ -6,6 +6,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class TripBundle(
-    var tripStatus: String? = null,
-    var tripsList: ArrayList<City> = arrayListOf()
+     var tripsList: ArrayList<City> = arrayListOf()
 ):Parcelable

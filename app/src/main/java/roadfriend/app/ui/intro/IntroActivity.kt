@@ -6,8 +6,8 @@ import roadfriend.app.databinding.ActivityIntroBinding
 import roadfriend.app.ui.auth.register.RegisterActivity
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.main.MainActivity
-import roadfriend.app.ui.search.SearchStatusActivity
-import roadfriend.app.utils.extensions.launchActivity
+import roadfriend.app.ui.search.SearchCityActivity
+ import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.onPageSelected
 
 class IntroActivity : BindingActivity<ActivityIntroBinding>() {
@@ -38,7 +38,7 @@ class IntroActivity : BindingActivity<ActivityIntroBinding>() {
         }
 
         binding.cardStart.setOnClickListener {
-            launchActivity<SearchStatusActivity> { }
+            launchActivity<SearchCityActivity> { }
             finish()
         }
 

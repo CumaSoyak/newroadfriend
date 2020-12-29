@@ -29,17 +29,14 @@ class CVDetail @JvmOverloads constructor(
     }
 
     fun initData(trips: Trips, activity: BaseActivity) {
-        setStatus(trips)
-        setDate(trips.date)
+         setDate(trips.date)
 
         setPrice(trips.callPrice())
         setDescription(trips.description)
         setCity(trips)
     }
 
-    private fun setStatus(trips: Trips) {
-        tripStatus.text = OptionData.tripatus(trips.status)
-    }
+
 
     private fun setMaps(trips: Trips, activity: BaseActivity) {
         val tripsList: ArrayList<Trips> = arrayListOf(trips)

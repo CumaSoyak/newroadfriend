@@ -10,7 +10,7 @@
 
     <style name="AppTheme" parent="AppTheme.Base">
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/background</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
 
@@ -72,7 +72,7 @@
     <style name="ProfilItemStyle">
         <item name="android:fontFamily">@font/inter_medium</item>
         <item name="android:textColor">@color/btc_black</item>
-        <item name="android:textSize">@dimen/font_text_small</item>
+        <item name="android:textSize">@dimen/font_text_medium</item>
 
     </style>
 
@@ -224,7 +224,7 @@
 
 
     <style name="TextViewStyleTitle">
-        <item name="android:fontFamily">@font/muliblackbold</item>
+        <item name="android:fontFamily">@font/sfprodisplay_semibold</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorTextColor</item>
     </style>

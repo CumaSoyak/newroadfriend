@@ -71,9 +71,7 @@ class CVEmptyView @JvmOverloads constructor(
     }
 
     fun homeSetring(tripRequest: GetTripRequest?): String {
-        return "${getString(R.string.ilan_bulunamadı)}\n \n  ${tripRequest?.startCity} -----> ${tripRequest?.endCity} \n \n ${OptionData.tripatus(
-            tripRequest?.status!!
-        )}  \n \n  ${getString(R.string.ilan_vermek_istermisiniz)}"
+        return "${getString(R.string.ilan_bulunamadı)}\n \n  ${tripRequest?.startCity} -----> ${tripRequest?.endCity} \n \n  \n \n  ${getString(R.string.ilan_vermek_istermisiniz)}"
     }
 
     fun initlistener(click: () -> Unit) {

@@ -1,6 +1,7 @@
 package roadfriend.app.ui.dashboard
 
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.Query
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.R
@@ -8,10 +9,12 @@ import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.databinding.ActivityDashBoardBinding
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.main.MainActivity
-import roadfriend.app.ui.search.SearchStatusActivity
+import roadfriend.app.ui.search.SearchCityActivity
+ import roadfriend.app.utils.OtherUtils
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.extensions.showToast
+import java.util.ArrayList
 
 class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
 
@@ -28,13 +31,14 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
         binding.vmDashBoard = viewModel
         binding.lifecycleOwner = this
         //getDefaultTrip()
+      //  agetDefaultTrip()
     }
 
     override fun initListener() {
 //        viewModel.tripSize()
 //        viewModel.userSize()
         binding.devam.setOnClickListener {
-            launchActivity<SearchStatusActivity> { }
+            launchActivity<SearchCityActivity> { }
         }
         binding.btnTest.setOnClickListener {
             CoreApp.testDatabase = "testDataBase-"
@@ -44,7 +48,7 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
             CoreApp.addAdminTrip = true
             launchActivity<MainActivity> { }
         }
-      //  getDefaultTrip()
+        //  getDefaultTrip()
     }
 
     fun getDefaultTrip() {
@@ -119,6 +123,17 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
             .addOnFailureListener {
                 showError("Bir şeyler ters gitti")
             }
+    }
+
+    fun agetDefaultTrip() {
+        val docRef = CoreApp.db.collection("trip")
+            .whereEqualTo("status", "2")
+        docRef.addSnapshotListener { snapshot, e ->
+            snapshot?.forEachIndexed { index, queryDocumentSnapshot ->
+                val data: Trips = queryDocumentSnapshot.toObject(Trips::class.java)
+
+            }
+        }
     }
 
 }
