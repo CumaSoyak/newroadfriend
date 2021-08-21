@@ -15,7 +15,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar_layout" />
+        <include
+            android:id="@+id/include"
+            layout="@layout/toolbar_layout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,8 +28,9 @@
                 android:id="@+id/llStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/llEnd"
+                app:layout_constraintBottom_toTopOf="@+id/recyclerview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -36,53 +39,15 @@
                     android:id="@+id/svStartCity"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:background="@drawable/bg_searchview"
+                    android:background="@drawable/edit_text_grey_bg_rounded"
                     android:focusable="false"
                     android:focusableInTouchMode="true"
                     android:textCursorDrawable="@null"
                     android:theme="@style/SearchViewTheme"
                     app:iconifiedByDefault="false"
-                    app:queryBackground="@drawable/bg_searchview"
                     app:queryHint="@string/baslangic_sehrini_giriniz"
                     app:searchIcon="@drawable/ic_location" />
 
-                <View
-                    android:id="@+id/view1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/grey_1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llEnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/recyclerview"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/llStart">
-
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/svEndCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/bg_searchview"
-                    android:focusable="false"
-                    android:focusableInTouchMode="true"
-                    android:textCursorDrawable="@null"
-                    android:theme="@style/SearchViewTheme"
-                    app:iconifiedByDefault="false"
-                    app:layout_constraintTop_toBottomOf="@+id/llEnd"
-                    app:queryBackground="@drawable/bg_searchview"
-                    app:queryHint="@string/bitis_sehrini_giriniz"
-                    app:searchIcon="@drawable/ic_location" />
-
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/gray" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -91,7 +56,7 @@
                 android:layout_height="0dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toTopOf="@+id/btnDecline"
-                app:layout_constraintTop_toBottomOf="@+id/llEnd"
+                app:layout_constraintTop_toBottomOf="@+id/llStart"
                 tools:listitem="@layout/item_station_list" />
 
             <androidx.appcompat.widget.AppCompatButton

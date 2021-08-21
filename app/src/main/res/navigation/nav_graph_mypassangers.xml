@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_mypassangers"
+    app:startDestination="@id/myPassengersListFragment">
+
+    <fragment
+        android:id="@+id/myPassengersListFragment"
+        android:name="com.biletdukkani.b2c.fragments.mypassengers.MyPassengersListFragment"
+        android:label="my_passengers_list"
+        tools:layout="@layout/fragment_mypassengers_list">
+        <action
+            android:id="@+id/action_myPassengersListFragment_to_myPassengersAddFragment"
+            app:destination="@id/myPassengersAddFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/myPassengersAddFragment"
+        android:name="com.biletdukkani.b2c.fragments.mypassengers.MyPassengerAddFragment"
+        android:label="my_passengers_add"
+        tools:layout="@layout/fragment_mypassenger_add" />
+
+</navigation>

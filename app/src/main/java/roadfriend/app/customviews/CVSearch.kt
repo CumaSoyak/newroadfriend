@@ -8,9 +8,8 @@ import androidx.fragment.app.Fragment
  import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.city.City
-import roadfriend.app.databinding.CvEmptyViewBinding
 import roadfriend.app.databinding.CvSearchBinding
-import roadfriend.app.ui.searchcity.SearchCityDialog
+import roadfriend.app.newui.search.SearchCityDialog
 import roadfriend.app.utils.AppConstants
 import roadfriend.app.utils.extensions.clickWithDebounce
 import roadfriend.app.utils.extensions.gone

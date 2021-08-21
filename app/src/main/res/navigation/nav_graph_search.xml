@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_search"
+    app:startDestination="@id/flightSearchFragment">
+
+    <fragment
+        android:id="@+id/flightSearchFragment"
+        android:name="com.biletdukkani.b2c.fragments.flight.flightSearch.FlightSearchFragment"
+        android:label="flight_search_fragment"
+        tools:layout="@layout/flight_search_fragment">
+        <action
+            android:id="@+id/action_flightSearch_to_flightDestinationSelect"
+            app:destination="@id/flightDestinationSelectFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_flightSearch_to_flightDateRangeSelect"
+            app:destination="@id/flightDateRangeSelectFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_flightSearch_to_flightPassengerCount"
+            app:destination="@id/flightPassengerCountFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_flightSearchFragment_flight_list"
+            app:destination="@id/nav_graph_flight_list" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flightDestinationSelectFragment"
+        android:name="com.biletdukkani.b2c.fragments.flight.flightDestinationSelect.FlightDestinationSelectFragmentDialog"
+        android:label="flight_from_fragment"
+        tools:layout="@layout/flight_destination_select_fragment_dialog" />
+    <fragment
+        android:id="@+id/flightDateRangeSelectFragment"
+        android:name="com.biletdukkani.b2c.fragments.flight.flightDateRangeSelect.FlightDateRangeSelectFragmentDialog"
+        android:label="flight_date_range_select_fragment"
+        tools:layout="@layout/flight_date_range_select_fragment_dialog" />
+    <fragment
+        android:id="@+id/flightPassengerCountFragment"
+        android:name="com.biletdukkani.b2c.fragments.flight.flightPassengerCount.FlightPassengerCountFragmentDialog"
+        android:label="flight_passenger_count_fragment"
+        tools:layout="@layout/flight_passenger_count_fragment_dialog">
+        <!--Alttaki action graflar arası geçişe örnektir. Startdestination farklı olacaksa IntentExt.kt de var'
+        <action
+            android:id="@+id/action_flightPassengerCountFragment_to_nav_graph_login"
+            app:destination="@id/nav_graph_login" />
+            -->
+    </fragment>
+    <include app:graph="@navigation/nav_graph_flight_list" />
+</navigation>

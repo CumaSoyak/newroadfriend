@@ -3,7 +3,6 @@ package roadfriend.app.ui.notification
 
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.local.model.Search
@@ -11,7 +10,7 @@ import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.databinding.FragmentSearchCityBinding
 import roadfriend.app.ui.base.BindingFragment
 import roadfriend.app.ui.main.MainActivity
-import roadfriend.app.ui.searchcity.SearchCityDialog
+import roadfriend.app.newui.search.SearchCityDialog
 import roadfriend.app.utils.AppConstants
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.gone

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2021.
+  ~
+  ~ Created by Yigit Can YILMAZ
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <View
+                android:id="@+id/view_bg_left_half"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"/>
+            <View
+                android:id="@+id/view_bg_right_half"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_day"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/calendar_date_bg"
+            tools:text="1"/>
+    </FrameLayout>
+
+</LinearLayout>

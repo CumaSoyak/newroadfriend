@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_profile"
+    app:startDestination="@id/profileFragment">
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.biletdukkani.b2c.fragments.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment">
+        <action
+            android:id="@+id/action_profile_to_personalInfo"
+            app:destination="@id/personalInfoFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_profileFragment_to_invoiceFragment"
+            app:destination="@id/invoiceFragment" />
+
+        <action
+            android:id="@+id/action_profileFragment_to_nav_mypassangers"
+            app:destination="@id/nav_mypassangers" />
+        <action
+            android:id="@+id/action_profileFragment_to_passwordChangeFragment"
+            app:destination="@id/passwordChangeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalInfoFragment"
+        android:name="com.biletdukkani.b2c.fragments.personalInfo.PersonalInfoFragment"
+        android:label="personal_info_fragment"
+        tools:layout="@layout/personal_info_fragment" />
+
+    <fragment
+        android:id="@+id/invoiceFragment"
+        android:name="com.biletdukkani.b2c.fragments.profile.invoiceinfo.InvoiceInfoFragment"
+        android:label="InvoiceFragment">
+        <action
+            android:id="@+id/action_invoiceFragment_to_invoiceInfoDetailFragment"
+            app:destination="@id/invoiceInfoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/invoiceInfoDetailFragment"
+        android:name="com.biletdukkani.b2c.fragments.profile.invoiceinfo.detail.InvoiceInfoDetailFragment"
+        android:label="fragment_invoice_info_detail"
+        tools:layout="@layout/fragment_invoice_info_detail">
+        <argument
+            android:name="invoiceInformationId"
+            app:argType="string" />
+    </fragment>
+
+    <include app:graph="@navigation/nav_graph_mypassangers" />
+    <fragment
+        android:id="@+id/passwordChangeFragment"
+        android:name="com.biletdukkani.b2c.fragments.passwordChange.PasswordChangeFragment"
+        android:label="password_change_fragment"
+        tools:layout="@layout/password_change_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.biletdukkani.b2c.fragments.settings.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
+
+</navigation>

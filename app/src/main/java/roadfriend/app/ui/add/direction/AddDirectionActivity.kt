@@ -9,7 +9,7 @@ import roadfriend.app.ui.add.adapter.IRemoveStationListener
 import roadfriend.app.ui.add.detail.AddDetailActivity
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.base.IBasePresenter
-import roadfriend.app.ui.searchcity.SearchCityDialog
+import roadfriend.app.newui.search.SearchCityDialog
 import roadfriend.app.utils.AppConstants.HOME_SEARCH
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.launchActivity

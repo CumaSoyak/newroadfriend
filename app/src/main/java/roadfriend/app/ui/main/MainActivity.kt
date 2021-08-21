@@ -10,7 +10,7 @@ import roadfriend.app.databinding.ActivityMainBinding
 import roadfriend.app.ui.add.direction.AddDirectionActivity
 import roadfriend.app.ui.auth.login.LoginActivity
 import roadfriend.app.ui.base.BindingActivity
-import roadfriend.app.ui.home.FirstFragment
+import roadfriend.app.newui.search.TravelerListFragment
 import roadfriend.app.ui.message.MessageFragment
 import roadfriend.app.ui.notification.SearchFragment
 import roadfriend.app.ui.profile.ProfilFragment
@@ -39,10 +39,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>() {
     }
 
     var activeFragment: Fragment? = null
-    var homeFragment: Fragment? = null
-    var searchFragment: Fragment? = null
-    var bidFragment: Fragment? = null
-    var profilFragment: Fragment? = null
     lateinit var badgeMessage: BadgeDrawable
 
 
@@ -54,18 +50,14 @@ class MainActivity : BindingActivity<ActivityMainBinding>() {
         binding.bottomNav.setOnNavigationItemSelectedListener { menuItem ->
             var selectedFragment: Fragment? = null
             when (menuItem.itemId) {
-                R.id.nav_home -> {
-                    replaceFragmentMethod(FirstFragment.newInstance())
-                }
                 R.id.nav_find -> {
-                    // if (searchFragment == null) {
-                    //       searchFragment = SearchFragment.newInstance()
-                    //       activeFragment = searchFragment
-                    //       addFragmentMethod(searchFragment!!)
-                    //    }
-                    //   selectedFragment = searchFragment
+
                     replaceFragmentMethod(SearchFragment.newInstance())
                 }
+                R.id.nav_mytraveler -> {
+                    replaceFragmentMethod(TravelerListFragment.newInstance())
+                }
+
                 R.id.nav_add -> {
                     if (isLogin()) {
                         selectedFragment = null
@@ -79,12 +71,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>() {
                 R.id.nav_message -> {
                     if (isLogin()) {
                         notidficationDisable()
-                        //    if (bidFragment == null) {
-                        //        bidFragment = MessageFragment.newInstance()
-                        //        addFragmentMethod(bidFragment!!)
-//
-                        //    }
-                        //    selectedFragment = bidFragment
                         replaceFragmentMethod(MessageFragment.newInstance())
                     } else {
                         openAuthActivity()
@@ -118,7 +104,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>() {
             true
 
         }
-        binding.bottomNav.selectedItemId = R.id.nav_home
+        binding.bottomNav.selectedItemId = R.id.nav_find
         checkBadgeNotification()
 
     }
@@ -154,7 +140,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        binding.bottomNav.selectedItemId = R.id.nav_home
+        binding.bottomNav.selectedItemId = R.id.nav_find
     }
 
     override fun onResume() {

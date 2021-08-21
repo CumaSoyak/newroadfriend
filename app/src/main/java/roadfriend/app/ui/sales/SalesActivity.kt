@@ -12,11 +12,10 @@ import roadfriend.app.R
 import roadfriend.app.customviews.CVBillingView
 import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.databinding.BottomDialogSalesBinding
-import roadfriend.app.databinding.CvAddItemBinding
 import roadfriend.app.databinding.SalesActivityBinding
 import roadfriend.app.ui.add.detail.AddDetailActivity
 import roadfriend.app.ui.base.BindingActivity
-import roadfriend.app.ui.home.FirstFragment
+import roadfriend.app.newui.search.TravelerListFragment
 import roadfriend.app.ui.main.MainActivity
 import roadfriend.app.utils.AppConstants.MONEY_REFUNED
 import roadfriend.app.utils.DialogUtils
@@ -191,7 +190,7 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
             if (intent.getStringExtra("intent") == AddDetailActivity::class.java.name) {
                 launchActivity<MainActivity> { }
             }
-            if (intent.getStringExtra("intent") == FirstFragment::class.java.name) {
+            if (intent.getStringExtra("intent") == TravelerListFragment::class.java.name) {
                 finish()
             } else {
                 finish()

@@ -1,8 +1,9 @@
-package roadfriend.app.ui.home
+package roadfriend.app.newui.search
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp.Companion.notLogin
 import roadfriend.app.R
@@ -10,30 +11,32 @@ import roadfriend.app.data.local.model.MapsModel
 import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.data.remote.model.trips.GetTripRequest
 import roadfriend.app.data.remote.model.trips.Trips
-import roadfriend.app.databinding.FragmentHomeFirstBinding
+import roadfriend.app.databinding.FragmentTravelerListBinding
 import roadfriend.app.ui.add.detail.AddDetailActivity
 import roadfriend.app.ui.auth.register.RegisterActivity
-import roadfriend.app.ui.base.BindingFragment
-import roadfriend.app.ui.main.MainActivity
-import roadfriend.app.ui.maps.MapsDialogFragment
+import roadfriend.app.ui.base.BaseFragment
+import roadfriend.app.ui.home.HomeViewModel
 import roadfriend.app.ui.profile.myaboutcomment.MyAboutCommentsActivity
 import roadfriend.app.ui.tripdetail.TripDetailActivity
 import roadfriend.app.ui.userdetail.UserDetailActivity
 import roadfriend.app.utils.OptionData
 import roadfriend.app.utils.OtherUtils
 import roadfriend.app.utils.PrefUtils
-import roadfriend.app.utils.extensions.*
+import roadfriend.app.utils.extensions.gone
+import roadfriend.app.utils.extensions.launchActivity
+import roadfriend.app.utils.extensions.logger
+import roadfriend.app.utils.extensions.visible
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.helper.TripBundle
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 import roadfriend.app.utils.manager.EventManager
 
-class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
+class TravelerListFragment : BaseFragment<FragmentTravelerListBinding, HomeViewModel>() {
 
-    override fun createBinding() = FragmentHomeFirstBinding.inflate(layoutInflater)
+    override fun createBinding() = FragmentTravelerListBinding.inflate(layoutInflater)
 
-    private val viewModel by viewModel<HomeViewModel>()
+    override val viewModel:HomeViewModel by activityViewModels()
 
     val adapter = GenericAdapter<Trips>(R.layout.item_advert, itemType = "home")
 
@@ -47,31 +50,27 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
     var tripBundle: TripBundle? = TripBundle()
 
     companion object {
-        val TAG: String = FirstFragment::class.java.name
-        fun newInstance(): FirstFragment =
-            FirstFragment().apply {
+        val TAG: String = TravelerListFragment::class.java.name
+        fun newInstance(): TravelerListFragment =
+            TravelerListFragment().apply {
 
             }
+
     }
 
-    override fun initNavigator() {
-        viewModel.setPresenter(this)
-    }
-
-    override fun initUI(view: View) {
+    override fun onViewReady(bundle: Bundle?) {
         binding.vmHome = viewModel
         binding.lifecycleOwner = this
 
         binding.include.tvToolbarTitle.text = resources.getString(R.string.search_trip)
     }
 
-    override fun initListener() {
 
+    override fun onViewListener() {
         listenerItem()
         tripFilter()
 
         binding.include.back.gone()
-
     }
 
 
@@ -92,7 +91,6 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
     }
 
     fun getTrip(getTripRequest: GetTripRequest) {
-
         try {
             FirebaseHelper().getFilterTrip(getTripRequest) { data ->
                 addData(data, "home")
@@ -110,12 +108,12 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
             isAvailabledata(false)
             try {
                 if (getTripRequest != null) {
-                 binding.   cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
-                    binding.     cvEmptyView.initlistener(click = {
+                    binding.cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
+                    binding.cvEmptyView.initlistener(click = {
                         passAddDetail()
                     })
                 } else {
-                    binding.  cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
+                    binding.cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
                 }
 
             } catch (e: Exception) {
@@ -124,7 +122,7 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
         } else {
             try {
                 isAvailabledata(true)
-                binding.   recyclerview.adapter = adapter
+                binding.recyclerview.adapter = adapter
                 adapter.clearItems()
                 adapter.addItems(calculateAdmobIndex(trips))
 
@@ -190,11 +188,11 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
     fun isAvailabledata(available: Boolean) {
         try {
             if (available) {
-                binding.include.   tvToolbarTitle.text = resources.getString(R.string.search_trip)
+                binding.include.tvToolbarTitle.text = resources.getString(R.string.search_trip)
                 binding.recyclerview.visible()
                 binding.cvEmptyView.gone()
             } else {
-                binding.  include. tvToolbarTitle.text = resources.getString(R.string.search_trip)
+                binding.include.tvToolbarTitle.text = resources.getString(R.string.search_trip)
                 binding.recyclerview.gone()
                 binding.cvEmptyView.visible()
             }

@@ -7,16 +7,13 @@ import android.net.Uri
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.databinding.FragmentHomeMainBinding
 import roadfriend.app.ui.base.BaseFragment
-import roadfriend.app.ui.home.FirstFragment
+import roadfriend.app.newui.search.TravelerListFragment
 import roadfriend.app.ui.home.HomeViewModel
 import roadfriend.app.utils.DialogUtils
 import roadfriend.app.utils.PrefUtils.isLogin
-import roadfriend.app.utils.extensions.gone
-import roadfriend.app.utils.extensions.visible
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 import roadfriend.app.utils.helper.ViewPagerAdapter
 
@@ -86,7 +83,7 @@ class HomeMainFragment : BaseFragment<FragmentHomeMainBinding>() {
 
     override fun initListener() {
         val adapter = ViewPagerAdapter(childFragmentManager)
-        adapter.addFragment(FirstFragment(), resources.getString(R.string.add_arac_ariyorum))
+        adapter.addFragment(TravelerListFragment(), resources.getString(R.string.add_arac_ariyorum))
         binding.viewPager.adapter = adapter
         binding.tabs.setupWithViewPager(binding.viewPager)
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2021.
+  ~
+  ~ Created by Yigit Can YILMAZ
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_fare"
+    app:startDestination="@id/paymentInfoFragment">
+
+    <fragment
+        android:id="@+id/paymentInfoFragment"
+        android:name="com.biletdukkani.b2c.fragments.payment.paymentInfo.PaymentInfoFragment"
+        android:label="payment_info_fragment"
+        tools:layout="@layout/payment_info_fragment" />
+</navigation>

@@ -1,19 +1,17 @@
 package roadfriend.app.ui.search
 
  import org.koin.androidx.viewmodel.ext.android.viewModel
-import roadfriend.app.R
-import roadfriend.app.data.local.model.Search
+ import roadfriend.app.data.local.model.Search
 import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.databinding.FragmentSearchCityBinding
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.main.MainActivity
-import roadfriend.app.ui.searchcity.SearchCityDialog
+import roadfriend.app.newui.search.SearchCityDialog
 import roadfriend.app.utils.AppConstants
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.gone
 import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.visible
-import roadfriend.app.utils.helper.LiveBus
 
 
 class SearchCityActivity : BindingActivity<FragmentSearchCityBinding>(),
