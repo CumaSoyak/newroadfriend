@@ -5,9 +5,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import kotlinx.android.synthetic.main.cv_empty_view.view.*
-import roadfriend.app.R
+ import roadfriend.app.R
 import roadfriend.app.data.remote.model.trips.GetTripRequest
+import roadfriend.app.databinding.CvDetailBinding
+import roadfriend.app.databinding.CvEmptyViewBinding
 import roadfriend.app.ui.biddetail.BidDetailActivity
 import roadfriend.app.ui.profile.myaboutcomment.MyAboutCommentsActivity
 import roadfriend.app.ui.profile.mytrip.MyTripsActivity
@@ -20,9 +21,10 @@ import roadfriend.app.utils.extensions.visible
 class CVEmptyView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
-    init {
-        LayoutInflater.from(context).inflate(R.layout.cv_empty_view, this)
-    }
+
+    private val binding = CvEmptyViewBinding.inflate(LayoutInflater.from(context), this, true)
+
+
 
     fun initData(
         context: Context,
@@ -32,7 +34,7 @@ class CVEmptyView @JvmOverloads constructor(
         this.visible()
         if (!fragmentName.isNullOrEmpty()) {
             if (fragmentName.equals("home")) {
-                ilanVer.visible()
+             binding.   ilanVer.visible()
                 setData(homeSetring(getTripRequest), R.drawable.ic_search)
             } else if (fragmentName.equals("homedefault")) {
                 setData(context.getString(R.string.ilk_ilanı_sen_ver), R.drawable.ic_fireworks)
@@ -66,8 +68,8 @@ class CVEmptyView @JvmOverloads constructor(
     }
 
     private fun setData(text: String, icon: Int) {
-        ivEmpty.setImageResource(icon)
-        tvEmpty.text = text
+        binding.  ivEmpty.setImageResource(icon)
+        binding.  tvEmpty.text = text
     }
 
     fun homeSetring(tripRequest: GetTripRequest?): String {
@@ -75,7 +77,7 @@ class CVEmptyView @JvmOverloads constructor(
     }
 
     fun initlistener(click: () -> Unit) {
-        ilanVer.setOnClickListener {
+        binding.  ilanVer.setOnClickListener {
             click.invoke()
         }
     }

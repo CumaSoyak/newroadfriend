@@ -11,7 +11,7 @@ class ProfilViewModel(dataManager: DataManager) : BaseViewModel<IBasePresenter>(
 
     val userData: MutableLiveData<User> = MutableLiveData()
 
-    fun getUserData() {
+    fun getUserDatas() {
         userData.value = PrefUtils.getUser()
     }
 }

@@ -6,9 +6,9 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import kotlinx.android.synthetic.main.cv_add_item.view.*
 import org.jetbrains.anko.textColor
 import roadfriend.app.R
+import roadfriend.app.databinding.CvAddItemBinding
 import roadfriend.app.utils.OtherUtils
 import roadfriend.app.utils.extensions.*
 
@@ -17,6 +17,7 @@ class CVAddItem : ConstraintLayout {
     var mDescTitle = ""
     lateinit var mContext: Context
     var date: String = ""
+    private val binding = CvAddItemBinding.inflate(LayoutInflater.from(context), this)
 
     constructor(context: Context?) : super(context!!) {
         if (context != null) {
@@ -37,7 +38,6 @@ class CVAddItem : ConstraintLayout {
     }
 
     fun init(attrs: AttributeSet?, context: Context?) {
-        LayoutInflater.from(context).inflate(R.layout.cv_add_item, this)
 
         try {
             setTextData(attrs, context)
@@ -57,24 +57,24 @@ class CVAddItem : ConstraintLayout {
             mDescTitle = it
         }
         values?.getDrawable(R.styleable.CVAddItem_iconSet).let {
-            ivOption.setImageDrawable(it)
-            ivOption.filter(R.color.color_edittext)
+            binding.ivOption.setImageDrawable(it)
+            binding.ivOption.filter(R.color.color_edittext)
         }
         values?.getBoolean(R.styleable.CVAddItem_price, false)?.let {
             if (it) {
-                tvDescTitle.gone()
-                etPrice.visible()
-                etPrice.listener {
+                binding.tvDescTitle.gone()
+                binding.etPrice.visible()
+                binding.etPrice.listener {
                     if (it.length > 0) {
                         setTopText(getString(R.string.add_detail_para))
-                        ivOption.filter(R.color.border)
-                        tvTL.visible()
-                        tvTL.text = OtherUtils.getCurreny().toUpperCase()
-                        groupNonSelected.visible()
+                        binding.ivOption.filter(R.color.border)
+                        binding.tvTL.visible()
+                        binding.tvTL.text = OtherUtils.getCurreny().toUpperCase()
+                        binding.groupNonSelected.visible()
                     } else {
-                        tvTL.gone()
-                        tvTopTitle.textColor = resources.getColor(R.color.color_edittext)
-                        ivOption.filter(R.color.color_edittext)
+                        binding.tvTL.gone()
+                        binding.tvTopTitle.textColor = resources.getColor(R.color.color_edittext)
+                        binding.ivOption.filter(R.color.color_edittext)
                     }
 
                 }
@@ -83,8 +83,8 @@ class CVAddItem : ConstraintLayout {
         if (!mTopTitle.isNullOrEmpty() && !mDescTitle.isNullOrEmpty()) {
             val item =
                 AddItemModel(mTopTitle, mDescTitle)
-            tvTopTitle.text = item.title
-            tvDescTitle.text = item.desc
+            binding.tvTopTitle.text = item.title
+            binding.tvDescTitle.text = item.desc
         }
 
 
@@ -95,29 +95,29 @@ class CVAddItem : ConstraintLayout {
     }
 
     fun setTopText(topText: String) {
-        tvTopTitle.text = topText
-        tvTopTitle.textColor = resources.getColor(R.color.border)
+        binding.tvTopTitle.text = topText
+        binding.tvTopTitle.textColor = resources.getColor(R.color.border)
     }
 
     fun setTopTextNotColor(topText: String) {
-        tvTopTitle.text = topText
+        binding.tvTopTitle.text = topText
     }
 
 
     fun setDescText(descText: String?) {
-        groupNonSelected.visible()
-        tvDescTitle.text = descText
-        tvDescTitle.textColor = resources.getColor(R.color.border)
-        tvTopTitle.textColor = resources.getColor(R.color.border)
-        ivOption.filter(R.color.border)
+        binding.groupNonSelected.visible()
+        binding.tvDescTitle.text = descText
+        binding.tvDescTitle.textColor = resources.getColor(R.color.border)
+        binding.tvTopTitle.textColor = resources.getColor(R.color.border)
+        binding.ivOption.filter(R.color.border)
     }
 
     fun getDescText(): String {
-        return tvDescTitle.text.toString()
+        return binding.tvDescTitle.text.toString()
     }
 
     fun getPrice(): String? {
-        return etPrice.textString()
+        return binding.etPrice.textString()
     }
 
     fun setTagDesc(tag: String) {
@@ -129,11 +129,11 @@ class CVAddItem : ConstraintLayout {
     }
 
     fun setIcon(icon: Drawable) {
-        ivOption.setImageDrawable(icon)
-        ivOption.filter(R.color.border)
+        binding.ivOption.setImageDrawable(icon)
+        binding.ivOption.filter(R.color.border)
     }
 
     fun setIconNotColor(icon: Drawable) {
-        ivOption.setImageDrawable(icon)
+        binding.ivOption.setImageDrawable(icon)
     }
 }

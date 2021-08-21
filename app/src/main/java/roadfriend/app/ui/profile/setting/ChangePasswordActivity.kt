@@ -6,8 +6,8 @@ import roadfriend.app.ui.base.BindingActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChangePasswordActivity : BindingActivity<ChangePasswordActivityBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.change_password_activity
+
+    override fun createBinding()= ChangePasswordActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<ChangePasswordViewModel>()
 

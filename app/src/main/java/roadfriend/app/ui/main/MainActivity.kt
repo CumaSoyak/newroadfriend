@@ -1,15 +1,15 @@
 package roadfriend.app.ui.main
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.badge.BadgeDrawable
-import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.R
+import roadfriend.app.databinding.ActivityMainBinding
 import roadfriend.app.ui.add.direction.AddDirectionActivity
 import roadfriend.app.ui.auth.login.LoginActivity
+import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.ui.home.FirstFragment
 import roadfriend.app.ui.message.MessageFragment
 import roadfriend.app.ui.notification.SearchFragment
@@ -20,7 +20,23 @@ import roadfriend.app.utils.extensions.overridePendingTransitionEnter
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BindingActivity<ActivityMainBinding>() {
+
+    override fun createBinding() = ActivityMainBinding.inflate(layoutInflater)
+
+    private val viewModel by viewModel<MainViewModel>()
+
+    override fun initNavigator() {
+        viewModel.setPresenter(this)
+    }
+
+    override fun initUI() {
+        setupBottomNavigationBar()
+    }
+
+    override fun initListener() {
+
+    }
 
     var activeFragment: Fragment? = null
     var homeFragment: Fragment? = null
@@ -29,30 +45,25 @@ class MainActivity : AppCompatActivity() {
     var profilFragment: Fragment? = null
     lateinit var badgeMessage: BadgeDrawable
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setupBottomNavigationBar()
-    }
 
     private fun setupBottomNavigationBar() {
-        badgeMessage = bottom_nav.getOrCreateBadge(R.id.nav_message)
+        badgeMessage = binding.bottomNav.getOrCreateBadge(R.id.nav_message)
         badgeMessage.isVisible = false
 
 
-        bottom_nav.setOnNavigationItemSelectedListener { menuItem ->
+        binding.bottomNav.setOnNavigationItemSelectedListener { menuItem ->
             var selectedFragment: Fragment? = null
             when (menuItem.itemId) {
                 R.id.nav_home -> {
-                     replaceFragmentMethod(FirstFragment.newInstance())
+                    replaceFragmentMethod(FirstFragment.newInstance())
                 }
                 R.id.nav_find -> {
-                   // if (searchFragment == null) {
-                 //       searchFragment = SearchFragment.newInstance()
-                 //       activeFragment = searchFragment
-                 //       addFragmentMethod(searchFragment!!)
-                 //    }
-                 //   selectedFragment = searchFragment
+                    // if (searchFragment == null) {
+                    //       searchFragment = SearchFragment.newInstance()
+                    //       activeFragment = searchFragment
+                    //       addFragmentMethod(searchFragment!!)
+                    //    }
+                    //   selectedFragment = searchFragment
                     replaceFragmentMethod(SearchFragment.newInstance())
                 }
                 R.id.nav_add -> {
@@ -68,12 +79,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_message -> {
                     if (isLogin()) {
                         notidficationDisable()
-                    //    if (bidFragment == null) {
-                    //        bidFragment = MessageFragment.newInstance()
-                    //        addFragmentMethod(bidFragment!!)
+                        //    if (bidFragment == null) {
+                        //        bidFragment = MessageFragment.newInstance()
+                        //        addFragmentMethod(bidFragment!!)
 //
-                    //    }
-                    //    selectedFragment = bidFragment
+                        //    }
+                        //    selectedFragment = bidFragment
                         replaceFragmentMethod(MessageFragment.newInstance())
                     } else {
                         openAuthActivity()
@@ -82,11 +93,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_profil -> {
                     if (isLogin()) {
-                      //  if (profilFragment == null) {
-                      //      profilFragment = ProfilFragment.newInstance()
-                      //      addFragmentMethod(profilFragment!!)
-                      //  }
-                      //  selectedFragment = profilFragment
+                        //  if (profilFragment == null) {
+                        //      profilFragment = ProfilFragment.newInstance()
+                        //      addFragmentMethod(profilFragment!!)
+                        //  }
+                        //  selectedFragment = profilFragment
                         replaceFragmentMethod(ProfilFragment.newInstance())
 
                     } else {
@@ -97,19 +108,22 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-        //   if (true) {
-        //       if (selectedFragment != null) {
-        //           showFragment(selectedFragment)
-        //       }
-        //   }
+            //   if (true) {
+            //       if (selectedFragment != null) {
+            //           showFragment(selectedFragment)
+            //       }
+            //   }
 
 
             true
 
         }
-        bottom_nav.selectedItemId = R.id.nav_home
+        binding.bottomNav.selectedItemId = R.id.nav_home
         checkBadgeNotification()
 
+    }
+    fun changeBottomStatus(nav: Int) {
+        binding.bottomNav.selectedItemId = nav
     }
 
     private fun openAuthActivity() {
@@ -123,6 +137,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().add(R.id.container, fragment).commit()
     }
+
     fun replaceFragmentMethod(fragment: Fragment) {
 
         supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
@@ -139,7 +154,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        bottom_nav.selectedItemId = R.id.nav_home
+        binding.bottomNav.selectedItemId = R.id.nav_home
     }
 
     override fun onResume() {
@@ -157,7 +172,7 @@ class MainActivity : AppCompatActivity() {
             }
             FirebaseHelper().getNotificationBid {
                 if (it) {
-                  //  badgeBid.isVisible = true
+                    //  badgeBid.isVisible = true
                 }
             }
         }
@@ -169,7 +184,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun bidNotification() {
-       // badgeBid.isVisible = false
+        // badgeBid.isVisible = false
         FirebaseHelper().setBidNotificationBadge(PrefUtils.getUser(), false)
     }
+
+
 }

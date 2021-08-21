@@ -17,7 +17,7 @@ class UserDetailViewModel(dataManager: DataManager) : BaseViewModel<IBasePresent
      }
 
     fun setUser(user: User?) {
-        userDetail.value = user
+        userDetail.value = user!!
     }
 
 }

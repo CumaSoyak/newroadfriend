@@ -1,5 +1,7 @@
 package roadfriend.app.di
 
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 import roadfriend.app.ui.add.AddViewModel
 import roadfriend.app.ui.add.detail.AddDetailViewModel
 import roadfriend.app.ui.message.chat.ChatViewModel
@@ -28,9 +30,7 @@ import roadfriend.app.ui.sales.SalesViewModel
 import roadfriend.app.ui.splash.SplashViewModel
 import roadfriend.app.ui.tripdetail.TripDetailViewModel
 import roadfriend.app.ui.userdetail.UserDetailViewModel
-import org.koin.androidx.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.module
-import roadfriend.app.ui.search.SearchViewModel
+ import roadfriend.app.ui.search.SearchViewModel
 
 val viewModelModule = module {
     viewModel { HomeViewModel(get()) }

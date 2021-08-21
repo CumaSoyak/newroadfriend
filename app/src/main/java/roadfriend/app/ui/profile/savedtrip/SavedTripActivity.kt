@@ -22,8 +22,8 @@ import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 import java.util.*
 
 class SavedTripActivity : BindingActivity<SavedTripActivityBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.saved_trip_activity
+
+    override fun createBinding()= SavedTripActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<SavedTripViewModel>()
 

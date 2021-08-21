@@ -20,8 +20,7 @@ class DashBoardActivity : BindingActivity<ActivityDashBoardBinding>() {
 
     private val viewModel by viewModel<DashBoardViewModel>()
 
-    override val getLayoutBindId: Int
-        get() = R.layout.activity_dash_board
+    override fun createBinding()= ActivityDashBoardBinding.inflate(layoutInflater)
 
     override fun initNavigator() {
         viewModel.setPresenter(this)

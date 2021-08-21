@@ -6,33 +6,9 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.ViewBinding
 import roadfriend.app.utils.helper.AutoClearedValue
 
-abstract class BindingDialogFragment<T : ViewDataBinding> : BaseDialogFragment() {
-    protected var binding: T by AutoClearedValue<T>()
-
-    @get:LayoutRes
-    abstract val getLayoutBindId: Int
-
-    override val layoutId: Int?
-        get() = null
-
-    override fun initBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): View? {
-        return DataBindingUtil.inflate<T>(
-            inflater,
-            getLayoutBindId,
-            container,
-            false
-        ).apply { binding = this }.root
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        //binding = null
-    }
+abstract class BindingDialogFragment<VB : ViewBinding> : BaseDialogFragment<VB>() {
 
 }

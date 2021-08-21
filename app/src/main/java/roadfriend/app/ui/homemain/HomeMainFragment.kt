@@ -7,9 +7,9 @@ import android.net.Uri
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import kotlinx.android.synthetic.main.fragment_home_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
+import roadfriend.app.databinding.FragmentHomeMainBinding
 import roadfriend.app.ui.base.BaseFragment
 import roadfriend.app.ui.home.FirstFragment
 import roadfriend.app.ui.home.HomeViewModel
@@ -23,7 +23,7 @@ import roadfriend.app.utils.helper.ViewPagerAdapter
 /**
  * A simple [Fragment] subclass.
  */
-class HomeMainFragment : BaseFragment() {
+class HomeMainFragment : BaseFragment<FragmentHomeMainBinding>() {
 
     private val viewModel by viewModel<HomeViewModel>()
 
@@ -32,8 +32,7 @@ class HomeMainFragment : BaseFragment() {
         fun newInstance(): HomeMainFragment = HomeMainFragment().apply {}
     }
 
-    override val layoutId: Int?
-        get() = R.layout.fragment_home_main
+    override fun createBinding() = FragmentHomeMainBinding.inflate(layoutInflater)
 
     override fun initNavigator() {
         viewModel.setPresenter(this)
@@ -43,15 +42,14 @@ class HomeMainFragment : BaseFragment() {
         if (isLogin()) {
             FirebaseHelper().getMyTrip { data ->
                 if (data.size > 0) {
-                    if (cvPremium != null) {
-                        cvPremium.visible()
-                        cvPremium.visibleContainer(data)
-                     }
+                    binding.cvPremium.visible()
+                    binding.cvPremium.visibleContainer(data)
 
                 }
             }
         }
     }
+
     fun showDietician() {
         val model = DialogUtils.DialogModel(
             "Tebrikler ücretsiz beslenme danışmanlığı kazandınız  \n ⚫ Hediye için Dm'den iletişime geçin. \n⚫ Takip edin ",
@@ -89,15 +87,14 @@ class HomeMainFragment : BaseFragment() {
     override fun initListener() {
         val adapter = ViewPagerAdapter(childFragmentManager)
         adapter.addFragment(FirstFragment(), resources.getString(R.string.add_arac_ariyorum))
-         viewPager.adapter = adapter
-        tabs.setupWithViewPager(viewPager)
-
+        binding.viewPager.adapter = adapter
+        binding.tabs.setupWithViewPager(binding.viewPager)
 
 
 //        tabs.getTabAt(0)?.setIcon(getDrawable(R.drawable.ic_truck))
 //        tabs.getTabAt(1)?.setIcon(getDrawable(R.drawable.ic_boxes))
 
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -112,11 +109,11 @@ class HomeMainFragment : BaseFragment() {
 
             override fun onPageSelected(position: Int) {
                 if (position == 0) {
-                     cvSearchFirst.visible()
-                    cvSearchSecond.gone()
+                    binding.cvSearchFirst.visible()
+                    binding.cvSearchSecond.gone()
                 } else {
-                     cvSearchFirst.gone()
-                    cvSearchSecond.visible()
+                    binding.cvSearchFirst.gone()
+                    binding.cvSearchSecond.visible()
                 }
             }
 

@@ -1,8 +1,7 @@
 package roadfriend.app.ui.add.detail
 
 import com.android.billingclient.api.BillingClient
-import kotlinx.android.synthetic.main.toolbar_layout.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+ import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.databinding.AddDetailActivityBinding
@@ -14,8 +13,8 @@ import roadfriend.app.utils.extensions.*
 import roadfriend.app.utils.helper.TripBundle
 
 class AddDetailActivity : BindingActivity<AddDetailActivityBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.add_detail_activity
+
+    override fun createBinding()= AddDetailActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<AddDetailViewModel>()
 
@@ -49,7 +48,7 @@ class AddDetailActivity : BindingActivity<AddDetailActivityBinding>() {
 
             }
         }
-        back.setOnClickListener {
+       binding.toolbar.back.setOnClickListener {
             onBackPressedSetResult()
         }
         binding.cvDate.setOnClickListener {

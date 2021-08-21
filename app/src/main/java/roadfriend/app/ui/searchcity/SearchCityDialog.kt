@@ -3,7 +3,6 @@ package roadfriend.app.ui.searchcity
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
-import kotlinx.android.synthetic.main.dialog_search_city.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp.Companion.statusSearch
 import roadfriend.app.R
@@ -23,8 +22,8 @@ import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 
 class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
     IBasePresenter {
-    override val getLayoutBindId: Int
-        get() = R.layout.dialog_search_city
+
+    override fun createBinding() = DialogSearchCityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<SearchCityViewModel>()
 
@@ -109,7 +108,7 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
     }
 
     fun submitOk() {
-        btnDecline.setOnClickListener {
+      binding.  btnDecline.setOnClickListener {
             searchCityListener?.city(stationStart, stationEnd)
             dismiss()
         }
@@ -125,20 +124,20 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
 
                 when (DIRECTION) {
                     DirectionType.START -> {
-                        svStartCity.hideKeyboard()
-                        svStartCity.setQuery(station.name, false)
+                        binding.svStartCity.hideKeyboard()
+                        binding.svStartCity.setQuery(station.name, false)
                         stationStart = station
                         DIRECTION = DirectionType.END
-                        svEndCity.onActionViewExpanded()
+                        binding.svEndCity.onActionViewExpanded()
                         adapter.addItems(mCityList)
 
                     }
                     DirectionType.END -> {
-                        svEndCity.hideKeyboard()
-                        svEndCity.setQuery(station.name, false)
+                        binding.svEndCity.hideKeyboard()
+                        binding.svEndCity.setQuery(station.name, false)
                         stationEnd = station
                         DIRECTION = DirectionType.START
-                        svStartCity.onActionViewExpanded()
+                        binding. svStartCity.onActionViewExpanded()
                         adapter.addItems(mCityList)
 
                     }
@@ -157,8 +156,8 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
     }
 
     fun cityInputListener() {
-        svStartCity.onActionViewExpanded()
-        svStartCity.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+        binding.svStartCity.onActionViewExpanded()
+        binding.svStartCity.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 filter(p0.toString())
@@ -167,7 +166,7 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 DIRECTION = DirectionType.START
-                if (svStartCity.query.isEmpty()) {
+                if ( binding.svStartCity.query.isEmpty()) {
                     isOpen = true
                     stationStart = null
                     buttonAcceptVisible()
@@ -177,7 +176,7 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
                 return false
             }
         })
-        svEndCity.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+        binding.svEndCity.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 filter(p0.toString())
@@ -186,7 +185,7 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 DIRECTION = DirectionType.END
-                if (svEndCity.query.isEmpty()) {
+                if ( binding.svEndCity.query.isEmpty()) {
                     isOpen = true
                     stationEnd = null
                     buttonAcceptVisible()
@@ -205,12 +204,12 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
         for (city in listCity) {
             when (DIRECTION) {
                 DirectionType.START -> {
-                    if (svStartCity.query.toString().equals(city.name?.toLowerCase())) {
+                    if ( binding.svStartCity.query.toString().equals(city.name?.toLowerCase())) {
                         stationStart = city
                     }
                 }
                 DirectionType.END -> {
-                    if (svEndCity.query.toString().equals(city.name?.toLowerCase())) {
+                    if ( binding.svEndCity.query.toString().equals(city.name?.toLowerCase())) {
                         stationEnd = city
                     }
                 }
@@ -251,7 +250,7 @@ class SearchCityDialog : BindingDialogFragment<DialogSearchCityBinding>(),
 
     fun buttonAcceptVisible() {
         if (!searchType.equals(AppConstants.HOME_SEARCH)) {
-            btnDecline.visible()
+            binding.btnDecline.visible()
         }
     }
 

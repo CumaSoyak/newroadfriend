@@ -19,6 +19,9 @@
         android:onClick='@{(v)-> vm.onListItemViewClickListener.onClickDetail(v, vm.adapterPosition,vm) }'
         android:paddingStart="@dimen/margin_normal"
         android:paddingTop="@dimen/margin_normal"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
         android:paddingBottom="@dimen/margin_normal">
 
 

@@ -8,7 +8,7 @@ import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.toolbar_layout.*
+import androidx.viewbinding.ViewBinding
 import roadfriend.app.R
 import roadfriend.app.utils.customscreen.LoadingDialog
 import roadfriend.app.utils.extensions.logger
@@ -16,17 +16,27 @@ import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.extensions.showSucces
 
 
-abstract class BaseFragment : Fragment(), IBasePresenter {
+abstract class BaseFragment<VB : ViewBinding> : Fragment(), IBasePresenter {
 
 
-    @get:LayoutRes
-    protected abstract val layoutId: Int?
+    private var _binding: VB? = null
+
+    val binding
+        get() = _binding
+            ?: throw IllegalStateException(
+                "Cannot access view in after view destroyed " +
+                        "and before view creation"
+            )
+
+    protected var viewId: Int = -1
 
     protected abstract fun initNavigator()
 
     protected abstract fun initUI(view: View)
 
     protected abstract fun initListener()
+
+    abstract fun createBinding(): VB
 
     private val dialog: AlertDialog? by lazy {
         LoadingDialog.Builder().setContext(context)
@@ -39,7 +49,7 @@ abstract class BaseFragment : Fragment(), IBasePresenter {
 
     override fun showLoading() {
         try {
-            if ( dialog != null) {
+            if (dialog != null) {
                 dialog?.show()
             }
         } catch (e: WindowManager.BadTokenException) {
@@ -64,11 +74,8 @@ abstract class BaseFragment : Fragment(), IBasePresenter {
         savedInstanceState: Bundle?
     ): View? {
         // logLifecycleEvents("onCreateView")
-        if (layoutId != null) {
-            return inflater.inflate(layoutId!!, container, false)
-        } else {
-            return initBinding(inflater, container)
-        }
+        _binding = createBinding()
+        return binding.root
     }
 
     private fun logLifecycleEvents(lifeCycleName: String) {
@@ -88,12 +95,10 @@ abstract class BaseFragment : Fragment(), IBasePresenter {
         fragmentManager?.beginTransaction()?.replace(R.id.frameLayout, fragment)?.commit()
     }
 
-    fun toolBarTitle(title: String) {
-        tvToolbarTitle.text = title
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewId = binding.root.id
         initUI(view)
         initListener()
     }
@@ -119,5 +124,9 @@ abstract class BaseFragment : Fragment(), IBasePresenter {
     override fun onDestroy() {
         super.onDestroy()
         dialog?.dismiss()
+    }
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }

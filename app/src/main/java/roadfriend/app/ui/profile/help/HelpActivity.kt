@@ -18,8 +18,8 @@ import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import java.util.*
 
 class HelpActivity : BindingActivity<HelpActivityBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.help_activity
+
+    override fun createBinding()= HelpActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<HelpViewModel>()
 

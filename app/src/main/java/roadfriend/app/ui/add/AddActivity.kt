@@ -11,8 +11,8 @@ import roadfriend.app.utils.extensions.launchActivity
 
 
 class AddActivity : BindingActivity<ActivityAddBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.activity_add
+
+    override fun createBinding()= ActivityAddBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<AddViewModel>()
 

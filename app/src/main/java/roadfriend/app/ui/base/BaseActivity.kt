@@ -4,23 +4,27 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.ViewBinding
 import roadfriend.app.R
 import roadfriend.app.utils.NetworkUtils
 import roadfriend.app.utils.customscreen.LoadingDialog
 import roadfriend.app.utils.extensions.overridePendingTransitionExit
 import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.extensions.showSucces
-import kotlinx.android.synthetic.main.toolbar_layout.*
 import java.lang.ref.WeakReference
 
 
-abstract class BaseActivity : AppCompatActivity(), IBasePresenter {
-    @get:LayoutRes
-    abstract val layoutId: Int?
+abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(), IBasePresenter {
 
+
+    lateinit var binding: VB
+
+    abstract fun createBinding(): VB
 
     protected abstract fun initNavigator()
 
@@ -64,10 +68,9 @@ abstract class BaseActivity : AppCompatActivity(), IBasePresenter {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (layoutId != null) {
-            setContentView(layoutId!!)
-        } else {
-            initBinding()
+        if (::binding.isInitialized.not()) {
+            binding = createBinding()
+            setContentView(binding.root)
         }
         initNavigator()
         initUI()
@@ -78,8 +81,8 @@ abstract class BaseActivity : AppCompatActivity(), IBasePresenter {
     }
 
     fun toolbarInit() {
-        if (back != null) {
-            back.setOnClickListener {
+        if (findViewById<ImageView>(R.id.back) != null) {
+            findViewById<ImageView>(R.id.back).setOnClickListener {
                 overridePendingTransitionExit()
                 finish()
             }
@@ -87,13 +90,9 @@ abstract class BaseActivity : AppCompatActivity(), IBasePresenter {
     }
 
     fun toolBarTitle(title: String?) {
-        if (tvToolbarTitle != null) {
-            tvToolbarTitle.text = title
+        if (findViewById<TextView>(R.id.tvToolbarTitle) != null) {
+            findViewById<TextView>(R.id.tvToolbarTitle).text = title
         }
-    }
-
-    open fun initBinding() {
-
     }
 
     override fun onError(errorMessage: String, errorCode: Int) {

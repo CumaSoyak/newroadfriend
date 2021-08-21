@@ -6,16 +6,9 @@ import android.content.Intent
 import android.net.Uri
 import android.view.View
 import com.facebook.login.LoginManager
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.reward.RewardItem
-import com.google.android.gms.ads.reward.RewardedVideoAd
-import com.google.android.gms.ads.reward.RewardedVideoAdListener
-import kotlinx.android.synthetic.main.fragment_profil.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.local.model.ProfilMenu
-import roadfriend.app.data.remote.model.trips.Trips
 import roadfriend.app.databinding.FragmentProfilBinding
 import roadfriend.app.ui.auth.login.LoginActivity
 import roadfriend.app.ui.base.BindingFragment
@@ -34,13 +27,13 @@ import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 
 
 class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.fragment_profil
+
+
+    override fun createBinding() = FragmentProfilBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<ProfilViewModel>()
 
     private val adapter = GenericAdapter<ProfilMenu>(R.layout.item_profil_menu)
-    private var mRewardedVideoAd: RewardedVideoAd? = null
 
     companion object {
         val TAG: String = ProfilFragment::class.java.simpleName
@@ -56,13 +49,12 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
         binding.lifecycleOwner = this
         addMenu()
 
-        viewModel.getUserData()
+        viewModel.getUserDatas()
     }
 
     override fun initListener() {
         menuListener()
-        rewardListener()
-    }
+     }
 
     private fun addMenu() {
         val menuItem: ArrayList<ProfilMenu> = arrayListOf()
@@ -140,7 +132,7 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
             )
         )
 
-        rv.adapter = adapter
+      binding.  rv.adapter = adapter
         adapter.addItems(menuItem)
     }
 
@@ -156,9 +148,7 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
     private fun openDetail(position: ProfilMenu) {
         when (position.id) {
             "destek" -> {
-                if (mRewardedVideoAd?.isLoaded!!) {
-                    mRewardedVideoAd!!.show()
-                }
+
             }
             "settings" -> {
                 /*settings*/
@@ -176,7 +166,7 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
                 //"Hakkımda yorumlar"
                 requireContext().launchActivity<MyAboutCommentsActivity> {
                     putExtra("data", PrefUtils.getUser())
-                    putExtra("myComment","myComment")
+                    putExtra("myComment", "myComment")
                 }
             }
             "condition" -> {
@@ -230,47 +220,6 @@ class ProfilFragment : BindingFragment<FragmentProfilBinding>() {
                 logout()
             }
         }
-    }
-
-    fun rewardListener() {
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(requireContext())
-        mRewardedVideoAd?.loadAd(
-            "ca-app-pub-7740710689946524/5882913386",
-            AdRequest.Builder().build()
-        )
-        mRewardedVideoAd?.rewardedVideoAdListener = object : RewardedVideoAdListener {
-            override fun onRewardedVideoAdClosed() {
-                print("")
-            }
-
-            override fun onRewardedVideoAdLeftApplication() {
-                print("")
-            }
-
-            override fun onRewardedVideoAdLoaded() {
-                print("")
-            }
-
-            override fun onRewardedVideoAdOpened() {
-                print("")
-            }
-
-            override fun onRewardedVideoCompleted() {
-            }
-
-            override fun onRewarded(reward: RewardItem?) {
-
-            }
-
-            override fun onRewardedVideoStarted() {
-
-            }
-
-            override fun onRewardedVideoAdFailedToLoad(p0: Int) {
-
-            }
-        }
-
     }
 
     fun logout() {

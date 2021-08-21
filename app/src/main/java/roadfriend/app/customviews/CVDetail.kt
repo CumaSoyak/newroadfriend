@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import kotlinx.android.synthetic.main.cv_detail.view.*
-import roadfriend.app.R
+ import roadfriend.app.R
 import roadfriend.app.data.local.model.MapsModel
 import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.data.remote.model.trips.Trips
+import roadfriend.app.databinding.CvChooseStatusBinding
+import roadfriend.app.databinding.CvDetailBinding
 import roadfriend.app.ui.base.BaseActivity
 import roadfriend.app.ui.maps.MapFragment
 import roadfriend.app.ui.sales.SalesActivity
@@ -21,14 +22,14 @@ class CVDetail @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
+    private val binding = CvDetailBinding.inflate(LayoutInflater.from(context), this, true)
 
     val adapter = GenericAdapter<City>(R.layout.item_trips_station_list)
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.cv_detail, this)
-    }
+     }
 
-    fun initData(trips: Trips, activity: BaseActivity) {
+    fun initData(trips: Trips) {
          setDate(trips.date)
 
         setPrice(trips.callPrice())
@@ -38,7 +39,7 @@ class CVDetail @JvmOverloads constructor(
 
 
 
-    private fun setMaps(trips: Trips, activity: BaseActivity) {
+    private fun setMaps(trips: Trips, activity: Context) {
         val tripsList: ArrayList<Trips> = arrayListOf(trips)
         val mapsModel = MapsModel()
         mapsModel.trips.addAll(tripsList)
@@ -52,45 +53,44 @@ class CVDetail @JvmOverloads constructor(
         bundle.putString("tripDetailActivity", "tripDetailActivity")
         val fragment = MapFragment()
         fragment.arguments = bundle
-        activity.supportFragmentManager.beginTransaction().replace(R.id.fLTripDetail, fragment)
-            .commit()
+       // activity.supportFragmentManager.beginTransaction().replace(R.id.fLTripDetail, fragment).commit()
     }
 
     private fun setCity(trips: Trips) {
-        tvFirstCity.text = trips.startCityName
-        tvSecondCity.text = trips.endCityName
+        binding.   tvFirstCity.text = trips.startCityName
+        binding. tvSecondCity.text = trips.endCityName
     }
 
 
     fun setDate(date: String?) {
         if (date.isNullOrEmpty()) {
-            cvDate.gone()
+            binding.   cvDate.gone()
         } else {
-            cvDate.setDescText(date)
+            binding.    cvDate.setDescText(date)
         }
     }
 
     fun setPrice(time: String?) {
-        cvPrice.setDescText(time)
+        binding.   cvPrice.setDescText(time)
     }
 
     fun setTripOption(optionTrip: String?, optionType: String?) {
         /**Option Type = TRAVEL, DRIVER**/
         if (optionTrip.isNullOrEmpty())
-            cvTripOptionstatus.gone()
+            binding.   cvTripOptionstatus.gone()
         else {
             val tripOption = OptionData.tripsDetailIcon(optionType, context)
-            cvTripOptionstatus.setDescText(optionTrip)
-            cvTripOptionstatus.setIcon(tripOption?.icon!!)
-            cvTripOptionstatus.setTopText(tripOption.title!!)
+         binding.    cvTripOptionstatus.setDescText(optionTrip)
+         binding.    cvTripOptionstatus.setIcon(tripOption?.icon!!)
+         binding.    cvTripOptionstatus.setTopText(tripOption.title!!)
         }
     }
 
     fun setDescription(description: String?) {
         if (description.isNullOrEmpty()) {
-            tvDescription.gone()
+            binding.     tvDescription.gone()
         } else {
-            tvDescription.setText(description)
+            binding.   tvDescription.setText(description)
         }
     }
 

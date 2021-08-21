@@ -9,8 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdRequest
-import kotlinx.android.synthetic.main.item_admob.view.*
-import kotlinx.android.synthetic.main.item_admob_yerel_gelismis.view.*
+import com.google.android.gms.ads.AdView
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.notification.NotificationModel
 import roadfriend.app.data.remote.model.trips.Trips
@@ -75,7 +74,8 @@ class GenericAdapter<T : ListItemViewModel>(
                     adRequest = AdRequest.Builder().build()
                     isAdMobRequestFirst = false
                 }
-                binding.root.adView.loadAd(adRequest)
+                var view = binding.root.findViewById<AdView>(R.id.adView)
+                view.loadAd(adRequest)
             }
         }
 

@@ -20,8 +20,8 @@ import roadfriend.app.utils.manager.EventManager
 import java.util.*
 
 class MyTripsActivity : BindingActivity<MyTripsActivityBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.my_trips_activity
+
+    override fun createBinding()= MyTripsActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<MyTripsViewModel>()
 

@@ -62,7 +62,7 @@ object OtherUtils {
         if (europeList.contains(getCurrentCountryCode())) {
             return "europe"
         } else {
-            return getCurrentCountryCode()
+            return "tr"//getCurrentCountryCode()
         }
     }
 

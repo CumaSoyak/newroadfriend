@@ -24,7 +24,7 @@ object BindingUtils {
     var mViewString: String? = null
 
     @JvmStatic
-    @BindingAdapter(value = ["app:addItemDescText"])
+    @BindingAdapter("app:addItemDescText")
     fun cvText(textView: CVAddItem, text: String) {
         textView.setDescText(text)
     }

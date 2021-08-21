@@ -27,7 +27,7 @@ class RemoteDataException {
                     message = "Lütfen Giriş Yapınız."
                     logOut(throwable.code())
                 } else {
-                    getHttpError(throwable.response().errorBody(), throwable.response().code())
+                    getHttpError(throwable.response()?.errorBody(), throwable.response()!!.code())
                 }
             }
 

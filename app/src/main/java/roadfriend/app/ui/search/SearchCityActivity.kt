@@ -1,7 +1,6 @@
 package roadfriend.app.ui.search
 
-import kotlinx.android.synthetic.main.toolbar_layout.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+ import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.local.model.Search
 import roadfriend.app.data.remote.model.city.City
@@ -19,8 +18,9 @@ import roadfriend.app.utils.helper.LiveBus
 
 class SearchCityActivity : BindingActivity<FragmentSearchCityBinding>(),
     SearchCityDialog.ISearchCityListener {
-    override val getLayoutBindId: Int
-        get() = R.layout.fragment_search_city
+
+    override fun createBinding()= FragmentSearchCityBinding.inflate(layoutInflater)
+
     private val cityList: ArrayList<City> = arrayListOf()
 
     companion object {
@@ -47,7 +47,7 @@ class SearchCityActivity : BindingActivity<FragmentSearchCityBinding>(),
         binding.selectCity.setOnClickListener {
             goSearchCityPage()
         }
-        back.gone()
+       binding.include. back.gone()
         binding.tvClear.setOnClickListener {
             binding.selectCity.visible()
             binding.gropSelected.gone()

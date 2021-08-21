@@ -4,12 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import kotlinx.android.synthetic.main.toolbar_layout.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+ import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.customviews.CvOption
@@ -30,14 +31,14 @@ import roadfriend.app.utils.firebasedatebase.TripFirebase
 import java.util.*
 
 class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.trip_detail_activity
+
+    override fun createBinding()=TripDetailActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<TripDetailViewModel>()
 
     private val trips: Trips by lazy { intent.getParcelableExtra<Trips>("data") as Trips }
 
-    lateinit var mInterstitialAd: InterstitialAd
+    private var mInterstitialAd: InterstitialAd? = null
 
     var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
@@ -55,10 +56,7 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
     }
 
     fun initData() {
-        mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd.adUnitId = "ca-app-pub-6449577219947127/5558552088"
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
-
+        loadReklam()
         if (PrefUtils.isLogin()) {
             if (trips.user.id.equals(PrefUtils.getUser().id)) {
                 binding.clBottomContainer.gone()
@@ -69,12 +67,29 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
         }
     }
 
+    fun loadReklam() {
+        var adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(
+            this,
+            "ca-app-pub-6449577219947127/5558552088",
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    mInterstitialAd = null
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    mInterstitialAd = interstitialAd
+                }
+            })
+    }
+
     override fun initListener() {
         addStation()
         //directionMap()
 
-        ivOptionToolbar.visible()
-        ivOptionToolbar.setOnClickListener {
+       binding.toolbar. ivOptionToolbar.visible()
+        binding.toolbar.ivOptionToolbar.setOnClickListener {
             initOption()
         }
         listenerBidEditText()
@@ -93,7 +108,7 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
     }
 
     fun initTripDetil() {
-        binding.cvDetail.initData(trips, this)
+        binding.cvDetail.initData(trips)
     }
 
     fun listenerBidEditText() {
@@ -243,8 +258,8 @@ class TripDetailActivity : BindingActivity<TripDetailActivityBinding>() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (mInterstitialAd.isLoaded) {
-            mInterstitialAd.show();
+        if (mInterstitialAd!=null) {
+            mInterstitialAd?.show(this)
         }
     }
 

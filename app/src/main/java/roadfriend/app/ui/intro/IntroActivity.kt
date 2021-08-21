@@ -11,8 +11,8 @@ import roadfriend.app.ui.search.SearchCityActivity
 import roadfriend.app.utils.extensions.onPageSelected
 
 class IntroActivity : BindingActivity<ActivityIntroBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.activity_intro
+
+    override fun createBinding() =ActivityIntroBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<IntroViewModel>()
 

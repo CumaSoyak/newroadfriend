@@ -14,8 +14,8 @@ import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.visible
 
 class SearchStatusActivity : BindingActivity<ActivitySearchBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.activity_search
+
+    override fun createBinding()= ActivitySearchBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<SearchViewModel>()
 

@@ -1,5 +1,6 @@
 package roadfriend.app.ui.maps
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -29,9 +30,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.PolyUtil
-import kotlinx.android.synthetic.main.item_admob.view.*
-import kotlinx.android.synthetic.main.map_fragment.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+ import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,11 +38,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import roadfriend.app.databinding.MapFragmentBinding
 
-class MapFragment : BaseFragment(), OnMapReadyCallback,
+class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback,
     GoogleMap.OnMarkerClickListener, GoogleApiClient.ConnectionCallbacks {
-    override val layoutId: Int?
-        get() = R.layout.map_fragment
+
+    override fun createBinding()= MapFragmentBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<MapViewModel>()
     var map: GoogleMap? = null
@@ -80,7 +80,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback,
 
     fun initActivityType() {
         if (arguments?.getString("tripDetailActivity").equals("tripDetailActivity")) {
-            viewPager.gone()
+            binding.  viewPager.gone()
         }
     }
 
@@ -109,9 +109,9 @@ class MapFragment : BaseFragment(), OnMapReadyCallback,
 
     fun initBottomSlider(tripsModel: ArrayList<Trips>) {
 
-        viewPager.setClipToPadding(false);
-        viewPager.setPadding(40, 0, 40, 0);
-        viewPager.setPadding(60, 8, 60, 8);
+         binding.viewPager.setClipToPadding(false);
+         binding.viewPager.setPadding(40, 0, 40, 0);
+         binding.viewPager.setPadding(60, 8, 60, 8);
         val adapter = LocationAdapter(
             activity!!.applicationContext,
             tripsModel,
@@ -123,8 +123,8 @@ class MapFragment : BaseFragment(), OnMapReadyCallback,
                     }
                 }
             })
-        viewPager.adapter = adapter
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+         binding.viewPager.adapter = adapter
+         binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
@@ -256,7 +256,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback,
         //  markerImage.setImageDrawable(image)
 
         val displayMetrics = DisplayMetrics()
-        activity!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
+        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         marker.layoutParams = ViewGroup.LayoutParams(52, ViewGroup.LayoutParams.WRAP_CONTENT)
         marker.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
         marker.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
@@ -341,22 +341,23 @@ class MapFragment : BaseFragment(), OnMapReadyCallback,
 //        context.startActivity(intent)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun mapVisit() {
-        ivTransparent.setOnTouchListener(View.OnTouchListener { v, event ->
+        binding. ivTransparent.setOnTouchListener(View.OnTouchListener { v, event ->
             val action = event.action
             when (action) {
                 MotionEvent.ACTION_DOWN -> {
-                    nestedScrollView.requestDisallowInterceptTouchEvent(true)
+                    binding.nestedScrollView.requestDisallowInterceptTouchEvent(true)
                     false
                 }
 
                 MotionEvent.ACTION_UP -> {
-                    nestedScrollView.requestDisallowInterceptTouchEvent(false)
+                    binding. nestedScrollView.requestDisallowInterceptTouchEvent(false)
                     true
                 }
 
                 MotionEvent.ACTION_MOVE -> {
-                    nestedScrollView.requestDisallowInterceptTouchEvent(true)
+                    binding. nestedScrollView.requestDisallowInterceptTouchEvent(true)
                     false
                 }
 
@@ -364,4 +365,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback,
             }
         })
     }
+
+
 }

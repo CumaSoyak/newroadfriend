@@ -3,14 +3,10 @@ package roadfriend.app.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.fragment_home_first.*
-import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp.Companion.notLogin
-import roadfriend.app.CoreApp.Companion.statusSearch
 import roadfriend.app.R
 import roadfriend.app.data.local.model.MapsModel
-import roadfriend.app.data.local.model.Search
 import roadfriend.app.data.remote.model.city.City
 import roadfriend.app.data.remote.model.trips.GetTripRequest
 import roadfriend.app.data.remote.model.trips.Trips
@@ -28,15 +24,14 @@ import roadfriend.app.utils.OtherUtils
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.*
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
-import roadfriend.app.utils.helper.LiveBus
 import roadfriend.app.utils.helper.TripBundle
 import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 import roadfriend.app.utils.manager.EventManager
 
 class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.fragment_home_first
+
+    override fun createBinding() = FragmentHomeFirstBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<HomeViewModel>()
 
@@ -67,7 +62,7 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
         binding.vmHome = viewModel
         binding.lifecycleOwner = this
 
-        tvToolbarTitle.text = resources.getString(R.string.search_trip)
+        binding.include.tvToolbarTitle.text = resources.getString(R.string.search_trip)
     }
 
     override fun initListener() {
@@ -75,7 +70,7 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
         listenerItem()
         tripFilter()
 
-        back.gone()
+        binding.include.back.gone()
 
     }
 
@@ -115,12 +110,12 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
             isAvailabledata(false)
             try {
                 if (getTripRequest != null) {
-                    cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
-                    cvEmptyView.initlistener(click = {
+                 binding.   cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
+                    binding.     cvEmptyView.initlistener(click = {
                         passAddDetail()
                     })
                 } else {
-                    cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
+                    binding.  cvEmptyView.initData(requireContext(), emptyKey, getTripRequest)
                 }
 
             } catch (e: Exception) {
@@ -129,7 +124,7 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
         } else {
             try {
                 isAvailabledata(true)
-                recyclerview.adapter = adapter
+                binding.   recyclerview.adapter = adapter
                 adapter.clearItems()
                 adapter.addItems(calculateAdmobIndex(trips))
 
@@ -195,11 +190,11 @@ class FirstFragment : BindingFragment<FragmentHomeFirstBinding>() {
     fun isAvailabledata(available: Boolean) {
         try {
             if (available) {
-                tvToolbarTitle.text = resources.getString(R.string.search_trip)
+                binding.include.   tvToolbarTitle.text = resources.getString(R.string.search_trip)
                 binding.recyclerview.visible()
                 binding.cvEmptyView.gone()
             } else {
-                tvToolbarTitle.text = resources.getString(R.string.search_trip)
+                binding.  include. tvToolbarTitle.text = resources.getString(R.string.search_trip)
                 binding.recyclerview.gone()
                 binding.cvEmptyView.visible()
             }

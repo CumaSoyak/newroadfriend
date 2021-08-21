@@ -8,14 +8,13 @@ import roadfriend.app.databinding.ProfilSettingsActivityBinding
 import roadfriend.app.ui.base.BindingActivity
 import roadfriend.app.utils.extensions.*
 import roadfriend.app.utils.extensions.ImagePickerActivity.Companion.REQUEST_IMAGE
-import kotlinx.android.synthetic.main.profil_settings_activity.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
 
 class ProfilSettingsActivity : BindingActivity<ProfilSettingsActivityBinding>(),
     ImagePickerActivity.PickerOptionListener {
-    override val getLayoutBindId: Int
-        get() = R.layout.profil_settings_activity
+
+    override fun createBinding()= ProfilSettingsActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<ProfilSettingsViewModel>()
 
@@ -65,7 +64,7 @@ class ProfilSettingsActivity : BindingActivity<ProfilSettingsActivityBinding>(),
             if (resultCode == Activity.RESULT_OK) {
                 uri = data.getParcelableExtra<Uri>("path")
                 try {
-                    circleImageView.load(uri.toString())
+                    binding.circleImageView.load(uri.toString())
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }

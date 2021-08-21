@@ -31,8 +31,7 @@ import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.common.api.Status
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import kotlinx.android.synthetic.main.register_activity.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+ import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.user.User
@@ -57,8 +56,8 @@ import java.util.regex.Pattern
 class RegisterActivity : BindingActivity<RegisterActivityBinding>(),
     ImagePickerActivity.PickerOptionListener,
     GoogleApiClient.OnConnectionFailedListener {
-    override val getLayoutBindId: Int
-        get() = R.layout.register_activity
+
+    override fun createBinding()= RegisterActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<RegisterViewMoel>()
     var uri: Uri? = null
@@ -148,9 +147,9 @@ class RegisterActivity : BindingActivity<RegisterActivityBinding>(),
                 uri = data.getParcelableExtra<Uri>("path")
                 try {
                     if (uri != null) {
-                        ivUserImage.visible()
-                        llSelectPhoto.gone()
-                        ivUserImage.load(uri.toString())
+                        binding.ivUserImage.visible()
+                        binding.llSelectPhoto.gone()
+                        binding.ivUserImage.load(uri.toString())
                     }
 
                 } catch (e: IOException) {
@@ -182,7 +181,7 @@ class RegisterActivity : BindingActivity<RegisterActivityBinding>(),
     private fun requestRegisterUser() {
         if (uri != null) {
             viewModel.getPresenter()?.showLoading()
-            FirebaseHelper().getUserRegister(etEmail.textString()) { isAvailable ->
+            FirebaseHelper().getUserRegister(binding.etEmail.textString()) { isAvailable ->
                 if (isAvailable) {
                     viewModel.getPresenter()?.hideLoading()
                     showSucces("Bu kişi vardır")
@@ -209,9 +208,9 @@ class RegisterActivity : BindingActivity<RegisterActivityBinding>(),
                     AuthFirebase().newUserCreate(
                         User(
                             "",
-                            etFullName.textString(),
-                            etEmail.textString(),
-                            etPassword.textString(),
+                            binding.etFullName.textString(),
+                            binding. etEmail.textString(),
+                            binding. etPassword.textString(),
                             it.toString(),
                             0,
                             PrefUtils.getFirebaseToken(), country = OtherUtils.getCountryCode()
@@ -246,18 +245,18 @@ class RegisterActivity : BindingActivity<RegisterActivityBinding>(),
     }
 
     fun inputValidate(): Boolean {
-        if (etFullName.textString().isNullOrEmpty() || !Pattern.matches(
+        if (binding.etFullName.textString().isNullOrEmpty() || !Pattern.matches(
                 "[A-Za-zçıüğöşİĞÜÖŞÇ]{2,}+\\s[A-Za-zçıüğöşİĞÜÖŞÇ]{2,}",
-                etFullName.text
+                binding.etFullName.text
             )
         ) {
-            etFullName.error = "Ad soyad arasında boşluk olmalıdır"
+            binding.etFullName.error = "Ad soyad arasında boşluk olmalıdır"
             return false
-        } else if (etEmail.textString().isNullOrEmpty() || !etEmail.textString().contains("@")) {
-            etEmail.error = "E-mail adresi yanlış"
+        } else if (binding.etEmail.textString().isNullOrEmpty() || !binding.etEmail.textString().contains("@")) {
+            binding.etEmail.error = "E-mail adresi yanlış"
             return false
-        } else if (etPassword.textString().isNullOrEmpty()) {
-            etPassword.error = "Parola giriniz"
+        } else if (binding.etPassword.textString().isNullOrEmpty()) {
+            binding.etPassword.error = "Parola giriniz"
             return false
         } else {
             return true
@@ -287,9 +286,9 @@ class RegisterActivity : BindingActivity<RegisterActivityBinding>(),
         }
 
         ss.setSpan(clickableSpan, 13, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        tvContract.text = ss
-        tvContract.movementMethod = LinkMovementMethod.getInstance()
-        tvContract.setTextColor(resources.getColor(R.color.border))
+        binding. tvContract.text = ss
+        binding. tvContract.movementMethod = LinkMovementMethod.getInstance()
+        binding. tvContract.setTextColor(resources.getColor(R.color.border))
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {}

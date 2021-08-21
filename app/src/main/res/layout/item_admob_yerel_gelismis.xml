@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.gms.ads.NativeExpressAdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        <com.google.android.gms.ads.nativead.NativeAdView xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adViewNativeExpress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

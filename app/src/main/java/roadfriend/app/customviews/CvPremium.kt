@@ -4,9 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import kotlinx.android.synthetic.main.item_premium.view.*
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.trips.Trips
+import roadfriend.app.databinding.CvSearchBinding
+import roadfriend.app.databinding.ItemPremiumBinding
 import roadfriend.app.ui.profile.mytrip.MyTripsActivity
 import roadfriend.app.ui.sales.SalesActivity
 import roadfriend.app.utils.DialogUtils
@@ -16,6 +17,7 @@ import roadfriend.app.utils.manager.EventManager
 class CvPremium @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
+    private val binding = ItemPremiumBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
         LayoutInflater.from(context).inflate(R.layout.item_premium, this)
@@ -23,8 +25,8 @@ class CvPremium @JvmOverloads constructor(
     }
 
     fun visibleContainer(trips: ArrayList<Trips>) {
-        tvTitle.isSelected = true
-        container.setOnClickListener {
+        binding.   tvTitle.isSelected = true
+        binding.container.setOnClickListener {
             EventManager.premiumShow()
             if (trips.size > 1) {
                 context.launchActivity<MyTripsActivity> {

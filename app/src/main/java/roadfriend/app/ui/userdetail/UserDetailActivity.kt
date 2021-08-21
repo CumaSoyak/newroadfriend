@@ -11,8 +11,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class UserDetailActivity : BindingActivity<UserDetailActivityBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.user_detail_activity
+
+    override fun createBinding()= UserDetailActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<UserDetailViewModel>()
     private val adapter by lazy { GenericAdapter<Comment>(R.layout.item_my_about_comment) }

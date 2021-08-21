@@ -6,7 +6,9 @@ import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.firestore.FirebaseFirestore
 import net.danlew.android.joda.JodaTimeAndroid
-import org.koin.android.ext.android.startKoin
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 import roadfriend.app.di.appModule
 import java.io.File
 
@@ -21,15 +23,16 @@ class CoreApp : MultiDexApplication() {
         var testDatabase = ""
         var addAdminTrip = false
         var statusSearch: String = "1"
-        var reklam: Boolean = true
-        lateinit var  firebaseAnalytics: FirebaseAnalytics
+        lateinit var firebaseAnalytics: FirebaseAnalytics
     }
 
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
         configureDi()
-        MobileAds.initialize(this, "ca-app-pub-6449577219947127~7608577534")
+        MobileAds.initialize(this) {
+
+        }
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         JodaTimeAndroid.init(this)
         db = FirebaseFirestore.getInstance()
@@ -43,6 +46,10 @@ class CoreApp : MultiDexApplication() {
 
     }
 
-    private fun configureDi() = startKoin(this, appModule)
+    private fun configureDi() = startKoin {
+        androidLogger()
+        androidContext(this@CoreApp)
+        modules(appModule)
+     }
 
 }

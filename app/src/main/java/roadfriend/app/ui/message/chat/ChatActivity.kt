@@ -5,8 +5,6 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
-import kotlinx.android.synthetic.main.chat_activity.*
-import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp.Companion.chatID
 import roadfriend.app.R
@@ -29,15 +27,15 @@ import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 import java.util.*
 
 class ChatActivity : BindingActivity<ChatActivityBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.chat_activity
+
+    override fun createBinding()= ChatActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<ChatViewModel>()
 
     private val adapter by lazy { GenericAdapter<MessageModel>(R.layout.item_chat) }
 
 
-    private val chatUser: User by lazy { intent.getParcelableExtra<User>("model") as User  }
+    private val chatUser: User by lazy { intent.getParcelableExtra<User>("model") as User }
 
     private lateinit var db: FirebaseFirestore
     var conversationsId: String? = null
@@ -58,7 +56,7 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
     override fun initUI() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
-        rvChat.adapter = adapter
+        binding. rvChat.adapter = adapter
         toolbarInit()
         db = FirebaseFirestore.getInstance()
         initAutomaticMessage()
@@ -73,10 +71,10 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
     }
 
     fun initUserData() {
-        ivUserImage.load(chatUser.image)
-        ivUserImage.visible()
+        binding.toolbar.ivUserImage.load(chatUser.image)
+        binding.toolbar.ivUserImage.visible()
         toolBarTitle(chatUser.fullName)
-        ivUserImage.setOnClickListener {
+        binding.toolbar.ivUserImage.setOnClickListener {
             launchActivity<MyAboutCommentsActivity> {
                 putExtra("data", chatUser)
             }
@@ -84,25 +82,25 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
     }
 
     override fun initListener() {
-        btnSendMessage.setOnClickListener {
+       binding. btnSendMessage.setOnClickListener {
             sendMesssage()
         }
         messageBoxListener()
 
 
         if (intent.hasExtra("firebaseMessage")) {
-            back.setOnClickListener {
+            binding.toolbar. back.setOnClickListener {
                 back()
             }
         }
         if (intent.hasExtra("tripDetail")) {
             beforeNoChating = true
         }
-        tvDegerlendir.setOnClickListener {
-          launchActivity<MyAboutCommentsActivity> {
-              putExtra("data", chatUser)
-          putExtra("visibleComment","visibleComment")
-          }
+        binding. tvDegerlendir.setOnClickListener {
+            launchActivity<MyAboutCommentsActivity> {
+                putExtra("data", chatUser)
+                putExtra("visibleComment", "visibleComment")
+            }
         }
 
     }
@@ -133,7 +131,7 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
         val time = FieldValue.serverTimestamp()
         //Benim chat listeme ekle
         val data = hashMapOf(
-            "messageText" to etChatBox.textString(),
+            "messageText" to binding.etChatBox.textString(),
             "fullName" to chatUser.fullName,
             "messageType" to "me",
             "time" to time
@@ -145,7 +143,7 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
             .set(data, SetOptions.merge()).addOnCompleteListener {
                 if (it.isSuccessful) {
                     sendYouMessageList(uuid, time)
-                    sendNotification(etChatBox.textString())
+                    sendNotification(binding.etChatBox.textString())
                     if (beforeNoChating) {   //eğer daha önce mesajlaşılmadıysa user oluştur
                         FirebaseHelper().chatCreateUser(chatUser)
                         FirebaseHelper().setNotificationBadge(chatUser, true)
@@ -160,7 +158,7 @@ class ChatActivity : BindingActivity<ChatActivityBinding>() {
         //Onun chat listesine ekle
         val userMe = PrefUtils.getUser()
         val dataYou = hashMapOf(
-            "messageText" to etChatBox.textString(),
+            "messageText" to binding.etChatBox.textString(),
             "fullName" to userMe.fullName,
             "messageType" to "you",
             "time" to time

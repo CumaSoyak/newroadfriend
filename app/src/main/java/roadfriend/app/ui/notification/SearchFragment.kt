@@ -3,8 +3,7 @@ package roadfriend.app.ui.notification
 
 import android.view.View
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.toolbar_layout.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.local.model.Search
@@ -16,7 +15,6 @@ import roadfriend.app.ui.searchcity.SearchCityDialog
 import roadfriend.app.utils.AppConstants
 import roadfriend.app.utils.PrefUtils
 import roadfriend.app.utils.extensions.gone
-import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.visible
 
 /**
@@ -24,8 +22,8 @@ import roadfriend.app.utils.extensions.visible
  */
 class SearchFragment : BindingFragment<FragmentSearchCityBinding>(),
     SearchCityDialog.ISearchCityListener {
-    override val getLayoutBindId: Int
-        get() = R.layout.fragment_search_city
+
+    override fun createBinding() = FragmentSearchCityBinding.inflate(layoutInflater)
 
     companion object {
         val TAG: String = SearchFragment::class.java.simpleName
@@ -46,7 +44,7 @@ class SearchFragment : BindingFragment<FragmentSearchCityBinding>(),
 
     override fun initUI(view: View) {
         binding.lifecycleOwner = this
-        back.gone()
+        binding.include.back.gone()
 
     }
 
@@ -71,8 +69,9 @@ class SearchFragment : BindingFragment<FragmentSearchCityBinding>(),
 
         binding.next.setOnClickListener {
             PrefUtils.createTrip(Search(stationStart, stationEnd))
-            requireActivity().bottom_nav.selectedItemId = R.id.nav_home
-        }
+
+            (requireActivity() as MainActivity).changeBottomStatus(R.id.nav_home)
+         }
     }
 
     fun goSearchCityPage() {

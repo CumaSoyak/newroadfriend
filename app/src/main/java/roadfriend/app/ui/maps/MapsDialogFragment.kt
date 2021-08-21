@@ -5,11 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.local.model.MapsModel
-import kotlinx.android.synthetic.main.toolbar_layout.*
+import roadfriend.app.databinding.MapsDialogFragmentBinding
+import roadfriend.app.ui.base.BaseDialogFragment
+import roadfriend.app.ui.base.BindingDialogFragment
+import roadfriend.app.ui.main.MainViewModel
 
-class MapsDialogFragment : DialogFragment() {
+class MapsDialogFragment : BindingDialogFragment<MapsDialogFragmentBinding>() {
+
+    override fun createBinding() = MapsDialogFragmentBinding.inflate(layoutInflater)
+
+    private val viewModel by viewModel<MapViewModel>()
 
     companion object {
         fun newInstance(searchType: MapsModel): MapsDialogFragment {
@@ -20,15 +28,15 @@ class MapsDialogFragment : DialogFragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.maps_dialog_fragment, container, false)
+    override fun initListener() {
+
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun initNavigator() {
+        viewModel.setPresenter(this)
+    }
+
+    override fun initUI() {
         val model = arguments?.getParcelable<MapsModel>("maps") as MapsModel
         var bundle = Bundle()
         bundle.putParcelable("maps", model)
@@ -38,10 +46,11 @@ class MapsDialogFragment : DialogFragment() {
         setToolbar()
     }
 
+
     fun setToolbar() {
-        tvToolbarTitle.text = getString(R.string.haritada_gor)
-    //    containerToolbar.backgroundColor(R.color.white)
-        back.setOnClickListener {
+        binding.include4.tvToolbarTitle.text = getString(R.string.haritada_gor)
+        //    containerToolbar.backgroundColor(R.color.white)
+        binding.include4.back.setOnClickListener {
             dismiss()
         }
     }

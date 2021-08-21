@@ -5,8 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.view.View
 import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.toolbar_layout.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+ import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.CoreApp.Companion.db
 import roadfriend.app.R
@@ -22,8 +21,7 @@ import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 
 class BidDetailActivity : BindingActivity<BidDetailActivityBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.bid_detail_activity
+    override fun createBinding()= BidDetailActivityBinding.inflate(layoutInflater)
 
     private val tripsId: String by lazy { intent.getStringExtra("model") as String }
 
@@ -46,7 +44,7 @@ class BidDetailActivity : BindingActivity<BidDetailActivityBinding>() {
         binding.rv.adapter = adapterBidList
         getBidList()
         adapterListener()
-        back.setOnClickListener {
+        binding.include5.back.setOnClickListener {
             back()
         }
     }

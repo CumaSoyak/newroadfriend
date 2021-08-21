@@ -6,12 +6,14 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import roadfriend.app.R
+import roadfriend.app.databinding.CvEmptyViewBinding
+import roadfriend.app.databinding.CvItemImageBinding
 import roadfriend.app.utils.extensions.load
-import kotlinx.android.synthetic.main.cv_item_image.view.*
 
 class CVItemImage : FrameLayout {
     var mImage = ""
     lateinit var mContext: Context
+    private val binding = CvItemImageBinding.inflate(LayoutInflater.from(context), this)
 
     constructor(context: Context?) : super(context!!) {
         if (context != null) {
@@ -42,7 +44,7 @@ class CVItemImage : FrameLayout {
         val values = context?.obtainStyledAttributes(attrs, R.styleable.CVItemImage, 0, 0)
         mImage = values?.getString(R.styleable.CVItemImage_image)!!
         if (!mImage.isNullOrEmpty())
-            ivItem.load(mImage)
+            binding.ivItem.load(mImage)
         values.recycle()
 
     }

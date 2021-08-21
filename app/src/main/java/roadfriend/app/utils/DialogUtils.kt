@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -16,10 +17,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
-import kotlinx.android.synthetic.main.bottom_dialog_choose.view.*
 import org.jetbrains.anko.layoutInflater
 import roadfriend.app.R
 import roadfriend.app.customviews.MaskEditText
+import roadfriend.app.databinding.BottomDialogChooseBinding
+import roadfriend.app.databinding.BottomDialogSalesBinding
 import roadfriend.app.ui.sales.SalesActivity
 import roadfriend.app.utils.extensions.checkPhoNumber
 import roadfriend.app.utils.extensions.gone
@@ -38,7 +40,7 @@ object DialogUtils {
 
         var negative: String? = null,
 
-        var icon: Int?=null,
+        var icon: Int? = null,
         @DrawableRes
 
         var isNegativeButton: Boolean = false,
@@ -63,8 +65,8 @@ object DialogUtils {
     fun showPopupInfo(
         context: Context,
         model: DialogModel,
-        btnOk: (() -> Unit?)?=null,
-        btnDesc: (() -> Unit?)? =null
+        btnOk: (() -> Unit?)? = null,
+        btnDesc: (() -> Unit?)? = null
     ) {
         myDialog = Dialog(context)
         myDialog?.setContentView(R.layout.custom_dialog)
@@ -80,10 +82,9 @@ object DialogUtils {
         if (model.isNegativeButton) {
             btnDecline.visible()
         }
-        if (model.icon==null){
+        if (model.icon == null) {
             image.gone()
-        }
-        else{
+        } else {
             image.visible()
         }
         txtPopup.text = model.title
@@ -155,7 +156,8 @@ object DialogUtils {
     ) {
 
         val dialog = BottomSheetDialog(context, R.style.SheetDialog)
-        val view = context.layoutInflater.inflate(R.layout.bottom_dialog_choose, null)
+        val view = BottomDialogChooseBinding.inflate(LayoutInflater.from(context))
+
         val adapterChoose by lazy {
             BottomSheetAdapter(
                 context,
@@ -182,7 +184,6 @@ object DialogUtils {
         view.icClose.setOnClickListener {
             dialog.dismiss()
         }
-        dialog.setContentView(view)
         dialog.show()
     }
 

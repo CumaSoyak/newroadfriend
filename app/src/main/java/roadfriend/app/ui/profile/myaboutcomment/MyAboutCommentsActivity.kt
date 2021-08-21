@@ -18,8 +18,8 @@ import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import java.util.*
 
 class MyAboutCommentsActivity : BindingActivity<MyAboutCommentsActivityBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.my_about_comments_activity
+
+    override fun createBinding()= MyAboutCommentsActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<MyAboutCommentsViewModel>()
 

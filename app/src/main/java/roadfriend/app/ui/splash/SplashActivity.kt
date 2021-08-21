@@ -2,9 +2,12 @@ package roadfriend.app.ui.splash
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.BuildConfig
 import roadfriend.app.R
+import roadfriend.app.databinding.FragmentHomeMainBinding
 import roadfriend.app.ui.base.BaseActivity
 import roadfriend.app.ui.dashboard.DashBoardActivity
 import roadfriend.app.ui.intro.IntroActivity
@@ -17,17 +20,10 @@ import roadfriend.app.utils.extensions.launchActivity
 import roadfriend.app.utils.extensions.showError
 import roadfriend.app.utils.firebasedatebase.FirebaseHelper
 
-class SplashActivity : BaseActivity() {
-    override val layoutId: Int?
-        get() = null
+class SplashActivity :AppCompatActivity(){
 
-    private val viewModel by viewModel<SplashViewModel>()
-
-    override fun initNavigator() {
-        viewModel.setPresenter(this)
-    }
-
-    override fun initUI() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         if (NetworkUtils.isConnected(this)) {
             FirebaseHelper().isAppUpdate { update ->
                 if (update) {
@@ -39,9 +35,6 @@ class SplashActivity : BaseActivity() {
         } else {
             showError(getString(R.string.internet))
         }
-    }
-
-    override fun initListener() {
     }
 
     fun launchActivity() {

@@ -2,7 +2,6 @@ package roadfriend.app.ui.message
 
 
 import android.view.View
-import kotlinx.android.synthetic.main.fragment_message.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.trips.Trips
@@ -19,9 +18,9 @@ import roadfriend.app.utils.helper.genericadapter.GenericAdapter
 import roadfriend.app.utils.helper.genericadapter.ListItemViewModel
 
 class MessageFragment : BindingFragment<FragmentMessageBinding>() {
-    override val getLayoutBindId: Int
-        get() = R.layout.fragment_message
 
+
+    override fun createBinding() = FragmentMessageBinding.inflate(layoutInflater)
 
     companion object {
         val TAG: String = MessageFragment::class.java.simpleName
@@ -60,7 +59,7 @@ class MessageFragment : BindingFragment<FragmentMessageBinding>() {
                 binding.cvEmptyView.visible()
             } else {
                 binding.cvEmptyView.gone()
-                rvBid.adapter = baseAdapter
+                binding.rvBid.adapter = baseAdapter
                 baseAdapter.clearItems()
                 baseAdapter.addItems(data)
                 adapterListener()

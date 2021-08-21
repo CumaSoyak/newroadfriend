@@ -5,10 +5,11 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.cv_search.view.*
-import roadfriend.app.CoreApp
+ import roadfriend.app.CoreApp
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.city.City
+import roadfriend.app.databinding.CvEmptyViewBinding
+import roadfriend.app.databinding.CvSearchBinding
 import roadfriend.app.ui.searchcity.SearchCityDialog
 import roadfriend.app.utils.AppConstants
 import roadfriend.app.utils.extensions.clickWithDebounce
@@ -21,12 +22,13 @@ class CVSearch @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr), SearchCityDialog.ISearchCityListener {
 
     lateinit var callbackCity: (City?, City?, String?) -> Unit
+    private val binding = CvSearchBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
         LayoutInflater.from(context).inflate(R.layout.cv_search, this)
         val values = context?.obtainStyledAttributes(attrs, R.styleable.CVSearch, 0, 0)
         values.getString(R.styleable.CVSearch_text_hint)?.let {
-            tvChooseCity.text = it
+            binding.  tvChooseCity.text = it
         }
     }
 
@@ -36,36 +38,36 @@ class CVSearch @JvmOverloads constructor(
         callback: (start: City?, end: City?, status: String?) -> Unit
     ) {
         this.callbackCity = callback
-        containerSearch.clickWithDebounce {
+        binding.   containerSearch.clickWithDebounce {
             EventManager.searchClick()
             fragment.fragmentManager?.beginTransaction()?.let { it1 ->
                 SearchCityDialog.newInstance(AppConstants.HOME_SEARCH, this)
                     .show(it1, "")
             }
         }
-        tvFilter.setOnClickListener {
+        binding. tvFilter.setOnClickListener {
             callBackFilter.invoke()
-            groupNoChoose.visible()
-            groupSelectedChosee.gone()
+            binding.   groupNoChoose.visible()
+            binding.   groupSelectedChosee.gone()
         }
     }
 
     override fun cityAndStatus(stationStart: City?, stationEnd: City?, status: String?) {
         visibleCotainer()
-        tvStartCity.text = stationStart?.name
-        tvEndCity.text = stationEnd?.name
+        binding.  tvStartCity.text = stationStart?.name
+        binding.  tvEndCity.text = stationEnd?.name
         callbackCity(stationStart, stationEnd, CoreApp.statusSearch)
     }
 
     fun visibleCotainer() {
-        groupNoChoose.gone()
-        groupSelectedChosee.visible()
+        binding.  groupNoChoose.gone()
+        binding.  groupSelectedChosee.visible()
     }
 
     fun cleanedFilter() {
-        tvFilter.gone()
-        groupNoChoose.visible()
-        groupSelectedChosee.gone()
+        binding. tvFilter.gone()
+        binding. groupNoChoose.visible()
+        binding.  groupSelectedChosee.gone()
     }
 
 }

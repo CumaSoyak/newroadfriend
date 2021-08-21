@@ -1,17 +1,18 @@
 package roadfriend.app.ui.sales
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import com.android.billingclient.api.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.analytics.FirebaseAnalytics
-import kotlinx.android.synthetic.main.bottom_dialog_sales.view.*
-import kotlinx.android.synthetic.main.sales_activity.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.CoreApp
 import roadfriend.app.CoreApp.Companion.db
 import roadfriend.app.R
 import roadfriend.app.customviews.CVBillingView
 import roadfriend.app.data.remote.model.trips.Trips
+import roadfriend.app.databinding.BottomDialogSalesBinding
+import roadfriend.app.databinding.CvAddItemBinding
 import roadfriend.app.databinding.SalesActivityBinding
 import roadfriend.app.ui.add.detail.AddDetailActivity
 import roadfriend.app.ui.base.BindingActivity
@@ -29,8 +30,8 @@ import roadfriend.app.utils.manager.EventManager
 
 class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedListener,
     AcknowledgePurchaseResponseListener {
-    override val getLayoutBindId: Int
-        get() = R.layout.sales_activity
+
+    override fun createBinding() = SalesActivityBinding.inflate(layoutInflater)
 
 
     private val viewModel by viewModel<SalesViewModel>()
@@ -60,7 +61,7 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
 
     fun initData() {
         binding.vm!!.setTrips(tripData)
-        binding.cvDetail.initData(tripData, this)
+        binding.cvDetail.initData(tripData)
         changeDescriptionColor()
     }
 
@@ -99,7 +100,7 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
 
     fun changeDescriptionColor() {
 
-        tvOrderDescription.text = spnableChangeColor(
+        binding.tvOrderDescription.text = spnableChangeColor(
             resources.getString(R.string.order_desc),
             MONEY_REFUNED,
             resources.getString(R.string.order_money_refuned),
@@ -192,8 +193,7 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
             }
             if (intent.getStringExtra("intent") == FirstFragment::class.java.name) {
                 finish()
-            }
-             else {
+            } else {
                 finish()
             }
         } else {
@@ -206,7 +206,8 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
 
     fun openPaymentBottomSheet() {
         salesBottomDialog = BottomSheetDialog(this, R.style.SheetDialog)
-        val view = layoutInflater.inflate(R.layout.bottom_dialog_sales, null)
+        val view = BottomDialogSalesBinding.inflate(LayoutInflater.from(this))
+
 
         val list: ArrayList<CVBillingView> = arrayListOf(
             view.billingOne, view.billingTwo, view.billingThree
@@ -219,17 +220,17 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
         /**Default select*/
         view.billingOne.select(view.billingOne, view.btnPayment, list)
         moneyType = skuList.get(0)
-        view.tvContent.text = OptionData.getPaymanetInfoText(0 )
+        view.tvContent.text = OptionData.getPaymanetInfoText(0)
 
         view.billingOne.setOnClickListener {
             moneyType = skuList.get(0)
             view.billingOne.select(view.billingOne, view.btnPayment, list)
-            view.tvContent.text = OptionData.getPaymanetInfoText(0 )
+            view.tvContent.text = OptionData.getPaymanetInfoText(0)
         }
         view.billingTwo.setOnClickListener {
             moneyType = skuList.get(1)
             view.billingTwo.select(view.billingTwo, view.btnPayment, list)
-            view.tvContent.text = OptionData.getPaymanetInfoText(1 )
+            view.tvContent.text = OptionData.getPaymanetInfoText(1)
         }
         view.billingThree.setOnClickListener {
             moneyType = skuList.get(2)
@@ -245,7 +246,6 @@ class SalesActivity : BindingActivity<SalesActivityBinding>(), PurchasesUpdatedL
         view.ivClose.setOnClickListener {
             salesBottomDialog.dismiss()
         }
-        salesBottomDialog.setContentView(view)
         salesBottomDialog.show()
     }
 

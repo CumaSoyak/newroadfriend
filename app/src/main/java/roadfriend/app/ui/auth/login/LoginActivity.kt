@@ -26,7 +26,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
-import kotlinx.android.synthetic.main.login_activity.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -34,8 +33,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class LoginActivity : BindingActivity<LoginActivityBinding>(),
     GoogleApiClient.OnConnectionFailedListener {
-    override val getLayoutBindId: Int
-        get() = R.layout.login_activity
+
+    override fun createBinding() = LoginActivityBinding.inflate(layoutInflater)
 
     private lateinit var callbackManager: CallbackManager
 
@@ -54,15 +53,15 @@ class LoginActivity : BindingActivity<LoginActivityBinding>(),
     }
 
     override fun initListener() {
-        btnLogin.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             viewModel.getPresenter()?.showLoading()
             request()
         }
-        btnRegister.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             launchActivity<RegisterActivity> { }
             finish()
         }
-        tvSkip.setOnClickListener {
+        binding.tvSkip.setOnClickListener {
             nextMainActivity()
         }
         binding.ivFacebook.setOnClickListener {
@@ -80,8 +79,8 @@ class LoginActivity : BindingActivity<LoginActivityBinding>(),
     }
 
     fun request() {
-        val mail = etEmail.textString()
-        val password = etPassword.textString()
+        val mail =binding. etEmail.textString()
+        val password =binding. etPassword.textString()
 
         AuthFirebase().getUserLogin(mail, password) { user ->
             if (user == null) {

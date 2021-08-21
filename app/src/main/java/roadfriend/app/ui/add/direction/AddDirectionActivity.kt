@@ -1,6 +1,5 @@
 package roadfriend.app.ui.add.direction
 
-import kotlinx.android.synthetic.main.add_direction_activity.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import roadfriend.app.R
 import roadfriend.app.data.remote.model.city.City
@@ -22,8 +21,7 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
     IBasePresenter, SearchCityDialog.ISearchCityListener, IRemoveStationListener {
 
 
-    override val getLayoutBindId: Int
-        get() = R.layout.add_direction_activity
+    override fun createBinding() = AddDirectionActivityBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<AddDirectionViewModel>()
 
@@ -32,7 +30,6 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
     private val cityList: ArrayList<City> = arrayListOf()
     private var mStationStart: City? = null
     private var mStationEnd: City? = null
-
 
 
     enum class StationType {
@@ -84,8 +81,8 @@ class AddDirectionActivity : BindingActivity<AddDirectionActivityBinding>(),
     override fun cityAndStatus(stationStart: City?, stationEnd: City?, status: String?) {
         binding.btnSelectCity.gone()
         binding.gropSelected.visible()
-        containerStart.text = stationStart?.name
-        containerEnd.text = stationEnd?.name
+        binding.containerStart.text = stationStart?.name
+        binding.containerEnd.text = stationEnd?.name
         mStationStart = stationStart
         mStationEnd = stationEnd
     }

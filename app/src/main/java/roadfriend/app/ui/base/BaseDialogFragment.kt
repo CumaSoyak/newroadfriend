@@ -5,21 +5,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
+import androidx.viewbinding.ViewBinding
 import roadfriend.app.R
 import dmax.dialog.SpotsDialog
-import kotlinx.android.synthetic.main.toolbar_layout.*
 
-abstract class BaseDialogFragment : DialogFragment(), IBasePresenter {
-    @get:LayoutRes
-    abstract val layoutId: Int?
+abstract class BaseDialogFragment<VB : ViewBinding> : DialogFragment(), IBasePresenter {
+
+    private var _binding: VB? = null
+
+    val binding
+        get() = _binding
+            ?: throw IllegalStateException(
+                "Cannot access view in after view destroyed " +
+                        "and before view creation"
+            )
+
+    protected var viewId: Int = -1
 
     protected abstract fun initNavigator()
 
     protected abstract fun initUI()
 
     protected abstract fun initListener()
+
+    abstract fun createBinding(): VB
 
     private val dialog: AlertDialog by lazy {
         SpotsDialog.Builder().setContext(context)
@@ -53,11 +66,8 @@ abstract class BaseDialogFragment : DialogFragment(), IBasePresenter {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (layoutId != null) {
-            return inflater.inflate(layoutId!!, container, false)
-        } else {
-            return initBinding(inflater, container)
-        }
+        _binding = createBinding()
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,16 +79,16 @@ abstract class BaseDialogFragment : DialogFragment(), IBasePresenter {
     }
 
     fun goTopBar() {
-        if (back != null) {
-            back.setOnClickListener {
+        if (requireView().findViewById<ImageView>(R.id.back) != null) {
+            requireView().findViewById<ImageView>(R.id.back).setOnClickListener {
                 dismiss()
             }
         }
     }
 
     fun toolBarTitle(title: String?) {
-        if (tvToolbarTitle != null) {
-            tvToolbarTitle.text = title
+        if (requireView().findViewById<TextView>(R.id.tvToolbarTitle) != null) {
+            requireView().findViewById<TextView>(R.id.tvToolbarTitle).text = title
         }
     }
 

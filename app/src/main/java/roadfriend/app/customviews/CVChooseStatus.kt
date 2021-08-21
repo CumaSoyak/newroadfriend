@@ -6,13 +6,15 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
-import kotlinx.android.synthetic.main.cv_choose_status.view.*
 import roadfriend.app.R
+import roadfriend.app.databinding.CvChooseStatusBinding
 import roadfriend.app.utils.extensions.filter
 import roadfriend.app.utils.extensions.visible
 
 class CVChooseStatus : ConstraintLayout {
     lateinit var mContext: Context
+
+    private val binding = CvChooseStatusBinding.inflate(LayoutInflater.from(context), this, true)
 
     constructor(context: Context?) : super(context!!) {
         if (context != null) {
@@ -49,13 +51,13 @@ class CVChooseStatus : ConstraintLayout {
         val status = values?.getInt(R.styleable.CVChooseStatus_status, -1)
 
         values?.getString(R.styleable.CVChooseStatus_text)?.let {
-            tvTitle.text = it
+            binding.tvTitle.text = it
         }
 
 
         when (status) {
-            1 -> ivChooseStatus.setImageDrawable(resources.getDrawable(R.drawable.ic_car))
-            2 -> ivChooseStatus.setImageDrawable(resources.getDrawable(R.drawable.ic_travel))
+            1 -> binding.ivChooseStatus.setImageDrawable(resources.getDrawable(R.drawable.ic_car))
+            2 -> binding.ivChooseStatus.setImageDrawable(resources.getDrawable(R.drawable.ic_travel))
 
         }
 
@@ -63,19 +65,19 @@ class CVChooseStatus : ConstraintLayout {
 
     fun selectItem() {
         val drawable = context.resources.getDrawable(R.drawable.custom_border_blue)
-        container.background = drawable
-        ivChooseStatus.filter(R.color.border)
-        rBChoose.isChecked = true
-        tvTitle.setTextColor(context.resources.getColor(R.color.border))
+        binding.container.background = drawable
+        binding.ivChooseStatus.filter(R.color.border)
+        binding.rBChoose.isChecked = true
+        binding.tvTitle.setTextColor(context.resources.getColor(R.color.border))
 
     }
 
     fun unSelectItem() {
         val drawable = context.resources.getDrawable(R.drawable.card_background)
-        container.background = drawable
-        ivChooseStatus.filter(R.color.non_selected_color)
-        rBChoose.isChecked = false
-        tvTitle.setTextColor(context.resources.getColor(R.color.non_selected_color))
+        binding.container.background = drawable
+        binding.ivChooseStatus.filter(R.color.non_selected_color)
+        binding.rBChoose.isChecked = false
+        binding.tvTitle.setTextColor(context.resources.getColor(R.color.non_selected_color))
     }
 
 
